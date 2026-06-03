@@ -1,0 +1,746 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>MCP - Page content structure</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="36f8cb6d-170b-8009-9cd9-c7027c4d19e8" class="page sans"><header><h1 class="page-title" dir="auto">MCP - Page content structure</h1><p class="page-description" dir="auto"></p><table class="properties"><tbody><tr class="property-row property-row-select"><th><span class="icon property-icon"><img src="https://app.notion.com/icons/arrow-circle-down_gray.svg" style="width:14px;height:14px;display:block"/></span>Type</th><td><span class="selected-value select-value-color-purple">Website</span></td></tr><tr class="property-row property-row-status"><th><span class="icon property-icon"><img src="https://app.notion.com/icons/burst_gray.svg" style="width:14px;height:14px;display:block"/></span>Status</th><td><span class="status-value"><div class="status-dot"></div>Not started</span></td></tr><tr class="property-row property-row-relation"><th><span class="icon property-icon"><img src="https://app.notion.com/icons/arrow-northeast_gray.svg" style="width:14px;height:14px;display:block"/></span>Sub-item</th><td><a href="https://app.notion.com/p/FAQ-for-MCP-3728cb6d170b8022974ccd3c02aca945?pvs=21">FAQ for MCP</a>, <a href="https://app.notion.com/p/MCP-tools-list-3728cb6d170b80d09b69e254c93657c7?pvs=21">MCP tools list</a>, <a href="https://app.notion.com/p/MCP-Website-questions-36f8cb6d170b802c9432dcf2f5888405?pvs=21">MCP Website questions</a>, <a href="https://app.notion.com/p/Create-hero-image-3728cb6d170b80fc9528c8199709179d?pvs=21">Create hero image</a></td></tr><tr class="property-row property-row-checkbox"><th><span class="icon property-icon"><img src="https://app.notion.com/icons/checkmark-square_gray.svg" style="width:14px;height:14px;display:block"/></span>Engineer alert</th><td><div class="checkbox checkbox-off"></div></td></tr><tr class="property-row property-row-checkbox"><th><span class="icon property-icon"><img src="https://app.notion.com/icons/checkmark-square_gray.svg" style="width:14px;height:14px;display:block"/></span>Quality issue?</th><td><div class="checkbox checkbox-off"></div></td></tr></tbody></table></header><div class="page-body"><div style="display:contents" dir="auto"><ol type="1" id="36f8cb6d-170b-8066-969e-e0bc63e2023d" class="numbered-list" start="1"><li><strong>Hero</strong><div style="display:contents" dir="auto"><ul id="36f8cb6d-170b-8017-be69-f060d7fbcdb4" class="bulleted-list"><li style="list-style-type:disc">Breadcrumb: Home &gt; Integrations &gt; MCP &gt; <code>Product</code><div style="display:contents" dir="auto"><p id="3728cb6d-170b-8059-8633-d861b417371d" class=""><a href="http://www.makini.io/integrations/hai-robotics-wms-integration">www.makini.io/mcp/</a>product</p></div></li></ul></div><div style="display:contents" dir="auto"><ul id="36f8cb6d-170b-80a8-96a3-f4cc14eb23ec" class="bulleted-list"><li style="list-style-type:disc">Integration ↔ MCP<div style="display:contents" dir="auto"><p id="3728cb6d-170b-803b-9617-e1039b0cc0e1" class="">linking to the sibling API page at /integrations/<code>product</code></p></div></li></ul></div><div style="display:contents" dir="auto"><ul id="36f8cb6d-170b-800b-8de7-c4685c4f9f2c" class="bulleted-list"><li style="list-style-type:disc">Product logo</li></ul></div><div style="display:contents" dir="auto"><ul id="36f8cb6d-170b-80fe-b69e-d084431d1426" class="bulleted-list"><li style="list-style-type:disc">H1: &quot;<code>Product</code> MCP Server&quot;</li></ul></div><div style="display:contents" dir="auto"><ul id="36f8cb6d-170b-8004-adad-feb9c32f170a" class="bulleted-list"><li style="list-style-type:disc">Subhead: give AI agents secure, real-time access to <code>Product</code> and <a href="https://www.makini.io/integrations">2,000+ other industrial products</a> through one MCP</li></ul></div><div style="display:contents" dir="auto"><ul id="36f8cb6d-170b-8064-8bda-f4915f947477" class="bulleted-list"><li style="list-style-type:disc">CTAs:<div style="display:contents" dir="auto"><ul id="36f8cb6d-170b-80be-be35-e3397bd72b34" class="bulleted-list"><li style="list-style-type:circle">&quot;Schedule demo&quot;</li></ul></div><div style="display:contents" dir="auto"><ul id="36f8cb6d-170b-806d-86bd-e969f3590d3b" class="bulleted-list"><li style="list-style-type:circle">&quot;Read docs&quot;</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="36f8cb6d-170b-8093-8fcc-f89dd0805c81" class="bulleted-list"><li style="list-style-type:disc">Inline trust: one MCP | 2,000+ products | SOC 2 Type II</li></ul></div><div style="display:contents" dir="auto"><ul id="3728cb6d-170b-80e4-86bf-c9fdce31979f" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Hero image - <a href="https://app.notion.com/p/Create-hero-image-3728cb6d170b80fc9528c8199709179d?pvs=21">Create hero image</a> </span><div class="indented"><div style="display:contents" dir="ltr"><figure id="3728cb6d-170b-80d7-a7c5-c9c7fadc4b0c" class="image"><a href="image.png"><img style="width:666.0069580078125px" src="image.png"/></a></figure></div></div></li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="36f8cb6d-170b-80a9-b8bc-dd1aecb39872" class="numbered-list" start="2"><li>Logo wall<div style="display:contents" dir="auto"><p id="36f8cb6d-170b-8021-89ad-fcd6cdb19d52" class="">&quot;Makini powers integrations for&quot; + customer logos (Siemens, ServiceTitan, Caterpillar, Trane, Tractian, Kion, Uptake)</p></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="36f8cb6d-170b-8077-903c-f6502b0755d6" class="numbered-list" start="3"><li>Connect <code>Product</code> to Claude, ChatGPT, Cursor or any other agent<div style="display:contents" dir="auto"><p id="3728cb6d-170b-8093-bcf0-d5df613f1d8e" class="">Works out-of-box with your favorite AI agents</p></div><div style="display:contents" dir="auto"><p id="3728cb6d-170b-80e4-8827-dbb122ef071e" class="">Claude, ChatGPT, Cursor, LangChain, Custom MCP SDK</p></div><div style="display:contents" dir="auto"><ul id="3728cb6d-170b-801f-8c42-f1e38d7759a0" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Cards with AI company logos</span><div class="indented"><div style="display:contents" dir="auto"><p id="3728cb6d-170b-80d5-80f0-ef55a2244c47" class="">When clicked, transfer to blog on how to connec </p></div></div></li></ul></div><div style="display:contents" dir="auto"><ul id="3728cb6d-170b-800b-962d-f1255e9f6623" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Write instructions on how to connect to agents</span><div class="indented"><div style="display:contents" dir="auto"><p id="3728cb6d-170b-802e-b168-c6e0b2d0dfad" class=""><a href="https://app.notion.com/p/Connect-tool-to-Claude-3728cb6d170b8012ad38c4666f5a03de?pvs=21">Connect tool to Claude</a> </p></div><div style="display:contents" dir="auto"><p id="3728cb6d-170b-809c-be38-fd5ede7952b7" class=""><a href="https://app.notion.com/p/Connect-tool-to-ChatGPT-a0c8cb6d170b83cf8a920155c62716b8?pvs=21">Connect tool to ChatGPT</a> </p></div></div></li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="36f8cb6d-170b-8041-8174-fb0107b5486f" class="numbered-list" start="4"><li>Available tools &amp; resources for <code>Product</code><div style="display:contents" dir="auto"><p id="36f8cb6d-170b-8070-ba39-f7a3f9c51f11" class=""><a href="https://app.notion.com/p/MCP-tools-list-3728cb6d170b80d09b69e254c93657c7?pvs=21">MCP tools list</a> </p></div><div style="display:contents" dir="auto"><p id="3728cb6d-170b-8083-9d05-e0c90060be9d" class="">Similar to the current list of end-points<div class="indented"><div style="display:contents" dir="ltr"><figure id="3728cb6d-170b-8080-8fee-f2b55523272f" class="image"><a href="image%201.png"><img style="width:630.0347290039062px" src="image%201.png"/></a></figure></div></div></p></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="36f8cb6d-170b-80fc-8460-e797216c707b" class="block-color-teal_background numbered-list" start="5"><li><strong>Why teams choose Makini</strong><div style="display:contents" dir="ltr"><figure id="3728cb6d-170b-80f3-814b-f149db18adcf" class="image"><a href="image%202.png"><img style="width:666.0243530273438px" src="image%202.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="3738cb6d-170b-8009-8991-ed65ae333969" class=""><strong>Eyebrow</strong><div class="indented"><div style="display:contents" dir="auto"><p id="3738cb6d-170b-80a5-897d-e85dfd17bd77" class="">ONE MCP. EVERY INDUSTRIAL PRODUCT.</p></div></div></p></div><div style="display:contents" dir="auto"><p id="3738cb6d-170b-8003-8285-db27cad54a69" class="">Headline<div class="indented"><div style="display:contents" dir="auto"><p id="3738cb6d-170b-8015-a260-eed7cfaa1862" class=""><code>Product</code> integration your roadmap keeps pushing. Already built.</p></div></div></p></div><div style="display:contents" dir="auto"><p id="3738cb6d-170b-80b8-b272-e939f1865253" class=""><strong>Subheading</strong><div class="indented"><div style="display:contents" dir="auto"><p id="3738cb6d-170b-8059-a716-dfe715296cbe" class="">Connect once over MCP. Your agent reads data and triggers actions in Hai Robotics WMS, plus 2,000 other systems, without you building or maintaining a single integration.</p></div></div></p></div><div style="display:contents" dir="auto"><ol type="1" id="3738cb6d-170b-8014-9101-cffae0251672" class="numbered-list" start="1"><li>Your agent runs <code>Product</code><div style="display:contents" dir="auto"><p id="3738cb6d-170b-803f-a4ff-d2d3c20f0f26" class="">One MCP endpoint and your agent can pull data and act on <code>Product</code>. The same connection reaches 2,000+ other products behind it.</p></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="3738cb6d-170b-80aa-af57-ef14c95b0f10" class="numbered-list" start="2"><li>Build the agent once<div style="display:contents" dir="auto"><p id="3738cb6d-170b-80c1-968b-c58b2472dadc" class="">Same tools on every system: search, get, create, update. Point the same agent at <code>Product</code> or SAP next, no rebuild.</p></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="3738cb6d-170b-8057-976e-f38f0d9ed851" class="numbered-list" start="3"><li>AI Agent only does what it&#x27;s allowed to<div style="display:contents" dir="auto"><p id="3738cb6d-170b-8051-9fab-e935282804d6" class="">Each connection runs on its own scoped credentials, so the agent inherits your access model. Every call is logged, so you can see exactly what it did.</p></div></li></ol></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="36f8cb6d-170b-809a-bb30-feda17c8e395" class="block-color-teal_background numbered-list" start="6"><li><strong>Live in three steps</strong><div style="display:contents" dir="ltr"><figure id="3728cb6d-170b-8013-a789-f2603352d93c" class="image"><a href="image%203.png"><img style="width:480px" src="image%203.png"/></a><figcaption><a href="https://www.merge.dev/merge-agent-handler">https://www.merge.dev/merge-agent-handler</a></figcaption></figure></div><div style="display:contents" dir="auto"><p id="3738cb6d-170b-8088-95c0-c189fe9062fb" class="">Headline<div class="indented"><div style="display:contents" dir="auto"><p id="3738cb6d-170b-80c4-b65b-ea1df34e197f" class="">Live in three steps</p></div></div></p></div><div style="display:contents" dir="auto"><ol type="1" id="3738cb6d-170b-80d3-ba70-c4e99f0223d3" class="numbered-list" start="1"><li>Connect <code>Product</code><div style="display:contents" dir="auto"><p id="3738cb6d-170b-8040-a3fd-fc52709efee4" class="">Log in. That&#x27;s the integration. Pick <code>Product</code> and sign in with the credentials you already use. No API keys to chase, no integration to build. Connected in under a minute.</p></div><div style="display:contents" dir="auto"><ul id="3738cb6d-170b-8083-926f-e9de94224d90" class="to-do-list"><li><div class="checkbox checkbox-on"></div> <span class="to-do-children-checked">Visual: Makini Link connection expereince</span><div class="indented"></div></li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="3738cb6d-170b-8004-8ded-e1f52356e71a" class="numbered-list" start="2"><li>Get your MCP endpoint<div style="display:contents" dir="auto"><p id="3738cb6d-170b-804d-b7cb-f1e93ba5a184" class="">One endpoint, scoped and logged. Makini gives you a single MCP endpoint and a token scoped to that login. The agent can only touch what those credentials allow, and every call lands on the log.</p></div><div style="display:contents" dir="auto"><ul id="3738cb6d-170b-8031-904a-d914454d1785" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Visual: Makini dashboard view of the connection showing the MCP endpoint URL and the scoped token, ideally with a permission scope and a log line visible so the &quot;scoped and logged&quot; claim is shown, not just told.</span><div class="indented"><div style="display:contents" dir="auto"><p id="3738cb6d-170b-80a3-8ba6-fb85b3f9983a" class="">Might need input from <span class="user">@Roman Kinyakin</span> - if customer is using Claud or ChatGPT, they can maybe copy a credential. In other cases, maybe download a JSON. Ask Roman what is the best experience</p></div></div></li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="3738cb6d-170b-8063-98d5-c2203a5b8adc" class="numbered-list" start="3"><li>Point your agent at it<div style="display:contents" dir="auto"><p id="3738cb6d-170b-8015-93bf-cf7b9d3b68ac" class="">One config block, any MCP client. Paste the endpoint into Claude, n8n, LangChain, or whatever you run. Your agent gets the same tools it uses on every other system: search, get, create, update.</p></div><div style="display:contents" dir="auto"><ul id="3738cb6d-170b-805f-bff3-d27f8401a13c" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Visual</span><div class="indented"><div style="display:contents" dir="auto"><p id="3738cb6d-170b-80cd-acdf-c934b6b16265" class="">the client picker (Claude, ChatGPT, Cursor, Winsurf, n8n - ask <span class="user">@Roman Kinyakin</span> for help) as tabs . Each tab shows the right kind of instruction for that client, not the same JSON for all of them the way the reference does.</p></div><div style="display:contents" dir="auto"><ul id="3738cb6d-170b-80a9-9d5e-ff96e405612a" class="bulleted-list"><li style="list-style-type:disc">Pick Claude or ChatGPT: show the UI connector flow. Click add, log into Hai Robotics WMS with your normal credentials, authorize, tools are live. No token, no file, no endpoint to copy.</li></ul></div><div style="display:contents" dir="auto"><ul id="3738cb6d-170b-8041-b9b4-dbf5c207949c" class="bulleted-list"><li style="list-style-type:disc">Pick Cursor, VS Code, n8n, or API: show the config block and the docs link. Endpoint, scoped token, paste, restart.</li></ul></div><div style="display:contents" dir="ltr"><figure id="3738cb6d-170b-80d6-9733-d3cd44ee1fd2" class="image"><a href="image%204.png"><img style="width:384px" src="image%204.png"/></a></figure></div></div></li></ul></div></li></ol></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="3728cb6d-170b-80c8-ae14-fdcbb6f5e7aa" class="block-color-teal_background numbered-list" start="7"><li>How it works<div style="display:contents" dir="auto"><p id="3738cb6d-170b-800c-a51f-c83be7048fc8" class="">Eyebrow<div class="indented"><div style="display:contents" dir="auto"><p id="3738cb6d-170b-8088-829d-c482abc32ee4" class="">HOW IT WORKS</p></div></div></p></div><div style="display:contents" dir="auto"><p id="3738cb6d-170b-80ee-8c8f-c61ecc52bc5b" class="">Headline<div class="indented"><div style="display:contents" dir="auto"><p id="3738cb6d-170b-8041-b857-d6de212553df" class="">One managed server between your agent and every system</p></div></div></p></div><div style="display:contents" dir="auto"><p id="3738cb6d-170b-8000-81d9-e1df3f9e880a" class="">Description<div class="indented"><div style="display:contents" dir="auto"><p id="3738cb6d-170b-8004-b834-eadc8b0d5096" class="">MCP is an open standard for giving AI agents tools to act. Makini runs as a managed MCP server in front of <code>Product</code> and your wider stack. Your agent hits one endpoint, and Makini handles auth, normalization, and logging across all 2,000 systems behind it.</p></div></div></p></div><div style="display:contents" dir="auto"><p id="3738cb6d-170b-80a0-867b-ee99cf2fb47e" class="">Diagram<div class="indented"><div style="display:contents" dir="ltr"><figure id="3728cb6d-170b-80b4-8abc-f1c10695f3b1" class="image"><a href="image%205.png"><img style="width:630.0347290039062px" src="image%205.png"/></a><figcaption>Reference</figcaption></figure></div><div style="display:contents" dir="auto"><ul id="3738cb6d-170b-80c8-a3cd-ea8b4bc3053d" class="bulleted-list"><li style="list-style-type:disc">Left node: <strong>Your agent</strong> / sub-label: Claude, Cursor, ChatGPT, or your own</li></ul></div><div style="display:contents" dir="auto"><ul id="3738cb6d-170b-80c3-a24a-ec9ef05e1d5c" class="bulleted-list"><li style="list-style-type:disc">Center node (the hero): <strong>Makini MCP server</strong>, with three stacked pills inside: Authentication / Normalization / Logging</li></ul></div><div style="display:contents" dir="auto"><ul id="3738cb6d-170b-8083-b12e-dee1d5bd74ac" class="bulleted-list"><li style="list-style-type:disc">Right side: the universal tool set as chips, <strong>search · get · create · update</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="3738cb6d-170b-801d-92e0-f12f73f2dbfe" class="bulleted-list"><li style="list-style-type:disc">Tag chips anchored to the center node: <strong>Tools &amp; resources · Streaming · Scoped tokens</strong></li></ul></div><div style="display:contents" dir="auto"><p id="3738cb6d-170b-80c2-980c-c29f57101b54" class=""><strong>Composition.</strong> Same left-to-right axis as your reference, and for the same reason: it matches reading order and the actual flow. Three zones. Who calls (agent), what sits in the middle (Makini), what gets reached (systems). Make the Makini server the hero. Largest, brightest, centered. Your agent and your systems are supporting cast. The three inner pills (auth, normalization, logging) are what visually earn the word &quot;managed,&quot; so keep them inside the box exactly like the reference&#x27;s pills.<br/></p></div></div></p></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="36f8cb6d-170b-804a-93e6-d325d1fddd66" class="block-color-teal_background numbered-list" start="8"><li><strong>Capabilities: Everything your agent can do over MCP</strong><div style="display:contents" dir="ltr"><figure id="3738cb6d-170b-8069-a09e-e9ead01409bf" class="image"><a href="image%206.png"><img style="width:666.0156860351562px" src="image%206.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="3738cb6d-170b-8004-9783-fd951c2f8aa0" class="">Eyebrow<div class="indented"><div style="display:contents" dir="auto"><p id="3738cb6d-170b-80ac-ad76-eaf8298495d2" class="">WHY MAKINI MCP</p></div></div></p></div><div style="display:contents" dir="auto"><p id="3738cb6d-170b-80ee-9945-ddcab769e6ff" class="">Headline<div class="indented"><div style="display:contents" dir="auto"><p id="3738cb6d-170b-80ad-bafb-faf5ca5ca835" class="">Everything your agent needs to act on industrial systems</p></div></div></p></div><div style="display:contents" dir="auto"><p id="3738cb6d-170b-80a0-bde5-d1ba3e21b618" class="">Description<div class="indented"><div style="display:contents" dir="auto"><p id="3738cb6d-170b-8055-9063-f656eec3351c" class="">The hard part of an agent isn&#x27;t the model. It&#x27;s giving it safe, reliable access to the systems that actually run the business. Makini handles that part. Connect once over MCP and your agent reads and acts on <code>Product</code> plus 2,000 other systems, with auth, scoping, and logging built in.</p></div></div></p></div><div style="display:contents" dir="auto"><p id="3738cb6d-170b-80b2-970d-ec421d8987bf" class="">CTA<div class="indented"><div style="display:contents" dir="auto"><p id="3738cb6d-170b-80ac-8c93-c2c12e7e35f9" class="">Schedule demo</p></div></div></p></div><div style="display:contents" dir="auto"><ol type="1" id="3738cb6d-170b-806d-9140-e3c5909112b3" class="numbered-list" start="1"><li><strong>One set of tools, every system</strong><div style="display:contents" dir="auto"><p id="3738cb6d-170b-8063-acb2-ea7e78774348" class="">Your agent calls the same four tools, search, get, create, update, across all 2,000 systems. It runs <code>Product</code> the same way it runs SAP or IBM Maximo, so you build the agent once and never rewrite it per system.</p></div><div style="display:contents" dir="auto"><ul id="3738cb6d-170b-806c-8148-d3186e4b7d4a" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Visual: a single tool list (search / get / create / update) on the left, fanning out to a grid of product cards. The reference&#x27;s stacked-connector look, inverted to show one toolset reaching many systems.</span><div class="indented"><div style="display:contents" dir="ltr"><figure id="3738cb6d-170b-80e9-9ba8-cb0c2ab5334c" class="image"><a href="image%207.png"><img style="width:336px" src="image%207.png"/></a></figure></div></div></li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="3738cb6d-170b-80ea-b407-d933b065282f" class="numbered-list" start="2"><li>Reach systems that never had an API<div style="display:contents" dir="auto"><p id="3738cb6d-170b-80fa-a603-cc0b79ab7f16" class="">Plenty of industrial software never shipped a REST API or an MCP server, including 20-year-old on-prem systems. Your agent reaches them anyway, so it works with what your customers actually run, not just modern SaaS.</p></div><div style="display:contents" dir="auto"><ul id="3738cb6d-170b-807c-a708-c006fa8f017a" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Visual: a dated on-prem system on one side (server rack or a vintage desktop UI), connected through Makini to a modern agent on the other. The contrast carries the point.</span><div class="indented"></div></li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="3738cb6d-170b-8084-9c7d-e65fd67761b0" class="numbered-list" start="3"><li>Connect by logging in<div style="display:contents" dir="auto"><p id="3738cb6d-170b-80b1-9a24-d76b786748dd" class="">Pick a product and sign in with the credentials you already use, whether it&#x27;s you, your code, or an agent over MCP. The same login flow works everywhere.</p></div><div style="display:contents" dir="auto"><ul id="3738cb6d-170b-8017-bbf0-ed7b0c60bd00" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Visual: the Makini Link auth screen (pick product, enter credentials), into a &quot;Connected&quot; success state. This is your existing GIF, repurposed.</span><div class="indented"></div></li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="3738cb6d-170b-8088-a028-dc4d357306aa" class="numbered-list" start="4"><li>Scoped, logged, accounted for<div style="display:contents" dir="auto"><p id="3738cb6d-170b-8052-9bad-fe24f71f12e7" class="">Each connection runs on its own token and can only do what those credentials allow in the source system. Every call the agent makes is logged and searchable, so you can see exactly what it did.</p></div><div style="display:contents" dir="auto"><ul id="3738cb6d-170b-8058-b2b3-c7ba63e6ab59" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Visual: a call log showing agent actions with timestamps, paired with a scope or permissions badge on the token. The reference&#x27;s &quot;enterprise security&quot; panel, as an audit log rather than a violations chart.</span><div class="indented"></div></li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="3738cb6d-170b-80fa-88db-e4b8f2036242" class="numbered-list" start="5"><li>Works with any MCP client<div style="display:contents" dir="auto"><p id="3738cb6d-170b-80cd-b8f8-ec57f2828518" class="">Point Claude, ChatGPT, Cursor, or n8n at your endpoint with one config block. No custom adapters, no lock-in, switch clients anytime.</p></div><div style="display:contents" dir="auto"><ul id="3738cb6d-170b-807d-886b-c8b3cdf6bbbb" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Visual: a row of client logos (Claude, ChatGPT, Cursor, n8n) all arrowing into a single Makini endpoint, or the client-tabbed config block from the setup widget so the two sections rhyme.</span><div class="indented"></div></li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="3738cb6d-170b-8024-bea5-d2186c9197f2" class="numbered-list" start="6"><li>Connections that don&#x27;t silently break<div style="display:contents" dir="auto"><p id="3738cb6d-170b-80e2-b1e9-e2307d670b60" class="">Makini watches every connection and alerts you the moment a sync fails, with the error detail to fix it. Your agent is never quietly calling a tool that went dead.</p></div><div style="display:contents" dir="auto"><ul id="3738cb6d-170b-8031-b28f-c5bd2463a504" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Visual: an alert card (&quot;Sync failed on [system], here&#x27;s why&quot;) sitting above a healthy green status list. Mirrors the reference&#x27;s monitoring chart, but as an alert plus status rather than a graph.</span><div class="indented"></div></li></ul></div></li></ol></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="36f8cb6d-170b-8097-9dd1-d84074b7f310" class="block-color-teal_background numbered-list" start="9"><li><strong>Security &amp; governance: Built for agents you can trust</strong><div style="display:contents" dir="auto"><p id="3738cb6d-170b-80ff-988c-db8ee14704d6" class="">Eyebrow<div class="indented"><div style="display:contents" dir="auto"><p id="3738cb6d-170b-8047-acd1-c063e1c1bcb7" class="">SECURITY AND GOVERNANCE</p></div></div></p></div><div style="display:contents" dir="auto"><p id="3738cb6d-170b-80f9-a5f9-c968f1eeb423" class="">Headline:<div class="indented"><div style="display:contents" dir="auto"><p id="3738cb6d-170b-8030-bdaf-ff2fc910fed1" class="">Control what the agent touches. See everything it does.</p></div></div></p></div><div style="display:contents" dir="auto"><p id="3738cb6d-170b-80af-8037-e46ca504ffcd" class="">Description:<div class="indented"><div style="display:contents" dir="auto"><p id="3738cb6d-170b-80d2-b234-fa4c052b6e5e" class="">Writing to a live CMMS or ERP is where teams get nervous, and they are right to be. Makini hands you the controls. Every connection is scoped to what its credentials can do, every call the agent makes is logged, and it is backed by SOC 2 Type II and twice-yearly penetration tests. Contact us to learn more.</p></div></div></p></div><div style="display:contents" dir="auto"><p id="3738cb6d-170b-80f0-a72c-fb0ed3f6f08b" class="">CTA:<div class="indented"><div style="display:contents" dir="auto"><p id="3738cb6d-170b-80c9-bee7-f5af9be0e7fe" class="">Security at Makini - leads to security page or trust center</p></div></div></p></div><div style="display:contents" dir="auto"><p id="3738cb6d-170b-80f1-9f29-e6e53bdbf56f" class=""><strong>Four pillars</strong><div class="indented"><div style="display:contents" dir="auto"><ol type="1" id="3738cb6d-170b-802b-841b-ca90f3184848" class="numbered-list" start="1"><li>Scoped, revocable access<br/>Each connection runs on its own token, scoped to what its credentials can do in the source system. Revoke it and the agent is locked out immediately.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="3738cb6d-170b-80c4-a8d6-efb0751688a6" class="numbered-list" start="2"><li>A log of every action<br/>Every call the agent makes is logged and searchable. Stream the audit trail into your own stack, Sentry, a webhook, or syslog, so it sits where your team already looks.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="3738cb6d-170b-80e1-8602-d40b55402387" class="numbered-list" start="3"><li>Independently verified<br/>SOC 2 Type II certified, with independent penetration tests twice a year.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="3738cb6d-170b-80d4-b840-ece0f0308964" class="numbered-list" start="4"><li>Your data, your region<br/>Need data to stay in-region? In-country hosting is available for the EU, UK, Canada, and Australia on request.</li></ol></div></div></p></div><div style="display:contents" dir="auto"><ul id="3738cb6d-170b-80a0-811e-fda954bcea66" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Visual.</span><div class="indented"><div style="display:contents" dir="auto"><p id="3738cb6d-170b-809c-8d3f-f4caf68d2139" class="">Instead, a compact governance visual: a scoped-token card with a visible &quot;Revoke&quot; control, sitting above a short audit-log list showing agent calls with timestamps. Put the single SOC 2 Type II badge beneath as the stamp. That shows the buyer holding the controls rather than showing four logos, which is both truthful and stronger for this objection. One badge in a &quot;you&#x27;re in control&quot; layout looks deliberate. One badge in a four-badge layout looks like three are missing.</p></div></div></li></ul></div></li></ol></div><div style="display:contents" dir="auto"><p id="36f8cb6d-170b-80b8-add9-fac6c656f070" class="">
+</p></div><div style="display:contents" dir="auto"><ol type="1" id="36f8cb6d-170b-805a-b390-c9df6c0de97c" class="numbered-list" start="1"><li><strong>Explore other MCP servers</strong><div style="display:contents" dir="auto"><p id="36f8cb6d-170b-806f-8586-cefb323ceb94" class="">Products logo grid - like on integrations page</p></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="36f8cb6d-170b-8009-9be2-d49e041eed6b" class="numbered-list" start="2"><li><strong>What is </strong><code><strong>Product</strong></code><div style="display:contents" dir="auto"><p id="36f8cb6d-170b-802b-a2b7-fca787175897" class="">Reuse from the API page. Captures the product-name query.</p></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="36f8cb6d-170b-8075-8cf8-eaf9bc22d8ad" class="numbered-list" start="3"><li><strong>Final CTA</strong><div style="display:contents" dir="auto"><ul id="36f8cb6d-170b-809f-8b2e-f12d2a67fa03" class="bulleted-list"><li style="list-style-type:disc">&quot;Connect your agent to [Product].&quot; Keep the mockup&#x27;s version.</li></ul></div><div style="display:contents" dir="auto"><ul id="3728cb6d-170b-8088-b394-cb64e9892a3b" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Visual</span><div class="indented"></div></li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="36f8cb6d-170b-802c-9621-dff28e518200" class="numbered-list" start="4"><li><strong>FAQ</strong><div style="display:contents" dir="auto"><ul id="36f8cb6d-170b-8005-9723-cc5d56d25f88" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked"><a href="https://app.notion.com/p/FAQ-for-MCP-3728cb6d170b8022974ccd3c02aca945?pvs=21">FAQ for MCP</a> </span><div class="indented"></div></li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="36f8cb6d-170b-8082-a89f-d7e69679e8d6" class="numbered-list" start="5"><li><strong>Footer</strong><div style="display:contents" dir="auto"><p id="36f8cb6d-170b-80aa-a4c4-ea2778412f30" class="">Site standard</p></div></li></ol></div><div style="display:contents" dir="auto"><p id="3728cb6d-170b-80d5-aac4-d21a0f5a0a5c" class="">
+</p></div><div style="display:contents" dir="auto"><ul id="3728cb6d-170b-807a-8666-d071eeac05b8" class="toggle"><li><details open=""><summary>Later</summary><div style="display:contents" dir="auto"><ol type="1" id="36f8cb6d-170b-80ca-95c8-c635b9956d4c" class="numbered-list" start="1"><li><strong>Use cases for [Product] (NEW, optional, SEO + imagination)</strong><div style="display:contents" dir="auto"><ul id="36f8cb6d-170b-8001-9ec4-f09c9641e051" class="bulleted-list"><li style="list-style-type:disc">3-4 agent scenarios by product category (e.g. CMMS: agent triages incoming work orders; pulls asset history before dispatch; reconciles spare-parts inventory across sites). Marketing-owned, templatable by category. Can fold into the FAQ if you want to keep the page shorter.</li></ul></div><div style="display:contents" dir="auto"><ol type="1" id="36f8cb6d-170b-80a8-808d-f5667fb83347" class="numbered-list" start="1"><li><strong>7. Drop-in setup: Add Makini to your agent</strong><div style="display:contents" dir="auto"><ul id="36f8cb6d-170b-802a-9b74-c2f186d12110" class="bulleted-list"><li style="list-style-type:disc">Code block 1: mcp.config.json with endpoint URL + auth header</li></ul></div><div style="display:contents" dir="auto"><ul id="36f8cb6d-170b-80eb-8289-db245610fd4b" class="bulleted-list"><li style="list-style-type:disc">Code block 2: example tool call returning a result as an MCP resource</li></ul></div><div style="display:contents" dir="auto"><ul id="36f8cb6d-170b-80de-89da-e6326305202f" class="bulleted-list"><li style="list-style-type:disc"><code>[CONFIRM J: real endpoint URL, exact auth header format, transport, the real tool name and payload schema shown]</code></li></ul></div></li></ol></div></li></ol></div></details></li></ul></div><div style="display:contents" dir="auto"><p id="3728cb6d-170b-801d-9c01-db9bdee752e5" class="">
+</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"><hr/><details open="" style="padding-top:1em"><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Inline comments</summary><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">H1: &quot;<code>Product</code> MCP Server&quot;</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a-/AAuE7mAH4WnIzvRZOudKxUB2Z-rGtg4-7ElfIcIoDHrm=s100" class="icon user-icon"/><span><b>George Surovtsev</b> <time style="font-size:0.8em">Jun 1, 2026, 9:28 AM</time></span></span></div><div style="padding:0.2em">SEO note for marketing: the H1 owns &quot;MCP server,&quot; but the title tag and meta should also carry &quot;connect ChatGPT and Claude to [Product]&quot; to catch the non-MCP searchers</div><div style="padding:0.3em"></div></li></ul></div><hr/></div><div class="indented"><div><p style="padding:0.2em"><b>Block text</b>: <mark class="highlight-yellow_background">&quot;Makini powers integrations for&quot; + customer logos (Siemens, ServiceTitan, Caterpillar, Trane, Tractian, Kion, Uptake)</mark></p><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><img src="https://lh3.googleusercontent.com/a-/AAuE7mAH4WnIzvRZOudKxUB2Z-rGtg4-7ElfIcIoDHrm=s100" class="icon user-icon"/><span><b>George Surovtsev</b> <time style="font-size:0.8em">Jun 1, 2026, 9:28 AM</time></span></span></div><div style="padding:0.2em">reuse from the API page.</div><div style="padding:0.3em"></div></li></ul></div><hr/></div></details></span></body></html>

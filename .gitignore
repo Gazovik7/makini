@@ -1,0 +1,11 @@
+# Claude Code local config / session data
+.claude/
+
+# Playwright CLI cache & logs
+.playwright-cli/
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
