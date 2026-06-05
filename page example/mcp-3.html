@@ -256,7 +256,7 @@
   /* #security - light 4-column vertical layout (not boxed cards) */
   .sec-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;margin-top:8px}
   .sec-col{display:flex;flex-direction:column;gap:10px;padding:0 4px}
-  .sec-col .mc-icon{margin-bottom:4px}
+  .sec-col .mc-icon{margin-bottom:4px}.sec-col .sec-ico3d{width:46px;height:46px;display:block;object-fit:contain;margin:0 0 10px;filter:drop-shadow(0 6px 12px rgba(0,0,0,.3))}
   .sec-col h3{color:#fff;font-size:16px;font-weight:600;margin:0;line-height:22px}
   .sec-col p{color:#c6c7cc;font-size:14px;line-height:22px;margin:0}
   .sec-cta{display:flex;flex-direction:column;align-items:center;gap:18px;margin-top:40px}
@@ -752,6 +752,7 @@
 </script>
 
 <!-- S5: Why teams choose Makini -->
+<style>#why{padding-top:132px!important;padding-bottom:132px!important}@media(max-width:767px){#why{padding-top:76px!important;padding-bottom:76px!important}}</style>
 <section class="mc-sec mc-glow-br bg-b mc-divide" id="why"><div class="m-container">
   <div class="mc-head"><h2 class="h2">The SAP EWM integration your roadmap keeps pushing. Already built.</h2><p class="mc-sub">Connect once over MCP. Your agent reads data and triggers actions in SAP EWM, plus 2,000+ other systems - without you building or maintaining a single integration.</p></div>
   </div>
@@ -966,10 +967,10 @@ function mcTabSwitch(btn,tabId){
     <p class="mc-sub">Every connection is scoped, every call is logged, and it's all backed by SOC 2 Type II.</p>
   </div>
   <div class="sec-grid">
-    <div class="sec-col"><div class="mc-icon"><svg viewBox="0 0 24 24"><circle cx="8" cy="15" r="5"/><path d="M11.5 11.5 21 2M17 6l3 3M14 9l2 2"/></svg></div><h3>Scoped, revocable access</h3><p>Each connection runs on its own token, scoped to what its credentials can do. Revoke it and the agent is locked out immediately.</p></div>
-    <div class="sec-col"><div class="mc-icon"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M9 12h6M9 16h6M9 8h3"/></svg></div><h3>A log of every action</h3><p>Every call is logged and searchable. Stream the audit trail into your own stack - Sentry, a webhook, or syslog.</p></div>
-    <div class="sec-col"><div class="mc-icon"><svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 9 8 11 4.6-2 8-6 8-11V5z"/><path d="m8.5 12 2.5 2.5L16 9"/></svg></div><h3>Independently verified</h3><p>SOC 2 Type II certified, with independent penetration tests twice a year.</p></div>
-    <div class="sec-col"><div class="mc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg></div><h3>Your data, your region</h3><p>In-country hosting for the EU, UK, Canada and Australia on request. Self-hosted deployments also available.</p></div>
+    <div class="sec-col"><img class="sec-ico3d" src="./SAP EWM API integration – connect to anything – Makini_files/makini-3d-key.png" alt="" loading="lazy"><h3>Scoped, revocable access</h3><p>Each connection runs on its own token, scoped to what its credentials can do. Revoke it and the agent is locked out immediately.</p></div>
+    <div class="sec-col"><img class="sec-ico3d" src="./SAP EWM API integration – connect to anything – Makini_files/makini-3d-log.png" alt="" loading="lazy"><h3>A log of every action</h3><p>Every call is logged and searchable. Stream the audit trail into your own stack - Sentry, a webhook, or syslog.</p></div>
+    <div class="sec-col"><img class="sec-ico3d" src="./SAP EWM API integration – connect to anything – Makini_files/makini-3d-shield.png" alt="" loading="lazy"><h3>Independently verified</h3><p>SOC 2 Type II certified, with independent penetration tests twice a year.</p></div>
+    <div class="sec-col"><img class="sec-ico3d" src="./SAP EWM API integration – connect to anything – Makini_files/makini-3d-globe.png" alt="" loading="lazy"><h3>Your data, your region</h3><p>In-country hosting for the EU, UK, Canada and Australia on request. Self-hosted deployments also available.</p></div>
   </div>
   <div class="sec-cta">
     <img src="./SAP EWM API integration – connect to anything – Makini_files/soc-ii.png" alt="SOC 2 Type II - Independently audited" class="sec-soc">
