@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 400">
+  <defs>
+    <radialGradient id="hub-fill" cx="30%" cy="20%" r="80%">
+      <stop offset="0%" stop-color="#3a2f5e"/>
+      <stop offset="100%" stop-color="#1f1c2b"/>
+    </radialGradient>
+    <linearGradient id="hub-border" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5485e5"/>
+      <stop offset="50%" stop-color="#fb63ff"/>
+      <stop offset="100%" stop-color="#9468f2"/>
+    </linearGradient>
+    <radialGradient id="agent-fill" cx="30%" cy="20%" r="80%">
+      <stop offset="0%" stop-color="#2d2a45"/>
+      <stop offset="100%" stop-color="#1b1921"/>
+    </radialGradient>
+    <filter id="glow-blur" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+    <linearGradient id="fade-g" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%"  stop-color="white" stop-opacity="0"/>
+      <stop offset="10%" stop-color="white" stop-opacity="1"/>
+      <stop offset="86%" stop-color="white" stop-opacity="1"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </linearGradient>
+    <mask id="fade-mask">
+      <rect width="460" height="400" fill="url(#fade-g)"/>
+    </mask>
+  </defs>
+
+  <g mask="url(#fade-mask)">
+
+    <!-- hub glow -->
+    <circle cx="230" cy="200" r="53" fill="#9468f2" opacity="0.25" filter="url(#glow-blur)">
+      <animate attributeName="opacity" values="0.22;0.38;0.22" dur="3s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+      <animate attributeName="r"       values="53;65;53"         dur="3s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    </circle>
+    <circle cx="230" cy="200" r="40" fill="#71a1ff" opacity="0.12" filter="url(#glow-blur)">
+      <animate attributeName="opacity" values="0.10;0.20;0.10" dur="3s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    </circle>
+
+    <!-- lines top: solid blue, orthogonal elbows -->
+    <path fill="none" stroke="#71a1ff" stroke-opacity="0.5" stroke-width="1.6" stroke-linecap="round"
+          d="M100 87 L100 109 Q100 121 112 121 L218 121 Q230 121 230 133 L230 147"/>
+    <path fill="none" stroke="#71a1ff" stroke-opacity="0.5" stroke-width="1.6" stroke-linecap="round"
+          d="M230 87 L230 147"/>
+    <path fill="none" stroke="#71a1ff" stroke-opacity="0.5" stroke-width="1.6" stroke-linecap="round"
+          d="M360 87 L360 109 Q360 121 348 121 L242 121 Q230 121 230 133 L230 147"/>
+
+    <!-- lines bottom: dashed animated, start below "Makini MCP" label -->
+    <path fill="none" stroke="white" stroke-opacity="0.25" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="5 7"
+          d="M230 276 L230 282 Q230 290 222 290 L98 290 Q90 290 90 305 L90 319">
+      <animate attributeName="stroke-dashoffset" from="0" to="-24" dur="1.2s" repeatCount="indefinite" calcMode="linear"/>
+    </path>
+    <path fill="none" stroke="white" stroke-opacity="0.25" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="5 7"
+          d="M230 276 L230 282 Q230 290 222 290 L191 290 Q183 290 183 305 L183 319">
+      <animate attributeName="stroke-dashoffset" from="0" to="-24" dur="1.2s" repeatCount="indefinite" calcMode="linear"/>
+    </path>
+    <path fill="none" stroke="white" stroke-opacity="0.25" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="5 7"
+          d="M230 276 L230 282 Q230 290 238 290 L269 290 Q277 290 277 305 L277 319">
+      <animate attributeName="stroke-dashoffset" from="0" to="-24" dur="1.2s" repeatCount="indefinite" calcMode="linear"/>
+    </path>
+    <path fill="none" stroke="white" stroke-opacity="0.25" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="5 7"
+          d="M230 276 L230 282 Q230 290 238 290 L362 290 Q370 290 370 305 L370 319">
+      <animate attributeName="stroke-dashoffset" from="0" to="-24" dur="1.2s" repeatCount="indefinite" calcMode="linear"/>
+    </path>
+
+    <!-- animated dots: agents → hub -->
+    <circle r="3" fill="#71a1ff">
+      <animateMotion dur="1.5s" repeatCount="indefinite" path="M100 87 L100 109 Q100 121 112 121 L218 121 Q230 121 230 133 L230 147"/>
+      <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="3" fill="#71a1ff">
+      <animateMotion dur="1.5s" begin="-0.5s" repeatCount="indefinite" path="M230 87 L230 147"/>
+      <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="1.5s" begin="-0.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="3" fill="#71a1ff">
+      <animateMotion dur="1.5s" begin="-1s" repeatCount="indefinite" path="M360 87 L360 109 Q360 121 348 121 L242 121 Q230 121 230 133 L230 147"/>
+      <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="1.5s" begin="-1s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- animated dots: hub → systems -->
+    <circle r="2.5" fill="#9468f2">
+      <animateMotion dur="1.6s" begin="-0.2s" repeatCount="indefinite" path="M230 276 L230 282 Q230 290 222 290 L98 290 Q90 290 90 305 L90 319"/>
+      <animate attributeName="opacity" values="0;0.9;0.9;0" keyTimes="0;0.1;0.9;1" dur="1.6s" begin="-0.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="2.5" fill="#9468f2">
+      <animateMotion dur="1.4s" begin="-0.7s" repeatCount="indefinite" path="M230 276 L230 282 Q230 290 222 290 L191 290 Q183 290 183 305 L183 319"/>
+      <animate attributeName="opacity" values="0;0.9;0.9;0" keyTimes="0;0.1;0.9;1" dur="1.4s" begin="-0.7s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="2.5" fill="#9468f2">
+      <animateMotion dur="1.6s" begin="-1.1s" repeatCount="indefinite" path="M230 276 L230 282 Q230 290 238 290 L269 290 Q277 290 277 305 L277 319"/>
+      <animate attributeName="opacity" values="0;0.9;0.9;0" keyTimes="0;0.1;0.9;1" dur="1.6s" begin="-1.1s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="2.5" fill="#9468f2">
+      <animateMotion dur="1.8s" begin="-0.4s" repeatCount="indefinite" path="M230 276 L230 282 Q230 290 238 290 L362 290 Q370 290 370 305 L370 319"/>
+      <animate attributeName="opacity" values="0;0.9;0.9;0" keyTimes="0;0.1;0.9;1" dur="1.8s" begin="-0.4s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- agent nodes: 54×54 rx=14 -->
+    <!-- Claude (100,60) -->
+    <rect x="73" y="33" width="54" height="54" rx="14" fill="url(#agent-fill)" stroke="white" stroke-opacity="0.12" stroke-width="1"/>
+    <svg x="86" y="46" width="28" height="28" viewBox="0 0 24 24">
+      <path fill="white" opacity="0.7" d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"/>
+    </svg>
+
+    <!-- ChatGPT (230,60) -->
+    <rect x="203" y="33" width="54" height="54" rx="14" fill="url(#agent-fill)" stroke="white" stroke-opacity="0.12" stroke-width="1"/>
+    <svg x="216" y="46" width="28" height="28" viewBox="0 0 24 24">
+      <path fill-rule="evenodd" fill="white" opacity="0.7" d="M9.205 8.658v-2.26c0-.19.072-.333.238-.428l4.543-2.616c.619-.357 1.356-.523 2.117-.523 2.854 0 4.662 2.212 4.662 4.566 0 .167 0 .357-.024.547l-4.71-2.759a.797.797 0 00-.856 0l-5.97 3.473zm10.609 8.8V12.06c0-.333-.143-.57-.429-.737l-5.97-3.473 1.95-1.118a.433.433 0 01.476 0l4.543 2.617c1.309.76 2.189 2.378 2.189 3.948 0 1.808-1.07 3.473-2.76 4.163zM7.802 12.703l-1.95-1.142c-.167-.095-.239-.238-.239-.428V5.899c0-2.545 1.95-4.472 4.591-4.472 1 0 1.927.333 2.712.928L8.23 5.067c-.285.166-.428.404-.428.737v6.898zM12 15.128l-2.795-1.57v-3.33L12 8.658l2.795 1.57v3.33L12 15.128zm1.796 7.23c-1 0-1.927-.332-2.712-.927l4.686-2.712c.285-.166.428-.404.428-.737v-6.898l1.974 1.142c.167.095.238.238.238.428v5.233c0 2.545-1.974 4.472-4.614 4.472zm-5.637-5.303l-4.544-2.617c-1.308-.761-2.188-2.378-2.188-3.948A4.482 4.482 0 014.21 6.327v5.423c0 .333.143.571.428.738l5.947 3.449-1.95 1.118a.432.432 0 01-.476 0zm-.262 3.9c-2.688 0-4.662-2.021-4.662-4.519 0-.19.024-.38.047-.57l4.686 2.71c.286.167.571.167.856 0l5.97-3.448v2.26c0 .19-.07.333-.237.428l-4.543 2.616c-.619.357-1.356.523-2.117.523zm5.899 2.83a5.947 5.947 0 005.827-4.756C22.287 18.339 24 15.84 24 13.296c0-1.665-.713-3.282-1.998-4.448.119-.5.19-.999.19-1.498 0-3.401-2.759-5.947-5.946-5.947-.642 0-1.26.095-1.88.31A5.962 5.962 0 0010.205 0a5.947 5.947 0 00-5.827 4.757C1.713 5.447 0 7.945 0 10.49c0 1.666.713 3.283 1.998 4.448-.119.5-.19 1-.19 1.499 0 3.401 2.759 5.946 5.946 5.946.642 0 1.26-.095 1.88-.309a5.96 5.96 0 004.162 1.713z"/>
+    </svg>
+
+    <!-- Cursor (360,60) -->
+    <rect x="333" y="33" width="54" height="54" rx="14" fill="url(#agent-fill)" stroke="white" stroke-opacity="0.12" stroke-width="1"/>
+    <svg x="346" y="46" width="28" height="28" viewBox="0 0 24 24">
+      <path fill="white" opacity="0.7" d="M11.503.131 1.891 5.678a.84.84 0 0 0-.42.726v11.188c0 .3.162.575.42.724l9.609 5.55a1 1 0 0 0 .998 0l9.61-5.55a.84.84 0 0 0 .42-.724V6.404a.84.84 0 0 0-.42-.726L12.497.131a1.01 1.01 0 0 0-.996 0M2.657 6.338h18.55c.263 0 .43.287.297.515L12.23 22.918c-.062.107-.229.064-.229-.06V12.335a.59.59 0 0 0-.295-.51l-9.11-5.257c-.109-.063-.064-.23.061-.23"/>
+    </svg>
+
+    <!-- hub node: 106×106 rx=26, gradient border + fill -->
+    <rect x="177" y="147" width="106" height="106" rx="12" fill="url(#hub-border)"/>
+    <rect x="178.5" y="148.5" width="103" height="103" rx="10.5" fill="url(#hub-fill)"/>
+    <image href="data:image/png;base64,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" x="202" y="172" width="56" height="56"/>
+
+    <!-- system nodes: 42×42 rx=12 -->
+    <!-- Infor (90,340) -->
+    <rect x="69" y="319" width="42" height="42" rx="12" fill="white" fill-opacity="0.05" stroke="white" stroke-opacity="0.11" stroke-width="1"/>
+    <svg x="74" y="324" width="32" height="32" viewBox="0 0 24 24">
+      <text x="12" y="12" text-anchor="middle" dominant-baseline="middle" fill="white" stroke="none" opacity="0.7" font-family="Arial,sans-serif" font-size="8.5" font-weight="800" letter-spacing="0.3">infor</text>
+    </svg>
+
+    <!-- SAP (183,340) -->
+    <rect x="162" y="319" width="42" height="42" rx="12" fill="white" fill-opacity="0.05" stroke="white" stroke-opacity="0.11" stroke-width="1"/>
+    <svg x="167" y="324" width="32" height="32" viewBox="0 0 24 24">
+      <path fill="none" stroke="white" stroke-opacity="0.7" stroke-width="1.4" stroke-linejoin="round" d="M2.5 9.5 L15.5 7.5 L21.5 12 L15.5 16.5 L2.5 14.5 Z"/>
+      <text x="11.2" y="12.5" text-anchor="middle" dominant-baseline="middle" fill="white" stroke="none" opacity="0.75" font-family="Arial Black,sans-serif" font-size="5.5" font-weight="900">SAP</text>
+    </svg>
+
+    <!-- Sage (277,340) -->
+    <rect x="256" y="319" width="42" height="42" rx="12" fill="white" fill-opacity="0.05" stroke="white" stroke-opacity="0.11" stroke-width="1"/>
+    <svg x="261" y="324" width="32" height="32" viewBox="0 0 24 24">
+      <text x="12" y="12" text-anchor="middle" dominant-baseline="middle" fill="white" stroke="none" opacity="0.7" font-family="Arial,sans-serif" font-size="9" font-weight="700">Sage</text>
+    </svg>
+
+    <!-- Gear (370,340) -->
+    <rect x="349" y="319" width="42" height="42" rx="12" fill="white" fill-opacity="0.05" stroke="white" stroke-opacity="0.11" stroke-width="1"/>
+    <svg x="354" y="324" width="32" height="32" viewBox="0 0 24 24">
+      <path fill="white" stroke="none" opacity="0.7" d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94L14.4 2.81c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41L9.25 5.35C8.66 5.59 8.12 5.92 7.63 6.29L5.24 5.33c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58C4.84 11.36 4.8 11.69 4.8 12s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.03-1.58ZM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6Z"/>
+    </svg>
+
+    <!-- labels -->
+    <text x="100" y="97"  text-anchor="middle" fill="#9a9ba6" font-size="11" font-family="Inter, sans-serif" font-weight="500">Claude</text>
+    <text x="230" y="97"  text-anchor="middle" fill="#9a9ba6" font-size="11" font-family="Inter, sans-serif" font-weight="500">ChatGPT</text>
+    <text x="360" y="97"  text-anchor="middle" fill="#9a9ba6" font-size="11" font-family="Inter, sans-serif" font-weight="500">Cursor</text>
+
+    <text x="230" y="268" text-anchor="middle" fill="white" font-size="12" font-family="Inter, sans-serif" font-weight="600">Makini MCP</text>
+
+    <text x="230" y="378" text-anchor="middle" fill="white" fill-opacity="0.35" font-size="11" font-family="Inter, sans-serif" font-weight="500" letter-spacing="0.04em">2,000+ systems</text>
+
+  </g>
+</svg>

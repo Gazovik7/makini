@@ -1,0 +1,299 @@
+<style>
+    .mc-cta-graphic {
+        position: relative;
+        width: 500px;
+        height: 340px;
+        display: block;
+        max-width: 100%;
+    }
+
+    .ctag-svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+        pointer-events: none;
+    }
+
+    .ctag-flow {
+        stroke-dasharray: 5 7;
+        animation: ctagDash 1.2s linear infinite;
+    }
+
+    @keyframes ctagDash {
+        to {
+            stroke-dashoffset: -24;
+        }
+    }
+
+    .ctag-node {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        display: grid;
+        place-items: center;
+        z-index: 2;
+    }
+
+    .ctag-agent {
+        left: 60px;
+        top: 170px;
+        width: 62px;
+        height: 62px;
+        border-radius: 8px;
+        background: radial-gradient(circle at 30% 20%, #26243150, #1b1921);
+        border: 1px solid #ffffff1f;
+        color: #dfe7ff;
+        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4);
+    }
+
+    .ctag-agent svg {
+        width: 30px;
+        height: 30px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 1.6;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    .ctag-hub {
+        left: 210px;
+        top: 170px;
+        width: 106px;
+        height: 106px;
+        border-radius: 12px;
+        background: radial-gradient(circle at 30% 20%, #3a2f5e, #1f1c2b);
+        box-shadow: 0 0 75px #9468f255, 0 0 34px #71a1ff44;
+        animation: ctagHubPulse 3s ease-in-out infinite;
+    }
+
+    .ctag-hub::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 12px;
+        padding: 1.5px;
+        background: linear-gradient(135deg, #5485e5, #fb63ff, #9468f2);
+        -webkit-mask: linear-gradient(#000 0 0) content-box,
+            linear-gradient(#000 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+    }
+
+    .ctag-hub svg {
+        width: 52px;
+        height: 52px;
+        position: relative;
+        z-index: 1;
+    }
+
+    @keyframes ctagHubPulse {
+
+        0%,
+        100% {
+            box-shadow: 0 0 75px #9468f255, 0 0 34px #71a1ff44;
+        }
+
+        50% {
+            box-shadow: 0 0 95px #9468f277, 0 0 46px #71a1ff66;
+        }
+    }
+
+    /* START блок под изображенице из cms  */
+    .ctag-sap {
+        left: 445px;
+        top: 170px;
+        width: 66px;
+        height: 66px;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .ctag-sap img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: contain;
+    }
+
+    /* END блок под изображенице из cms  */
+
+    .ctag-sys {
+        width: 42px;
+        height: 42px;
+        border-radius: 6px;
+        background: #ffffff0d;
+        border: 1px solid #ffffff1c;
+        color: #aeb0c0;
+    }
+
+    .ctag-sys svg {
+        width: 20px;
+        height: 20px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 1.6;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    .ctag-s1 {
+        left: 390px;
+        top: 54px;
+    }
+
+    .ctag-s2 {
+        left: 412px;
+        top: 102px;
+    }
+
+    .ctag-s3 {
+        left: 412px;
+        top: 250px;
+    }
+
+    .ctag-s4 {
+        left: 390px;
+        top: 298px;
+    }
+
+    .ctag-label {
+        position: absolute;
+        transform: translateX(-50%);
+        font-size: 11px;
+        font-weight: 500;
+        color: #9a9ba6;
+        white-space: nowrap;
+        z-index: 2;
+    }
+
+    .ctag-lab-agent {
+        left: 60px;
+        top: 212px;
+    }
+
+    .ctag-lab-hub {
+        left: 210px;
+        top: 236px;
+        color: #fff;
+        font-weight: 600;
+    }
+
+    .ctag-lab-sap {
+        left: 445px;
+        top: 205px;
+    }
+
+    @media (max-width: 560px) {
+        .mc-cta-graphic {
+            transform: scale(0.78);
+            transform-origin: center;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .ctag-flow {
+            animation: none;
+        }
+
+        .ctag-hub {
+            animation: none;
+        }
+
+        .ctag-dot {
+            display: none;
+        }
+    }
+</style>
+
+<div class="mc-cta-graphic">
+    <svg class="ctag-svg" viewBox="0 0 500 340" fill="none">
+        <path d="M91 170 L155 170" stroke="#71a1ff" stroke-width="2" stroke-linecap="round" />
+
+        <circle class="ctag-dot" cx="93" cy="170" r="3.2" fill="#71a1ff" opacity="0">
+            <animate attributeName="cx" values="93;153" dur="1.6s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.18;0.82;1" dur="1.6s"
+                repeatCount="indefinite" />
+        </circle>
+
+        <path class="ctag-flow" d="M263 170 L410 170" stroke="#ffffff" stroke-opacity=".3" stroke-width="1.6"
+            stroke-linecap="round" />
+
+        <path class="ctag-flow" d="M263 170 L308 170 Q320 170 320 158 L320 66 Q320 54 332 54 L388 54" stroke="#ffffff"
+            stroke-opacity=".2" stroke-width="1.6" stroke-linecap="round" />
+
+        <path class="ctag-flow" d="M263 170 L308 170 Q320 170 320 158 L320 114 Q320 102 332 102 L405 102"
+            stroke="#ffffff" stroke-opacity=".2" stroke-width="1.6" stroke-linecap="round" />
+
+        <path class="ctag-flow" d="M263 170 L308 170 Q320 170 320 182 L320 238 Q320 250 332 250 L405 250"
+            stroke="#ffffff" stroke-opacity=".2" stroke-width="1.6" stroke-linecap="round" />
+
+        <path class="ctag-flow" d="M263 170 L308 170 Q320 170 320 182 L320 286 Q320 298 332 298 L388 298"
+            stroke="#ffffff" stroke-opacity=".2" stroke-width="1.6" stroke-linecap="round" />
+    </svg>
+
+    <!-- YOUR AGENT ICON -->
+    <div class="ctag-node ctag-agent">
+        <svg viewBox="0 0 24 24">
+            <rect x="5" y="7" width="14" height="11" rx="3" />
+            <path d="M12 7V4M9 12h.01M15 12h.01M9 18v2M15 18v2" />
+        </svg>
+    </div>
+
+    <!-- MAKINI MCP LOGO -->
+    <div class="ctag-node ctag-hub">
+        <svg viewBox="0 0 100 100" fill="#fff" aria-label="Makini">
+            <g transform="skewX(-12)">
+                <rect x="30" y="32" width="7" height="36" rx="2" />
+                <rect x="43" y="32" width="7" height="36" rx="2" />
+                <rect x="56" y="32" width="7" height="36" rx="2" />
+                <rect x="69" y="32" width="7" height="36" rx="2" />
+            </g>
+        </svg>
+    </div>
+
+    <!-- CMS IMAGE -->
+    <div class="ctag-node ctag-sap">
+        <img src="{{wf:The logo|Dynamo}}" alt="">
+    </div>
+
+    <!-- SYSTEM ICON 1 -->
+    <div class="ctag-node ctag-sys ctag-s1">
+        <svg viewBox="0 0 24 24">
+            <text x="12" y="12" text-anchor="middle" dominant-baseline="middle" fill="currentColor" stroke="none"
+                font-family="Arial,sans-serif" font-size="8.5" font-weight="800" letter-spacing="0.3">infor</text>
+        </svg>
+    </div>
+
+    <!-- SYSTEM ICON 2 -->
+    <div class="ctag-node ctag-sys ctag-s2">
+        <svg viewBox="0 0 24 24">
+            <path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"
+                d="M2.5 9.5 L15.5 7.5 L21.5 12 L15.5 16.5 L2.5 14.5 Z" />
+            <text x="11.2" y="12.5" text-anchor="middle" dominant-baseline="middle" fill="currentColor" stroke="none"
+                font-family="Arial Black,sans-serif" font-size="5.5" font-weight="900">SAP</text>
+        </svg>
+    </div>
+
+    <!-- SYSTEM ICON 3 -->
+    <div class="ctag-node ctag-sys ctag-s3">
+        <svg viewBox="0 0 24 24">
+            <text x="12" y="12" text-anchor="middle" dominant-baseline="middle" fill="currentColor" stroke="none"
+                font-family="Arial,sans-serif" font-size="9" font-weight="700">Sage</text>
+        </svg>
+    </div>
+
+    <!-- SYSTEM ICON 4 -->
+    <div class="ctag-node ctag-sys ctag-s4">
+        <svg viewBox="0 0 24 24">
+            <path fill="currentColor" stroke="none"
+                d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94L14.4 2.81c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41L9.25 5.35C8.66 5.59 8.12 5.92 7.63 6.29L5.24 5.33c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58C4.84 11.36 4.8 11.69 4.8 12s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.03-1.58ZM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6Z" />
+        </svg>
+    </div>
+
+    <span class="ctag-label ctag-lab-agent">Your agent</span>
+    <span class="ctag-label ctag-lab-hub">Makini MCP</span>
+    <span class="ctag-label ctag-lab-sap">{{wf:Heading|Dynamo}}</span>
+</div>

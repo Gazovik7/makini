@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MCP &amp; Unified API — design variants</title>
+<link rel="stylesheet" type="text/css" href="./Makini _ Universal API for Industrial Systems_files/makini.webflow.shared.22d320141.min.css">
+<style>
+:root{--blue:#71a1ff;--purple:#9468f2;--pink:#ef68f2;--green:#7ee7b1;--amber:#f9c74f;--t2:#c6c7cc;--muted:#959599;--b1:#ffffff14;--b2:#ffffff1f}
+body{background:#0e0e14;color:#fff;margin:0;font-family:'Inter',sans-serif}
+.m-container{position:relative}
+
+/* demo chrome */
+.demo-nav{position:sticky;top:0;z-index:60;display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap;padding:12px;background:rgba(14,14,20,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--b1)}
+.demo-nav b{color:#fff;font-size:13px;margin-right:8px;font-weight:600}
+.demo-nav a{color:var(--t2);font-size:13px;text-decoration:none;border:1px solid var(--b1);border-radius:999px;padding:7px 14px;transition:.15s}
+.demo-nav a:hover{color:#fff;border-color:var(--b2);background:#ffffff08}
+.vlabel{max-width:1100px;margin:0 auto;padding:56px 24px 0}
+.vlabel .tag{display:inline-block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--purple);border:1px solid var(--b2);border-radius:999px;padding:5px 12px;margin-bottom:12px}
+.vlabel h3{font-size:23px;font-weight:600;margin:0;color:#fff}
+.vlabel p{color:var(--muted);font-size:14px;margin:8px 0 0;max-width:720px;line-height:22px}
+
+/* block shells */
+.blk{padding:72px 0;position:relative;overflow:hidden}
+.blk.bgA{background:#16161d}.blk.bgB{background:#1b1921}.blk.bgC{background:#1d1d28}
+.blk .glow{position:absolute;z-index:0;width:720px;height:460px;border-radius:50%;filter:blur(130px);opacity:.45;pointer-events:none}
+.blk .glow.tl{top:-180px;left:-160px;background:radial-gradient(circle,#71a1ff45,transparent 70%)}
+.blk .glow.br{bottom:-180px;right:-150px;background:radial-gradient(circle,#ef68f23d,transparent 70%)}
+.blk .glow.c{top:-200px;left:50%;transform:translateX(-50%);width:900px;background:radial-gradient(circle,#9468f238,transparent 70%)}
+.blk .m-container{z-index:2}
+.eyebrow{color:var(--blue)!important;letter-spacing:.14em;text-transform:uppercase;font-size:12px;font-weight:600;text-align:center}
+.lead{color:var(--t2);max-width:700px;margin:14px auto 0;text-align:center;font-size:16px;line-height:25px}
+
+/* point list */
+.pts{display:flex;flex-direction:column;gap:20px}
+.pt{display:flex;gap:14px;align-items:flex-start}
+.chip{width:44px;height:44px;flex-shrink:0;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#dfe7ff;background:linear-gradient(135deg,#71a1ff3d,#ef68f230);border:1px solid var(--b2);box-shadow:0 0 20px #9468f22e}
+.chip svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.pt h4{margin:0 0 4px;color:#fff;font-size:16px;font-weight:600;line-height:22px}
+.pt p{margin:0;color:var(--t2);font-size:14px;line-height:22px}
+
+/* split layouts */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-top:48px}
+
+/* mock panel (browser chrome) */
+.panel{background:#0b0b12;border:1px solid var(--b2);border-radius:18px;overflow:hidden;box-shadow:0 30px 80px -40px #000}
+.chrome{display:flex;align-items:center;gap:7px;padding:13px 16px;border-bottom:1px solid #ffffff14;background:#ffffff05}
+.dotc{width:11px;height:11px;border-radius:50%;display:block}.dotc.r{background:#ff5f57}.dotc.y{background:#febc2e}.dotc.g{background:#28c840}
+.chrome .lbl{margin-left:8px;font-size:11px;font-weight:500;letter-spacing:.04em;color:#6f6f76}
+.fld-lbl{font-size:11px;font-weight:600;letter-spacing:.08em;background:linear-gradient(135deg,#9468f2,#fb63ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:10px}
+.mono{font-family:'SFMono-Regular',Consolas,Menlo,monospace}
+.fld{background:#ffffff0d;border:1px solid #ffffff1a;border-radius:10px;padding:13px 16px;font-size:12px}
+
+/* agent logos */
+.agents{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:40px;position:relative;z-index:2}
+.agentcard{position:relative;display:flex;flex-direction:column;align-items:center;gap:11px;text-align:center;padding:22px 22px 20px;min-width:128px;border-radius:16px;background:radial-gradient(circle at 100% 0,#212433,#1b1921);border:1px solid var(--b1);text-decoration:none;transition:transform .28s cubic-bezier(.2,.7,.3,1),border-color .28s,box-shadow .28s}
+.agentcard:hover{transform:translateY(-3px);border-color:#ebb2ff44;box-shadow:0 10px 28px -10px #d897ff44}
+.agentcard .ico{width:46px;height:46px;display:flex;align-items:center;justify-content:center}
+.agentcard .ico img{width:30px;height:30px;object-fit:contain;filter:brightness(0) invert(1);opacity:.95}
+.agentcard .ico svg{width:30px;height:30px}
+.agentcard .nm{color:#fff;font-size:14px;font-weight:600}
+.agentcard .sb{color:var(--muted);font-size:11.5px;margin-top:-4px}
+
+/* CTA */
+.ctawrap{text-align:center;margin-top:44px;position:relative;z-index:2}
+.cta{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;font-size:15px;font-weight:600;color:#fff;text-decoration:none;background:linear-gradient(135deg,#71a1ff,#9468f2);transition:.2s;box-shadow:0 8px 30px -10px #71a1ff80}
+.cta:hover{transform:translateY(-2px);box-shadow:0 12px 36px -10px #9468f2aa}
+.cta.ghost{background:none;border:1px solid var(--b2);box-shadow:none}
+.cta.ghost:hover{border-color:#fff;background:#ffffff0a}
+
+/* code panel with tabs */
+.codepanel{background:#0b0b12;border:1px solid var(--b2);border-radius:18px;overflow:hidden;box-shadow:0 30px 80px -40px #000}
+.cp-tabs{display:flex;border-bottom:1px solid #ffffff12}
+.cp-tab{padding:13px 20px;background:transparent;border:none;border-right:1px solid #ffffff12;color:#666;font-size:13px;font-weight:500;cursor:pointer;transition:.15s}
+.cp-tab.on{background:#ffffff08;color:#fff}
+.cp-tab:hover{color:#fff}
+.cp-body{padding:22px 24px;font-size:13px;line-height:23px;display:none}
+.cp-body.on{display:block}
+.cp-body pre{margin:0;font-family:'SFMono-Regular',Consolas,Menlo,monospace;font-size:13px;line-height:23px;color:var(--t2);overflow-x:auto;white-space:pre}
+.k{color:#71a1ff}.s{color:#7ee7b1}.c{color:#5b5b66}.m{color:#fb9fff}
+.resp{margin-top:14px;padding-top:14px;border-top:1px dashed #ffffff14;color:var(--muted);font-size:12px}
+.badge{display:inline-block;font-family:'SFMono-Regular',Consolas,Menlo,monospace;font-size:10px;font-weight:700;letter-spacing:.06em;padding:3px 8px;border-radius:999px;color:#7ee7b1;background:rgba(126,231,177,.12);border:1px solid rgba(126,231,177,.3)}
+
+/* upgraded 3-card grid (variant 2) */
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+.ucard{position:relative;overflow:hidden;padding:30px 28px;border-radius:18px;background:radial-gradient(circle at 100% 0,#23222e,#1b1921);border:1px solid var(--b1);transition:transform .28s,border-color .28s,box-shadow .28s}
+.ucard::before{content:"";position:absolute;inset:0;border-radius:18px;padding:1px;background:linear-gradient(130deg,#71a1ff,#ef68f2,#9468f2);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .3s;pointer-events:none}
+.ucard:hover{transform:translateY(-4px);box-shadow:0 18px 44px -20px #000}
+.ucard:hover::before{opacity:1}
+.ucard h4{margin:18px 0 8px;color:#fff;font-size:17px;font-weight:600}
+.ucard p{margin:0;color:var(--t2);font-size:14px;line-height:22px}
+
+/* code strip (variant 2 api) */
+.codestrip{max-width:760px;margin:44px auto 0;background:#0b0b12;border:1px solid var(--b2);border-radius:14px;padding:18px 22px;font-family:'SFMono-Regular',Consolas,Menlo,monospace;font-size:13.5px;color:var(--t2);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* agent strip compact (variant 2) */
+.astrip{display:flex;gap:18px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:40px}
+.astrip .a{display:flex;align-items:center;gap:9px;color:var(--t2);font-size:14px}
+.astrip .a img{width:22px;height:22px;filter:brightness(0) invert(1);opacity:.9}
+.astrip .a svg{width:22px;height:22px}
+.astrip .sep{width:1px;height:20px;background:#ffffff26}
+
+/* interactive showcase (variant 3) */
+.showcase{display:grid;grid-template-columns:1fr 1.05fr;gap:48px;align-items:start;margin-top:48px}
+.sc-list{display:flex;flex-direction:column;gap:6px}
+.sc-item{padding:20px 22px;border-left:2px solid #ffffff1a;cursor:pointer;border-radius:0 12px 12px 0;transition:.2s}
+.sc-item:hover{background:#ffffff06}
+.sc-item.active{background:rgba(148,104,242,.08);border-left-color:transparent;border-image:linear-gradient(180deg,#9468f2,#fb63ff) 1}
+.sc-item h4{margin:0;color:#6b6b70;font-size:16px;font-weight:600;transition:.15s}
+.sc-item.active h4{color:#fff}
+.sc-item p{margin:8px 0 0;color:#555;font-size:14px;line-height:22px;display:none}
+.sc-item.active p{display:block;color:var(--muted)}
+.sc-stage{position:relative;min-height:380px}
+.sc-panel{position:absolute;inset:0;opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .4s,transform .4s,visibility 0s linear .4s}
+.sc-panel.active{position:relative;opacity:1;visibility:visible;transform:none;transition:opacity .42s,transform .42s}
+
+@media (max-width:991px){
+  .split,.showcase{grid-template-columns:1fr;gap:32px}
+  .cards3{grid-template-columns:1fr}
+  .sc-stage{min-height:0}
+}
+</style>
+</head>
+<body class="m-body black">
+
+<div class="demo-nav">
+  <b>Design variants</b>
+  <a href="#v1">1 · Signature panels</a>
+  <a href="#v2">2 · Upgraded cards + strip</a>
+  <a href="#v3">3 · Interactive showcase</a>
+</div>
+
+<!-- ============================================================= -->
+<!-- VARIANT 1 — SIGNATURE PANELS                                  -->
+<!-- ============================================================= -->
+<div id="v1" class="vlabel">
+  <span class="tag">Variant 1</span>
+  <h3>Signature product panels</h3>
+  <p>Each pillar gets its own product visual so the two blocks read differently. MCP pairs the copy with a live-looking endpoint panel and a row of agent logos. Unified API pairs it with a "one call, every system" code panel (tabs SAP / NetSuite / Dynamics). Minimal JS (tabs only).</p>
+</div>
+
+<!-- MCP -->
+<section class="blk bgA">
+  <div class="glow tl"></div>
+  <div class="m-container">
+    <div class="s2-upheading center eyebrow">MAKINI MCP</div>
+    <h2 class="h2">One MCP to deploy agents across thousands of industrial enterprise tools</h2>
+    <p class="lead">Point any MCP client at one endpoint and your agents read and act across the Makini network, with the same login-based connection and the same governance as everything else we run.</p>
+    <div class="split">
+      <div class="panel">
+        <div class="chrome"><span class="dotc r"></span><span class="dotc y"></span><span class="dotc g"></span><span class="lbl">mcp.makini.io — Endpoint</span></div>
+        <div style="padding:26px 28px">
+          <div class="fld-lbl">MCP ENDPOINT</div>
+          <div class="fld mono" style="color:#7ee7b1;word-break:break-all;margin-bottom:20px">https://mcp.makini.io/v1/network-42f8c1</div>
+          <div class="fld-lbl">SCOPED TOKEN</div>
+          <div class="fld" style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px"><span class="mono" style="color:#c6c7cc">mk_live_••••••••••••••••</span><span style="font-size:11px;color:#7ee7b1;background:rgba(126,231,177,.1);border:1px solid rgba(126,231,177,.2);border-radius:6px;padding:3px 9px">● Active</span></div>
+          <div class="fld" style="padding:14px 16px">
+            <div style="font-size:11px;font-weight:600;letter-spacing:.08em;color:#555;margin-bottom:10px">RECENT CALLS</div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;justify-content:space-between"><span class="mono" style="font-size:12px;color:#c6c7cc">search_work_orders</span><span class="badge">200</span></div>
+              <div style="display:flex;justify-content:space-between"><span class="mono" style="font-size:12px;color:#c6c7cc">create_work_order</span><span class="badge">201</span></div>
+              <div style="display:flex;justify-content:space-between"><span class="mono" style="font-size:12px;color:#c6c7cc">search_inventory_transfers</span><span class="badge">200</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pts">
+        <div class="pt"><div class="chip"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="7" rx="2"/><rect x="2" y="14" width="20" height="7" rx="2"/><path d="M6 7h.01M6 18h.01"/></svg></div><div><h4>Reach what never had an API</h4><p>The plant system installed in 2003. The on-prem box no vendor will ever modernize. Your agents reach those the same way they reach modern cloud software.</p></div></div>
+        <div class="pt"><div class="chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M2 21c0-4.42 4.03-8 9-8s9 3.58 9 8"/><path d="M8.5 22h7"/></svg></div><div><h4>Ready for your favorite agents</h4><p>Claude, ChatGPT, n8n, LangChain, or your own. One config block, no custom adapters.</p></div></div>
+        <div class="pt"><div class="chip"><svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 9 8 11 4.6-2 8-6 8-11V5z"/><path d="m8.5 12 2.5 2.5L16 9"/></svg></div><div><h4>Safe by your own rules</h4><p>An agent does only what its credentials allow, and every call is logged. Your existing access model governs it.</p></div></div>
+      </div>
+    </div>
+    <div class="agents">
+      <a class="agentcard" href="#"><div class="ico"><img src="./SAP EWM API integration – connect to anything – Makini_files/logo-claude.svg" alt="Claude"></div><div class="nm">Claude</div><div class="sb">Remote MCP</div></a>
+      <a class="agentcard" href="#"><div class="ico"><img src="./SAP EWM API integration – connect to anything – Makini_files/logo-chatgpt.svg" alt="ChatGPT"></div><div class="nm">ChatGPT</div><div class="sb">MCP connector</div></a>
+      <a class="agentcard" href="#"><div class="ico"><img src="./SAP EWM API integration – connect to anything – Makini_files/logo-cursor.svg" alt="Cursor"></div><div class="nm">Cursor</div><div class="sb">mcp.json</div></a>
+      <a class="agentcard" href="#"><div class="ico"><img src="./SAP EWM API integration – connect to anything – Makini_files/logo-langchain.svg" alt="LangChain"></div><div class="nm">LangChain</div><div class="sb">Python / JS</div></a>
+      <a class="agentcard" href="#"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 7l-4.5 5 4.5 5"/><path d="M15 7l4.5 5-4.5 5"/></svg></div><div class="nm">VS Code</div><div class="sb">MCP settings</div></a>
+    </div>
+    <div class="ctawrap"><a class="cta" href="#">Explore the MCP server →</a></div>
+  </div>
+</section>
+
+<!-- UNIFIED API -->
+<section class="blk bgB">
+  <div class="glow br"></div>
+  <div class="m-container">
+    <div class="s2-upheading center eyebrow">UNIFIED API</div>
+    <h2 class="h2">Build once. Read and write every system the same way</h2>
+    <p class="lead">Build to one Unified API. Read and write across every ERP, CMMS, and WMS. The call is the same and the data comes back the same, whatever runs underneath. We monitor and maintain every connection.</p>
+    <div class="split">
+      <div class="pts">
+        <div class="pt"><div class="chip"><svg viewBox="0 0 24 24"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg></div><div><h4>One normalized model, every system</h4><p>One call, every system. Write a purchase order to SAP, NetSuite, or Dynamics with the same call. Pull inventory back in one format, every time. With built-in workflow automation, you may not write code at all.</p></div></div>
+        <div class="pt"><div class="chip"><svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h12"/><circle cx="19" cy="18" r="2"/></svg></div><div><h4>Built for the messy ones</h4><p>No two SAP installs are alike, and you know it. Custom objects, custom fields, the table someone renamed in 2018. Map any of it in settings, or drop to the native API when the standard model is not enough.</p></div></div>
+        <div class="pt"><div class="chip"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg></div><div><h4>Maintained for you</h4><p>When a system changes and an integration breaks, we fix it. The cost stays predictable and off your roadmap.</p></div></div>
+      </div>
+      <div class="codepanel">
+        <div class="cp-tabs">
+          <button class="cp-tab on" data-g="apiOne" data-i="0">SAP</button>
+          <button class="cp-tab" data-g="apiOne" data-i="1">NetSuite</button>
+          <button class="cp-tab" data-g="apiOne" data-i="2">Dynamics</button>
+        </div>
+        <div class="cp-body on" data-g="apiOne" data-i="0">
+<pre><span class="c">// same call, system = SAP</span>
+<span class="k">POST</span> /v1/purchase_orders
+{
+  <span class="k">"connection"</span>: <span class="s">"sap-s4hana"</span>,
+  <span class="k">"vendor_id"</span>:  <span class="s">"V-10293"</span>,
+  <span class="k">"line_items"</span>: [{ <span class="k">"sku"</span>:<span class="s">"BRG-22"</span>, <span class="k">"qty"</span>:<span class="m">40</span> }]
+}</pre>
+          <div class="resp"><span class="badge">201 Created</span> &nbsp;normalized response &nbsp;<span class="mono">{ id, status, vendor, line_items[] }</span></div>
+        </div>
+        <div class="cp-body" data-g="apiOne" data-i="1">
+<pre><span class="c">// same call, system = NetSuite</span>
+<span class="k">POST</span> /v1/purchase_orders
+{
+  <span class="k">"connection"</span>: <span class="s">"netsuite"</span>,
+  <span class="k">"vendor_id"</span>:  <span class="s">"V-10293"</span>,
+  <span class="k">"line_items"</span>: [{ <span class="k">"sku"</span>:<span class="s">"BRG-22"</span>, <span class="k">"qty"</span>:<span class="m">40</span> }]
+}</pre>
+          <div class="resp"><span class="badge">201 Created</span> &nbsp;<b style="color:#c6c7cc">same shape</b> &nbsp;<span class="mono">{ id, status, vendor, line_items[] }</span></div>
+        </div>
+        <div class="cp-body" data-g="apiOne" data-i="2">
+<pre><span class="c">// same call, system = Dynamics</span>
+<span class="k">POST</span> /v1/purchase_orders
+{
+  <span class="k">"connection"</span>: <span class="s">"dynamics-365"</span>,
+  <span class="k">"vendor_id"</span>:  <span class="s">"V-10293"</span>,
+  <span class="k">"line_items"</span>: [{ <span class="k">"sku"</span>:<span class="s">"BRG-22"</span>, <span class="k">"qty"</span>:<span class="m">40</span> }]
+}</pre>
+          <div class="resp"><span class="badge">201 Created</span> &nbsp;<b style="color:#c6c7cc">same shape</b> &nbsp;<span class="mono">{ id, status, vendor, line_items[] }</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ctawrap"><a class="cta ghost" href="#">Read the API docs →</a></div>
+  </div>
+</section>
+
+<!-- ============================================================= -->
+<!-- VARIANT 2 — UPGRADED CARDS + SIGNATURE STRIP                   -->
+<!-- ============================================================= -->
+<div id="v2" class="vlabel">
+  <span class="tag">Variant 2</span>
+  <h3>Upgraded cards + signature strip</h3>
+  <p>Keeps the familiar "3 cards" rhythm but upgrades them — gradient icon chips, hover gradient border, equal height. Each pillar gets one signature element: MCP a row of agent logos + CTA, Unified API a single "one call" code strip above the cards. No JS.</p>
+</div>
+
+<!-- MCP -->
+<section class="blk bgA">
+  <div class="glow c"></div>
+  <div class="m-container">
+    <div class="s2-upheading center eyebrow">MAKINI MCP</div>
+    <h2 class="h2">One MCP to deploy agents across thousands of industrial enterprise tools</h2>
+    <p class="lead">Point any MCP client at one endpoint and your agents read and act across the Makini network, with the same login-based connection and the same governance as everything else we run.</p>
+    <div class="cards3">
+      <div class="ucard"><div class="chip"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="7" rx="2"/><rect x="2" y="14" width="20" height="7" rx="2"/><path d="M6 7h.01M6 18h.01"/></svg></div><h4>Reach what never had an API</h4><p>The plant system installed in 2003. The on-prem box no vendor will ever modernize. Your agents reach those the same way they reach modern cloud software.</p></div>
+      <div class="ucard"><div class="chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M2 21c0-4.42 4.03-8 9-8s9 3.58 9 8"/><path d="M8.5 22h7"/></svg></div><h4>Ready for your favorite agents</h4><p>Claude, ChatGPT, n8n, LangChain, or your own. One config block, no custom adapters.</p></div>
+      <div class="ucard"><div class="chip"><svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 9 8 11 4.6-2 8-6 8-11V5z"/><path d="m8.5 12 2.5 2.5L16 9"/></svg></div><h4>Safe by your own rules</h4><p>An agent does only what its credentials allow, and every call is logged. Your existing access model governs it.</p></div>
+    </div>
+    <div class="astrip">
+      <div class="a"><img src="./SAP EWM API integration – connect to anything – Makini_files/logo-claude.svg" alt="">Claude</div><span class="sep"></span>
+      <div class="a"><img src="./SAP EWM API integration – connect to anything – Makini_files/logo-chatgpt.svg" alt="">ChatGPT</div><span class="sep"></span>
+      <div class="a"><img src="./SAP EWM API integration – connect to anything – Makini_files/logo-cursor.svg" alt="">Cursor</div><span class="sep"></span>
+      <div class="a"><img src="./SAP EWM API integration – connect to anything – Makini_files/logo-langchain.svg" alt="">LangChain</div><span class="sep"></span>
+      <div class="a"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 7l-4.5 5 4.5 5"/><path d="M15 7l4.5 5-4.5 5"/></svg>VS Code</div>
+    </div>
+    <div class="ctawrap"><a class="cta" href="#">Explore the MCP server →</a></div>
+  </div>
+</section>
+
+<!-- UNIFIED API -->
+<section class="blk bgB">
+  <div class="glow br"></div>
+  <div class="m-container">
+    <div class="s2-upheading center eyebrow">UNIFIED API</div>
+    <h2 class="h2">Build once. Read and write every system the same way</h2>
+    <p class="lead">Build to one Unified API. Read and write across every ERP, CMMS, and WMS. The call is the same and the data comes back the same, whatever runs underneath. We monitor and maintain every connection.</p>
+    <div class="codestrip">
+      <span><span class="k">POST</span> <span class="mono" style="color:#c6c7cc">/v1/purchase_orders</span> &nbsp;<span class="c">// SAP · NetSuite · Dynamics — one call</span></span>
+      <span class="badge">→ 201 same shape</span>
+    </div>
+    <div class="cards3">
+      <div class="ucard"><div class="chip"><svg viewBox="0 0 24 24"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg></div><h4>One normalized model, every system</h4><p>One call, every system. Write a purchase order to SAP, NetSuite, or Dynamics with the same call. Pull inventory back in one format, every time. With built-in workflow automation, you may not write code at all.</p></div>
+      <div class="ucard"><div class="chip"><svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h12"/><circle cx="19" cy="18" r="2"/></svg></div><h4>Built for the messy ones</h4><p>No two SAP installs are alike, and you know it. Custom objects, custom fields, the table someone renamed in 2018. Map any of it in settings, or drop to the native API when the standard model is not enough.</p></div>
+      <div class="ucard"><div class="chip"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg></div><h4>Maintained for you</h4><p>When a system changes and an integration breaks, we fix it. The cost stays predictable and off your roadmap.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================= -->
+<!-- VARIANT 3 — INTERACTIVE SHOWCASE                              -->
+<!-- ============================================================= -->
+<div id="v3" class="vlabel">
+  <span class="tag">Variant 3</span>
+  <h3>Interactive showcase</h3>
+  <p>The points become clickable items on the left; the panel on the right swaps to match. Most engaging, but taller and JS-driven — two of these stacked make the page longer. Click the items to switch panels.</p>
+</div>
+
+<!-- MCP -->
+<section class="blk bgA">
+  <div class="glow tl"></div>
+  <div class="m-container">
+    <div class="s2-upheading center eyebrow">MAKINI MCP</div>
+    <h2 class="h2">One MCP to deploy agents across thousands of industrial enterprise tools</h2>
+    <p class="lead">Point any MCP client at one endpoint and your agents read and act across the Makini network.</p>
+    <div class="showcase">
+      <div class="sc-list">
+        <div class="sc-item active" data-step="1"><h4>Reach what never had an API</h4><p>The plant system installed in 2003. The on-prem box no vendor will ever modernize. Your agents reach those the same way they reach modern cloud software.</p></div>
+        <div class="sc-item" data-step="2"><h4>Ready for your favorite agents</h4><p>Claude, ChatGPT, n8n, LangChain, or your own. One config block, no custom adapters.</p></div>
+        <div class="sc-item" data-step="3"><h4>Safe by your own rules</h4><p>An agent does only what its credentials allow, and every call is logged. Your existing access model governs it.</p></div>
+      </div>
+      <div class="sc-stage">
+        <div class="sc-panel active" data-panel="1">
+          <div class="panel"><div class="chrome"><span class="dotc r"></span><span class="dotc y"></span><span class="dotc g"></span><span class="lbl">Legacy system → MCP</span></div>
+            <div style="padding:30px 28px">
+              <div class="fld" style="margin-bottom:12px;display:flex;justify-content:space-between"><span class="mono" style="color:#c6c7cc;font-size:12px">SAP R/3 · installed 2003</span><span class="badge" style="color:#71a1ff;background:rgba(113,161,255,.12);border-color:rgba(113,161,255,.3)">reachable</span></div>
+              <div class="fld" style="margin-bottom:12px;display:flex;justify-content:space-between"><span class="mono" style="color:#c6c7cc;font-size:12px">On-prem WMS box</span><span class="badge" style="color:#71a1ff;background:rgba(113,161,255,.12);border-color:rgba(113,161,255,.3)">reachable</span></div>
+              <div class="fld" style="display:flex;justify-content:space-between"><span class="mono" style="color:#c6c7cc;font-size:12px">Modern cloud SaaS</span><span class="badge">reachable</span></div>
+              <p style="color:var(--muted);font-size:13px;margin:18px 0 0;line-height:21px">Same MCP tools whether the system shipped with an API or not.</p>
+            </div>
+          </div>
+        </div>
+        <div class="sc-panel" data-panel="2">
+          <div class="panel"><div class="chrome"><span class="dotc r"></span><span class="dotc y"></span><span class="dotc g"></span><span class="lbl">Add MCP server — one config</span></div>
+            <div style="padding:8px 0">
+              <div class="agents" style="margin-top:18px;margin-bottom:8px;gap:10px">
+                <a class="agentcard" href="#" style="min-width:104px;padding:18px 14px 16px"><div class="ico"><img src="./SAP EWM API integration – connect to anything – Makini_files/logo-claude.svg" alt=""></div><div class="nm">Claude</div></a>
+                <a class="agentcard" href="#" style="min-width:104px;padding:18px 14px 16px"><div class="ico"><img src="./SAP EWM API integration – connect to anything – Makini_files/logo-chatgpt.svg" alt=""></div><div class="nm">ChatGPT</div></a>
+                <a class="agentcard" href="#" style="min-width:104px;padding:18px 14px 16px"><div class="ico"><img src="./SAP EWM API integration – connect to anything – Makini_files/logo-langchain.svg" alt=""></div><div class="nm">LangChain</div></a>
+              </div>
+              <div style="padding:0 28px 24px"><div class="fld mono" style="color:#7ee7b1;font-size:12px">"url": "https://mcp.makini.io/v1/..."</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="sc-panel" data-panel="3">
+          <div class="panel"><div class="chrome"><span class="dotc r"></span><span class="dotc y"></span><span class="dotc g"></span><span class="lbl">Audit log</span></div>
+            <div style="padding:26px 28px;display:flex;flex-direction:column;gap:10px">
+              <div class="fld" style="display:flex;justify-content:space-between;font-size:12px"><span class="mono" style="color:#c6c7cc">read · search_work_orders</span><span class="badge">allowed</span></div>
+              <div class="fld" style="display:flex;justify-content:space-between;font-size:12px"><span class="mono" style="color:#c6c7cc">write · create_work_order</span><span class="badge">allowed</span></div>
+              <div class="fld" style="display:flex;justify-content:space-between;font-size:12px"><span class="mono" style="color:#c6c7cc">delete · purge_assets</span><span class="badge" style="color:#ff8a8a;background:rgba(255,138,138,.1);border-color:rgba(255,138,138,.3)">denied</span></div>
+              <p style="color:var(--muted);font-size:13px;margin:8px 0 0;line-height:21px">Scoped to the credential. Every call logged.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UNIFIED API -->
+<section class="blk bgB">
+  <div class="glow br"></div>
+  <div class="m-container">
+    <div class="s2-upheading center eyebrow">UNIFIED API</div>
+    <h2 class="h2">Build once. Read and write every system the same way</h2>
+    <p class="lead">Build to one Unified API. Read and write across every ERP, CMMS, and WMS — the call and the data come back the same.</p>
+    <div class="showcase">
+      <div class="sc-list">
+        <div class="sc-item active" data-step="1"><h4>One normalized model, every system</h4><p>One call, every system. Write a purchase order to SAP, NetSuite, or Dynamics with the same call. Pull inventory back in one format, every time.</p></div>
+        <div class="sc-item" data-step="2"><h4>Built for the messy ones</h4><p>No two SAP installs are alike, and you know it. Map custom objects and fields in settings, or drop to the native API when the standard model is not enough.</p></div>
+        <div class="sc-item" data-step="3"><h4>Maintained for you</h4><p>When a system changes and an integration breaks, we fix it. The cost stays predictable and off your roadmap.</p></div>
+      </div>
+      <div class="sc-stage">
+        <div class="sc-panel active" data-panel="1">
+          <div class="codepanel"><div class="cp-tabs" style="pointer-events:none"><button class="cp-tab on">one call → every system</button></div>
+            <div class="cp-body on" style="display:block">
+<pre><span class="k">POST</span> /v1/purchase_orders   <span class="c">// SAP</span>
+<span class="k">POST</span> /v1/purchase_orders   <span class="c">// NetSuite</span>
+<span class="k">POST</span> /v1/purchase_orders   <span class="c">// Dynamics</span></pre>
+              <div class="resp"><span class="badge">201</span> identical request, <b style="color:#c6c7cc">identical response shape</b></div>
+            </div>
+          </div>
+        </div>
+        <div class="sc-panel" data-panel="2">
+          <div class="panel"><div class="chrome"><span class="dotc r"></span><span class="dotc y"></span><span class="dotc g"></span><span class="lbl">Field mapping — settings</span></div>
+            <div style="padding:26px 28px;display:flex;flex-direction:column;gap:10px">
+              <div class="fld" style="display:flex;justify-content:space-between;font-size:12px"><span class="mono" style="color:#c6c7cc">ZZ_CUSTOM_VENDOR</span><span class="mono" style="color:#7ee7b1">→ vendor_id</span></div>
+              <div class="fld" style="display:flex;justify-content:space-between;font-size:12px"><span class="mono" style="color:#c6c7cc">MATNR_OLD_2018</span><span class="mono" style="color:#7ee7b1">→ sku</span></div>
+              <div class="fld" style="display:flex;justify-content:space-between;font-size:12px"><span class="mono" style="color:#c6c7cc">native API</span><span class="badge">escape hatch</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="sc-panel" data-panel="3">
+          <div class="panel"><div class="chrome"><span class="dotc r"></span><span class="dotc y"></span><span class="dotc g"></span><span class="lbl">Connection health — Makini</span></div>
+            <div style="padding:26px 28px;display:flex;flex-direction:column;gap:10px">
+              <div class="fld" style="display:flex;justify-content:space-between;font-size:12px"><span class="mono" style="color:#c6c7cc">SAP S/4HANA</span><span class="badge">● monitored</span></div>
+              <div class="fld" style="display:flex;justify-content:space-between;font-size:12px"><span class="mono" style="color:#c6c7cc">vendor pushed breaking change</span><span class="badge" style="color:#f9c74f;background:rgba(249,199,79,.12);border-color:rgba(249,199,79,.3)">we fixed it</span></div>
+              <p style="color:var(--muted);font-size:13px;margin:8px 0 0;line-height:21px">Off your roadmap. Predictable cost.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="text-align:center;padding:56px 24px;color:#555;font-size:13px">End of variants — pick one and I’ll wire it into the homepage.</div>
+
+<script>
+// code-panel tabs (variant 1 API)
+document.querySelectorAll('.cp-tab[data-g]').forEach(function(tab){
+  tab.addEventListener('click',function(){
+    var g=tab.dataset.g, i=tab.dataset.i;
+    document.querySelectorAll('.cp-tab[data-g="'+g+'"]').forEach(function(t){t.classList.toggle('on',t.dataset.i===i);});
+    document.querySelectorAll('.cp-body[data-g="'+g+'"]').forEach(function(b){b.classList.toggle('on',b.dataset.i===i);});
+  });
+});
+// interactive showcase (variant 3) — scoped per .showcase
+document.querySelectorAll('.showcase').forEach(function(sc){
+  var items=sc.querySelectorAll('.sc-item'), panels=sc.querySelectorAll('.sc-panel');
+  items.forEach(function(it){
+    it.addEventListener('click',function(){
+      var n=it.dataset.step;
+      items.forEach(function(x){x.classList.toggle('active',x.dataset.step===n);});
+      panels.forEach(function(p){p.classList.toggle('active',p.dataset.panel===n);});
+    });
+  });
+});
+</script>
+</body>
+</html>

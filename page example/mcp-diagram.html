@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Makini MCP flow diagram</title>
+<style>
+  :root{ font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+  html,body{margin:0;height:100%;}
+  /* dark stage just so the graphic reads like on the site — remove if you embed it elsewhere */
+  body{display:grid;place-items:center;background:radial-gradient(120% 120% at 70% 20%,#23202e,#16161d 70%);}
+
+  /* ===== CTA flow graphic: agent → Makini hub → SAP EWM + systems ===== */
+  .mc-cta-graphic{position:relative;width:500px;height:340px;display:block;max-width:100%}
+  .ctag-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+
+  /* animated dashed branches */
+  .ctag-flow{stroke-dasharray:5 7;animation:ctagDash 1.2s linear infinite}
+  @keyframes ctagDash{to{stroke-dashoffset:-24}}
+
+  /* nodes */
+  .ctag-node{position:absolute;transform:translate(-50%,-50%);display:grid;place-items:center;z-index:2}
+  .ctag-agent{left:60px;top:170px;width:62px;height:62px;border-radius:16px;background:radial-gradient(circle at 30% 20%,#26243150,#1b1921);border:1px solid #ffffff1f;color:#dfe7ff;box-shadow:0 8px 28px rgba(0,0,0,.4)}
+  .ctag-agent svg{width:30px;height:30px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+
+  /* center hub with gradient border + pulsing glow */
+  .ctag-hub{left:210px;top:170px;width:106px;height:106px;border-radius:26px;background:radial-gradient(circle at 30% 20%,#3a2f5e,#1f1c2b);box-shadow:0 0 75px #9468f255,0 0 34px #71a1ff44;animation:ctagHubPulse 3s ease-in-out infinite}
+  .ctag-hub::before{content:"";position:absolute;inset:0;border-radius:26px;padding:1.5px;background:linear-gradient(135deg,#5485e5,#fb63ff,#9468f2);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+  .ctag-hub svg{width:52px;height:52px;position:relative;z-index:1}
+  @keyframes ctagHubPulse{0%,100%{box-shadow:0 0 75px #9468f255,0 0 34px #71a1ff44}50%{box-shadow:0 0 95px #9468f277,0 0 46px #71a1ff66}}
+
+  /* SAP destination tile */
+  .ctag-sap{left:445px;top:170px;width:66px;height:66px;border-radius:16px;background:#fff;box-shadow:0 0 34px #ffffff22,0 8px 28px rgba(0,0,0,.4)}
+  .ctag-sap svg{width:46px;height:30px}
+
+  /* small system icons */
+  .ctag-sys{width:42px;height:42px;border-radius:12px;background:#ffffff0d;border:1px solid #ffffff1c;color:#aeb0c0}
+  .ctag-sys svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  .ctag-s1{left:390px;top:54px}.ctag-s2{left:412px;top:102px}.ctag-s3{left:412px;top:250px}.ctag-s4{left:390px;top:298px}
+
+  /* labels */
+  .ctag-label{position:absolute;transform:translateX(-50%);font-size:11px;font-weight:500;color:#9a9ba6;white-space:nowrap;z-index:2}
+  .ctag-lab-agent{left:60px;top:212px}
+  .ctag-lab-hub{left:210px;top:236px;color:#fff;font-weight:600}
+  .ctag-lab-sap{left:445px;top:214px}
+
+  @media(max-width:560px){.mc-cta-graphic{transform:scale(.78);transform-origin:center}}
+  @media (prefers-reduced-motion:reduce){
+    .ctag-flow{animation:none}
+    .ctag-hub{animation:none}
+    .ctag-dot{display:none}
+  }
+</style>
+</head>
+<body>
+
+  <div class="mc-cta-graphic">
+    <svg class="ctag-svg" viewBox="0 0 500 340" fill="none">
+      <!-- solid link agent → hub + the moving dot travelling along it -->
+      <path d="M91 170 L155 170" stroke="#71a1ff" stroke-width="2" stroke-linecap="round"/>
+      <circle class="ctag-dot" cy="170" r="3.2" fill="#71a1ff">
+        <animate attributeName="cx" values="93;153" dur="1.6s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.18;0.82;1" dur="1.6s" repeatCount="indefinite"/>
+      </circle>
+
+      <!-- animated dashed branches hub → SAP + systems -->
+      <path class="ctag-flow" d="M263 170 L410 170" stroke="#ffffff" stroke-opacity=".3" stroke-width="1.6" stroke-linecap="round"/>
+      <path class="ctag-flow" d="M263 170 L308 170 Q320 170 320 158 L320 66 Q320 54 332 54 L388 54" stroke="#ffffff" stroke-opacity=".2" stroke-width="1.6" stroke-linecap="round"/>
+      <path class="ctag-flow" d="M263 170 L308 170 Q320 170 320 158 L320 114 Q320 102 332 102 L405 102" stroke="#ffffff" stroke-opacity=".2" stroke-width="1.6" stroke-linecap="round"/>
+      <path class="ctag-flow" d="M263 170 L308 170 Q320 170 320 182 L320 238 Q320 250 332 250 L405 250" stroke="#ffffff" stroke-opacity=".2" stroke-width="1.6" stroke-linecap="round"/>
+      <path class="ctag-flow" d="M263 170 L308 170 Q320 170 320 182 L320 286 Q320 298 332 298 L388 298" stroke="#ffffff" stroke-opacity=".2" stroke-width="1.6" stroke-linecap="round"/>
+    </svg>
+
+    <!-- agent (robot) -->
+    <div class="ctag-node ctag-agent">
+      <svg viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="11" rx="3"/><path d="M12 7V4M9 12h.01M15 12h.01M9 18v2M15 18v2"/></svg>
+    </div>
+
+    <!-- Makini hub (inline logo: four slanted bars) -->
+    <div class="ctag-node ctag-hub">
+      <svg viewBox="0 0 100 100" fill="#fff" aria-label="Makini">
+        <g transform="skewX(-12)">
+          <rect x="30" y="32" width="7" height="36" rx="2"/>
+          <rect x="43" y="32" width="7" height="36" rx="2"/>
+          <rect x="56" y="32" width="7" height="36" rx="2"/>
+          <rect x="69" y="32" width="7" height="36" rx="2"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- SAP destination (inline tile) -->
+    <div class="ctag-node ctag-sap">
+      <svg viewBox="0 0 80 50"><path d="M0 6 H62 L52 44 H0 Z" fill="#0a6ed1"/><text x="28" y="34" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" fill="#fff" text-anchor="middle">SAP</text></svg>
+    </div>
+
+    <!-- small system icons -->
+    <div class="ctag-node ctag-sys ctag-s1"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+    <div class="ctag-node ctag-sys ctag-s2"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></div>
+    <div class="ctag-node ctag-sys ctag-s3"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M9 12h6M9 16h6"/></svg></div>
+    <div class="ctag-node ctag-sys ctag-s4"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg></div>
+
+    <!-- labels -->
+    <span class="ctag-label ctag-lab-agent">Your agent</span>
+    <span class="ctag-label ctag-lab-hub">Makini MCP</span>
+    <span class="ctag-label ctag-lab-sap">SAP EWM</span>
+  </div>
+
+</body>
+</html>
