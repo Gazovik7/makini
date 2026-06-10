@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en" class=" w-mod-js"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Makini | All industrial integrations at once — API or MCP</title>
+<meta content="Makini is the integration layer for industrial software. One network of 2,000+ systems, reachable two ways: a Unified API for your product, an MCP server for your agents." name="description">
+<meta content="Makini — All industrial integrations at once" property="og:title">
+<meta content="./SAP EWM API integration – connect to anything – Makini_files/og-mcp.png" property="og:image">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="Makini — All industrial integrations at once" name="twitter:title">
+<meta content="./SAP EWM API integration – connect to anything – Makini_files/og-mcp.png" name="twitter:image">
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<link href="https://cdn.prod.website-files.com/" rel="preconnect">
+<link href="./SAP EWM API integration – connect to anything – Makini_files/makini.webflow.shared.b087ea904.min.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
+<link href="https://cdn.prod.website-files.com/6075c27738665c833a39fd83/6087764e8ff33d5dbc62d11c_Frame%2010.png" rel="shortcut icon" type="image/x-icon">
+<style>
+  .m-body{overflow-x:hidden}
+  /* Sticky header — pinned on scroll (matches makini.io/mcp/* live behaviour) */
+  .m-header{position:fixed;top:0;left:0;right:0;z-index:2147483647}
+  /* Header CTA: Sign in (ghost) · Sign up (soft fill) · Book demo (white glow) */
+  .m-header-btn-box{gap:10px}
+  .m-header-btn-box .button-secondary.light.nav-bar{margin-right:0}
+  .m-header-btn-box .header-button{padding:8px 18px}
+  .m-header-btn-box .btn-blue{width:auto;min-width:0;min-height:0;height:auto;margin:0;padding:8px 18px;font-size:14px;font-weight:400}
+  /* Fix: the shared .btn-blue:hover grows the glow (20px→28px, .5→.6). Because the header is
+     position:fixed at the top edge, moving the cursor up to the browser tab bar exits the
+     viewport while still over "Book demo"; Chrome freezes :hover until the pointer re-enters,
+     leaving a stray enlarged glow bleeding toward Sign up. Pin the header CTA's hover glow to
+     its resting value so there is nothing to get stuck; keep a subtle lift for feedback. */
+  .m-header-btn-box .btn-blue:hover{box-shadow:-1px 0 20px #71a1ff80,1px 0 20px #ef68f280,inset 0 0 16px #3d44e199;transform:translateY(-1px)}
+  .mode-switch-wrap{display:flex;justify-content:center;margin-bottom:30px}
+  .mode-switch{display:inline-flex;gap:4px;padding:5px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.16);-webkit-backdrop-filter:blur(2px) saturate(150%);backdrop-filter:url(#lg-refract) blur(2px) saturate(150%);box-shadow:inset 1.5px 1.5px 1px -1px rgba(255,255,255,.55),inset -1.5px -1.5px 1px -1px rgba(255,255,255,.30),inset 0 0 10px rgba(255,255,255,.05),0 8px 26px rgba(0,0,0,.30)}
+  .mode-opt{position:relative;display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:999px;font-size:14px;font-weight:500;color:#c6c7cc;transition:.25s ease;white-space:nowrap}
+  .mode-opt:hover{color:#fff}
+  .mode-opt.active{color:#fff;background:rgba(120,128,255,.16);border:1px solid rgba(255,255,255,.22);-webkit-backdrop-filter:blur(2px) saturate(170%);backdrop-filter:url(#lg-refract) blur(2px) saturate(170%);box-shadow:inset 1.5px 1.5px 1px -1px rgba(255,255,255,.70),inset -1.5px -1.5px 1px -1px rgba(255,255,255,.40),inset 0 0 14px rgba(148,104,242,.22),0 6px 20px rgba(148,104,242,.28)}
+  .mode-opt .dot{width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.7}
+  @media(max-width:600px){.mode-switch{width:100%}.mode-opt{flex:1;justify-content:center;padding:10px 14px;font-size:13px}}
+  .mc-sec{padding:80px 0;position:relative;z-index:2;overflow:hidden}
+  /* ambient section glows - varied per section so backgrounds aren't flat */
+  .mc-sec::before{content:"";position:absolute;z-index:-1;width:720px;height:460px;border-radius:50%;filter:blur(130px);opacity:.5;pointer-events:none}
+  .mc-glow-tl::before{background:radial-gradient(circle,#71a1ff45,transparent 70%);top:-160px;left:-140px}
+  .mc-glow-tr::before{background:radial-gradient(circle,#ef68f23d,transparent 70%);top:-170px;right:-140px}
+  .mc-glow-bl::before{background:radial-gradient(circle,#9468f240,transparent 70%);bottom:-180px;left:-120px}
+  .mc-glow-br::before{background:radial-gradient(circle,#71a1ff3d,transparent 70%);bottom:-180px;right:-140px}
+  .mc-glow-c::before{background:radial-gradient(circle,#9468f238,transparent 70%);top:-200px;left:50%;transform:translateX(-50%);width:900px}
+  .mc-head{max-width:760px;margin:0 auto 48px;text-align:center;position:relative;z-index:1}
+  .mc-sub{color:#c6c7cc;max-width:680px;margin:8px auto 0;font-size:15px;line-height:24px}
+  .mc-card{position:relative;overflow:hidden;background-image:radial-gradient(circle at 100% 0,#212433,#1b1921);border:1px solid #ffffff14;border-radius:16px;padding:24px}
+  /* makini-style corner glow inside cards, color cycles so cards differ */
+  .mc-card::after{content:"";position:absolute;z-index:0;top:-26px;right:-22px;width:150px;height:150px;border-radius:100%;filter:blur(70px);opacity:.55;background:#b355d166;pointer-events:none}
+  .mc-card>*{position:relative;z-index:1}
+  .mc-grid-3 .mc-card:nth-child(3n+1)::after{background:#71a1ff80}
+  .mc-grid-3 .mc-card:nth-child(3n+2)::after{background:#9468f280}
+  .mc-grid-3 .mc-card:nth-child(3n)::after{background:#ef68f280}
+  .mc-grid-2 .mc-card:nth-child(4n+1)::after{background:#71a1ff80}
+  .mc-grid-2 .mc-card:nth-child(4n+2)::after{background:#ef68f280}
+  .mc-grid-2 .mc-card:nth-child(4n+3)::after{background:#9468f280}
+  .mc-grid-2 .mc-card:nth-child(4n)::after{background:#71a1ff80}
+  .mc-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .mc-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+  .mc-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#dfe7ff;background:linear-gradient(135deg,#71a1ff3d,#ef68f230);border:1px solid #ffffff1f;box-shadow:0 0 20px #9468f22e;margin-bottom:16px}
+  .mc-icon svg{width:23px;height:23px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  .mc-card h3{margin:0 0 8px;color:#fff;font-size:18px;line-height:26px;font-weight:600}
+  .mc-card p{margin:0;color:#c6c7cc;font-size:15px;line-height:24px}
+  /* what-is-mcp two column + flow diagram */
+  .mc-2col{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+  .mc-2col h2{margin:0 0 16px;color:#fff;font-size:36px;line-height:46px;font-weight:400}
+  .mc-2col p{margin:0 0 14px;color:#c6c7cc;font-size:16px;line-height:27px}
+  .mc-2col.mc-stack{grid-template-columns:1fr;max-width:720px;margin:0 auto;text-align:center;gap:44px}
+  .mc-2col.mc-stack .s2-upheading{text-align:center}
+  .mc-2col.mc-stack .mc-pill-row{justify-content:center}
+  .mc-2col.mc-stack .mc-flow2{max-width:560px;width:100%;margin:0 auto}
+  /* #how flow diagram - uniform left-aligned nodes; middle node's pills sit in their own row below the head */
+  #how .mc-flow2-node{text-align:left}
+  #how .mc-flow2-center{flex-direction:column;align-items:stretch;gap:0}
+  #how .mc-flow2-pills{justify-content:flex-start}
+  /* ===== S7 How it works - horizontal "agent handler" flow ===== */
+  .mc-hflow{display:flex;align-items:center;gap:16px;max-width:1080px;margin:0 auto;padding:10px 0}
+  .mc-hf-col{display:flex;flex-direction:column;align-items:center;gap:12px;flex:0 0 auto;position:relative}
+  /* label sits OUTSIDE the centering box so the column's centre = the icon's centre,
+     which is exactly where the connector line meets it (was drifting below, toward the label) */
+  .mc-hf-label{position:absolute;top:100%;left:50%;transform:translateX(-50%);margin-top:12px;color:#c6c7cc;font-size:13px;font-weight:500;font-family:Inter,sans-serif;white-space:nowrap}
+  .mc-hf-usericon{width:72px;height:72px;border-radius:18px;display:grid;place-items:center;color:#dfe7ff;background:radial-gradient(circle at 30% 20%,#2a3550,#1b1f2b);border:1px solid #ffffff1f;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+  .mc-hf-usericon svg{width:32px;height:32px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  .mc-hf-agent{width:82px;height:82px;border-radius:50%;display:grid;place-items:center;color:#dfe7ff;background:radial-gradient(circle at 50% 38%,#ffffff1a,#20222e);border:1px solid #ffffff26;box-shadow:0 0 40px #71a1ff44,inset 0 0 22px #ffffff14}
+  .mc-hf-agent svg{width:38px;height:38px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;opacity:.92}
+  /* connectors */
+  .mc-hf-link{flex:1 1 auto;min-width:30px;height:2px;position:relative;overflow:visible;background:linear-gradient(90deg,#ffffff00,#ffffff20,#ffffff00)}
+  .mc-hf-link.s{flex:0 0 46px}
+  /* a single white dot travelling left → right along the wire (no coloured glint) */
+  .mc-hf-link::after{content:"";position:absolute;top:50%;left:0;width:7px;height:7px;border-radius:50%;background:#fff;box-shadow:0 0 8px 2px #ffffff99;transform:translate(-50%,-50%);animation:mc-hf-packet 1.6s linear infinite}
+  @keyframes mc-hf-packet{0%{left:0;opacity:0}15%{opacity:1}85%{opacity:1}100%{left:100%;opacity:0}}
+  @keyframes mc-hf-packet-v{0%{top:0;opacity:0}15%{opacity:1}85%{opacity:1}100%{top:100%;opacity:0}}
+  @media(prefers-reduced-motion:reduce){.mc-hf-link::before,.mc-hf-link::after{animation:none}}
+  /* center hub */
+  .mc-hf-hub{position:relative;flex:0 0 auto;width:336px;padding:46px 24px 24px;border-radius:22px;background:radial-gradient(circle at 50% 0,#2a2e44,#1b1922);border:1px solid #ffffff14;box-shadow:0 0 70px -12px #9468f24d,0 24px 60px rgba(0,0,0,.4)}
+  .mc-hf-hub::before{content:"";position:absolute;inset:0;border-radius:22px;padding:1.5px;background:linear-gradient(125deg,#5485e5,#fb63ff,#9468f2);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+  .mc-hf-hub-badge{position:absolute;top:-22px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:9px;padding:9px 18px;border-radius:999px;background:#0f0f16;border:1px solid #ffffff22;box-shadow:0 10px 30px rgba(0,0,0,.5);white-space:nowrap}
+  .mc-hf-hub-badge img{width:22px;height:22px;object-fit:contain}
+  .mc-hf-hub-badge span{color:#fff;font-size:15px;font-weight:600;font-family:Inter,sans-serif}
+  .mc-hf-hub-pills{display:flex;flex-direction:column;gap:12px}
+  .mc-hf-hpill{text-align:center;padding:15px 18px;border-radius:14px;color:#fff;font-size:15px;font-weight:600;background:linear-gradient(180deg,#ffffff12,#ffffff07);border:1px solid #ffffff1a}
+  .mc-hf-hpill:nth-child(2){background:linear-gradient(180deg,#71a1ff26,#9468f218);border-color:#71a1ff3d}
+  /* right tool list */
+  /* tools column = a clipped viewport with an endlessly scrolling track (conveys "many tools") */
+  .mc-hf-tools{flex:0 0 auto;width:208px;position:relative;height:260px;overflow:hidden;-webkit-mask:linear-gradient(180deg,transparent,#000 16%,#000 84%,transparent);mask:linear-gradient(180deg,transparent,#000 16%,#000 84%,transparent)}
+  /* "page-flip" feel: hold on a row, then a quick eased slide to the next, then hold again */
+  .mc-hf-tools-track{display:flex;flex-direction:column;will-change:transform;animation:mc-hf-toolflip 8s ease-in-out infinite}
+  .mc-hf-tools:hover .mc-hf-tools-track{animation-play-state:paused}
+  /* selection frame fixed to the centre row slot (104px = 3rd slot) — a row lands in it exactly on every flip */
+  .mc-hf-tools::after{content:"";position:absolute;left:0;right:0;top:104px;height:42px;border-radius:12px;border:1px solid #71a1ff;background:linear-gradient(120deg,#71a1ff22,#ef68f214);pointer-events:none;z-index:2;animation:mc-hf-lens .8s ease-out infinite}
+  .mc-hf-tool{flex:0 0 auto;height:42px;margin-bottom:10px;display:flex;align-items:center;gap:10px;padding:0 14px;border-radius:12px;background:#ffffff08;border:1px solid #ffffff14;font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:13px;color:#c6c7cc}
+  .mc-hf-tool svg{width:15px;height:15px;flex:0 0 auto;stroke:#71a1ff;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;opacity:.85}
+  .mc-hf-tool.hot{background:linear-gradient(120deg,#71a1ff20,#ef68f216);border-color:#71a1ff45;color:#fff;box-shadow:0 0 26px -8px #71a1ff77}
+  .mc-hf-tool.faded{opacity:.4}
+  /* one copy = 10 rows × 52px = 520px. Each 10% of the timeline = one row: ~6.5% hold, then a
+     quick eased slide of one row. The ease-in-out on the slide gives the "page-flip" settle. */
+  @keyframes mc-hf-toolflip{
+    0%,6.5%{transform:translateY(0)}
+    10%,16.5%{transform:translateY(-52px)}
+    20%,26.5%{transform:translateY(-104px)}
+    30%,36.5%{transform:translateY(-156px)}
+    40%,46.5%{transform:translateY(-208px)}
+    50%,56.5%{transform:translateY(-260px)}
+    60%,66.5%{transform:translateY(-312px)}
+    70%,76.5%{transform:translateY(-364px)}
+    80%,86.5%{transform:translateY(-416px)}
+    90%,96.5%{transform:translateY(-468px)}
+    100%{transform:translateY(-520px)}
+  }
+  /* gentle ring flash on each flip, synced to the 0.8s-per-row cadence */
+  @keyframes mc-hf-lens{0%{box-shadow:0 0 0 0 #71a1ff00,0 0 18px -10px #71a1ff55}72%{box-shadow:0 0 0 0 #71a1ff00,0 0 18px -10px #71a1ff55}86%{box-shadow:0 0 0 2px #71a1ff3d,0 0 30px -8px #71a1ffaa}100%{box-shadow:0 0 0 0 #71a1ff00,0 0 18px -10px #71a1ff55}}
+  @media(prefers-reduced-motion:reduce){.mc-hf-tools-track,.mc-hf-tools::after{animation:none}}
+  @media(max-width:991px){.mc-hf-hub{width:300px}.mc-hf-tools{width:184px}.mc-hflow{gap:12px}}
+  @media(max-width:767px){
+    .mc-hflow{flex-direction:column;gap:16px}
+    .mc-hf-link,.mc-hf-link.s{flex:0 0 auto;width:2px;height:30px;min-width:0;background:linear-gradient(180deg,#ffffff00,#ffffff20,#ffffff00)}
+    .mc-hf-link::after{top:0;left:50%;transform:translate(-50%,-50%);animation:mc-hf-packet-v 1.6s linear infinite}
+    .mc-hf-col .mc-hf-label{position:static;transform:none;margin-top:0}
+    .mc-hf-hub,.mc-hf-tools{width:100%;max-width:340px}
+  }
+  .mc-flow{display:flex;flex-direction:column;gap:14px}
+  .mc-node{display:flex;align-items:center;gap:14px;padding:18px 20px;border-radius:14px;background:#ffffff08;border:1px solid #ffffff14}
+  .mc-node.accent{background-image:linear-gradient(120deg,#71a1ff24,#ef68f21f);border-color:#71a1ff45;box-shadow:0 0 40px #9468f21f}
+  .mc-node-ico{width:42px;height:42px;border-radius:10px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#dfe7ff;background:#ffffff0f;border:1px solid #ffffff1f}
+  .mc-node-ico svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  .mc-node-t{color:#fff;font-size:15px;font-weight:600;line-height:20px}
+  .mc-node-s{color:#959599;font-size:13px;line-height:18px;margin-top:2px}
+  .mc-flow-arrow{align-self:center;color:#71a1ff;opacity:.7;line-height:1}
+  /* steps */
+  .mc-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;counter-reset:s}
+  .mc-step{position:relative;overflow:hidden;padding:28px 24px;border-radius:16px;background-image:linear-gradient(180deg,#ffffff0d,#ffffff05);border:1px solid #ffffff1f}
+  .mc-step::after{content:"";position:absolute;z-index:0;bottom:-40px;left:-30px;width:160px;height:160px;border-radius:100%;filter:blur(70px);opacity:.5;pointer-events:none}
+  .mc-step>*{position:relative;z-index:1}
+  .mc-step:nth-child(1)::after{background:#71a1ff80}
+  .mc-step:nth-child(2)::after{background:#9468f280}
+  .mc-step:nth-child(3)::after{background:#ef68f280}
+  .mc-step-no{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:999px;font-size:14px;font-weight:600;color:#fff;margin-bottom:16px;background:linear-gradient(135deg,#71a1ff,#ef68f2)}
+  .mc-step h3{margin:0 0 8px;color:#fff;font-size:18px;line-height:26px;font-weight:600}
+  .mc-step p{margin:0;color:#c6c7cc;font-size:15px;line-height:24px}
+  /* code */
+  .mc-code-wrap{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .mc-code{background:#0e0e14;border:1px solid #ffffff14;border-radius:16px;overflow:hidden}
+  .mc-code-bar{display:flex;align-items:center;gap:8px;padding:12px 18px;border-bottom:1px solid #ffffff0d}
+  .mc-code-bar .d{width:11px;height:11px;border-radius:50%;background:#ffffff26}
+  .mc-code-bar span{margin-left:8px;color:#959599;font-size:13px}
+  .mc-code pre{margin:0;padding:20px;overflow-x:auto;color:#c6c7cc;font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:13.5px;line-height:22px;white-space:pre}
+  .mc-code .k{color:#71a1ff}.mc-code .s{color:#7ee7b1}.mc-code .c{color:#666}
+  /* clients */
+  .mc-clients{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+  .mc-client{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;padding:24px 16px;border-radius:14px;background:#ffffff08;border:1px solid #ffffff14}
+  .mc-client .mc-node-ico{width:52px;height:52px;border-radius:12px}
+  .mc-logo{width:30px;height:30px;object-fit:contain;filter:brightness(0) invert(1);opacity:.95}
+  .mc-logo-svg{width:28px;height:28px;display:block}
+  .mc-client-t{color:#fff;font-size:14px;font-weight:600}
+  .mc-pill-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:18px}
+  .mc-pill{display:inline-flex;align-items:center;gap:8px;background:#ffffff0f;border:1px solid #ffffff1a;border-radius:999px;padding:8px 14px;font-size:13px;color:#c6c7cc}
+  .mc-dot{width:8px;height:8px;border-radius:50%;background:#7ee7b1}
+  @media (max-width:991px){
+    .mc-grid-3,.mc-steps{grid-template-columns:1fr 1fr}
+    .mc-2col,.mc-code-wrap{grid-template-columns:1fr}
+    .mc-clients{grid-template-columns:repeat(3,1fr)}
+  }
+  @media (max-width:767px){
+    .mc-sec{padding:56px 0}
+    .mc-grid-3,.mc-grid-2,.mc-steps,.mc-clients{grid-template-columns:1fr}
+    .mc-2col h2{font-size:30px;line-height:40px}
+  }
+  /* Why teams choose section */
+  .mc-why-items{display:flex;flex-direction:column;gap:20px}
+  .mc-why-item{display:flex;align-items:flex-start;gap:18px}
+  .mc-why-no{display:inline-flex;align-items:center;justify-content:center;min-width:40px;height:40px;border-radius:999px;font-size:14px;font-weight:600;color:#fff;background:linear-gradient(135deg,#71a1ff,#ef68f2);flex-shrink:0;margin-top:1px}
+  .mc-why-title{color:#fff;font-size:16px;font-weight:600;margin-bottom:5px;line-height:22px}
+  .mc-why-desc{color:#c6c7cc;font-size:14px;line-height:22px}
+  @media(max-width:767px){.mc-2col.mc-why-col{grid-template-columns:1fr}}
+  /* Hero 2-col override */
+  .s1-mcp{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;max-width:none;margin:0}
+  .s1-logo-stage{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;min-height:360px}
+  .s1-mcp .s1-box{max-width:none;text-align:left;align-items:flex-start}
+  .s1-mcp .s1-h1-box,.s1-mcp .s1-subheading-box,.s1-mcp .s1-btn-box,.s1-mcp .s1-list-features,.s1-mcp .mode-switch-wrap{text-align:left;justify-content:flex-start}
+  .s1-mcp .mode-switch-wrap{display:flex;justify-content:flex-start;margin-bottom:24px}
+  .s1-h1-accent{color:inherit}
+  /* Hero visual card */
+  .s1-visual{position:relative}
+  .s1-visual-card{background:#0d0d14;border:1px solid rgba(255,255,255,.12);border-radius:20px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.5),0 0 0 1px rgba(113,161,255,.1)}
+  .s1-vc-bar{display:flex;align-items:center;gap:8px;padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
+  .s1-vc-dot{width:10px;height:10px;border-radius:50%}
+  .s1-vc-bar span{margin-left:6px;color:#555;font-size:12px;font-family:monospace}
+  .s1-vc-body{padding:20px 22px;display:flex;flex-direction:column;gap:12px}
+  .s1-vc-line{display:flex;align-items:flex-start;gap:10px;font-family:monospace;font-size:12.5px;line-height:19px}
+  .s1-vc-prompt{color:#555;flex-shrink:0}
+  .s1-vc-cmd{color:#c6c7cc}
+  .s1-vc-tool{color:#71a1ff}
+  .s1-vc-arg{color:#7ee7b1}
+  .s1-vc-res{background:rgba(126,231,177,.06);border:1px solid rgba(126,231,177,.15);border-radius:8px;padding:10px 14px;font-family:monospace;font-size:12px;line-height:18px;color:#7ee7b1;margin-left:18px}
+  .s1-vc-res span{color:#555}
+  .s1-vc-cursor{display:inline-block;width:7px;height:13px;background:#71a1ff;vertical-align:middle;animation:blink 1s step-end infinite;margin-left:2px}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+  /* Hero glow blobs */
+  .s1-glow-pink{position:absolute;width:340px;height:340px;border-radius:50%;background:#fb63ff;filter:blur(120px);opacity:.18;top:-60px;right:-60px;pointer-events:none;z-index:0}
+  .s1-glow-blue{position:absolute;width:280px;height:280px;border-radius:50%;background:#5485e5;filter:blur(100px);opacity:.22;bottom:-40px;left:-40px;pointer-events:none;z-index:0}
+  .s1-visual{position:relative;z-index:1}
+  @media(max-width:991px){.s1-mcp{grid-template-columns:1fr;gap:40px}.s1-visual,.s1-logo-stage{display:none}}
+  /* Tools paginated grid */
+  .mc-tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .mc-tool{padding:20px 22px;border-radius:14px;background:#ffffff08;border:1px solid #ffffff14;transition:.15s ease}
+  .mc-tool:hover{background:#ffffff0e;border-color:#ffffff22}
+  .mc-tool-name{font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:12.5px;font-weight:600;color:#dfe7ff;margin:0 0 9px;word-break:break-word}
+  .mc-tool-desc{color:#c6c7cc;font-size:13px;line-height:20px;margin:0}
+  .mc-pager{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:32px;flex-wrap:wrap}
+  .mc-page-btn,.mc-page-nav{min-width:36px;height:36px;border-radius:8px;border:1px solid #ffffff14;background:transparent;color:#959599;font-size:13.5px;cursor:pointer;padding:0 12px;transition:.15s ease;white-space:nowrap}
+  .mc-page-btn:hover,.mc-page-nav:hover{color:#fff;border-color:#ffffff30;background:#ffffff08}
+  .mc-page-btn.active{color:#fff;background:linear-gradient(135deg,rgba(113,161,255,.22),rgba(239,104,242,.12));border-color:rgba(113,161,255,.48)}
+  .mc-page-nav:disabled{opacity:.28;cursor:default;pointer-events:none}
+  @media(max-width:991px){.mc-tools-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:767px){.mc-tools-grid{grid-template-columns:1fr}}
+  /* Interactive steps section */
+  .mc-steps-interactive{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+  .mc-step-list{display:flex;flex-direction:column;gap:6px;margin-top:32px}
+  .mc-step-item{padding:18px 20px 18px 22px;border-left:2px solid rgba(255,255,255,.1);cursor:pointer;transition:.2s ease;border-radius:0 12px 12px 0}
+  .mc-step-item:hover{background:rgba(255,255,255,.04);border-left-color:rgba(255,255,255,.22)}
+  .mc-step-item.active{background:rgba(148,104,242,.08);border-left-color:transparent;border-image:linear-gradient(180deg,#9468f2,#fb63ff) 1}
+  .mc-step-item-no{font-size:11px;font-weight:600;letter-spacing:.08em;background:linear-gradient(135deg,#9468f2,#fb63ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;margin-bottom:4px;display:none}
+  .mc-step-item.active .mc-step-item-no{display:block}
+  .mc-step-item-title{font-size:15px;font-weight:600;color:#6b6b70;line-height:22px;transition:.15s}
+  .mc-step-item.active .mc-step-item-title{color:#fff}
+  .mc-step-item-desc{font-size:14px;color:#555;line-height:22px;margin-top:7px;display:none}
+  .mc-step-item.active .mc-step-item-desc{display:block;color:#959599}
+  .mc-steps-visual{position:sticky;top:100px}
+  .mc-steps-panel{background:#0b0b12;border:1px solid rgba(255,255,255,.12);border-radius:20px;overflow:hidden;min-height:380px;display:none;flex-direction:column}
+  .mc-steps-panel.active{display:flex}
+  @media(max-width:991px){.mc-steps-interactive{grid-template-columns:1fr;gap:40px}.mc-steps-visual{position:static}}
+  /* ===== S3: premium agent client cards ===== */
+  .mc-agentcard-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+  .mc-agentcard{position:relative;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;padding:26px 16px 22px;border-radius:16px;background:radial-gradient(circle at 100% 0,#212433,#1b1921);border:1px solid #ffffff14;cursor:pointer;overflow:hidden;text-decoration:none;transition:transform .28s cubic-bezier(.2,.7,.3,1),border-color .28s ease,box-shadow .28s ease}
+  .mc-agentcard::before{content:"";position:absolute;inset:0;border-radius:16px;padding:1px;background:linear-gradient(130deg,#71a1ff,#ef68f2,#9468f2);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .3s ease;pointer-events:none}
+  /* hover outline matches the "Sync … data" .card-box cards on the integration page */
+  .mc-agentcard:hover{border-color:#ebb2ff33;box-shadow:0 4px 18px #d897ff33}
+  /* spotlight glow behind the card row (like the homepage Use Case block) */
+  #agents .mc-agentcard-grid{position:relative}
+  #agents .mc-agentcard-grid::before{content:"";position:absolute;z-index:0;left:50%;top:50%;transform:translate(-50%,-50%);width:860px;max-width:96%;height:440px;border-radius:50%;background:radial-gradient(ellipse at center,rgba(148,104,242,.34),rgba(113,161,255,.14) 45%,transparent 72%);filter:blur(110px);pointer-events:none}
+  #agents .mc-agentcard{z-index:1}
+  .mc-agentcard .mc-node-ico{width:52px;height:52px;border-radius:12px;transition:transform .28s ease}
+  .mc-agentcard:hover .mc-node-ico{transform:scale(1.06)}
+  .mc-agentcard-t{color:#fff;font-size:15px;font-weight:600;line-height:18px}
+  .mc-agentcard-sub{color:#959599;font-size:12px;line-height:15px;margin-top:-4px}
+  .mc-agentcard-cta{display:flex;align-items:center;gap:5px;color:#71a1ff;font-size:12.5px;font-weight:600;opacity:0;transform:translateY(4px);transition:opacity .28s ease,transform .28s ease;margin-top:2px}
+  .mc-agentcard-cta svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .28s ease}
+  .mc-agentcard:hover .mc-agentcard-cta{opacity:1;transform:translateY(0)}
+  .mc-agentcard:hover .mc-agentcard-cta svg{transform:translateX(3px)}
+  /* ===== S7: premium flow diagram ===== */
+  .mc-flow2{display:flex;flex-direction:column;gap:0;align-items:stretch}
+  .mc-flow2-node{position:relative;display:flex;align-items:center;gap:14px;padding:18px 20px;border-radius:14px;background:#ffffff08;border:1px solid #ffffff14}
+  .mc-flow2-node .mc-node-ico{width:42px;height:42px;border-radius:10px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#dfe7ff;background:#ffffff0f;border:1px solid #ffffff1f}
+  .mc-flow2-node .mc-node-ico svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  .mc-flow2-t{color:#fff;font-size:15px;font-weight:600;line-height:20px}
+  .mc-flow2-s{color:#959599;font-size:13px;line-height:18px;margin-top:2px}
+  .mc-flow2-center{padding:24px 22px;border-radius:18px;background:radial-gradient(circle at 100% 0,#2a2e44,#201d2c);border:1.5px solid transparent;box-shadow:0 0 70px -10px #9468f24d,0 0 30px -8px #71a1ff55;background-clip:padding-box}
+  .mc-flow2-center::before{content:"";position:absolute;inset:0;border-radius:18px;padding:1.5px;background:linear-gradient(125deg,#5485e5,#fb63ff,#9468f2);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+  .mc-flow2-center .mc-node-ico{width:50px;height:50px;border-radius:12px;color:#fff;background:linear-gradient(135deg,#71a1ff33,#ef68f229);border-color:#9468f255}
+  .mc-flow2-center .mc-flow2-t{font-size:17px}
+  .mc-flow2-head{display:flex;align-items:center;gap:14px}
+  .mc-flow2-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .mc-flow2-pill{display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border-radius:999px;background:#ffffff0d;border:1px solid #ffffff1f;color:#dfe7ff;font-size:12.5px;font-weight:500;line-height:1}
+  .mc-flow2-pill .mc-flow2-pdot{width:6px;height:6px;border-radius:50%;background:#71a1ff;box-shadow:0 0 8px #71a1ff}
+  .mc-flow2-pill:nth-child(2) .mc-flow2-pdot{background:#ef68f2;box-shadow:0 0 8px #ef68f2}
+  .mc-flow2-pill:nth-child(3) .mc-flow2-pdot{background:#9468f2;box-shadow:0 0 8px #9468f2}
+  .mc-flow2-arrow{align-self:center;color:#71a1ff;line-height:0;padding:6px 0}
+  .mc-flow2-arrow svg{width:24px;height:24px;display:block}
+  .mc-flow2-arrow .mc-flow2-pulse{animation:mcFlow2Pulse 1.8s ease-in-out infinite}
+  .mc-flow2-arrow:nth-of-type(4) .mc-flow2-pulse{animation-delay:.9s}
+  @keyframes mcFlow2Pulse{0%,100%{opacity:.35;transform:translateY(-2px)}50%{opacity:1;transform:translateY(2px)}}
+  @media (prefers-reduced-motion:reduce){.mc-flow2-arrow .mc-flow2-pulse{animation:none;opacity:.7}}
+  @media (max-width:991px){.mc-agentcard-grid{grid-template-columns:repeat(3,1fr)}}
+  @media (max-width:767px){.mc-agentcard-grid{grid-template-columns:1fr}.mc-agentcard-cta{opacity:1;transform:none}}
+  /* ---- S4 tools: type badges, even grid, filter row ---- */
+  .mc-tool{min-height:148px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+  .mc-tool::before{display:none}
+  .mc-tool:hover{transform:translateY(-2px);background:#ffffff10;border-color:#ffffff2e;box-shadow:0 8px 28px -14px rgba(0,0,0,.6)}
+  .mc-tool-head{display:flex;align-items:center;gap:8px;margin:0 0 9px;flex-wrap:wrap}
+  .mc-tool-head .mc-tool-name{margin:0;flex:1 1 auto;min-width:0}
+  .mc-tool-badge{flex:0 0 auto;font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:9.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:3px 8px;border-radius:999px;border:1px solid transparent;line-height:1;white-space:nowrap}
+  .mc-tool-badge.read{color:#71a1ff;background:rgba(113,161,255,.12);border-color:rgba(113,161,255,.30)}
+  .mc-tool-badge.create{color:#7ee7b1;background:rgba(126,231,177,.12);border-color:rgba(126,231,177,.30)}
+  .mc-tool-badge.update{color:#f9c74f;background:rgba(249,199,79,.12);border-color:rgba(249,199,79,.30)}
+  .mc-tool.type-read::before{background:#71a1ff}
+  .mc-tool.type-create::before{background:#7ee7b1}
+  .mc-tool.type-update::before{background:#f9c74f}
+  .mc-tool.type-read:hover{border-color:rgba(113,161,255,.40)}
+  .mc-tool.type-create:hover{border-color:rgba(126,231,177,.40)}
+  .mc-tool.type-update:hover{border-color:rgba(249,199,79,.40)}
+  .mc-tool-desc{flex:1 1 auto}
+  .mc-tool-filters{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin:0 0 24px}
+  .mc-filter{font-size:13.5px;font-weight:500;color:#959599;background:transparent;border:1px solid #ffffff14;border-radius:999px;padding:8px 16px;cursor:pointer;transition:.15s ease;display:inline-flex;align-items:center;gap:7px;line-height:1}
+  .mc-filter:hover{color:#fff;border-color:#ffffff30;background:#ffffff08}
+  .mc-filter .dot{width:7px;height:7px;border-radius:50%}
+  .mc-filter[data-f="read"] .dot{background:#71a1ff}
+  .mc-filter[data-f="create"] .dot{background:#7ee7b1}
+  .mc-filter[data-f="update"] .dot{background:#f9c74f}
+  .mc-filter .cnt{font-size:11.5px;color:#6d6d75;font-variant-numeric:tabular-nums}
+  .mc-filter.active{color:#fff;background:#ffffff0e;border-color:#ffffff30}
+  .mc-filter.active .cnt{color:#c6c7cc}
+  .mc-filter[data-f="all"].active{border-color:rgba(239,104,242,.45);background:linear-gradient(135deg,rgba(239,104,242,.14),rgba(113,161,255,.10))}
+  .mc-filter[data-f="read"].active{border-color:rgba(113,161,255,.45)}
+  .mc-filter[data-f="create"].active{border-color:rgba(126,231,177,.45)}
+  .mc-filter[data-f="update"].active{border-color:rgba(249,199,79,.45)}
+  .mc-page-btn,.mc-page-nav{font-variant-numeric:tabular-nums}
+  .mc-page-btn:hover,.mc-page-nav:hover{transform:translateY(-1px)}
+  .mc-tools-empty{grid-column:1/-1;text-align:center;color:#959599;font-size:14px;padding:40px 0}
+  @media(max-width:767px){.mc-tool{min-height:0}}
+  /* tools rendered as integration-style .card-box cards (dark) */
+  #toolsGrid{align-items:stretch}
+  #toolsGrid .card-box{width:auto;height:100%;margin:0}
+  #toolsGrid .card-box .card-h{word-break:break-word;font-family:inherit;font-size:15px;font-weight:500;line-height:18.15px;color:#fff}
+  /* #security - light 4-column vertical layout (not boxed cards) */
+  .sec-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;margin-top:8px}
+  .sec-col{display:flex;flex-direction:column;gap:10px;padding:0 4px}
+  .sec-col .mc-icon{margin-bottom:4px}.sec-col .sec-ico3d{width:46px;height:46px;display:block;object-fit:contain;margin:0 0 10px;filter:drop-shadow(0 6px 12px rgba(0,0,0,.3))}
+  .sec-col h3{color:#fff;font-size:16px;font-weight:600;margin:0;line-height:22px}
+  .sec-col p{color:#c6c7cc;font-size:14px;line-height:22px;margin:0}
+  .sec-cta{display:flex;flex-direction:column;align-items:center;gap:18px;margin-top:40px}
+  .sec-cta .sec-soc{height:64px;width:auto}
+  @media(max-width:991px){.sec-grid{grid-template-columns:repeat(2,1fr);gap:28px}}
+  @media(max-width:600px){.sec-grid{grid-template-columns:1fr}}
+  /* FAQ: "+" toggle turns into "×" when open */
+  .faq .icon_arrow{transform:none!important;transition:transform .25s ease}
+  .faq .dropdown_faq.w--open .icon_arrow{transform:rotate(45deg)!important}
+  /* ===== S5 "Why" refinement ===== */
+  .wj-why-eyebrow{color:#71a1ff}
+  .mc-why-items.wj-why-card{position:relative;overflow:hidden;gap:0;background-image:radial-gradient(circle at 100% 0,#212433,#1b1921);border:1px solid #ffffff14;border-radius:18px;padding:8px 26px;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+  .mc-why-items.wj-why-card::after{content:"";position:absolute;z-index:0;top:-30px;right:-26px;width:170px;height:170px;border-radius:100%;filter:blur(72px);opacity:.5;background:#71a1ff66;pointer-events:none}
+  .mc-why-items.wj-why-card .mc-why-item{position:relative;z-index:1;padding:22px 18px;border-radius:12px;transition:background .25s ease,transform .25s ease}
+  .mc-why-items.wj-why-card .mc-why-item + .mc-why-item{border-top:1px solid #ffffff12}
+  .mc-why-items.wj-why-card .mc-why-item:hover{background:#ffffff08;transform:translateX(3px)}
+  .mc-why-items.wj-why-card .mc-why-no{background:linear-gradient(135deg,#71a1ff,#9468f2 55%,#ef68f2);box-shadow:0 0 0 4px #71a1ff1f,0 6px 18px rgba(113,161,255,.35),inset 0 1px 1px rgba(255,255,255,.45);transition:box-shadow .25s ease,transform .25s ease}
+  .mc-why-items.wj-why-card .mc-why-item:hover .mc-why-no{transform:scale(1.06);box-shadow:0 0 0 5px #71a1ff2e,0 8px 22px rgba(148,104,242,.45),inset 0 1px 1px rgba(255,255,255,.5)}
+  /* ===== S8 Capabilities refinement ===== */
+  .mc-grid-3 .mc-card.wc-feature{border:1px solid transparent;background-image:radial-gradient(circle at 100% 0,#212433,#1b1921),linear-gradient(135deg,#71a1ff,#9468f2 50%,#ef68f2);background-origin:border-box;background-clip:padding-box,border-box;box-shadow:0 0 50px rgba(113,161,255,.22),0 18px 50px rgba(0,0,0,.3)}
+  .mc-grid-3 .mc-card.wc-feature::after{background:#71a1ff99;opacity:.7;width:200px;height:200px;filter:blur(80px)}
+  .wc-feature-eyebrow{display:inline-block;margin-bottom:14px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#71a1ff}
+  .mc-grid-3 .mc-card .mc-icon{transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+  .mc-grid-3 .mc-card.wc-feature .mc-icon{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#71a1ff54,#9468f240 50%,#ef68f238);border-color:#ffffff33;box-shadow:0 0 28px #71a1ff3d}
+  .mc-grid-3 .mc-card{transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+  .mc-grid-3 .mc-card:hover{transform:translateY(-5px);border-color:#71a1ff5c;box-shadow:0 16px 44px rgba(0,0,0,.38),0 0 30px rgba(113,161,255,.18)}
+  .mc-grid-3 .mc-card.wc-feature:hover{box-shadow:0 0 60px rgba(148,104,242,.32),0 22px 60px rgba(0,0,0,.35)}
+  .mc-grid-3 .mc-card:hover .mc-icon{transform:translateY(-2px);box-shadow:0 0 26px #9468f24d;border-color:#ffffff3d}
+  @media (max-width:767px){.mc-why-items.wj-why-card{padding:8px 16px}}
+
+  /* ===== S8 Capabilities - 2-up cards with mock visuals ===== */
+  .cap-grid{grid-template-columns:repeat(2,1fr);gap:22px}
+  .cap-grid .mc-card{display:flex;flex-direction:column;padding:28px;transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+  .cap-grid .mc-card:hover{transform:translateY(-5px);border-color:#ebb2ff33;box-shadow:0 4px 18px #d897ff33}
+  .cap-grid .mc-card.wc-feature{border:1px solid transparent;background-image:radial-gradient(circle at 100% 0,#212433,#1b1921),linear-gradient(135deg,#71a1ff,#9468f2 50%,#ef68f2);background-origin:border-box;background-clip:padding-box,border-box;box-shadow:0 0 50px rgba(113,161,255,.22),0 18px 50px rgba(0,0,0,.3)}
+  .cap-grid .mc-card.wc-feature:hover{box-shadow:0 4px 18px #d897ff33}
+  .cap-grid .mc-card.wc-feature::after{background:#71a1ff99;opacity:.7;width:200px;height:200px;filter:blur(80px)}
+  .cap-grid .mc-card.wc-feature .mc-icon{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#71a1ff54,#9468f240 50%,#ef68f238);border-color:#ffffff33;box-shadow:0 0 28px #71a1ff3d}
+  .cap-grid .mc-card h3{font-size:20px;line-height:28px}
+  /* visual shell */
+  .cap-viz{margin-top:auto;padding-top:22px;display:flex;flex-direction:column;gap:9px}
+  .cap-viz .cap-panel{border:1px solid #ffffff12;border-radius:12px;background:linear-gradient(180deg,#ffffff0a,#ffffff03);padding:14px;display:flex;flex-direction:column;gap:9px}
+  /* 1 - tool rows */
+  .cap-tool{display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:9px;background:#ffffff08;border:1px solid #ffffff0f}
+  .cap-verb{font-family:monospace;font-size:12.5px;font-weight:600;padding:2px 9px;border-radius:6px}
+  .v-search{color:#71a1ff;background:#71a1ff1f}.v-get{color:#7ee7b1;background:#7ee7b11f}.v-create{color:#ef68f2;background:#ef68f21f}.v-update{color:#e0b65a;background:#e0b65a1f}
+  .cap-sys{color:#c6c7cc;font-size:13px}
+  /* 2 - system rows */
+  .cap-row{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:9px;background:#ffffff08;border:1px solid #ffffff0f}
+  .cap-row-t{color:#c6c7cc;font-size:12.5px;font-family:monospace}
+  .cap-ok{font-size:11px;color:#7ee7b1;background:rgba(126,231,177,.12);border:1px solid rgba(126,231,177,.22);border-radius:6px;padding:3px 9px;font-weight:500;white-space:nowrap}
+  /* 3 - login */
+  .cap-login-top{display:flex;align-items:center;gap:9px;justify-content:center;margin-bottom:2px}
+  .cap-login-logo{width:26px;height:26px;border-radius:7px;background:#fff;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+  .cap-login-logo img{width:18px;height:18px;object-fit:contain}
+  .cap-login-name{color:#fff;font-size:14px;font-weight:600}
+  .cap-field{padding:10px 13px;border-radius:8px;background:#ffffff08;border:1px solid #ffffff14;color:#7c7c84;font-size:12.5px}
+  .cap-field-dots{letter-spacing:.18em}
+  .cap-login-btn{margin-top:3px;padding:11px;border-radius:8px;text-align:center;color:#fff;font-size:13px;font-weight:600;background:linear-gradient(135deg,#9468f2,#ef68f2)}
+  /* 4 - scoped/log */
+  .cap-token{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:9px;background:#ffffff08;border:1px solid #ffffff0f;gap:10px}
+  .cap-token-key{font-family:monospace;font-size:12.5px;color:#c6c7cc}
+  .cap-chip{font-size:11px;color:#c8a6ff;background:rgba(148,104,242,.16);border:1px solid rgba(148,104,242,.3);border-radius:6px;padding:3px 9px;white-space:nowrap}
+  .cap-log{display:flex;align-items:center;justify-content:space-between;padding:7px 12px;border-radius:8px;background:#ffffff05}
+  .cap-log-t{font-family:monospace;font-size:12.5px;color:#959599}
+  .cap-code-2{font-size:11px;font-family:monospace;padding:2px 8px;border-radius:5px;color:#7ee7b1;background:rgba(126,231,177,.1)}
+  /* 5 - clients + code */
+  .cap-clients{display:flex;flex-wrap:wrap;gap:7px}
+  .cap-client{font-size:12px;color:#dfe7ff;background:#ffffff0d;border:1px solid #ffffff1f;border-radius:999px;padding:5px 12px}
+  .cap-code{margin:0;padding:11px 13px;border-radius:9px;background:#0e0d14;border:1px solid #ffffff10;color:#c6c7cc;font-family:monospace;font-size:12px;line-height:19px;white-space:pre;overflow-x:auto}
+  .cap-code .cap-k{color:#71a1ff}.cap-code .cap-v{color:#7ee7b1}
+  /* 6 - monitoring */
+  .cap-mon-head{display:flex;align-items:center;justify-content:space-between}
+  .cap-mon-t{color:#c6c7cc;font-size:12.5px;font-weight:500}
+  .cap-spark{width:100%;height:auto;display:block;margin:2px 0}
+  .cap-alert{display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:8px;background:rgba(224,182,90,.08);border:1px solid rgba(224,182,90,.22);color:#e0b65a;font-size:12px}
+  .cap-alert-dot{width:7px;height:7px;border-radius:50%;background:#e0b65a;box-shadow:0 0 8px #e0b65a;flex:0 0 auto}
+  @media (max-width:767px){.cap-grid{grid-template-columns:1fr}}
+  /* ===== S6 STEPS polish ===== */
+  .mc-step-item-title{color:#8a8a90}
+  .mc-step-item-desc{color:#888}
+  .mc-step-item:hover .mc-step-item-title{color:#c6c7cc}
+  .mc-steps-panel{position:absolute;inset:0;opacity:0;visibility:hidden;transform:translateY(10px) scale(.995);transition:opacity .38s ease,transform .38s ease,visibility 0s linear .38s;pointer-events:none}
+  .mc-steps-panel.active{position:relative;opacity:1;visibility:visible;transform:translateY(0) scale(1);transition:opacity .42s ease,transform .42s ease,visibility 0s;pointer-events:auto;z-index:1}
+  .mc-steps-visual{position:sticky;top:100px;min-height:420px}
+  @media(max-width:991px){.mc-steps-visual{position:static;min-height:0}}
+  .mc-panel-chrome{display:flex;align-items:center;gap:7px;padding:13px 16px;border-bottom:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);flex-shrink:0}
+  .mc-panel-chrome .mc-dotc{width:11px;height:11px;border-radius:50%;display:block}
+  .mc-panel-chrome .mc-dotc.r{background:#ff5f57}
+  .mc-panel-chrome .mc-dotc.y{background:#febc2e}
+  .mc-panel-chrome .mc-dotc.g{background:#28c840}
+  .mc-panel-chrome .mc-chrome-label{margin-left:8px;font-size:11px;font-weight:500;letter-spacing:.04em;color:#6f6f76;font-family:Inter,sans-serif}
+  .mc-step-progress{display:flex;gap:6px;margin-top:22px}
+  .mc-step-progress .mc-prog-bar{flex:1;height:3px;border-radius:3px;background:rgba(255,255,255,.1);overflow:hidden;cursor:pointer}
+  .mc-step-progress .mc-prog-bar.active{background:rgba(113,161,255,.25)}
+  .mc-step-progress .mc-prog-bar.active::after{content:"";display:block;height:100%;width:100%;background:linear-gradient(90deg,#71a1ff,#9468f2);border-radius:3px}
+  .mc-powered{color:#7a7a82;font-size:12px;margin-top:6px;display:flex;align-items:center;gap:6px}
+  .mc-powered::before{content:"";width:6px;height:6px;border-radius:50%;background:#71a1ff;box-shadow:0 0 8px rgba(113,161,255,.6)}
+  .getting .skew-box-contant .u-s5-left .mc-cta-eyebrow{display:inline-flex;align-items:center;gap:9px;margin-bottom:16px;padding:6px 12px 6px 6px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:999px}
+  .getting .mc-cta-eyebrow .mc-cta-logo{width:26px;height:26px;border-radius:7px;background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .getting .mc-cta-eyebrow .mc-cta-logo img{width:19px;height:19px;object-fit:contain;display:block}
+  .getting .mc-cta-eyebrow .mc-cta-eyebrow-text{font-size:13px;font-weight:600;letter-spacing:.04em;color:#fff;font-family:Inter,sans-serif;white-space:nowrap}
+  /* ===== CTA custom graphic: agent → Makini hub → SAP EWM + systems ===== */
+  .mc-cta-graphic{position:relative;max-width:100%;margin:0 auto}
+  /* hero ctag graphic: container must equal the SVG viewBox (500x340) so connector lines meet the px-positioned nodes */
+  .s1-logo-stage .mc-cta-graphic{width:500px;height:340px;display:block}
+  /* getting CTA robot image: keep its own sizing (item-4 sizing is hero-only) */
+  .getting .mc-cta-graphic{width:460px;height:440px;margin:-30px auto -90px;display:flex;align-items:flex-end;justify-content:center}
+  .mc-cta-img{width:100%;height:100%;object-fit:contain;object-position:center bottom;display:block;-webkit-mask-image:linear-gradient(to bottom,#000 80%,transparent 99%);mask-image:linear-gradient(to bottom,#000 80%,transparent 99%)}
+  .ctag-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+  .ctag-flow{stroke-dasharray:5 7;animation:ctagDash 1.2s linear infinite}
+  @keyframes ctagDash{to{stroke-dashoffset:-24}}
+  @media (prefers-reduced-motion:reduce){.ctag-flow{animation:none}}
+  .ctag-node{position:absolute;transform:translate(-50%,-50%);display:grid;place-items:center;z-index:2}
+  .ctag-agent{left:60px;top:170px;width:62px;height:62px;border-radius:16px;background:radial-gradient(circle at 30% 20%,#26243150,#1b1921);border:1px solid #ffffff1f;color:#dfe7ff;box-shadow:0 8px 28px rgba(0,0,0,.4)}
+  .ctag-agent svg{width:30px;height:30px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  .ctag-hub{left:210px;top:170px;width:106px;height:106px;border-radius:12px;background:radial-gradient(circle at 30% 20%,#3a2f5e,#1f1c2b);box-shadow:0 0 75px #9468f255,0 0 34px #71a1ff44}
+  .ctag-hub::before{content:"";position:absolute;inset:0;border-radius:26px;padding:1.5px;background:linear-gradient(135deg,#5485e5,#fb63ff,#9468f2);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+  .ctag-hub img{width:56px;height:56px;object-fit:contain;position:relative;z-index:1}
+  .ctag-sap{left:445px;top:170px;width:66px;height:66px;border-radius:16px;background:#fff;box-shadow:0 0 34px #ffffff22,0 8px 28px rgba(0,0,0,.4)}
+  .ctag-sap img{width:44px;height:44px;object-fit:contain}
+  .ctag-sys{width:42px;height:42px;border-radius:12px;background:#ffffff0d;border:1px solid #ffffff1c;color:#aeb0c0}
+  .ctag-sys svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  .ctag-sys .ctag-logo{width:35px;height:27px;object-fit:contain;opacity:.85}
+  .ctag-s1{left:390px;top:54px}.ctag-s2{left:412px;top:102px}.ctag-s3{left:412px;top:250px}.ctag-s4{left:390px;top:298px}
+  .ctag-label{position:absolute;transform:translateX(-50%);font-size:11px;font-weight:500;color:#9a9ba6;font-family:Inter,sans-serif;white-space:nowrap;z-index:2}
+  .ctag-lab-agent{left:60px;top:212px}.ctag-lab-hub{left:210px;top:236px;color:#fff;font-weight:600}.ctag-lab-sap{left:445px;top:214px}
+  @media(max-width:560px){.mc-cta-graphic{transform:scale(.78);transform-origin:center}}
+  /* ===== S9 Security enhancements ===== */
+  .mc-soc-badge{display:inline-flex;align-items:center;gap:14px;margin:0 auto 30px;padding:14px 22px 14px 16px;border:1px solid #ffffff14;border-radius:16px;background:radial-gradient(circle at 0% 0%,#1d2a25,#1b1921);box-shadow:0 0 0 1px #7ee7b10f,0 18px 50px -28px #7ee7b13d}
+  .mc-soc-shield{flex:none;width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:radial-gradient(circle at 30% 20%,#7ee7b133,#7ee7b10a);border:1px solid #7ee7b13d}
+  .mc-soc-shield svg{width:26px;height:26px;display:block}
+  .mc-soc-txt{display:flex;flex-direction:column;text-align:left;line-height:1.2}
+  .mc-soc-title{font-size:16px;font-weight:600;color:#fff;letter-spacing:.01em}
+  .mc-soc-sub{font-size:12.5px;color:#7ee7b1;font-weight:500;margin-top:3px;display:flex;align-items:center;gap:6px}
+  .mc-soc-sub::before{content:"";width:6px;height:6px;border-radius:50%;background:#7ee7b1;box-shadow:0 0 8px #7ee7b1}
+  .mc-sec-headwrap{display:flex;flex-direction:column;align-items:center}
+  .h2.mc-sec-h2{font-size:46px;line-height:54px;font-weight:500;letter-spacing:-.01em;max-width:18ch}
+  .mc-card-sec{position:relative}
+  .mc-card-sec .mc-icon{color:#7ee7b1}
+  @media(max-width:767px){.h2.mc-sec-h2{font-size:32px;line-height:39px}.mc-soc-badge{width:100%;justify-content:flex-start}}
+  /* ===== S11 key capabilities card ===== */
+  .ewm-cap-card{border:1px solid #ffffff14;border-radius:20px;background:radial-gradient(circle at 100% 0,#212433,#1b1921);padding:26px 26px 10px;align-self:start}
+  .ewm-cap-head{display:flex;align-items:center;gap:10px;padding-bottom:18px;border-bottom:1px solid #ffffff12;margin-bottom:6px}
+  .ewm-cap-dot{width:8px;height:8px;border-radius:50%;background:#71a1ff;box-shadow:0 0 10px #71a1ff}
+  .ewm-cap-eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#959599;font-weight:600}
+  .ewm-cap-row{display:flex;align-items:center;gap:16px;padding:18px 0;border-bottom:1px solid #ffffff0d}
+  .ewm-cap-row:last-child{border-bottom:none}
+  .ewm-cap-ico{flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:#ffffff08;border:1px solid #ffffff12}
+  .ewm-cap-ico svg{width:22px;height:22px;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .ewm-cap-row:nth-child(2) .ewm-cap-ico svg{stroke:#71a1ff}
+  .ewm-cap-row:nth-child(3) .ewm-cap-ico svg{stroke:#7ee7b1}
+  .ewm-cap-row:nth-child(4) .ewm-cap-ico svg{stroke:#ef68f2}
+  .ewm-cap-row:nth-child(5) .ewm-cap-ico svg{stroke:#9468f2}
+  .ewm-cap-body{flex:1;min-width:0}
+  .ewm-cap-stat{font-size:22px;font-weight:600;color:#fff;line-height:1.2}
+  .ewm-cap-stat span{font-size:13px;font-weight:500;color:#959599;margin-left:4px}
+  .ewm-cap-label{font-size:14px;color:#c6c7cc;margin-top:3px;line-height:1.45}
+  @media(max-width:991px){.ewm-cap-card{margin-top:8px}}
+  /* ============ V2 REDESIGN ============ */
+  /* 1. Section background rhythm + dividers */
+  .mc-sec.bg-a{background:#16161d}
+  .mc-sec.bg-b{background:#1d1d28}
+  .mc-sec.bg-deep{background:#121118}
+  .mc-divide{border-top:1px solid rgba(255,255,255,.07)}
+  /* unified eyebrow system */
+  .s2-upheading.mc-eyebrow{color:#c6c7cc;letter-spacing:3px;font-weight:400;text-transform:uppercase;font-size:13px}
+  /* section heading hierarchy */
+  .mc-sec.sec-hero-h .h2{font-size:46px;line-height:54px;font-weight:500;letter-spacing:-.01em}
+  .mc-sec.sec-minor-h .h2{font-size:30px;line-height:40px}
+  @media(max-width:767px){.mc-sec.sec-hero-h .h2{font-size:32px;line-height:40px}}
+  /* 2. Light section (#tools) */
+  .mc-sec-light{background:#f4f5f7 !important;border-top-color:rgba(0,0,0,.06)}
+  .mc-sec-light::before{display:none}
+  .mc-sec-light .h2{color:#16161d}
+  .mc-sec-light .mc-sub{color:#55555f}
+  .mc-sec-light .s2-upheading{color:#5a6cff}
+  .mc-sec-light .mc-tool{background:#fff;border-color:#e4e5ea;box-shadow:0 1px 2px rgba(16,16,30,.04)}
+  .mc-sec-light .mc-tool:hover{background:#fff;border-color:#c9cad4;box-shadow:0 10px 30px -12px rgba(16,16,30,.18)}
+  .mc-sec-light .mc-tool-name{color:#16161d}
+  .mc-sec-light .mc-tool-desc{color:#55555f}
+  .mc-sec-light .mc-tool-badge.read{color:#2f5fd0;background:rgba(47,95,208,.10);border-color:rgba(47,95,208,.28)}
+  .mc-sec-light .mc-tool-badge.create{color:#1a8f5e;background:rgba(26,143,94,.10);border-color:rgba(26,143,94,.28)}
+  .mc-sec-light .mc-tool-badge.update{color:#b07d12;background:rgba(176,125,18,.12);border-color:rgba(176,125,18,.30)}
+  .mc-sec-light .mc-filter{color:#55555f;border-color:#d7d8df}
+  .mc-sec-light .mc-filter:hover{color:#16161d;border-color:#b9bac4;background:#ffffff}
+  .mc-sec-light .mc-filter.active{color:#16161d;background:#fff;border-color:#b9bac4;box-shadow:0 1px 2px rgba(16,16,30,.06)}
+  .mc-sec-light .mc-filter[data-f="all"].active{background:linear-gradient(135deg,rgba(90,108,255,.12),rgba(180,85,209,.10));border-color:rgba(90,108,255,.45)}
+  .mc-sec-light .mc-filter .cnt{color:#9a9ba6}
+  .mc-sec-light .mc-page-btn,.mc-sec-light .mc-page-nav{color:#55555f;border-color:#d7d8df}
+  .mc-sec-light .mc-page-btn:hover,.mc-sec-light .mc-page-nav:hover{color:#16161d;border-color:#b9bac4;background:#fff}
+  .mc-sec-light .mc-page-btn.active{color:#16161d;background:linear-gradient(135deg,rgba(90,108,255,.16),rgba(180,85,209,.10));border-color:rgba(90,108,255,.5)}
+  .mc-sec-light .mc-tools-empty{color:#7a7b85}
+  /* tools search input */
+  .mc-tool-search{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #d7d8df;border-radius:999px;padding:8px 16px;min-width:220px}
+  .mc-tool-search svg{width:16px;height:16px;stroke:#9a9ba6;fill:none;stroke-width:1.8;flex:none}
+  .mc-tool-search input{border:none;outline:none;background:transparent;color:#16161d;font-size:13.5px;width:100%;font-family:inherit}
+  .mc-tool-search input::placeholder{color:#9a9ba6}
+  @media(max-width:767px){.mc-tool-search{width:100%}}
+  /* 4. Steps: kill left void */
+  .mc-steps-interactive.steps-centered{align-items:center}
+  .mc-steps-trust{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px;padding-left:22px}
+  .mc-steps-trust .mc-pill{background:#ffffff0a}
+  .mc-steps-trust .mc-dot{background:#7ee7b1}
+  /* 7. Hero terminal line reveal */
+  .s1-visual-card .s1-vc-line,.s1-visual-card .s1-vc-res{opacity:0;animation:vcReveal .45s ease forwards}
+  .s1-visual-card .s1-vc-line:nth-child(1){animation-delay:.25s}
+  .s1-visual-card .s1-vc-line:nth-child(2){animation-delay:.5s}
+  .s1-visual-card .s1-vc-line:nth-child(3){animation-delay:.75s}
+  .s1-visual-card .s1-vc-line:nth-child(4){animation-delay:1s}
+  .s1-visual-card .s1-vc-res{animation-delay:1.4s}
+  .s1-visual-card .s1-vc-line:nth-child(6){animation-delay:1.9s}
+  @keyframes vcReveal{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+  @media(prefers-reduced-motion:reduce){.s1-visual-card .s1-vc-line,.s1-visual-card .s1-vc-res{opacity:1;animation:none}}
+  /* 8. polish: logo-wall count */
+  .mc-logowall-count{color:#fff;font-weight:600;font-size:14px;white-space:nowrap;opacity:.9}
+  .mc-logowall-count span{color:#71a1ff}
+  /* FAQ cards */
+  .s5.faq .faq_item{border:1px solid #ffffff14;border-radius:14px;margin-bottom:12px;background:#ffffff05;overflow:hidden;transition:border-color .2s ease}
+  .s5.faq .faq_item:hover{border-color:#ffffff2a}
+  .s5.faq .dropdown-toggle_faq{padding:18px 22px}
+  /* CTA hub pulse */
+  .ctag-hub{animation:ctagHubPulse 3s ease-in-out infinite}
+  @keyframes ctagHubPulse{0%,100%{box-shadow:0 0 75px #9468f255,0 0 34px #71a1ff44}50%{box-shadow:0 0 95px #9468f277,0 0 46px #71a1ff66}}
+  @media(prefers-reduced-motion:reduce){.ctag-hub{animation:none}}
+  /* ── CTA vertical hub diagram ── */
+  /* Vertically center the two columns so the graphic sits level with the heading+buttons
+     instead of stretching to the top and drooping below the section. */
+  .getting .skew-box-contant{align-items:center}
+  .getting .mc-cta-graphic{width:460px;height:400px;margin:0 auto;display:block}
+  .cta-hub-svg{width:460px;height:400px;display:block}
+</style>
+</head><body class="m-body black"><div data-collapse="medium" data-animation="default" data-duration="200" data-easing="ease-out-quad" data-easing2="ease-out-quad" data-w-id="2e6c35ff-cb74-4f6d-2ba4-7989f0f50950" role="banner" class="m-header w-nav"><div class="m-container"><div class="m-nav-box"><a href="https://www.makini.io/" class="brand w-nav-brand"><img src="./SAP EWM API integration – connect to anything – Makini_files/608566aaabf4b474f887440f_Light.svg" width="140" alt="" class="header-logo logo-icon"></a><nav role="navigation" class="nav-menu w-nav-menu"><a href="https://www.makini.io/integrations" class="m-nav-link mob hide">Products</a><div data-hover="true" data-delay="100" data-w-id="2e6c35ff-cb74-4f6d-2ba4-7989f0f50958" class="nav-dropdown mob w-dropdown"><div class="nav-link dropdown w-dropdown-toggle"><a href="https://www.makini.io/integrations" class="m-nav-link">Integrations</a></div><nav class="dropdown-list w-dropdown-list"><div class="drop-box vertical"><div class="nav-heading-box full-w"><div class="drop-h">Integrations</div><div class="nav-heading-text">See the top integrations Makini builds for you</div></div><div class="nav-cont-box"><div class="drop-int-collection col3 w-dyn-list"><div fs-cmsload-element="list" role="list" class="drop-int-collection-list col3 w-dyn-items"><div role="listitem" class="drop-int-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/blue-yonder" class="nav-int-box w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/65b3a8373d3ea3723f5477ee_f7Vgz5UfBJ0l9dc5VDQm-BGe6Al4R1GEis4GEmOMeCM.webp" loading="lazy" alt="65b3a8373d3ea3723f5477ee_f7Vgz5UfBJ0l9dc5VDQm-BGe6Al4R1GEis4GEmOMeCM.webp" class="drop-logo-int"><div fs-cmsfilter-field="title" class="drop-int-h">Blue Yonder</div></a></div><div role="listitem" class="drop-int-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/sap-extended-warehouse-management" aria-current="page" class="nav-int-box w-inline-block w--current"><img src="./SAP EWM API integration – connect to anything – Makini_files/67080ac3f5d59e851d4cbb00_VuUw59TdK1FK9dvmnJ0CSZFghJO0bbRC-DkxVUWtCzo.webp" loading="lazy" alt="670e658062fb9f80ae472705_X2G4-zGpkPxjuAuuPJkahbClS_qBaRfV_fiVrKRtlNM.webp" class="drop-logo-int"><div fs-cmsfilter-field="title" class="drop-int-h">SAP EWM</div></a></div><div role="listitem" class="drop-int-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/oracle-warehouse-management" class="nav-int-box w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/692f424df67b6477d9dae677_5_lWM6pBfynTA2cgx75IoQwg4WzCASNQB0s5vJK18YQ.png" loading="lazy" alt="67080a4918672fb167799acb_GPHP8Sc4jbIHDAQ040rWH6e7c4BRSI9AGrjVkVF3jdI.png" class="drop-logo-int"><div fs-cmsfilter-field="title" class="drop-int-h">Oracle Warehouse Management</div></a></div><div role="listitem" class="drop-int-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/sap-business-one" class="nav-int-box w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/65b3a88ee56fbacf3e6e9e01_q-K1NCFWw5dWAj9NTGeK9EkFBK6-AFALDfOjKejW9O8.webp" loading="lazy" alt="65b3a88ee56fbacf3e6e9e01_q-K1NCFWw5dWAj9NTGeK9EkFBK6-AFALDfOjKejW9O8.webp" class="drop-logo-int"><div fs-cmsfilter-field="title" class="drop-int-h">SAP Business One</div></a></div><div role="listitem" class="drop-int-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/oracle-fusion-cloud-warehouse-management" class="nav-int-box w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/65b3a9eb9fea3d2b46d28267_BBin_Xl6U-Tt-qx1EUY1HG_vccNbmfbRlsXGmXbv90I.webp" loading="lazy" alt="65b3a9eb9fea3d2b46d28267_BBin_Xl6U-Tt-qx1EUY1HG_vccNbmfbRlsXGmXbv90I.webp" class="drop-logo-int"><div fs-cmsfilter-field="title" class="drop-int-h">Oracle Fusion Cloud</div></a></div><div role="listitem" class="drop-int-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/infor-wms" class="nav-int-box w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/65df222c44955d2ba1b1f3fd_h149IqVojdfYooZLjnjJZYY4nzaGwi-OWn1nP8eASNU.webp" loading="lazy" alt="65df222c44955d2ba1b1f3fd_h149IqVojdfYooZLjnjJZYY4nzaGwi-OWn1nP8eASNU.webp" class="drop-logo-int"><div fs-cmsfilter-field="title" class="drop-int-h">INFOR WMS</div></a></div><div role="listitem" class="drop-int-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/plex-systems" class="nav-int-box w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/65b3a9ee2dc41c223581f640_SklO3WmiP0EKD3Sf0CK9TgNNyC98ITky26JQSUrfV-U.webp" loading="lazy" alt="65b3a9ee2dc41c223581f640_SklO3WmiP0EKD3Sf0CK9TgNNyC98ITky26JQSUrfV-U.webp" class="drop-logo-int"><div fs-cmsfilter-field="title" class="drop-int-h">PLEX Systems</div></a></div><div role="listitem" class="drop-int-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/sap" class="nav-int-box w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/692f425a4e34a646271350d4_lwYL-zYI_3O5VxF9NJDyfOUUhJ29GF4NUE76nv92kxc.png" loading="lazy" alt="67080ac3f5d59e851d4cbb00_VuUw59TdK1FK9dvmnJ0CSZFghJO0bbRC-DkxVUWtCzo.png" class="drop-logo-int"><div fs-cmsfilter-field="title" class="drop-int-h">SAP S/4HANA</div></a></div></div><div id="w-node-_73224f2f-5d3b-f573-3d47-1cba28fec46d-f0f50950" role="navigation" aria-label="List" class="w-pagination-wrapper pagination"><a href="https://www.makini.io/integrations/sap-extended-warehouse-management?4f85e4ec_page=2" aria-label="Next Page" class="w-pagination-next hidden"><div class="w-inline-block">Next</div><svg class="w-pagination-next-icon" height="12px" width="12px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" transform="translate(0, 1)"><path fill="none" stroke="currentColor" fill-rule="evenodd" d="M4 2l4 4-4 4"></path></svg></a><link rel="prerender" href="https://www.makini.io/integrations/sap-extended-warehouse-management?4f85e4ec_page=2"><div><a data-w-id="575a1e9e-cc85-5a22-f756-a9fafb7983ef" href="https://www.makini.io/integrations" class="u-s5-right-card-link nav col3 w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/69eb6f626369c092fd1cfa41_pag_icon.png" loading="lazy" alt="" class="icon_pagi"><div class="link-box-text">See all <span id="stats-count">systems</span></div><div class="link-arrow-box"><div class="link-arrow-line"></div><div class="link-arrow-line2"></div></div></a><div class="hidden w-embed w-script"></div></div></div></div></div></div></nav></div><div data-hover="true" data-delay="100" data-w-id="784d8bfc-3285-b225-acd5-dccae3bfbc38" class="nav-dropdown mob w-dropdown"><div class="nav-link dropdown w-dropdown-toggle"><a href="https://www.makini.io/use-cases" class="m-nav-link">Use&nbsp;cases</a></div><nav class="dropdown-list uses w-dropdown-list"><div class="drop-box"><div class="nav-heading-box"><div class="drop-h">Use Cases</div><div class="nav-heading-text">There is so much you can build with us</div></div><div class="nav-cont-box"><a href="https://www.makini.io/use-cases/advanced-maintenance" class="nav-cont-link w-inline-block"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/6343ec042682b22c997a4bf4_advanced.webp" alt="" class="nav-cont-link-icon"><div class="nav-cont-link-text">Advanced maintenance</div></a><a href="https://www.makini.io/use-cases/inventory-optimization" class="nav-cont-link w-inline-block"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/634573be271cb16b176f22a4_Inventory.webp" alt="" class="nav-cont-link-icon"><div class="nav-cont-link-text">Inventory optimization</div></a><a href="https://www.makini.io/use-cases/aftermarket" class="nav-cont-link w-inline-block"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/6345743417693c768b856201_Industrial.webp" alt="" class="nav-cont-link-icon"><div class="nav-cont-link-text">Industrial aftermarket</div></a></div></div></nav></div><a href="https://www.makini.io/integrations" class="m-nav-link mob">Integrations</a><a href="https://www.makini.io/pricing" class="m-nav-link">Pricing</a><a href="https://docs.makini.io/docs/api-docs/branches/master/df956de0eed6b-makini-api" target="_blank" class="m-nav-link mob">Developers</a><a href="https://www.makini.io/use-cases" class="m-nav-link mob">Use Cases</a><a href="https://www.makini.io/careers" class="m-nav-link mob">Careers</a><a href="https://www.makini.io/blog" class="m-nav-link mob">Blog</a><a href="https://www.makini.io/legal" class="m-nav-link mob">Legal</a><a href="https://www.makini.io/faq" class="m-nav-link mob">FAQ</a><div data-hover="true" data-delay="100" data-w-id="b4b0e6e1-3526-2be2-dcd8-41919f5f1ac5" class="nav-dropdown mob w-dropdown"><div class="nav-link dropdown w-dropdown-toggle"><a href="https://docs.makini.io/" target="_blank" class="m-nav-link">Developers</a></div><nav class="dropdown-list dev w-dropdown-list"><div class="drop-box"><div class="nav-heading-box"><div class="drop-h">Developers</div><div class="nav-heading-text">All you need to integrate with Makini and learn about our APIs</div></div><div class="nav-cont-box"><a href="https://docs.makini.io/docs/api-docs/branches/master/df956de0eed6b-makini-api" target="_blank" class="nav-cont-link w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/633bf755e410115b92f89298_book-icon.webp" loading="lazy" alt="" class="nav-cont-link-icon"><div class="nav-cont-link-text">API reference</div></a></div></div></nav></div><div data-hover="true" data-delay="100" data-w-id="ee5dd854-221b-a342-7213-544f0ff644a0" class="nav-dropdown mob w-dropdown"><div class="nav-link dropdown w-dropdown-toggle"><div class="m-nav-link">Company</div></div><nav class="dropdown-list comp w-dropdown-list"><div class="drop-box"><div class="nav-heading-box"><div class="drop-h">Company</div><div class="nav-heading-text">Mission behind the work and people behind the code</div></div><div class="nav-cont-box"><a href="https://www.makini.io/careers" class="nav-cont-link w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/63218a7f8fcc565c39d13cd1_career-s2-icon3.webp" loading="lazy" alt="" class="nav-cont-link-icon"><div class="nav-cont-link-text">Careers</div></a><a href="https://www.makini.io/blog" class="nav-cont-link w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/632aa87e099f14381ce2d424_newsroom-icon.webp" loading="lazy" alt="" class="nav-cont-link-icon"><div class="nav-cont-link-text">Blog</div></a><a href="https://www.makini.io/legal" class="nav-cont-link w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/633bf3e6965e5d7d3e255a9d_circles.webp" loading="lazy" alt="" class="nav-cont-link-icon"><div class="nav-cont-link-text">Legal</div></a><a href="https://www.makini.io/faq" class="nav-cont-link w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/660fe7f140d40e9b10f9f135_Frame 5540 (1).webp" loading="lazy" alt="" class="nav-cont-link-icon"><div class="nav-cont-link-text">FAQ</div></a></div></div></nav></div><div class="nav-line"><div class="nav-line blur"></div></div></nav><div class="m-header-btn-box"><a href="https://app.makini.io/login" class="button-secondary light nav-bar w-button">Sign in</a><a href="https://app.makini.io/register" class="button-primary header-button w-button">Sign up</a><a rel="nofollow" href="https://calendly.com/api-94107/makini-api-demo" target="_blank" class="btn-blue w-button">Book demo</a></div><div class="burger w-nav-button"><div class="burger-box"><div data-w-id="5e47b169-81fe-31b1-4dcf-c87b04d3f258" class="burger-line"></div><div data-w-id="f7e9939b-74e3-b770-24de-4b1022476114" class="burger-line"></div><div data-w-id="7f92807b-3900-71c3-9399-24452580fb24" class="burger-line"></div></div></div></div></div></div><div class="nav-bg"></div>
+<style>
+  /* ---- homepage supplemental (prefix .hm-) ---- */
+  .hm-hero{padding:150px 0 96px;position:relative;text-align:center;overflow:hidden}
+  .hm-hero .m-container{position:relative;z-index:2}
+  .hm-hero-pill{display:inline-flex;align-items:center;gap:9px;padding:7px 16px;border-radius:999px;font-size:13px;font-weight:500;color:#c6c7cc;background:#ffffff0f;border:1px solid #ffffff1f;margin-bottom:26px}
+  .hm-hero-pill .mc-dot{width:7px;height:7px;border-radius:50%;background:#7ee7b1;box-shadow:0 0 10px #7ee7b1}
+  .hm-h1{font-size:58px;line-height:66px;font-weight:600;letter-spacing:-.02em;color:#fff;margin:0 auto;max-width:14ch}
+  .hm-h1 .hm-grad{background:linear-gradient(135deg,#71a1ff,#ef68f2);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .hm-hero-sub{font-size:19px;line-height:30px;color:#c6c7cc;max-width:680px;margin:24px auto 0}
+  .hm-cta-row{display:flex;justify-content:center;gap:14px;margin-top:38px;flex-wrap:wrap}
+  .hm-cta-row .btn-blue{width:auto;min-width:0;min-height:0;height:auto;margin:0;padding:14px 30px;font-size:15px;font-weight:500}
+  .hm-cta-row .price-card-btn{display:inline-flex;align-items:center;justify-content:center;height:52px;padding:0 26px;margin:0;border-radius:8px}
+  .hm-cta-row .price-card-btn .price-card-btn-text{font-size:15px;font-weight:500}
+  .hm-trust{display:inline-flex;align-items:center;gap:14px;margin-top:34px;font-size:14px;color:#959599;flex-wrap:wrap;justify-content:center}
+  .hm-trust b{color:#c6c7cc;font-weight:600}
+  .hm-trust .hm-dot{width:4px;height:4px;border-radius:50%;background:#4a4b55}
+  /* marquee */
+  .hm-marquee{margin-top:18px;position:relative;overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+  .hm-mq-track{display:flex;width:max-content;gap:0;animation:hm-scroll 46s linear infinite}
+  .hm-mq-item{display:flex;align-items:center;justify-content:center;padding:0 44px;height:64px;flex:0 0 auto}
+  .hm-mq-logo{height:30px;width:auto;max-width:150px;object-fit:contain;opacity:.72;filter:grayscale(.15);transition:opacity .25s ease}
+  .hm-mq-item:hover .hm-mq-logo{opacity:1}
+  @keyframes hm-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @media(prefers-reduced-motion:reduce){.hm-mq-track{animation:none}}
+  /* platform overview */
+  .hm-platform{text-align:center;padding:128px 0}
+  .hm-platform .hm-big{font-size:46px;line-height:56px;font-weight:400;color:#fff;max-width:18ch;margin:14px auto 0}
+  .hm-platform .hm-big b{font-weight:600}
+  .hm-platform .mc-sub{max-width:660px;margin:20px auto 0}
+  /* pillar header row */
+  .hm-pillar-cta{display:inline-flex;align-items:center;gap:8px;margin-top:34px;color:#71a1ff;font-size:15px;font-weight:600;transition:gap .2s ease}
+  .hm-pillar-cta:hover{gap:12px}
+  .hm-arrow{width:18px;height:18px}
+  .hm-center{text-align:center}
+  /* makini link panel */
+  .hm-link-panel{position:relative;overflow:hidden;display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;background-image:radial-gradient(circle at 100% 0,#212433,#1b1921);border:1px solid #ffffff14;border-radius:20px;padding:48px;box-shadow:0 30px 70px rgba(0,0,0,.4)}
+  .hm-link-panel::after{content:"";position:absolute;z-index:0;top:-40px;right:-30px;width:240px;height:240px;border-radius:100%;filter:blur(80px);opacity:.5;background:#9468f266;pointer-events:none}
+  .hm-link-panel>*{position:relative;z-index:1}
+  .hm-link-panel h2{font-size:38px;line-height:46px;font-weight:600;color:#fff;margin:14px 0 0}
+  .hm-link-panel p{color:#c6c7cc;font-size:16px;line-height:26px;margin:16px 0 0;max-width:42ch}
+  .hm-login{display:flex;flex-direction:column;gap:14px}
+  .hm-login-card{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:14px;background:#0e0e14;border:1px solid #ffffff14}
+  .hm-login-card .hm-li-ico{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#dfe7ff;background:linear-gradient(135deg,#71a1ff3d,#ef68f230);border:1px solid #ffffff1f;flex:0 0 auto}
+  .hm-login-card .hm-li-ico svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .hm-login-card .hm-li-t{color:#fff;font-size:14px;font-weight:600;margin-bottom:2px}
+  .hm-login-card .hm-li-s{color:#959599;font-size:12.5px;line-height:17px}
+  .hm-login-card.is-done{border-color:#7ee7b133;box-shadow:0 0 0 1px #7ee7b114}
+  .hm-login-card.is-done .hm-li-ico{color:#7ee7b1;background:linear-gradient(135deg,#7ee7b130,#7ee7b110)}
+  /* systems grid */
+  .hm-sysgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:8px}
+  .hm-sys-tile{display:flex;align-items:center;justify-content:center;height:104px;border-radius:14px;background:#ffffff05;border:1px solid #ffffff12;transition:border-color .2s ease,background .2s ease}
+  .hm-sys-tile:hover{border-color:#ffffff24;background:#ffffff09}
+  .hm-sys-logo{height:30px;width:auto;max-width:130px;object-fit:contain;opacity:.72}
+  .hm-sys-more{flex-direction:column;gap:2px;background-image:radial-gradient(circle at 100% 0,#212433,#1b1921);border-color:#ffffff1f}
+  .hm-sys-count{font-size:24px;font-weight:600;color:#fff}
+  .hm-sys-count-sub{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#959599}
+  .hm-sys-foot{display:flex;justify-content:center;margin-top:34px}
+  /* security desc */
+  .hm-sec-desc{max-width:720px;margin:0 auto 38px;text-align:center;color:#c6c7cc;font-size:16px;line-height:26px}
+  @media(max-width:991px){
+    .hm-h1{font-size:46px;line-height:54px}
+    .hm-link-panel{grid-template-columns:1fr;gap:30px;padding:36px}
+    .hm-sysgrid{grid-template-columns:repeat(3,1fr)}
+    .hm-platform .hm-big{font-size:38px;line-height:46px}
+  }
+  @media(max-width:767px){
+    .hm-hero{padding:120px 0 72px}
+    .hm-h1{font-size:36px;line-height:43px}
+    .hm-hero-sub{font-size:17px}
+    .hm-platform{padding:80px 0}
+    .hm-platform .hm-big{font-size:30px;line-height:40px}
+    .hm-sysgrid{grid-template-columns:repeat(2,1fr)}
+    .hm-link-panel h2{font-size:30px;line-height:38px}
+  }
+  /* ---- chosen variant visuals (hero split, MCP flow, Unified API split) ---- */
+  .hm-hero-split{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+  .vr-hub{width:100%;height:auto;display:block}
+  .mc-card-noicon h3{margin-top:2px}
+  .hm-cta-center{display:flex;justify-content:center;margin-top:44px}
+  .hm-cta-center .price-card-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:52px;padding:0 26px;margin:0;border-radius:8px}
+  .hm-cta-center .price-card-btn .price-card-btn-text{font-size:15px;font-weight:500}
+  .hm-cta-center .hm-arrow{width:18px;height:18px}
+  .vr-2col{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:flex-start;max-width:1040px;margin:0 auto}
+  .vr-bullet{display:flex;gap:14px;align-items:flex-start;padding:15px 0;border-bottom:1px solid #ffffff0f}
+  .vr-bullet:last-of-type{border-bottom:0}
+  .vr-bullet-t{color:#fff;font-size:16px;font-weight:600;margin-bottom:4px}
+  .vr-bullet-s{color:#c6c7cc;font-size:14px;line-height:21px}
+  .vr-callviz{background:radial-gradient(circle at 100% 0,#212433,#1b1921);border:1px solid #ffffff14;border-radius:16px;padding:26px}
+  /* endpoint flipper: the "command" cycles, hold then a quick eased slide (like the MCP tools list) */
+  .vr-call{position:relative;height:48px;overflow:hidden;background:#0e0e16;border:1px solid #71a1ff45;border-radius:10px}
+  .vr-call-track{display:flex;flex-direction:column;will-change:transform;animation:vr-epflip 22.5s ease-in-out infinite}
+  .vr-call-ep{height:48px;flex:0 0 auto;display:flex;align-items:center;gap:9px;padding:0 15px;font-family:"SFMono-Regular",Consolas,monospace;font-size:14px;white-space:nowrap}
+  .vr-call-ep .m{color:#fff;font-weight:600}
+  .vr-call-ep .p{color:#71a1ff;font-weight:600}
+  .vr-call-arrow{font-size:12px;color:#959599;margin:12px 0 10px;text-align:center}
+  /* systems flipper: a 3-row window streaming through many systems, fading into the pinned "+2,000 more" */
+  .vr-call-rows{position:relative;height:148px;overflow:hidden;-webkit-mask:linear-gradient(180deg,transparent,#000 10%,#000 88%,transparent);mask:linear-gradient(180deg,transparent,#000 10%,#000 88%,transparent)}
+  .vr-call-rowtrack{display:flex;flex-direction:column;will-change:transform;animation:vr-sysflip 22.5s ease-in-out infinite}
+  .vr-call-row{height:44px;margin-bottom:8px;flex:0 0 auto;display:flex;justify-content:space-between;align-items:center;padding:0 15px;border-radius:10px;background:#ffffff08;border:1px solid #ffffff12;font-size:14px;color:#fff}
+  .vr-call-row i.ok{font-style:normal;color:#7ee7b1;font-size:12.5px}
+  .vr-call-row.more{background:#ffffff05;border-color:#ffffff0c;color:#6d6f76}
+  @keyframes vr-epflip{0.00%,28.67%{transform:translateY(-0px)}33.33%,62.00%{transform:translateY(-48px)}66.67%,95.33%{transform:translateY(-96px)}100%{transform:translateY(-144px)}}
+  @keyframes vr-sysflip{0.00%,4.00%{transform:translateY(-0px)}6.67%,10.67%{transform:translateY(-52px)}13.33%,17.33%{transform:translateY(-104px)}20.00%,24.00%{transform:translateY(-156px)}26.67%,30.67%{transform:translateY(-208px)}33.33%,37.33%{transform:translateY(-260px)}40.00%,44.00%{transform:translateY(-312px)}46.67%,50.67%{transform:translateY(-364px)}53.33%,57.33%{transform:translateY(-416px)}60.00%,64.00%{transform:translateY(-468px)}66.67%,70.67%{transform:translateY(-520px)}73.33%,77.33%{transform:translateY(-572px)}80.00%,84.00%{transform:translateY(-624px)}86.67%,90.67%{transform:translateY(-676px)}93.33%,97.33%{transform:translateY(-728px)}100%{transform:translateY(-780px)}}
+  @media(prefers-reduced-motion:reduce){.vr-call-track,.vr-call-rowtrack{animation:none}}
+  @media(max-width:991px){.hm-hero-split,.vr-2col{grid-template-columns:1fr;gap:30px}}
+  @media(max-width:767px){.hm-hero-split .hm-h1{font-size:36px;line-height:43px}}
+</style>
+
+<!-- ============ HERO ============ -->
+<section class="s1 hm-hero mc-glow-tl mc-glow-br" style="overflow:hidden;text-align:left;padding:128px 0 92px">
+  <div class="m-container"><div class="hm-hero-split">
+    <div>
+      <div class="hm-hero-pill"><span class="mc-dot"></span>One network · API or MCP</div>
+      <h1 class="hm-h1" style="margin:0;max-width:none;text-align:left">All industrial integrations at once. <span class="hm-grad">API or MCP</span></h1>
+      <p class="hm-hero-sub" style="margin:22px 0 0;text-align:left">Build integrations into your product with one Unified API, or connect your AI agents over MCP — across ERP, CMMS, WMS, and 2,000+ industrial products, including legacy ones that never had an API.</p>
+      <div class="hm-cta-row" style="justify-content:flex-start">
+        <a rel="nofollow" href="https://calendly.com/api-94107/makini-api-demo" target="_blank" class="btn-blue w-button">Book demo</a>
+        <a href="https://app.makini.io/register" class="price-card-btn w-inline-block"><div class="price-card-btn-text">Start free trial</div></a>
+      </div>
+      <div class="hm-trust" style="justify-content:flex-start"><span><b>2,000+</b> systems</span><span class="hm-dot"></span><span>Connect instantly</span><span class="hm-dot"></span><span><b>SOC 2</b> Type II</span></div>
+    </div>
+    <div><svg class="vr-hub" viewBox="0 0 560 340" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Industrial systems unified through Makini, reachable as API or MCP">
+    <defs>
+      <linearGradient id="hb-hero" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5485e5"/><stop offset="50%" stop-color="#fb63ff"/><stop offset="100%" stop-color="#9468f2"/></linearGradient>
+      <radialGradient id="hf-hero" cx="30%" cy="20%" r="80%"><stop offset="0" stop-color="#2a2e44"/><stop offset="100%" stop-color="#1b1922"/></radialGradient>
+      <filter id="hg-hero" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="16"/></filter>
+    </defs>
+    <circle cx="288" cy="154" r="60" fill="#9468f2" opacity="0.22" filter="url(#hg-hero)"><animate attributeName="opacity" values="0.16;0.32;0.16" dur="3s" repeatCount="indefinite"/></circle>
+    <path d="M70 69 C150 69 170 154 232 154" stroke="#ffffff1f" stroke-width="1.5" fill="none" stroke-dasharray="4 6"><animate attributeName="stroke-dashoffset" from="0" to="-20" dur="1.3s" repeatCount="indefinite"/></path><path d="M70 137 C150 137 170 154 232 154" stroke="#ffffff1f" stroke-width="1.5" fill="none" stroke-dasharray="4 6"><animate attributeName="stroke-dashoffset" from="0" to="-20" dur="1.3s" repeatCount="indefinite"/></path><path d="M70 221 C150 221 170 154 232 154" stroke="#ffffff1f" stroke-width="1.5" fill="none" stroke-dasharray="4 6"><animate attributeName="stroke-dashoffset" from="0" to="-20" dur="1.3s" repeatCount="indefinite"/></path><path d="M70 289 C150 289 170 154 232 154" stroke="#ffffff1f" stroke-width="1.5" fill="none" stroke-dasharray="4 6"><animate attributeName="stroke-dashoffset" from="0" to="-20" dur="1.3s" repeatCount="indefinite"/></path>
+    
+    <g>
+      <rect x="20" y="44" width="50" height="50" rx="13" fill="#1b1d28" stroke="#ffffff1a"/>
+      <image href="./SAP EWM API integration – connect to anything – Makini_files/69d66fabcf108617104252cb_logo-siemens.webp" x="29" y="57" width="32" height="24" preserveAspectRatio="xMidYMid meet" opacity="0.9"/>
+    </g>
+    <g>
+      <rect x="20" y="112" width="50" height="50" rx="13" fill="#1b1d28" stroke="#ffffff1a"/>
+      <image href="./SAP EWM API integration – connect to anything – Makini_files/69d66faa77e0f98b22f937a8_logo-caterpillar.webp" x="29" y="125" width="32" height="24" preserveAspectRatio="xMidYMid meet" opacity="0.9"/>
+    </g>
+    <g>
+      <rect x="20" y="196" width="50" height="50" rx="13" fill="#1b1d28" stroke="#ffffff1a"/>
+      <image href="./SAP EWM API integration – connect to anything – Makini_files/69d66faa16d28a4799806c2c_logo-maintainx.webp" x="29" y="209" width="32" height="24" preserveAspectRatio="xMidYMid meet" opacity="0.9"/>
+    </g>
+    <g>
+      <rect x="20" y="264" width="50" height="50" rx="13" fill="#1b1d28" stroke="#ffffff1a"/>
+      <image href="./SAP EWM API integration – connect to anything – Makini_files/69d66faab133d35bd4cd65ee_logo-servicetitan.webp" x="29" y="277" width="32" height="24" preserveAspectRatio="xMidYMid meet" opacity="0.9"/>
+    </g>
+    <circle r="3" fill="#71a1ff"><animateMotion dur="1.7s" begin="-0s" repeatCount="indefinite" path="M70 69 C150 69 170 154 232 154"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.9;1" dur="1.7s" begin="-0s" repeatCount="indefinite"/></circle><circle r="3" fill="#71a1ff"><animateMotion dur="1.7s" begin="-0.4s" repeatCount="indefinite" path="M70 137 C150 137 170 154 232 154"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.9;1" dur="1.7s" begin="-0.4s" repeatCount="indefinite"/></circle><circle r="3" fill="#71a1ff"><animateMotion dur="1.7s" begin="-0.8s" repeatCount="indefinite" path="M70 221 C150 221 170 154 232 154"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.9;1" dur="1.7s" begin="-0.8s" repeatCount="indefinite"/></circle><circle r="3" fill="#71a1ff"><animateMotion dur="1.7s" begin="-1.2000000000000002s" repeatCount="indefinite" path="M70 289 C150 289 170 154 232 154"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.9;1" dur="1.7s" begin="-1.2000000000000002s" repeatCount="indefinite"/></circle>
+    <rect x="232" y="116" width="112" height="76" rx="18" fill="url(#hb-hero)"/>
+    <rect x="233.4" y="117.4" width="109.2" height="73.2" rx="16.6" fill="url(#hf-hero)"/>
+    <image href="./SAP EWM API integration – connect to anything – Makini_files/makini-white-sign.png" x="266" y="132" width="44" height="44" preserveAspectRatio="xMidYMid meet"/>
+    <text x="288" y="208" text-anchor="middle" fill="#fff" font-family="Inter,sans-serif" font-size="12" font-weight="600">Makini</text>
+    <path d="M344 140 C394 140 404 96 452 96" stroke="#71a1ff" stroke-width="2" fill="none"/>
+    <path d="M344 168 C394 168 404 212 452 212" stroke="#ef68f2" stroke-width="2" fill="none"/>
+    <circle r="3.2" fill="#cfe0ff"><animateMotion dur="1.5s" repeatCount="indefinite" path="M344 140 C394 140 404 96 452 96"/></circle>
+    <circle r="3.2" fill="#ffd0fb"><animateMotion dur="1.5s" begin="-0.6s" repeatCount="indefinite" path="M344 168 C394 168 404 212 452 212"/></circle>
+    <g><rect x="452" y="72" width="92" height="48" rx="12" fill="#12131c" stroke="#71a1ff66"/><text x="498" y="101" text-anchor="middle" fill="#cfe0ff" font-family="SFMono-Regular,Consolas,monospace" font-size="15" font-weight="700">API { }</text></g>
+    <g><rect x="452" y="188" width="92" height="48" rx="12" fill="#12131c" stroke="#ef68f266"/><text x="498" y="217" text-anchor="middle" fill="#ffd0fb" font-family="SFMono-Regular,Consolas,monospace" font-size="15" font-weight="700">MCP</text></g>
+    <text x="45" y="326" text-anchor="middle" fill="#7e8090" font-family="Inter,sans-serif" font-size="10.5" font-weight="500">2,000+ systems</text>
+  </svg></div>
+  </div></div>
+</section>
+
+<!-- ============ LOGO WALL ============ -->
+<section class="mc-sec" style="padding:64px 0 72px">
+  <div class="m-container hm-center">
+    <div class="s2-upheading center mc-eyebrow" style="margin-bottom:30px">Trusted by industrial software vendors and the enterprises they serve</div>
+  </div>
+  <div class="hm-marquee">
+    <div class="hm-mq-track"><div class="hm-mq-item"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66fabcf108617104252cb_logo-siemens.webp" loading="lazy" alt="Siemens" class="hm-mq-logo"></div><div class="hm-mq-item"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa77e0f98b22f937a8_logo-caterpillar.webp" loading="lazy" alt="Caterpillar" class="hm-mq-logo"></div><div class="hm-mq-item"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66fab7df0bd8752b4fb1f_logo-tractian.webp" loading="lazy" alt="Tractian" class="hm-mq-logo"></div><div class="hm-mq-item"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa16d28a4799806c2c_logo-maintainx.webp" loading="lazy" alt="MaintainX" class="hm-mq-logo"></div><div class="hm-mq-item"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66faab133d35bd4cd65ee_logo-servicetitan.webp" loading="lazy" alt="ServiceTitan" class="hm-mq-logo"></div><div class="hm-mq-item"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66faab3c4d8b053d323fb_logo-nucor.webp" loading="lazy" alt="Nucor" class="hm-mq-logo"></div><div class="hm-mq-item"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa9c07994b17a3e075_logo-trane.webp" loading="lazy" alt="Trane" class="hm-mq-logo"></div><div class="hm-mq-item"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66fab59dc758211384772_logo-uptake.webp" loading="lazy" alt="Uptake" class="hm-mq-logo"></div><div class="hm-mq-item"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66fabec129f7ee4be19e4_logo-kiongroup.webp" loading="lazy" alt="KION Group" class="hm-mq-logo"></div><div class="hm-mq-item"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66fab4b4c78aa337451ed_logo-cofactr.webp" loading="lazy" alt="Cofactr" class="hm-mq-logo"></div><div class="hm-mq-item"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa940b2f57767ebdd2_logo-abs.webp" loading="lazy" alt="ABS" class="hm-mq-logo"></div><div class="hm-mq-item"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa2ff8cc46c21f26d5_logo-datanomix.webp" loading="lazy" alt="Datanomix" class="hm-mq-logo"></div><div class="hm-mq-item"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa02ef252088a87c0b_logo-wm.webp" loading="lazy" alt="WM" class="hm-mq-logo"></div><div class="hm-mq-item"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa822b4f70e9148021_logo-arvist.webp" loading="lazy" alt="Arvist" class="hm-mq-logo"></div><div class="hm-mq-item"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66fabcf108617104252cb_logo-siemens.webp" loading="lazy" alt="Siemens" class="hm-mq-logo"></div><div class="hm-mq-item"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa77e0f98b22f937a8_logo-caterpillar.webp" loading="lazy" alt="Caterpillar" class="hm-mq-logo"></div><div class="hm-mq-item"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66fab7df0bd8752b4fb1f_logo-tractian.webp" loading="lazy" alt="Tractian" class="hm-mq-logo"></div><div class="hm-mq-item"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa16d28a4799806c2c_logo-maintainx.webp" loading="lazy" alt="MaintainX" class="hm-mq-logo"></div><div class="hm-mq-item"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66faab133d35bd4cd65ee_logo-servicetitan.webp" loading="lazy" alt="ServiceTitan" class="hm-mq-logo"></div><div class="hm-mq-item"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66faab3c4d8b053d323fb_logo-nucor.webp" loading="lazy" alt="Nucor" class="hm-mq-logo"></div><div class="hm-mq-item"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa9c07994b17a3e075_logo-trane.webp" loading="lazy" alt="Trane" class="hm-mq-logo"></div><div class="hm-mq-item"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66fab59dc758211384772_logo-uptake.webp" loading="lazy" alt="Uptake" class="hm-mq-logo"></div><div class="hm-mq-item"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66fabec129f7ee4be19e4_logo-kiongroup.webp" loading="lazy" alt="KION Group" class="hm-mq-logo"></div><div class="hm-mq-item"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66fab4b4c78aa337451ed_logo-cofactr.webp" loading="lazy" alt="Cofactr" class="hm-mq-logo"></div><div class="hm-mq-item"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa940b2f57767ebdd2_logo-abs.webp" loading="lazy" alt="ABS" class="hm-mq-logo"></div><div class="hm-mq-item"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa2ff8cc46c21f26d5_logo-datanomix.webp" loading="lazy" alt="Datanomix" class="hm-mq-logo"></div><div class="hm-mq-item"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa02ef252088a87c0b_logo-wm.webp" loading="lazy" alt="WM" class="hm-mq-logo"></div><div class="hm-mq-item"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa822b4f70e9148021_logo-arvist.webp" loading="lazy" alt="Arvist" class="hm-mq-logo"></div></div>
+  </div>
+</section>
+
+<!-- ============ PLATFORM OVERVIEW ============ -->
+<section class="mc-sec hm-platform mc-glow-tr">
+  <div class="m-container">
+    <div class="s2-upheading center mc-eyebrow">The platform</div>
+    <div class="hm-big">One network. <b>Every industrial system.</b></div>
+    <p class="mc-sub">A single integration layer that connects to anything — from modern industrial vertical agents and cloud products to an on-prem box in a plant. Reach the whole network through one integration.</p>
+  </div>
+</section>
+
+<!-- ============ PILLAR ONE — MAKINI MCP ============ -->
+<section class="mc-sec mc-glow-bl">
+  <div class="m-container">
+    <div class="mc-head">
+      <div class="s2-upheading center mc-eyebrow">Makini MCP</div>
+      <h2 class="h2">One MCP to deploy agents across thousands of industrial tools</h2>
+      <p class="mc-sub">Point any MCP client at one endpoint and your agents read and act across the Makini network — with the same login-based connection and the same governance as everything else we run.</p>
+    </div>
+    <div style="margin:0 auto 44px;max-width:1080px"><div class="mc-hflow">
+    <div class="mc-hf-col">
+      <div class="mc-hf-usericon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M5 21c0-3.9 3.1-7 7-7s7 3.1 7 7"/></svg></div>
+      <div class="mc-hf-label">Your user</div>
+    </div>
+    <div class="mc-hf-link s"></div>
+    <div class="mc-hf-col">
+      <div class="mc-hf-agent"><svg viewBox="0 0 24 24"><circle cx="6" cy="12" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="18" cy="18" r="2.4"/><path d="M8.2 11 15.8 7M8.2 13l7.6 4"/></svg></div>
+      <div class="mc-hf-label">Your agent</div>
+    </div>
+    <div class="mc-hf-link"></div>
+    <div class="mc-hf-hub">
+      <div class="mc-hf-hub-badge"><img src="./SAP EWM API integration – connect to anything – Makini_files/makini-white-sign.png" alt="Makini"><span>Makini MCP</span></div>
+      <div class="mc-hf-hub-pills">
+        <div class="mc-hf-hpill">Authentication</div>
+        <div class="mc-hf-hpill">Real-time pass-through</div>
+        <div class="mc-hf-hpill">Logging</div>
+      </div>
+    </div>
+    <div class="mc-hf-link"></div>
+    <div class="mc-hf-tools" aria-label="A continuously scrolling list of MCP tool calls">
+      <div class="mc-hf-tools-track">
+        <div class="mc-hf-tool"><svg viewBox="0 0 24 24"><path d="M5 8l3 3-3 3M11 16h6"/></svg>list_…</div>
+        <div class="mc-hf-tool"><svg viewBox="0 0 24 24"><path d="M5 8l3 3-3 3M11 16h6"/></svg>search_…</div>
+        <div class="mc-hf-tool"><svg viewBox="0 0 24 24"><path d="M5 8l3 3-3 3M11 16h6"/></svg>create_…</div>
+        <div class="mc-hf-tool"><svg viewBox="0 0 24 24"><path d="M5 8l3 3-3 3M11 16h6"/></svg>get_…</div>
+        <div class="mc-hf-tool"><svg viewBox="0 0 24 24"><path d="M5 8l3 3-3 3M11 16h6"/></svg>update_…</div>
+        <div class="mc-hf-tool"><svg viewBox="0 0 24 24"><path d="M5 8l3 3-3 3M11 16h6"/></svg>delete_…</div>
+        <div class="mc-hf-tool"><svg viewBox="0 0 24 24"><path d="M5 8l3 3-3 3M11 16h6"/></svg>count_…</div>
+        <div class="mc-hf-tool"><svg viewBox="0 0 24 24"><path d="M5 8l3 3-3 3M11 16h6"/></svg>sync_…</div>
+        <div class="mc-hf-tool"><svg viewBox="0 0 24 24"><path d="M5 8l3 3-3 3M11 16h6"/></svg>export_…</div>
+        <div class="mc-hf-tool"><svg viewBox="0 0 24 24"><path d="M5 8l3 3-3 3M11 16h6"/></svg>watch_…</div>
+        <div class="mc-hf-tool" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 8l3 3-3 3M11 16h6"/></svg>list_…</div>
+        <div class="mc-hf-tool" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 8l3 3-3 3M11 16h6"/></svg>search_…</div>
+        <div class="mc-hf-tool" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 8l3 3-3 3M11 16h6"/></svg>create_…</div>
+        <div class="mc-hf-tool" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 8l3 3-3 3M11 16h6"/></svg>get_…</div>
+        <div class="mc-hf-tool" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 8l3 3-3 3M11 16h6"/></svg>update_…</div>
+        <div class="mc-hf-tool" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 8l3 3-3 3M11 16h6"/></svg>delete_…</div>
+        <div class="mc-hf-tool" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 8l3 3-3 3M11 16h6"/></svg>count_…</div>
+        <div class="mc-hf-tool" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 8l3 3-3 3M11 16h6"/></svg>sync_…</div>
+        <div class="mc-hf-tool" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 8l3 3-3 3M11 16h6"/></svg>export_…</div>
+        <div class="mc-hf-tool" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 8l3 3-3 3M11 16h6"/></svg>watch_…</div>
+      </div>
+    </div>
+  </div></div>
+    <div class="mc-grid-3">
+      <div class="mc-card mc-card-noicon"><h3>Reach what never had an API</h3><p>The plant system installed in 2003. The on-prem box no vendor will ever modernize. Your agents reach those the same way they reach modern cloud software.</p></div>
+      <div class="mc-card mc-card-noicon"><h3>Ready for your favorite agents</h3><p>Claude, ChatGPT, n8n, LangChain, or your own. One config block, no custom adapters.</p></div>
+      <div class="mc-card mc-card-noicon"><h3>Safe by your own rules</h3><p>An agent does only what its credentials allow, and every call is logged. Your existing access model governs it.</p></div>
+    </div>
+    <div class="hm-cta-center"><a href="mcp.html" class="price-card-btn w-inline-block"><div class="price-card-btn-text">Explore the MCP server</div><svg class="hm-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+  </div>
+</section>
+
+<!-- ============ PILLAR TWO — UNIFIED API ============ -->
+<section class="mc-sec mc-glow-tr">
+  <div class="m-container">
+    <div class="mc-head">
+      <div class="s2-upheading center mc-eyebrow">Unified API</div>
+      <h2 class="h2">Build once. Read and write every system the same way</h2>
+    </div>
+    <div class="vr-2col">
+      <div class="vr-callviz">
+        <div class="vr-call"><div class="vr-call-track"><div class="vr-call-ep"><span class="m">POST</span><span class="p">/purchase_orders</span></div><div class="vr-call-ep"><span class="m">GET</span><span class="p">/inventory_levels</span></div><div class="vr-call-ep"><span class="m">POST</span><span class="p">/work_orders</span></div><div class="vr-call-ep"><span class="m">POST</span><span class="p">/purchase_orders</span></div><div class="vr-call-ep"><span class="m">GET</span><span class="p">/inventory_levels</span></div><div class="vr-call-ep"><span class="m">POST</span><span class="p">/work_orders</span></div></div></div>
+        <div class="vr-call-arrow">one call →</div>
+        <div class="vr-call-rows"><div class="vr-call-rowtrack"><div class="vr-call-row"><span>SAP</span><i class="ok">✓ same format</i></div><div class="vr-call-row"><span>NetSuite</span><i class="ok">✓ same format</i></div><div class="vr-call-row"><span>Microsoft Dynamics</span><i class="ok">✓ same format</i></div><div class="vr-call-row"><span>Oracle EBS</span><i class="ok">✓ same format</i></div><div class="vr-call-row more"><span>+ 2,000 more</span></div><div class="vr-call-row"><span>Infor M3</span><i class="ok">✓ same format</i></div><div class="vr-call-row"><span>IBM Maximo</span><i class="ok">✓ same format</i></div><div class="vr-call-row"><span>Blue Yonder</span><i class="ok">✓ same format</i></div><div class="vr-call-row"><span>Manhattan WMS</span><i class="ok">✓ same format</i></div><div class="vr-call-row more"><span>+ 2,000 more</span></div><div class="vr-call-row"><span>SAP S/4HANA</span><i class="ok">✓ same format</i></div><div class="vr-call-row"><span>Oracle Fusion</span><i class="ok">✓ same format</i></div><div class="vr-call-row"><span>Epicor</span><i class="ok">✓ same format</i></div><div class="vr-call-row"><span>Plex Systems</span><i class="ok">✓ same format</i></div><div class="vr-call-row more"><span>+ 2,000 more</span></div><div class="vr-call-row"><span>SAP</span><i class="ok">✓ same format</i></div><div class="vr-call-row"><span>NetSuite</span><i class="ok">✓ same format</i></div><div class="vr-call-row"><span>Microsoft Dynamics</span><i class="ok">✓ same format</i></div><div class="vr-call-row"><span>Oracle EBS</span><i class="ok">✓ same format</i></div><div class="vr-call-row more"><span>+ 2,000 more</span></div><div class="vr-call-row"><span>Infor M3</span><i class="ok">✓ same format</i></div><div class="vr-call-row"><span>IBM Maximo</span><i class="ok">✓ same format</i></div><div class="vr-call-row"><span>Blue Yonder</span><i class="ok">✓ same format</i></div><div class="vr-call-row"><span>Manhattan WMS</span><i class="ok">✓ same format</i></div><div class="vr-call-row more"><span>+ 2,000 more</span></div><div class="vr-call-row"><span>SAP S/4HANA</span><i class="ok">✓ same format</i></div><div class="vr-call-row"><span>Oracle Fusion</span><i class="ok">✓ same format</i></div><div class="vr-call-row"><span>Epicor</span><i class="ok">✓ same format</i></div><div class="vr-call-row"><span>Plex Systems</span><i class="ok">✓ same format</i></div><div class="vr-call-row more"><span>+ 2,000 more</span></div></div></div>
+      </div>
+      <div>
+        <div class="vr-bullet"><div><div class="vr-bullet-t">One normalized model, every system</div><div class="vr-bullet-s">Write a purchase order to SAP, NetSuite, or Dynamics with the same call. Pull inventory back in one format, every time. With built-in workflow automation, you may not write code at all.</div></div></div>
+        <div class="vr-bullet"><div><div class="vr-bullet-t">Built for the messy ones</div><div class="vr-bullet-s">No two SAP installs are alike, and you know it. Custom objects, custom fields, the table someone renamed in 2018. Map any of it in settings, or drop to the native API when the standard model is not enough.</div></div></div>
+        <div class="vr-bullet"><div><div class="vr-bullet-t">Maintained for you</div><div class="vr-bullet-s">When a system changes and an integration breaks, we fix it. The cost stays predictable and off your roadmap.</div></div></div>
+      </div>
+    </div>
+    <div class="hm-cta-center"><a href="integration.html" class="price-card-btn w-inline-block"><div class="price-card-btn-text">See the Unified API</div><svg class="hm-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+  </div>
+</section>
+
+<!-- ============ MAKINI LINK ============ -->
+<section class="mc-sec mc-glow-bl">
+  <div class="m-container">
+    <div class="hm-link-panel">
+      <div>
+        <div class="s2-upheading mc-eyebrow">Makini Link</div>
+        <h2>Simply login</h2>
+        <p>Makini Link is how a connection gets made. Log into the system, and that is it. No API keys to email around, no credentials passing through your hands, no integration meeting. Send a magic link, or embed Link into your product.</p>
+        <a href="integration.html" class="hm-pillar-cta">How Link works <svg class="hm-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <div class="hm-login">
+        <div class="hm-login-card"><div class="hm-li-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M5 21c0-3.9 3.1-7 7-7s7 3.1 7 7"/></svg></div><div><div class="hm-li-t">Your users</div><div class="hm-li-s">Log into the system once — no keys to share, no credentials passing through your hands.</div></div></div>
+        <div class="hm-login-card"><div class="hm-li-ico"><svg viewBox="0 0 24 24"><path d="M8 4c-2 0-3 1-3 3v2c0 1-1 2-2 2 1 0 2 1 2 2v2c0 2 1 3 3 3M16 4c2 0 3 1 3 3v2c0 1 1 2 2 2-1 0-2 1-2 2v2c0 2-1 3-3 3"/></svg></div><div><div class="hm-li-t">Your API</div><div class="hm-li-s">The same connection powers every Unified API call in your product.</div></div></div>
+        <div class="hm-login-card"><div class="hm-li-ico"><svg viewBox="0 0 24 24"><rect x="5" y="8" width="14" height="11" rx="2"/><path d="M12 8V4M9 3.5h6M9 13h.01M15 13h.01M9.5 16h5"/></svg></div><div><div class="hm-li-t">Your agents</div><div class="hm-li-s">Reach it over MCP — same login, same governance as everything else we run.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY MAKINI ============ -->
+<section class="mc-sec mc-glow-tl">
+  <div class="m-container">
+    <div class="mc-head">
+      <div class="s2-upheading center mc-eyebrow">Why Makini</div>
+      <h2 class="h2">One connection. 2,000 systems. None of the upkeep</h2>
+      <p class="mc-sub">One connection reaches the whole network, and we keep all of it running. Your team never goes back to integration work.</p>
+    </div>
+    <div class="mc-2col mc-why-col" style="max-width:880px;margin:0 auto">
+      <div class="mc-why-items wj-why-card" style="grid-column:1/-1">
+        <div class="mc-why-item"><div class="mc-why-no">1</div><div><div class="mc-why-title">Whatever the system, we cover it</div><div class="mc-why-desc">From a lightweight fleet-management SaaS to one obscure system to the seven-figure bespoke system someone built years ago and never documented — one connection covers it. If we don't have it, we build it. In the last 12 months, no product took Makini more than one day to add.</div></div></div>
+        <div class="mc-why-item"><div class="mc-why-no">2</div><div><div class="mc-why-title">Ship in days, not quarters</div><div class="mc-why-desc">We activate every customer and partner ourselves. Even the most conservative, risk-averse manufacturers tend to go live in about two weeks.</div></div></div>
+        <div class="mc-why-item"><div class="mc-why-no">3</div><div><div class="mc-why-title">We own the maintenance</div><div class="mc-why-desc">Systems change and integrations break. We fix them. At three integrations, most teams already need a full-time person just to keep them running. We turn that into predictable OPEX.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECURITY ============ -->
+<section class="mc-sec mc-glow-br">
+  <div class="m-container">
+    <div class="mc-head">
+      <div class="s2-upheading center mc-eyebrow">Security</div>
+      <h2 class="h2 mc-sec-h2">Control what touches your systems. See everything it does.</h2>
+    </div>
+    <p class="hm-sec-desc">Writing to a live CMMS or ERP is where teams get nervous — and they are right to be. So Makini gives you the controls, not just the connection. You decide what each integration can touch, you see everything it does, and you can shut it off in a click. Built to satisfy the most demanding security teams in industry.</p>
+    <div style="display:flex;justify-content:center;margin-bottom:34px">
+      <div class="mc-soc-badge"><div class="mc-soc-shield" style="width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#7ee7b1;background:#7ee7b114;border:1px solid #7ee7b126"><svg viewBox="0 0 24 24"><path d="M12 3l2.2 1.6 2.7-.2.9 2.6 2.2 1.6-.8 2.6.8 2.6-2.2 1.6-.9 2.6-2.7-.2L12 21l-2.2-1.6-2.7.2-.9-2.6L4 15.4l.8-2.6L4 10.2l2.2-1.6.9-2.6 2.7.2L12 3z"/><path d="M9.5 12l1.8 1.8L15 10"/></svg></div><div style="text-align:left"><div class="mc-soc-title">SOC 2 Type II · UK Cyber Essentials · GDPR</div><div class="mc-soc-sub" style="color:#959599;font-size:13px">Independently tested twice a year</div></div></div>
+    </div>
+    <div class="mc-grid-2">
+      <div class="mc-card"><div class="mc-icon"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="4"/><path d="M11 11l8 8M16 16l2-2M14 18l2-2"/></svg></div><h3>Scoped, revocable access</h3><p>Each connection runs on its own token, scoped to what its credentials can do in the source system. Revoke it and access is cut off immediately.</p></div>
+      <div class="mc-card"><div class="mc-icon"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div><h3>A log of every action</h3><p>Every call is logged and searchable, from API requests to workflow executions. Stream the audit trail into Sentry, a webhook, or syslog — so it sits where your team already looks.</p></div>
+      <div class="mc-card"><div class="mc-icon"><svg viewBox="0 0 24 24"><path d="M12 3l2.2 1.6 2.7-.2.9 2.6 2.2 1.6-.8 2.6.8 2.6-2.2 1.6-.9 2.6-2.7-.2L12 21l-2.2-1.6-2.7.2-.9-2.6L4 15.4l.8-2.6L4 10.2l2.2-1.6.9-2.6 2.7.2L12 3z"/><path d="M9.5 12l1.8 1.8L15 10"/></svg></div><h3>Independently verified</h3><p>SOC 2 Type II, UK Cyber Essentials, and GDPR compliant, with independent tests twice a year.</p></div>
+      <div class="mc-card"><div class="mc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.6 3.8 9S14.5 18.5 12 21c-2.5-2.5-3.8-5.6-3.8-9S9.5 5.5 12 3z"/></svg></div><h3>Your data, your region</h3><p>Keep data in-region, or on your own infrastructure. In-country hosting for the EU, UK, and Australia; self-hosting on request. GovCloud and ITAR are supported and running in production today.</p></div>
+    </div>
+    <div class="hm-cta-center"><a href="trust-center.html" class="price-card-btn w-inline-block"><div class="price-card-btn-text">Visit the Trust Center</div><svg class="hm-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+  </div>
+</section>
+
+<!-- ============ SYSTEMS GRID ============ -->
+<section class="mc-sec mc-glow-tl">
+  <div class="m-container">
+    <div class="mc-head">
+      <h2 class="h2">2,000+ systems, and counting</h2>
+      <p class="mc-sub">A dense, scannable network the industry actually runs on — and we add new systems in about a day.</p>
+    </div>
+    <div class="hm-sysgrid"><div class="hm-sys-tile"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66fabcf108617104252cb_logo-siemens.webp" loading="lazy" alt="Siemens" class="hm-sys-logo"></div><div class="hm-sys-tile"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa77e0f98b22f937a8_logo-caterpillar.webp" loading="lazy" alt="Caterpillar" class="hm-sys-logo"></div><div class="hm-sys-tile"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66fab7df0bd8752b4fb1f_logo-tractian.webp" loading="lazy" alt="Tractian" class="hm-sys-logo"></div><div class="hm-sys-tile"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa16d28a4799806c2c_logo-maintainx.webp" loading="lazy" alt="MaintainX" class="hm-sys-logo"></div><div class="hm-sys-tile"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66faab133d35bd4cd65ee_logo-servicetitan.webp" loading="lazy" alt="ServiceTitan" class="hm-sys-logo"></div><div class="hm-sys-tile"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66faab3c4d8b053d323fb_logo-nucor.webp" loading="lazy" alt="Nucor" class="hm-sys-logo"></div><div class="hm-sys-tile"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa9c07994b17a3e075_logo-trane.webp" loading="lazy" alt="Trane" class="hm-sys-logo"></div><div class="hm-sys-tile"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66fab59dc758211384772_logo-uptake.webp" loading="lazy" alt="Uptake" class="hm-sys-logo"></div><div class="hm-sys-tile"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66fabec129f7ee4be19e4_logo-kiongroup.webp" loading="lazy" alt="KION Group" class="hm-sys-logo"></div><div class="hm-sys-tile"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66fab4b4c78aa337451ed_logo-cofactr.webp" loading="lazy" alt="Cofactr" class="hm-sys-logo"></div><div class="hm-sys-tile"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa940b2f57767ebdd2_logo-abs.webp" loading="lazy" alt="ABS" class="hm-sys-logo"></div><div class="hm-sys-tile hm-sys-more"><div class="hm-sys-count">+2,000</div><div class="hm-sys-count-sub">systems</div></div></div>
+    <div class="hm-cta-center"><a href="https://www.makini.io/integrations" target="_blank" class="price-card-btn w-inline-block"><div class="price-card-btn-text">See all systems</div><svg class="hm-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<div class="getting"><div class="skew-box"><div class="m-container skew"><div class="skew-box-contant"><div class="u-s5-left"><h2 class="h2 white _2">Say yes to every integration</h2><div class="u-s5-box-text">Book a demo. Bring your hardest system, and we'll show it connected.</div><div class="price-s2-left-btns"><a class="btn-blue w-button" rel="nofollow" href="https://calendly.com/api-94107/makini-api-demo" target="_blank">Book a demo</a><a class="price-card-btn s2-btn2 w-inline-block" href="https://docs.makini.io/docs/api-docs/branches/master/df956de0eed6b-makini-api" target="_blank" rel="noopener noreferrer"><div class="price-card-btn-text">Read the docs</div></a></div></div></div></div><img src="./SAP EWM API integration – connect to anything – Makini_files/630df2e36671aa7e747178ca_getting-dec1.svg" loading="lazy" alt="" class="skew-box-dec1"><img src="./SAP EWM API integration – connect to anything – Makini_files/630df354bf383e28caafd39f_getting-dec2.svg" loading="lazy" alt="" class="skew-box-dec2"></div><div class="skew-bg"></div></div>
+<footer class="footer"><div class="m-container"><div class="footer-box"><div class="footer-col1"><a href="https://www.makini.io/" class="footer-logo-link w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/608566aaabf4b474f887440f_Light.svg" loading="lazy" alt="logotype makini" class="footer-logo"></a><div class="footer-social-box"><a rel="nofollow" data-w-id="1922b780-db14-3e7b-e2e0-5b526bdd55bf" href="https://twitter.com/ThatGirlMakini" target="_blank" class="footer-social-icon w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/630daac64e0ef51b7d323012_twitter.svg" loading="lazy" alt="logotype twitter" class="footer-social-icon-img"></a><a rel="nofollow" data-w-id="62af4326-50c3-e970-76ca-3e1ff0fc0228" href="https://www.facebook.com/makini.io/" target="_blank" class="footer-social-icon w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/630dacc108248530ab8e7714_facebook.svg" loading="lazy" alt="logotype facebook" class="footer-social-icon-img"></a><a rel="nofollow" data-w-id="a066a0c3-83f2-2f13-b191-0c5b1dc1390b" href="https://www.linkedin.com/company/makini-io/mycompany/" target="_blank" class="footer-social-icon w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/630dacd04e0ef5591d324dd7_linkedin.svg" loading="lazy" alt="logotype linkedin" class="footer-social-icon-img"></a></div><div class="footer-logo_soc"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d7969667b065756dc9ac08_image 1843.png" loading="lazy" width="48" alt=""><div>SOC 2 Type</div></div></div><div class="footer-col2 none"><div class="footer-h">Integrations</div><div class="footer-collection-box"><div class="footer-collection w-dyn-list"><div role="list" class="footer-collection-list w-dyn-items"><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/blue-yonder" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">Blue Yonder</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/sap-extended-warehouse-management" aria-current="page" class="footer-collection-item-link w-inline-block w--current"><div class="footer-collection-item-text">SAP EWM</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/oracle-warehouse-management" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">Oracle Warehouse Management</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/sap-business-one" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">SAP Business One</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/oracle-fusion-cloud-warehouse-management" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">Oracle Fusion Cloud</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/infor-wms" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">INFOR WMS</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/plex-systems" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">PLEX Systems</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/sap" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">SAP S/4HANA</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/service-channel" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">ServiceChannel</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/tractian" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">Tractian</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/ulysses" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">Ulysses Systems</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/snapfulfil" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">SnapFulfil WMS</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/aptean-tabware" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">Aptean EAM Tabware</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/odoo" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">Odoo</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/oracle-e-business-suite" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">Oracle EBS</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/asset-essentials" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">Brightly Asset Essentials</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/ariba" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">SAP Ariba</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/infor-erp-m3" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">INFOR ERP M3</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/k-motion-enterprise-3pl" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">K.Motion Enterprise 3PL</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/fishbowl" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">Fishbowl</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/netsuite" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">Oracle NetSuite</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/sage-500" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">Sage 500</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/eclipse" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">Eclipse</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/aptean-api-pro" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">Aptean</div></a></div></div></div><div class="div-block-2"><div class="div-block-3"></div><a data-w-id="8fe16e21-ae8e-4075-83ab-9a732010b1e9" href="https://www.makini.io/integrations" class="footer-products-link w-inline-block"><div class="link-box-text">See all</div><div class="link-arrow-box"><div class="link-arrow-line"></div><div class="link-arrow-line2"></div></div></a></div></div></div><div class="footer-col3"><div id="w-node-_1ac254c9-5ce5-eb6a-6153-54242b71c2ba-ae2f46c5" class="footer-h">About</div><a href="https://www.makini.io/use-cases" class="footer-link">Use cases</a><a href="https://www.makini.io/pricing" class="footer-link">Pricing</a><a href="https://www.makini.io/careers" class="footer-link">Careers</a><a id="w-node-_866a1790-6567-9689-15fb-254a19b08fa7-ae2f46c5" href="https://www.makini.io/use-cases/advanced-maintenance" class="footer-link">Advanced maintenance</a><a href="https://docs.makini.io/docs/api-docs/branches/master/df956de0eed6b-makini-api" target="_blank" class="footer-link">API reference</a><a href="https://www.makini.io/blog" class="footer-link">Blog</a><a id="w-node-_3076ab55-8267-8143-ab22-5b23f72a3b81-ae2f46c5" href="https://www.makini.io/use-cases/inventory-optimization" class="footer-link">Inventory optimization</a><a href="https://www.makini.io/educational-resources" class="footer-link">Educational resources</a><a href="https://www.makini.io/legal" class="footer-link">Legal</a><a id="w-node-_76b49c40-56c1-026d-591b-684f87d5d7cf-ae2f46c5" href="https://www.makini.io/use-cases/aftermarket" class="footer-link">Industrial aftermarket</a><a href="https://www.makini.io/sitemap" class="footer-link">Sitemap</a><a id="w-node-_78906131-b62f-eb0a-449b-aa57ca79dae7-ae2f46c5" href="https://www.makini.io/faq" class="footer-link">FAQ</a><div class="w-embed"><style>
+.footer-col3 .footer-link {
+width: auto !important;
+}
+</style></div></div></div></div></footer><script src="./SAP EWM API integration – connect to anything – Makini_files/jquery-3.5.1.min.dc5e7f18c8.js" type="text/javascript"></script>
+<script src="./SAP EWM API integration – connect to anything – Makini_files/webflow.schunk.1a807f015b216e46.js" type="text/javascript"></script>
+<script src="./SAP EWM API integration – connect to anything – Makini_files/webflow.schunk.9b5bd8e84658d2a4.js" type="text/javascript"></script>
+<script src="./SAP EWM API integration – connect to anything – Makini_files/webflow.847938a1.8836ea3eb6313895.js" type="text/javascript"></script></body></html>

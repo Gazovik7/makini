@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300" fill="none" font-family="Inter, Arial, sans-serif">
+  <defs>
+    <linearGradient id="f-border" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5485e5"/><stop offset="50%" stop-color="#fb63ff"/><stop offset="100%" stop-color="#9468f2"/></linearGradient>
+    <radialGradient id="f-hub" cx="50%" cy="0%" r="120%"><stop offset="0" stop-color="#2a2e44"/><stop offset="100%" stop-color="#1b1922"/></radialGradient>
+    <radialGradient id="f-user" cx="30%" cy="20%" r="85%"><stop offset="0" stop-color="#2a3550"/><stop offset="100%" stop-color="#1b1f2b"/></radialGradient>
+    <filter id="f-dot" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="1.6"/></filter>
+    <filter id="f-hubglow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="22"/></filter>
+    <clipPath id="f-tools-clip"><rect x="0" y="0" width="208" height="148" rx="4"/></clipPath>
+  </defs>
+
+  <!-- wires -->
+  
+  <line x1="96" y1="150" x2="150" y2="150" stroke="#ffffff" stroke-opacity="0.18" stroke-width="2" stroke-linecap="round"/>
+  <circle r="3.5" cy="150" fill="#fff" filter="url(#f-dot)"><animate attributeName="cx" values="96;150" dur="1.6s" begin="0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.85;1" dur="1.6s" begin="0s" repeatCount="indefinite"/></circle>
+  
+  <line x1="250" y1="150" x2="360" y2="150" stroke="#ffffff" stroke-opacity="0.18" stroke-width="2" stroke-linecap="round"/>
+  <circle r="3.5" cy="150" fill="#fff" filter="url(#f-dot)"><animate attributeName="cx" values="250;360" dur="1.6s" begin="-0.4s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.85;1" dur="1.6s" begin="-0.4s" repeatCount="indefinite"/></circle>
+  
+  <line x1="700" y1="150" x2="792" y2="150" stroke="#ffffff" stroke-opacity="0.18" stroke-width="2" stroke-linecap="round"/>
+  <circle r="3.5" cy="150" fill="#fff" filter="url(#f-dot)"><animate attributeName="cx" values="700;792" dur="1.6s" begin="-0.8s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.85;1" dur="1.6s" begin="-0.8s" repeatCount="indefinite"/></circle>
+
+  <!-- user -->
+  <rect x="24" y="114" width="72" height="72" rx="18" fill="url(#f-user)" stroke="#ffffff1f"/>
+  <g transform="translate(44,134) scale(1.33)" stroke="#dfe7ff" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M5 21c0-3.9 3.1-7 7-7s7 3.1 7 7"/></g>
+  <text x="60" y="206" text-anchor="middle" fill="#c6c7cc" font-size="13" font-weight="500">Your user</text>
+
+  <!-- agent -->
+  <circle cx="200" cy="150" r="41" fill="#20222e" stroke="#ffffff26"/>
+  <circle cx="200" cy="150" r="41" fill="#9468f2" opacity="0.12" filter="url(#f-hubglow)"/>
+  <g transform="translate(181,131) scale(1.6)" stroke="#dfe7ff" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="18" cy="18" r="2.4"/><path d="M8.2 11 15.8 7M8.2 13l7.6 4"/></g>
+  <text x="200" y="206" text-anchor="middle" fill="#c6c7cc" font-size="13" font-weight="500">Your agent</text>
+
+  <!-- Makini MCP hub: clean rounded-rect, gradient outline matches the box, title inside -->
+  <rect x="360" y="40" width="340" height="220" rx="22" fill="#9468f2" opacity="0.16" filter="url(#f-hubglow)"/>
+  <rect x="360" y="40" width="340" height="220" rx="22" fill="url(#f-hub)"/>
+  <rect x="361" y="41" width="338" height="218" rx="21" fill="none" stroke="url(#f-border)" stroke-width="1.6"/>
+  <!-- title row inside the box -->
+  <image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJEAAABZCAYAAAA+Y8b6AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAB4RJREFUeAHtnb2O5EQUhc+MIFkEuwKJuCBlEQTklIgJ9hF4A0iJeJQlgbdAU0Rk7KDdeNtESCPBDrBLApKpO+1a9Xj9U646tq+r+5M8rZ5uWdXuU/ceX99yAwTquv7Kb8/qdB767R5IyL78dlGn89xv3/vtc799AAJ+PyZzTDu/PQARv78v6rzv7ZF8LuQiH6zm8A1I1HtRMvi63gvpPWRS70WQi3zhlMlW70XN4OIc+XwKDhY8PgaH+83jO8ig+eIN8pH9fAQOrGNkGSJiDaYCD9aYnjaPbyEP1niEX8CBNfkvNYnoEgT8rLfgcdU83vH7fQ3psKLH9dnZ2TU40CZ/loj8gZWBsAwxRUTgfWEv/LY7eH4X6VhwYB0jgSUilxuJDEj4GfYjOLBTWSAnpRlwcCBQ78+oaJM/V0S0vAoec4koKRI1plpVygfZo+WKSNvBEVhjetx6/jbS0GiqWSn/UjxaUSJqPBqLq9bzVHPNNNUVOFhwqORPsoiUmmqWiNqmOpCS0iw4qDTV8icnEhnw0Bamn/b8P8VcG3BwIMA21fInR0Q0U62w9tEnokmRSKmpNuBxM/lzRKSxUm3BYdfz/zcxjaIr1WHyaxCRAwGyqe6NRBPNtUZTTZ/8SSKaI68SMOCxG3jtDuKx4KDWVAupkajkMP145PUpV/QNOLBKIKxuAuHlmFJFRC1WgcPcpjowxVyrSvmYafKnisiCQwUerAO0G3k9ylyTuwl+BQfW5K8OJ//a6cyBALnwORaJYj0R01SzPJEFh1vjmSyiJq8eq6kWXvfHIKboqPG6ogGHPBGhbFM9FoUCmxMRufDpDp+kiOgYK9VtlhSRA4fZJv+akagCj6VMdWDwDI1c+FRtqoU1ReRAYGFTHRiLRKxjpN5UC5NENFexKhMDHk8i3yfmeugsjVZHAw8DDnkiwslUHzLU6Viyqc4W0TFXqtsMpTQLDg4cZp38U0VkwaECj6VNdaDTXBduqju7CaaKyIADK0wbLG+qA32RyIDDJky1EC2iOYtVGTBnfaypDvSZa43LqAw4uK5/TolEJS99mRqFAl3mWuPljlnHNEVEsxWrMrDgcIU0ulKatjqaBY/OyT9FRBYctrBQMZZb6Yxc+NyEqRamiMiAA7P2sZapDrS7HA1IEE317Ok1SkRHYKqnnt4H2uaaZaodeMz+vcVGotIr1S+QzmGn49GZaiFWRBpNNevgpJrqwGFK03a5Y5HCZ6yILDiUZKoDN+mMbKpZ0XqRboJYERlw0Lj0JdVUB8JpvgEJoqlepJtgaU+k7YxDSDXVgXDLmZJNdZ6IlihWJcCsVOeY6oD4Io2m2oKDG3oxJhKVfJOmXFMdEF+kqm14yW6CGBGVvPTlZ3CQicYy1do6Pke7CZYUkQMBcuHzJ3D4BCSId9FdrJtgi5GIGaZ/AIfs3/5o2FSRMTAoInJe1Xjn09/843/I50Nw0CgiN/aGsUjELFZV4GDBoWoe/0Q+74MDs1K9WDfBmIhKXvrimse/kMcbzcZgc6ZaWCoSaV76khuJWFFok6ZaGBORBQcHDnN4tL+Rx31w2KSpFnpFdCzryf2jRKIcc82KRBV4LFqWGYpEBhy2sPTlH6TDEpEDgTVadIdEVPLSl/aYfkcaYqjfBYdNmmphSEQaL3fMFaZTzTXNVEPhzc5j37iEiBwIzNxNkGquaZVqhR2feSIqfOlLV4tuqidiVaor8NAhIug01bMdHD/Gf5FWdGT5IQcC5HsTRKfXPhGV/LOcfWOaKiIx1aoud4BYR5sy+c9nHkzJItJoqlkp301589wiciCwUDfB1NN8jabagsOkyf+KiJSa6iW6Caaa65OpbuiKRAYcrre09CXBXGsz1TLxFzfVQpeISjbVbuT1WBGdTPUB5zMORuPSl7ExxYroVKk+YE4RORBYuEU39vLHqVJ9wC0RkYtVLFNtwCGmRTc2Ep1M9QHnMw2EuZ58sTDdmOuYszSNptqAQ7aIVilWjbB0ev0j4j0lm+rJLbptEVlw2FKlus1YSmOlMkHdMiokMFc62+TSl4Yxc32qVLd4KaI1i1UDGHCYUvgci0Qae6oNOGRHoqM21YEIc61qyfTcvyAUw6GIjvYmTR0MmWtVjflQcFPWOSLRFi93tOlLaSW3fyR7NLUiWrmboM9cs1KZxp+mqJDIjYjIxaoKHAw4pHQT9EUijbeQMeDgkEiIRKsWq3pY7YLigLnWdveP1U21EESk8e4fax+crmVErEKjA4fVTbUQRGTBoQRTHWi3y55MdQ9BRAYcWGHaYP1ugnY6Y110vS7JVAvnWvJqC2ZPdeqY2pFI4y1kDDg4ZCCRSKOpXt2jdZhrbUVGQcXkFxFpNNUWHHLHdGiutZ2ZWfDI8mgiIgsOJZnqQIhEIiDWfRmLMtWCiMiAA7P2sbapDgRfxDTVFTiwJlqFTJieqCRTHQiV61OleoBzcIxeRTTVcqAZp8DZX5j/TJLOREhPwOFb8HDg4JCL1GT89qhO5xl5WY+M6YHfdnU6F/W+1sQYy12/fea37/z2vE5DjtFDEPH7uyf7rNORMX0JAv8DTQPqpXEGp1YAAAAASUVORK5CYII=" x="455" y="60" width="26" height="26" preserveAspectRatio="xMidYMid meet"/>
+  <text x="490" y="78" fill="#fff" font-size="16" font-weight="600">Makini MCP</text>
+  <!-- pills -->
+  <g transform="translate(404,104)">
+    <g transform="translate(0,0)"><rect x="0" y="0" width="252" height="34" rx="9" fill="#ffffff0d" stroke="#ffffff14"/><text x="16" y="22" fill="#dfe7ff" font-size="13" font-weight="500">Authentication</text></g>
+    <g transform="translate(0,44)"><rect x="0" y="0" width="252" height="34" rx="9" fill="#ffffff0d" stroke="#ffffff14"/><text x="16" y="22" fill="#dfe7ff" font-size="13" font-weight="500">Real-time pass-through</text></g>
+    <g transform="translate(0,88)"><rect x="0" y="0" width="252" height="34" rx="9" fill="#ffffff0d" stroke="#ffffff14"/><text x="16" y="22" fill="#dfe7ff" font-size="13" font-weight="500">Logging</text></g>
+  </g>
+
+  <!-- tools (flipping list inside a clipped viewport) -->
+  <g transform="translate(792,76)">
+    <g clip-path="url(#f-tools-clip)">
+      <g>
+        
+    <g transform="translate(0,0)">
+      <rect x="0" y="0" width="208" height="42" rx="12" fill="#ffffff08" stroke="#ffffff14"/>
+      <g transform="translate(14,21)" stroke="#71a1ff" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"><path d="M-4 -4 l3 3 -3 3 M3 5 h6" transform="scale(0.95)"/></g>
+      <text x="34" y="25" fill="#c6c7cc" font-family="'SFMono-Regular',Consolas,monospace" font-size="13">list_…</text>
+    </g>
+    <g transform="translate(0,52)">
+      <rect x="0" y="0" width="208" height="42" rx="12" fill="#ffffff08" stroke="#ffffff14"/>
+      <g transform="translate(14,21)" stroke="#71a1ff" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"><path d="M-4 -4 l3 3 -3 3 M3 5 h6" transform="scale(0.95)"/></g>
+      <text x="34" y="25" fill="#c6c7cc" font-family="'SFMono-Regular',Consolas,monospace" font-size="13">search_…</text>
+    </g>
+    <g transform="translate(0,104)">
+      <rect x="0" y="0" width="208" height="42" rx="12" fill="#ffffff08" stroke="#ffffff14"/>
+      <g transform="translate(14,21)" stroke="#71a1ff" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"><path d="M-4 -4 l3 3 -3 3 M3 5 h6" transform="scale(0.95)"/></g>
+      <text x="34" y="25" fill="#c6c7cc" font-family="'SFMono-Regular',Consolas,monospace" font-size="13">create_…</text>
+    </g>
+    <g transform="translate(0,156)">
+      <rect x="0" y="0" width="208" height="42" rx="12" fill="#ffffff08" stroke="#ffffff14"/>
+      <g transform="translate(14,21)" stroke="#71a1ff" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"><path d="M-4 -4 l3 3 -3 3 M3 5 h6" transform="scale(0.95)"/></g>
+      <text x="34" y="25" fill="#c6c7cc" font-family="'SFMono-Regular',Consolas,monospace" font-size="13">get_…</text>
+    </g>
+    <g transform="translate(0,208)">
+      <rect x="0" y="0" width="208" height="42" rx="12" fill="#ffffff08" stroke="#ffffff14"/>
+      <g transform="translate(14,21)" stroke="#71a1ff" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"><path d="M-4 -4 l3 3 -3 3 M3 5 h6" transform="scale(0.95)"/></g>
+      <text x="34" y="25" fill="#c6c7cc" font-family="'SFMono-Regular',Consolas,monospace" font-size="13">update_…</text>
+    </g>
+    <g transform="translate(0,260)">
+      <rect x="0" y="0" width="208" height="42" rx="12" fill="#ffffff08" stroke="#ffffff14"/>
+      <g transform="translate(14,21)" stroke="#71a1ff" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"><path d="M-4 -4 l3 3 -3 3 M3 5 h6" transform="scale(0.95)"/></g>
+      <text x="34" y="25" fill="#c6c7cc" font-family="'SFMono-Regular',Consolas,monospace" font-size="13">delete_…</text>
+    </g>
+    <g transform="translate(0,312)">
+      <rect x="0" y="0" width="208" height="42" rx="12" fill="#ffffff08" stroke="#ffffff14"/>
+      <g transform="translate(14,21)" stroke="#71a1ff" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"><path d="M-4 -4 l3 3 -3 3 M3 5 h6" transform="scale(0.95)"/></g>
+      <text x="34" y="25" fill="#c6c7cc" font-family="'SFMono-Regular',Consolas,monospace" font-size="13">count_…</text>
+    </g>
+    <g transform="translate(0,364)">
+      <rect x="0" y="0" width="208" height="42" rx="12" fill="#ffffff08" stroke="#ffffff14"/>
+      <g transform="translate(14,21)" stroke="#71a1ff" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"><path d="M-4 -4 l3 3 -3 3 M3 5 h6" transform="scale(0.95)"/></g>
+      <text x="34" y="25" fill="#c6c7cc" font-family="'SFMono-Regular',Consolas,monospace" font-size="13">sync_…</text>
+    </g>
+    <g transform="translate(0,416)">
+      <rect x="0" y="0" width="208" height="42" rx="12" fill="#ffffff08" stroke="#ffffff14"/>
+      <g transform="translate(14,21)" stroke="#71a1ff" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"><path d="M-4 -4 l3 3 -3 3 M3 5 h6" transform="scale(0.95)"/></g>
+      <text x="34" y="25" fill="#c6c7cc" font-family="'SFMono-Regular',Consolas,monospace" font-size="13">export_…</text>
+    </g>
+    <g transform="translate(0,468)">
+      <rect x="0" y="0" width="208" height="42" rx="12" fill="#ffffff08" stroke="#ffffff14"/>
+      <g transform="translate(14,21)" stroke="#71a1ff" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"><path d="M-4 -4 l3 3 -3 3 M3 5 h6" transform="scale(0.95)"/></g>
+      <text x="34" y="25" fill="#c6c7cc" font-family="'SFMono-Regular',Consolas,monospace" font-size="13">watch_…</text>
+    </g>
+    <g transform="translate(0,520)">
+      <rect x="0" y="0" width="208" height="42" rx="12" fill="#ffffff08" stroke="#ffffff14"/>
+      <g transform="translate(14,21)" stroke="#71a1ff" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"><path d="M-4 -4 l3 3 -3 3 M3 5 h6" transform="scale(0.95)"/></g>
+      <text x="34" y="25" fill="#c6c7cc" font-family="'SFMono-Regular',Consolas,monospace" font-size="13">list_…</text>
+    </g>
+    <g transform="translate(0,572)">
+      <rect x="0" y="0" width="208" height="42" rx="12" fill="#ffffff08" stroke="#ffffff14"/>
+      <g transform="translate(14,21)" stroke="#71a1ff" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"><path d="M-4 -4 l3 3 -3 3 M3 5 h6" transform="scale(0.95)"/></g>
+      <text x="34" y="25" fill="#c6c7cc" font-family="'SFMono-Regular',Consolas,monospace" font-size="13">search_…</text>
+    </g>
+    <g transform="translate(0,624)">
+      <rect x="0" y="0" width="208" height="42" rx="12" fill="#ffffff08" stroke="#ffffff14"/>
+      <g transform="translate(14,21)" stroke="#71a1ff" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"><path d="M-4 -4 l3 3 -3 3 M3 5 h6" transform="scale(0.95)"/></g>
+      <text x="34" y="25" fill="#c6c7cc" font-family="'SFMono-Regular',Consolas,monospace" font-size="13">create_…</text>
+    </g>
+    <g transform="translate(0,676)">
+      <rect x="0" y="0" width="208" height="42" rx="12" fill="#ffffff08" stroke="#ffffff14"/>
+      <g transform="translate(14,21)" stroke="#71a1ff" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"><path d="M-4 -4 l3 3 -3 3 M3 5 h6" transform="scale(0.95)"/></g>
+      <text x="34" y="25" fill="#c6c7cc" font-family="'SFMono-Regular',Consolas,monospace" font-size="13">get_…</text>
+    </g>
+    <g transform="translate(0,728)">
+      <rect x="0" y="0" width="208" height="42" rx="12" fill="#ffffff08" stroke="#ffffff14"/>
+      <g transform="translate(14,21)" stroke="#71a1ff" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"><path d="M-4 -4 l3 3 -3 3 M3 5 h6" transform="scale(0.95)"/></g>
+      <text x="34" y="25" fill="#c6c7cc" font-family="'SFMono-Regular',Consolas,monospace" font-size="13">update_…</text>
+    </g>
+    <g transform="translate(0,780)">
+      <rect x="0" y="0" width="208" height="42" rx="12" fill="#ffffff08" stroke="#ffffff14"/>
+      <g transform="translate(14,21)" stroke="#71a1ff" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"><path d="M-4 -4 l3 3 -3 3 M3 5 h6" transform="scale(0.95)"/></g>
+      <text x="34" y="25" fill="#c6c7cc" font-family="'SFMono-Regular',Consolas,monospace" font-size="13">delete_…</text>
+    </g>
+    <g transform="translate(0,832)">
+      <rect x="0" y="0" width="208" height="42" rx="12" fill="#ffffff08" stroke="#ffffff14"/>
+      <g transform="translate(14,21)" stroke="#71a1ff" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"><path d="M-4 -4 l3 3 -3 3 M3 5 h6" transform="scale(0.95)"/></g>
+      <text x="34" y="25" fill="#c6c7cc" font-family="'SFMono-Regular',Consolas,monospace" font-size="13">count_…</text>
+    </g>
+    <g transform="translate(0,884)">
+      <rect x="0" y="0" width="208" height="42" rx="12" fill="#ffffff08" stroke="#ffffff14"/>
+      <g transform="translate(14,21)" stroke="#71a1ff" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"><path d="M-4 -4 l3 3 -3 3 M3 5 h6" transform="scale(0.95)"/></g>
+      <text x="34" y="25" fill="#c6c7cc" font-family="'SFMono-Regular',Consolas,monospace" font-size="13">sync_…</text>
+    </g>
+    <g transform="translate(0,936)">
+      <rect x="0" y="0" width="208" height="42" rx="12" fill="#ffffff08" stroke="#ffffff14"/>
+      <g transform="translate(14,21)" stroke="#71a1ff" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"><path d="M-4 -4 l3 3 -3 3 M3 5 h6" transform="scale(0.95)"/></g>
+      <text x="34" y="25" fill="#c6c7cc" font-family="'SFMono-Regular',Consolas,monospace" font-size="13">export_…</text>
+    </g>
+    <g transform="translate(0,988)">
+      <rect x="0" y="0" width="208" height="42" rx="12" fill="#ffffff08" stroke="#ffffff14"/>
+      <g transform="translate(14,21)" stroke="#71a1ff" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"><path d="M-4 -4 l3 3 -3 3 M3 5 h6" transform="scale(0.95)"/></g>
+      <text x="34" y="25" fill="#c6c7cc" font-family="'SFMono-Regular',Consolas,monospace" font-size="13">watch_…</text>
+    </g>
+        <animateTransform attributeName="transform" type="translate" dur="9s" repeatCount="indefinite" calcMode="spline"
+          keyTimes="0.0000;0.0600;0.1000;0.1600;0.2000;0.2600;0.3000;0.3600;0.4000;0.4600;0.5000;0.5600;0.6000;0.6600;0.7000;0.7600;0.8000;0.8600;0.9000;0.9600;1"
+          values="0 0;0 0;0 -52;0 -52;0 -104;0 -104;0 -156;0 -156;0 -208;0 -208;0 -260;0 -260;0 -312;0 -312;0 -364;0 -364;0 -416;0 -416;0 -468;0 -468;0 -520"
+          keySplines="0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1;0 0 1 1"/>
+      </g>
+    </g>
+  </g>
+</svg>

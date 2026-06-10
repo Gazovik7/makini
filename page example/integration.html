@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<!-- saved from url=(0068)https://www.makini.io/integrations/sap-extended-warehouse-management -->
+<html lang="en" class=" w-mod-js"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link href="https://cdn.prod.website-files.com/" rel="preconnect"><title>SAP EWM API integration – connect to anything – Makini</title><meta content="Integrate Sap Ewm and hundreds of other CMMS/EAM faster and better. Instantly connect, automate workflows, create web-hooks, and customize mappings with instant logging." name="description"><meta content="SAP EWM API integration – connect to anything – Makini" property="og:title"><meta content="Integrate Sap Ewm and hundreds of other CMMS/EAM faster and better. Instantly connect, automate workflows, create web-hooks, and customize mappings with instant logging." property="og:description"><meta content="SAP EWM API integration – connect to anything – Makini" name="twitter:title"><meta content="Integrate Sap Ewm and hundreds of other CMMS/EAM faster and better. Instantly connect, automate workflows, create web-hooks, and customize mappings with instant logging." name="twitter:description"><meta property="og:type" content="website"><meta content="summary_large_image" name="twitter:card"><meta content="width=device-width, initial-scale=1" name="viewport"><link href="./SAP EWM API integration – connect to anything – Makini_files/makini.webflow.shared.b087ea904.min.css" rel="stylesheet" type="text/css"><script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script><link href="https://cdn.prod.website-files.com/6075c27738665c833a39fd83/6087764e8ff33d5dbc62d11c_Frame%2010.png" rel="shortcut icon" type="image/x-icon"><link href="https://cdn.prod.website-files.com/6075c27738665c833a39fd83/60877652fc5ec5bef3e69ba0_Frame%209.png" rel="apple-touch-icon">
+
+<style>
+
+  .m-body {
+    overflow-x: hidden;
+  }
+  .body {
+    overflow-x: hidden;
+  }
+  /* Sticky header — pinned on scroll (matches makini.io/mcp/* live behaviour) */
+  .m-header{position:fixed;top:0;left:0;right:0;z-index:2147483647}
+  /* Header CTA: Sign in (ghost) · Sign up (soft fill) · Book demo (white glow) */
+  .m-header-btn-box{gap:10px}
+  .m-header-btn-box .button-secondary.light.nav-bar{margin-right:0}
+  .m-header-btn-box .header-button{padding:8px 18px}
+  .m-header-btn-box .btn-blue{width:auto;min-width:0;min-height:0;height:auto;margin:0;padding:8px 18px;font-size:14px;font-weight:400}
+</style>
+
+<!--script defer src="https://cdn.jsdelivr.net/npm/@finsweet/attributes-mirrorclick@1/mirrorclick.js"></script-->
+
+</head><body class="m-body black"><div data-collapse="medium" data-animation="default" data-duration="200" data-easing="ease-out-quad" data-easing2="ease-out-quad" data-w-id="2e6c35ff-cb74-4f6d-2ba4-7989f0f50950" role="banner" class="m-header w-nav"><div class="m-container"><div class="m-nav-box"><a href="https://www.makini.io/" class="brand w-nav-brand"><img src="./SAP EWM API integration – connect to anything – Makini_files/608566aaabf4b474f887440f_Light.svg" width="140" alt="" class="header-logo logo-icon"></a><nav role="navigation" class="nav-menu w-nav-menu"><a href="https://www.makini.io/integrations" class="m-nav-link mob hide">Products</a><div data-hover="true" data-delay="100" data-w-id="2e6c35ff-cb74-4f6d-2ba4-7989f0f50958" class="nav-dropdown mob w-dropdown"><div class="nav-link dropdown w-dropdown-toggle"><a href="https://www.makini.io/integrations" class="m-nav-link">Integrations</a></div><nav class="dropdown-list w-dropdown-list"><div class="drop-box vertical"><div class="nav-heading-box full-w"><div class="drop-h">Integrations</div><div class="nav-heading-text">See the top integrations Makini builds for you</div></div><div class="nav-cont-box"><div class="drop-int-collection col3 w-dyn-list"><div fs-cmsload-element="list" role="list" class="drop-int-collection-list col3 w-dyn-items"><div role="listitem" class="drop-int-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/blue-yonder" class="nav-int-box w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/65b3a8373d3ea3723f5477ee_f7Vgz5UfBJ0l9dc5VDQm-BGe6Al4R1GEis4GEmOMeCM.webp" loading="lazy" alt="65b3a8373d3ea3723f5477ee_f7Vgz5UfBJ0l9dc5VDQm-BGe6Al4R1GEis4GEmOMeCM.webp" class="drop-logo-int"><div fs-cmsfilter-field="title" class="drop-int-h">Blue Yonder</div></a></div><div role="listitem" class="drop-int-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/sap-extended-warehouse-management" aria-current="page" class="nav-int-box w-inline-block w--current"><img src="./SAP EWM API integration – connect to anything – Makini_files/67080ac3f5d59e851d4cbb00_VuUw59TdK1FK9dvmnJ0CSZFghJO0bbRC-DkxVUWtCzo.webp" loading="lazy" alt="670e658062fb9f80ae472705_X2G4-zGpkPxjuAuuPJkahbClS_qBaRfV_fiVrKRtlNM.webp" class="drop-logo-int"><div fs-cmsfilter-field="title" class="drop-int-h">SAP EWM</div></a></div><div role="listitem" class="drop-int-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/oracle-warehouse-management" class="nav-int-box w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/692f424df67b6477d9dae677_5_lWM6pBfynTA2cgx75IoQwg4WzCASNQB0s5vJK18YQ.png" loading="lazy" alt="67080a4918672fb167799acb_GPHP8Sc4jbIHDAQ040rWH6e7c4BRSI9AGrjVkVF3jdI.png" class="drop-logo-int"><div fs-cmsfilter-field="title" class="drop-int-h">Oracle Warehouse Management</div></a></div><div role="listitem" class="drop-int-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/sap-business-one" class="nav-int-box w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/65b3a88ee56fbacf3e6e9e01_q-K1NCFWw5dWAj9NTGeK9EkFBK6-AFALDfOjKejW9O8.webp" loading="lazy" alt="65b3a88ee56fbacf3e6e9e01_q-K1NCFWw5dWAj9NTGeK9EkFBK6-AFALDfOjKejW9O8.webp" class="drop-logo-int"><div fs-cmsfilter-field="title" class="drop-int-h">SAP Business One</div></a></div><div role="listitem" class="drop-int-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/oracle-fusion-cloud-warehouse-management" class="nav-int-box w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/65b3a9eb9fea3d2b46d28267_BBin_Xl6U-Tt-qx1EUY1HG_vccNbmfbRlsXGmXbv90I.webp" loading="lazy" alt="65b3a9eb9fea3d2b46d28267_BBin_Xl6U-Tt-qx1EUY1HG_vccNbmfbRlsXGmXbv90I.webp" class="drop-logo-int"><div fs-cmsfilter-field="title" class="drop-int-h">Oracle Fusion Cloud</div></a></div><div role="listitem" class="drop-int-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/infor-wms" class="nav-int-box w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/65df222c44955d2ba1b1f3fd_h149IqVojdfYooZLjnjJZYY4nzaGwi-OWn1nP8eASNU.webp" loading="lazy" alt="65df222c44955d2ba1b1f3fd_h149IqVojdfYooZLjnjJZYY4nzaGwi-OWn1nP8eASNU.webp" class="drop-logo-int"><div fs-cmsfilter-field="title" class="drop-int-h">INFOR WMS</div></a></div><div role="listitem" class="drop-int-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/plex-systems" class="nav-int-box w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/65b3a9ee2dc41c223581f640_SklO3WmiP0EKD3Sf0CK9TgNNyC98ITky26JQSUrfV-U.webp" loading="lazy" alt="65b3a9ee2dc41c223581f640_SklO3WmiP0EKD3Sf0CK9TgNNyC98ITky26JQSUrfV-U.webp" class="drop-logo-int"><div fs-cmsfilter-field="title" class="drop-int-h">PLEX Systems</div></a></div><div role="listitem" class="drop-int-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/sap" class="nav-int-box w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/692f425a4e34a646271350d4_lwYL-zYI_3O5VxF9NJDyfOUUhJ29GF4NUE76nv92kxc.png" loading="lazy" alt="67080ac3f5d59e851d4cbb00_VuUw59TdK1FK9dvmnJ0CSZFghJO0bbRC-DkxVUWtCzo.png" class="drop-logo-int"><div fs-cmsfilter-field="title" class="drop-int-h">SAP S/4HANA</div></a></div></div><div id="w-node-_73224f2f-5d3b-f573-3d47-1cba28fec46d-f0f50950" role="navigation" aria-label="List" class="w-pagination-wrapper pagination"><a href="https://www.makini.io/integrations/sap-extended-warehouse-management?4f85e4ec_page=2" aria-label="Next Page" class="w-pagination-next hidden"><div class="w-inline-block">Next</div><svg class="w-pagination-next-icon" height="12px" width="12px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" transform="translate(0, 1)"><path fill="none" stroke="currentColor" fill-rule="evenodd" d="M4 2l4 4-4 4"></path></svg></a><link rel="prerender" href="https://www.makini.io/integrations/sap-extended-warehouse-management?4f85e4ec_page=2"><div><a data-w-id="575a1e9e-cc85-5a22-f756-a9fafb7983ef" href="https://www.makini.io/integrations" class="u-s5-right-card-link nav col3 w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/69eb6f626369c092fd1cfa41_pag_icon.png" loading="lazy" alt="" class="icon_pagi"><div class="link-box-text">See all <span id="stats-count">systems</span></div><div class="link-arrow-box"><div class="link-arrow-line"></div><div class="link-arrow-line2"></div></div></a><div class="hidden w-embed w-script"></div></div></div></div></div></div></nav></div><div data-hover="true" data-delay="100" data-w-id="784d8bfc-3285-b225-acd5-dccae3bfbc38" class="nav-dropdown mob w-dropdown"><div class="nav-link dropdown w-dropdown-toggle"><a href="https://www.makini.io/use-cases" class="m-nav-link">Use&nbsp;cases</a></div><nav class="dropdown-list uses w-dropdown-list"><div class="drop-box"><div class="nav-heading-box"><div class="drop-h">Use Cases</div><div class="nav-heading-text">There is so much you can build with us</div></div><div class="nav-cont-box"><a href="https://www.makini.io/use-cases/advanced-maintenance" class="nav-cont-link w-inline-block"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/6343ec042682b22c997a4bf4_advanced.webp" alt="" class="nav-cont-link-icon"><div class="nav-cont-link-text">Advanced maintenance</div></a><a href="https://www.makini.io/use-cases/inventory-optimization" class="nav-cont-link w-inline-block"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/634573be271cb16b176f22a4_Inventory.webp" alt="" class="nav-cont-link-icon"><div class="nav-cont-link-text">Inventory optimization</div></a><a href="https://www.makini.io/use-cases/aftermarket" class="nav-cont-link w-inline-block"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/6345743417693c768b856201_Industrial.webp" alt="" class="nav-cont-link-icon"><div class="nav-cont-link-text">Industrial aftermarket</div></a></div></div></nav></div><a href="https://www.makini.io/integrations" class="m-nav-link mob">Integrations</a><a href="https://www.makini.io/pricing" class="m-nav-link">Pricing</a><a href="https://docs.makini.io/docs/api-docs/branches/master/df956de0eed6b-makini-api" target="_blank" class="m-nav-link mob">Developers</a><a href="https://www.makini.io/use-cases" class="m-nav-link mob">Use Cases</a><a href="https://www.makini.io/careers" class="m-nav-link mob">Careers</a><a href="https://www.makini.io/blog" class="m-nav-link mob">Blog</a><a href="https://www.makini.io/legal" class="m-nav-link mob">Legal</a><a href="https://www.makini.io/faq" class="m-nav-link mob">FAQ</a><div data-hover="true" data-delay="100" data-w-id="b4b0e6e1-3526-2be2-dcd8-41919f5f1ac5" class="nav-dropdown mob w-dropdown"><div class="nav-link dropdown w-dropdown-toggle"><a href="https://docs.makini.io/" target="_blank" class="m-nav-link">Developers</a></div><nav class="dropdown-list dev w-dropdown-list"><div class="drop-box"><div class="nav-heading-box"><div class="drop-h">Developers</div><div class="nav-heading-text">All you need to integrate with Makini and learn about our APIs</div></div><div class="nav-cont-box"><a href="https://docs.makini.io/docs/api-docs/branches/master/df956de0eed6b-makini-api" target="_blank" class="nav-cont-link w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/633bf755e410115b92f89298_book-icon.webp" loading="lazy" alt="" class="nav-cont-link-icon"><div class="nav-cont-link-text">API reference</div></a></div></div></nav></div><div data-hover="true" data-delay="100" data-w-id="ee5dd854-221b-a342-7213-544f0ff644a0" class="nav-dropdown mob w-dropdown"><div class="nav-link dropdown w-dropdown-toggle"><div class="m-nav-link">Company</div></div><nav class="dropdown-list comp w-dropdown-list"><div class="drop-box"><div class="nav-heading-box"><div class="drop-h">Company</div><div class="nav-heading-text">Mission behind the work and people behind the code</div></div><div class="nav-cont-box"><a href="https://www.makini.io/careers" class="nav-cont-link w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/63218a7f8fcc565c39d13cd1_career-s2-icon3.webp" loading="lazy" alt="" class="nav-cont-link-icon"><div class="nav-cont-link-text">Careers</div></a><a href="https://www.makini.io/blog" class="nav-cont-link w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/632aa87e099f14381ce2d424_newsroom-icon.webp" loading="lazy" alt="" class="nav-cont-link-icon"><div class="nav-cont-link-text">Blog</div></a><a href="https://www.makini.io/legal" class="nav-cont-link w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/633bf3e6965e5d7d3e255a9d_circles.webp" loading="lazy" alt="" class="nav-cont-link-icon"><div class="nav-cont-link-text">Legal</div></a><a href="https://www.makini.io/faq" class="nav-cont-link w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/660fe7f140d40e9b10f9f135_Frame 5540 (1).webp" loading="lazy" alt="" class="nav-cont-link-icon"><div class="nav-cont-link-text">FAQ</div></a></div></div></nav></div><div class="nav-line"><div class="nav-line blur"></div></div></nav><div class="m-header-btn-box"><a href="https://app.makini.io/login" class="button-secondary light nav-bar w-button">Sign in</a><a href="https://app.makini.io/register" class="button-primary header-button w-button">Sign up</a><a rel="nofollow" href="https://calendly.com/api-94107/makini-api-demo" target="_blank" class="btn-blue w-button">Book demo</a></div><div class="burger w-nav-button"><div class="burger-box"><div data-w-id="5e47b169-81fe-31b1-4dcf-c87b04d3f258" class="burger-line"></div><div data-w-id="f7e9939b-74e3-b770-24de-4b1022476114" class="burger-line"></div><div data-w-id="7f92807b-3900-71c3-9399-24452580fb24" class="burger-line"></div></div></div></div></div></div><div class="nav-bg"></div><section class="s1"><div class="m-container"><div class="breadcrumb"><a href="https://www.makini.io/" class="breadcrumb-link">Home</a><div class="slash">/</div><a href="https://www.makini.io/integrations" class="breadcrumb-link">Integrations</a><div class="slash">/</div><div class="title-text">SAP EWM</div></div><style>
+  .mode-switch-wrap{display:flex;justify-content:center;margin-bottom:30px}
+  .mode-switch{display:inline-flex;gap:4px;padding:5px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.16);-webkit-backdrop-filter:blur(2px) saturate(150%);backdrop-filter:url(#lg-refract) blur(2px) saturate(150%);box-shadow:inset 1.5px 1.5px 1px -1px rgba(255,255,255,.55),inset -1.5px -1.5px 1px -1px rgba(255,255,255,.30),inset 0 0 10px rgba(255,255,255,.05),0 8px 26px rgba(0,0,0,.30)}
+  .mode-opt{position:relative;display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:999px;font-size:14px;font-weight:500;color:#c6c7cc;transition:.25s ease;white-space:nowrap}
+  .mode-opt:hover{color:#fff}
+  .mode-opt.active{color:#fff;background:rgba(120,128,255,.16);border:1px solid rgba(255,255,255,.22);-webkit-backdrop-filter:blur(2px) saturate(170%);backdrop-filter:url(#lg-refract) blur(2px) saturate(170%);box-shadow:inset 1.5px 1.5px 1px -1px rgba(255,255,255,.70),inset -1.5px -1.5px 1px -1px rgba(255,255,255,.40),inset 0 0 14px rgba(148,104,242,.22),0 6px 20px rgba(148,104,242,.28)}
+  .mode-opt .dot{width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.7}
+  @media(max-width:600px){.mode-switch{width:100%}.mode-opt{flex:1;justify-content:center;padding:10px 14px;font-size:13px}}
+  /* Unified-API hero: 2-col layout (mirrors the MCP page) */
+  .s1-uapi{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;max-width:none;margin:0}
+  .s1-uapi .s1-box{max-width:none;text-align:left;align-items:flex-start;display:flex;flex-direction:column}
+  .s1-uapi .s1-h1-box,.s1-uapi .s1-subheading-box,.s1-uapi .s1-btn-box{text-align:left;justify-content:flex-start}
+  .s1-uapi .int-logo{margin:0 0 18px}
+  .s1-uapi-stage{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;min-height:360px}
+  .s1-glow-pink{position:absolute;width:340px;height:340px;border-radius:50%;background:#fb63ff;filter:blur(120px);opacity:.18;top:-60px;right:-60px;pointer-events:none;z-index:0}
+  .s1-glow-blue{position:absolute;width:280px;height:280px;border-radius:50%;background:#5485e5;filter:blur(100px);opacity:.22;bottom:-40px;left:-40px;pointer-events:none;z-index:0}
+  .uapi-graphic{position:relative;z-index:1;width:500px;height:360px;max-width:100%}
+  .uapi-graphic svg{width:100%;height:100%;display:block;overflow:visible}
+  @media(max-width:991px){.s1-uapi{grid-template-columns:1fr;gap:36px}.s1-uapi-stage{display:none}}
+</style><svg aria-hidden="true" width="0" height="0" style="position:absolute"><filter id="lg-refract" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.009 0.013" numOctaves="2" seed="7" result="t"/><feGaussianBlur in="t" stdDeviation="2.2" result="b"/><feDisplacementMap in="SourceGraphic" in2="b" scale="46" xChannelSelector="R" yChannelSelector="G"/></filter></svg><div class="mode-switch-wrap" style="justify-content:center;margin-bottom:40px"><div class="mode-switch" role="tablist">
+  <a class="mode-opt active" href="integration.html" role="tab" aria-selected="true"><span class="dot"></span>Integration</a>
+  <a class="mode-opt" href="mcp.html" role="tab" aria-selected="false">MCP server</a>
+</div></div><div class="s1-uapi"><div class="s1-box" style="padding:0"><img loading="lazy" alt="" src="./SAP EWM API integration – connect to anything – Makini_files/67080ac3f5d59e851d4cbb00_VuUw59TdK1FK9dvmnJ0CSZFghJO0bbRC-DkxVUWtCzo.webp" class="int-logo"><div class="s1-h1-box"><h1 class="s1-h1 inline"><div class="inline">SAP EWM</div><div class="inline"> Integration</div></h1></div><div class="s1-subheading-box"><div class="s1-subheading">Makini makes adding and maintaining your&nbsp;</div><div class="s1-subheading">SAP EWM</div><div class="s1-subheading">&nbsp;integration simple with a <a href="https://docs.makini.io/docs/api-docs/branches/master/ZG9jOjEwMjE0Mg-getting-started-with-makini" target="_blank" class="subheading-link">Unified API.</a></div></div><div class="s1-btn-box"><div class="hidden w-embed"><a href="https://app.makini.io/register?_ga=2.217875094.1224981658.1659937789-1817805212.1654850753&amp;platform=sap-extended-warehouse-management&amp;email=" target="_blank" id="generateSP" class="btn-blue w-button">Test connection</a></div><div class="box-button-connect"><div class="button-connect w-embed"><a href="https://app.makini.io/register?_ga=2.217875094.1224981658.1659937789-1817805212.1654850753&amp;platform=sap-extended-warehouse-management&amp;email=" target="_blank" id="generateSP" class="btn-blue email-l w-button">Test connection</a></div><a data-w-id="58a1e7d7-7139-7625-05eb-207733c52546" href="https://www.makini.io/integrations/sap-extended-warehouse-management#" class="btn-blue pp w-button">Test connection</a></div><a rel="nofollow" href="https://calendly.com/api-94107/makini-api-demo" target="_blank" class="price-card-btn s2-btn2 w-inline-block"><div class="price-card-btn-text">Schedule demo</div></a></div></div><div class="s1-uapi-stage"><div class="s1-glow-pink"></div><div class="s1-glow-blue"></div><div class="uapi-graphic"><svg viewBox="0 0 500 360" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Many industrial systems unified through one Makini API into your app"><defs><radialGradient id="uapi-hub-fill" cx="30%" cy="20%" r="80%"><stop offset="0%" stop-color="#3a2f5e"/><stop offset="100%" stop-color="#1f1c2b"/></radialGradient><linearGradient id="uapi-hub-border" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#5485e5"/><stop offset="50%" stop-color="#fb63ff"/><stop offset="100%" stop-color="#9468f2"/></linearGradient><radialGradient id="uapi-node-fill" cx="30%" cy="20%" r="80%"><stop offset="0%" stop-color="#2d2a45"/><stop offset="100%" stop-color="#1b1921"/></radialGradient><linearGradient id="uapi-app-border" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#71a1ff"/><stop offset="100%" stop-color="#9468f2"/></linearGradient><filter id="uapi-glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="18"/></filter><clipPath id="uapi-cp1"><rect x="35" y="35" width="50" height="50" rx="12"/></clipPath><clipPath id="uapi-cp2"><rect x="35" y="99" width="50" height="50" rx="12"/></clipPath><clipPath id="uapi-cp3"><rect x="35" y="211" width="50" height="50" rx="12"/></clipPath><clipPath id="uapi-cp4"><rect x="35" y="275" width="50" height="50" rx="12"/></clipPath><linearGradient id="uapi-fade" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#fff" stop-opacity="0"/><stop offset="5%" stop-color="#fff" stop-opacity="1"/><stop offset="95%" stop-color="#fff" stop-opacity="1"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></linearGradient><mask id="uapi-fade-mask"><rect width="500" height="360" fill="url(#uapi-fade)"/></mask></defs><g mask="url(#uapi-fade-mask)"><!-- hub glow --><circle cx="250" cy="180" r="53" fill="#9468f2" opacity="0.25" filter="url(#uapi-glow)"><animate attributeName="opacity" values="0.22;0.4;0.22" dur="3s" repeatCount="indefinite"/><animate attributeName="r" values="53;66;53" dur="3s" repeatCount="indefinite"/></circle><circle cx="250" cy="180" r="40" fill="#71a1ff" opacity="0.12" filter="url(#uapi-glow)"><animate attributeName="opacity" values="0.1;0.2;0.1" dur="3s" repeatCount="indefinite"/></circle><!-- incoming streams: systems -> hub --><path d="M85 60 L150 60 Q162 60 162 72 L162 168 Q162 180 174 180 L197 180" stroke="#fff" stroke-opacity="0.2" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="5 7"><animate attributeName="stroke-dashoffset" from="0" to="-24" dur="1.2s" repeatCount="indefinite"/></path><path d="M85 124 L150 124 Q162 124 162 136 L162 168 Q162 180 174 180 L197 180" stroke="#fff" stroke-opacity="0.2" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="5 7"><animate attributeName="stroke-dashoffset" from="0" to="-24" dur="1.2s" repeatCount="indefinite"/></path><path d="M85 236 L150 236 Q162 236 162 224 L162 192 Q162 180 174 180 L197 180" stroke="#fff" stroke-opacity="0.2" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="5 7"><animate attributeName="stroke-dashoffset" from="0" to="-24" dur="1.2s" repeatCount="indefinite"/></path><path d="M85 300 L150 300 Q162 300 162 288 L162 192 Q162 180 174 180 L197 180" stroke="#fff" stroke-opacity="0.2" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="5 7"><animate attributeName="stroke-dashoffset" from="0" to="-24" dur="1.2s" repeatCount="indefinite"/></path><!-- unified output: hub -> app (single clean API) --><path d="M303 180 L403 180" stroke="#71a1ff" stroke-width="2.4" stroke-linecap="round"/><!-- incoming dots --><circle r="3" fill="#71a1ff"><animateMotion dur="1.6s" begin="-0.2s" repeatCount="indefinite" path="M85 60 L150 60 Q162 60 162 72 L162 168 Q162 180 174 180 L197 180"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="1.6s" begin="-0.2s" repeatCount="indefinite"/></circle><circle r="3" fill="#71a1ff"><animateMotion dur="1.6s" begin="-0.8s" repeatCount="indefinite" path="M85 124 L150 124 Q162 124 162 136 L162 168 Q162 180 174 180 L197 180"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="1.6s" begin="-0.8s" repeatCount="indefinite"/></circle><circle r="3" fill="#71a1ff"><animateMotion dur="1.6s" begin="-1.2s" repeatCount="indefinite" path="M85 236 L150 236 Q162 236 162 224 L162 192 Q162 180 174 180 L197 180"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="1.6s" begin="-1.2s" repeatCount="indefinite"/></circle><circle r="3" fill="#71a1ff"><animateMotion dur="1.6s" begin="-0.5s" repeatCount="indefinite" path="M85 300 L150 300 Q162 300 162 288 L162 192 Q162 180 174 180 L197 180"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="1.6s" begin="-0.5s" repeatCount="indefinite"/></circle><!-- output dot: one unified stream --><circle r="3.4" fill="#fff"><animateMotion dur="1.4s" repeatCount="indefinite" path="M303 180 L403 180"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.15;0.85;1" dur="1.4s" repeatCount="indefinite"/></circle><!-- system nodes (real logos) --><image href="./SAP EWM API integration – connect to anything – Makini_files/logo-sys-1.webp" x="35" y="35" width="50" height="50" clip-path="url(#uapi-cp1)" preserveAspectRatio="xMidYMid slice"/><rect x="35" y="35" width="50" height="50" rx="12" fill="none" stroke="#fff" stroke-opacity="0.14"/><image href="./SAP EWM API integration – connect to anything – Makini_files/logo-sys-2.webp" x="35" y="99" width="50" height="50" clip-path="url(#uapi-cp2)" preserveAspectRatio="xMidYMid slice"/><rect x="35" y="99" width="50" height="50" rx="12" fill="none" stroke="#fff" stroke-opacity="0.14"/><image href="./SAP EWM API integration – connect to anything – Makini_files/logo-sys-3.png" x="35" y="211" width="50" height="50" clip-path="url(#uapi-cp3)" preserveAspectRatio="xMidYMid slice"/><rect x="35" y="211" width="50" height="50" rx="12" fill="none" stroke="#fff" stroke-opacity="0.14"/><image href="./SAP EWM API integration – connect to anything – Makini_files/logo-sys-4.png" x="35" y="275" width="50" height="50" clip-path="url(#uapi-cp4)" preserveAspectRatio="xMidYMid slice"/><rect x="35" y="275" width="50" height="50" rx="12" fill="none" stroke="#fff" stroke-opacity="0.14"/><!-- hub: Makini Unified API --><rect x="197" y="127" width="106" height="106" rx="20" fill="url(#uapi-hub-border)"/><rect x="198.5" y="128.5" width="103" height="103" rx="18.5" fill="url(#uapi-hub-fill)"/><image href="./SAP EWM API integration – connect to anything – Makini_files/makini-white-sign.png" x="222" y="152" width="56" height="56" preserveAspectRatio="xMidYMid meet"/><!-- app node: your application --><rect x="403" y="143" width="74" height="74" rx="16" fill="url(#uapi-app-border)" opacity="0.9"/><rect x="404.5" y="144.5" width="71" height="71" rx="14.5" fill="url(#uapi-node-fill)"/><text x="440" y="189" text-anchor="middle" font-family="'SFMono-Regular',Consolas,monospace" font-size="24" font-weight="700" fill="#fff">{ }</text><!-- labels --><text x="250" y="251" text-anchor="middle" fill="#fff" font-size="12.5" font-family="Inter,sans-serif" font-weight="600">Makini Unified API</text><text x="440" y="234" text-anchor="middle" fill="#9a9ba6" font-size="11" font-family="Inter,sans-serif" font-weight="500">Your app</text><text x="60" y="345" text-anchor="middle" fill="#9a9ba6" font-size="10.5" font-family="Inter,sans-serif" font-weight="500">2,000+ systems</text></g></svg></div></div></div><div class="s1-list-features" style="justify-content:center;margin-top:48px"><div class="item_features"><div class="wrapper-icon_fectures"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d650d413bed53e49b87d02_img-1.png" loading="lazy" width="32" alt="" class="img_features"></div><div class="text_features">Connect instantly</div></div><div class="s1-line"></div><div class="item_features"><div class="wrapper-icon_fectures"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d650d488e89b034a982b82_img-2.png" loading="lazy" width="28" alt="" class="img_features"></div><div class="text_features">2000+ integrations</div></div><div class="s1-line"></div><div class="item_features"><div class="wrapper-icon_fectures"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d650d4a00109f4d3e52db6_img-3.png" loading="lazy" width="36" height="Auto" alt="" class="img_features"></div><div class="text_features">SOC2 Type II</div></div></div></div><img src="./SAP EWM API integration – connect to anything – Makini_files/630dee899f2fade382f4fb81_s1-dec1.svg" loading="lazy" alt="" class="s1-dec2"><img src="./SAP EWM API integration – connect to anything – Makini_files/630deee52b4487b24cdc08f5_s1-dec2.svg" loading="lazy" alt="" class="s1-dec3"></section><section data-w-id="62aff5a8-0d55-8c68-4d75-c7a949be7f2f" class="home-s2"><div class="m-container"><div class="s2-upheading center">Makini powers integrations at</div></div><div class="train-box"><div class="train"><div class="train-vagon"><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66fabec129f7ee4be19e4_logo-kiongroup.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66fab59dc758211384772_logo-uptake.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66fabcf108617104252cb_logo-siemens.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66fab7df0bd8752b4fb1f_logo-tractian.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66fab4b4c78aa337451ed_logo-cofactr.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa822b4f70e9148021_logo-arvist.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa02ef252088a87c0b_logo-wm.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa77e0f98b22f937a8_logo-caterpillar.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa9c07994b17a3e075_logo-trane.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faab133d35bd4cd65ee_logo-servicetitan.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faae3cba71e34bf81cc_logo-oha.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa16d28a4799806c2c_logo-maintainx.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa940b2f57767ebdd2_logo-abs.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faae4aa971adb66be37_logo-obamafoundation.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa2ff8cc46c21f26d5_logo-datanomix.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/6a0f1b1205127f9b36959b4a_Mask group.png" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/6a0f1b127c706806ad188ded_Group 34585.png" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa4dc6cc8aae9afeb6_logo-rightly.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faab3c4d8b053d323fb_logo-nucor.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa5036a1839b234a20_logo-inmapz.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faaf20f86a4d86a2fe7_logo-vento.webp" alt="" class="train-img"></div></div><div class="train-vagon"><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66fabec129f7ee4be19e4_logo-kiongroup.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66fab59dc758211384772_logo-uptake.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66fabcf108617104252cb_logo-siemens.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66fab7df0bd8752b4fb1f_logo-tractian.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66fab4b4c78aa337451ed_logo-cofactr.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa822b4f70e9148021_logo-arvist.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa02ef252088a87c0b_logo-wm.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa77e0f98b22f937a8_logo-caterpillar.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa9c07994b17a3e075_logo-trane.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faab133d35bd4cd65ee_logo-servicetitan.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faae3cba71e34bf81cc_logo-oha.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa16d28a4799806c2c_logo-maintainx.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa940b2f57767ebdd2_logo-abs.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faae4aa971adb66be37_logo-obamafoundation.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa2ff8cc46c21f26d5_logo-datanomix.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/6a0f1b1205127f9b36959b4a_Mask group.png" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/6a0f1b127c706806ad188ded_Group 34585.png" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa4dc6cc8aae9afeb6_logo-rightly.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faab3c4d8b053d323fb_logo-nucor.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa5036a1839b234a20_logo-inmapz.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faaf20f86a4d86a2fe7_logo-vento.webp" alt="" class="train-img"></div></div><div class="train-vagon"><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66fabec129f7ee4be19e4_logo-kiongroup.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66fab59dc758211384772_logo-uptake.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66fabcf108617104252cb_logo-siemens.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66fab7df0bd8752b4fb1f_logo-tractian.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66fab4b4c78aa337451ed_logo-cofactr.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa822b4f70e9148021_logo-arvist.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa02ef252088a87c0b_logo-wm.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa77e0f98b22f937a8_logo-caterpillar.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa9c07994b17a3e075_logo-trane.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faab133d35bd4cd65ee_logo-servicetitan.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faae3cba71e34bf81cc_logo-oha.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa16d28a4799806c2c_logo-maintainx.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa940b2f57767ebdd2_logo-abs.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faae4aa971adb66be37_logo-obamafoundation.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa2ff8cc46c21f26d5_logo-datanomix.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/6a0f1b1205127f9b36959b4a_Mask group.png" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/6a0f1b127c706806ad188ded_Group 34585.png" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa4dc6cc8aae9afeb6_logo-rightly.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faab3c4d8b053d323fb_logo-nucor.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa5036a1839b234a20_logo-inmapz.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faaf20f86a4d86a2fe7_logo-vento.webp" alt="" class="train-img"></div></div><div class="train-vagon"><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66fabec129f7ee4be19e4_logo-kiongroup.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66fab59dc758211384772_logo-uptake.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66fabcf108617104252cb_logo-siemens.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66fab7df0bd8752b4fb1f_logo-tractian.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66fab4b4c78aa337451ed_logo-cofactr.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa822b4f70e9148021_logo-arvist.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa02ef252088a87c0b_logo-wm.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa77e0f98b22f937a8_logo-caterpillar.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa9c07994b17a3e075_logo-trane.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faab133d35bd4cd65ee_logo-servicetitan.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faae3cba71e34bf81cc_logo-oha.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa16d28a4799806c2c_logo-maintainx.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa940b2f57767ebdd2_logo-abs.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faae4aa971adb66be37_logo-obamafoundation.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa2ff8cc46c21f26d5_logo-datanomix.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/6a0f1b1205127f9b36959b4a_Mask group.png" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/6a0f1b127c706806ad188ded_Group 34585.png" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa4dc6cc8aae9afeb6_logo-rightly.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faab3c4d8b053d323fb_logo-nucor.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faa5036a1839b234a20_logo-inmapz.webp" alt="" class="train-img"></div><div class="frame_train-img"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/69d66faaf20f86a4d86a2fe7_logo-vento.webp" alt="" class="train-img"></div></div></div></div><div class="hidden w-embed"><style>
+ .train-box {
+-webkit-mask-image: linear-gradient(90deg, rgba(1,1,2,0) 0%, rgba(1,1,2,1) 5%, rgba(0,0,0,1) 95%, rgba(0,0,0,0) 100%);
+}
+</style></div></section><section class="s2"><div class="m-container"><div class="s2-upheading-box"><div class="s2-upheading inline">Sync&nbsp;</div><div class="s2-upheading inline">SAP EWM</div><div class="s2-upheading inline">&nbsp;data</div></div><div data-current="ERP" data-easing="ease" data-duration-in="300" data-duration-out="100" class="tab-collection w-tabs"><div class="tab-content-collection w-tab-content"><div data-w-tab="ERP" fs-list-instance="cms-1" class="w-tab-pane w--tab-active"><div class="link-collection w-dyn-list"><div fs-list-loadcount="all" fs-list-element="list" fs-list-load="more" role="list" class="s2-collection-list w-dyn-items"><div data-target-url="https://docs.makini.io/list-purchase-requisitions-31674292e0" role="listitem" class="collection-item dialog-btn w-dyn-item"><div data-w-id="f23b87ae-d6e2-50ad-0d4b-94dc3422e9cd" class="card-box"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/660c03f73e87f2475a1a5c26_6267 1.webp" alt="" class="card-icon"><div class="card-text-box"><div class="card-text-cont"><div class="card-h">Purchase Requisition</div><div class="card-text">An internal request to procure goods or services, subject to approval before being converted into a purchase order.</div></div><div class="card-link-box"><div class="card-link-box-text">Details</div><div class="link-arrow-box"><div class="link-arrow-line"></div><div class="link-arrow-line2"></div></div></div></div></div></div><div data-target-url="https://docs.makini.io/list-rfqs-31674309e0" role="listitem" class="collection-item dialog-btn w-dyn-item"><div data-w-id="f23b87ae-d6e2-50ad-0d4b-94dc3422e9cd" class="card-box"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/660c03ac46dded2bf0011482_7810 1.webp" alt="" class="card-icon"><div class="card-text-box"><div class="card-text-cont"><div class="card-h">Request for Quotation</div><div class="card-text">A document issued to one or more vendors soliciting pricing and terms for goods or services, used to support purchasing decisions and vendor selection.</div></div><div class="card-link-box"><div class="card-link-box-text">Details</div><div class="link-arrow-box"><div class="link-arrow-line"></div><div class="link-arrow-line2"></div></div></div></div></div></div><div data-target-url="https://docs.makini.io/list-production-orders-31678373e0" role="listitem" class="collection-item dialog-btn w-dyn-item"><div data-w-id="f23b87ae-d6e2-50ad-0d4b-94dc3422e9cd" class="card-box"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/6606ac9f9889f3fe5499168a_6415 1.webp" alt="" class="card-icon"><div class="card-text-box"><div class="card-text-cont"><div class="card-h">Production Order</div><div class="card-text">A directive to manufacture a specified quantity of a product, coordinating the allocation of materials, labor, and work centers required for production execution.</div></div><div class="card-link-box"><div class="card-link-box-text">Details</div><div class="link-arrow-box"><div class="link-arrow-line"></div><div class="link-arrow-line2"></div></div></div></div></div></div><div data-target-url="https://docs.makini.io/list-boms-31678377e0" role="listitem" class="collection-item dialog-btn w-dyn-item"><div data-w-id="f23b87ae-d6e2-50ad-0d4b-94dc3422e9cd" class="card-box"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/6606ac7419d287dd92f305d3_7633 1.webp" alt="" class="card-icon"><div class="card-text-box"><div class="card-text-cont"><div class="card-h">Bill of Materials</div><div class="card-text">A structured list of components, subassemblies, and raw materials required to manufacture a product, used to drive material planning and production order execution.</div></div><div class="card-link-box"><div class="card-link-box-text">Details</div><div class="link-arrow-box"><div class="link-arrow-line"></div><div class="link-arrow-line2"></div></div></div></div></div></div><div data-target-url="https://docs.makini.io/list-receipts-31674449e0" role="listitem" class="collection-item dialog-btn w-dyn-item"><div data-w-id="f23b87ae-d6e2-50ad-0d4b-94dc3422e9cd" class="card-box"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/6606ac4aac6a3348e3de1403_7733 1.webp" alt="" class="card-icon"><div class="card-text-box"><div class="card-text-cont"><div class="card-h">Receipt</div><div class="card-text">An operation recording the physical intake of goods against a purchase order or transfer order, updating on-hand inventory and triggering payables processing.</div></div><div class="card-link-box"><div class="card-link-box-text">Details</div><div class="link-arrow-box"><div class="link-arrow-line"></div><div class="link-arrow-line2"></div></div></div></div></div></div><div data-target-url="https://docs.makini.io/list-invoices-31674457e0" role="listitem" class="collection-item dialog-btn w-dyn-item"><div data-w-id="f23b87ae-d6e2-50ad-0d4b-94dc3422e9cd" class="card-box"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/6606ac0d62019b1b092797bd_7729 1.webp" alt="" class="card-icon"><div class="card-text-box"><div class="card-text-cont"><div class="card-h">Invoice</div><div class="card-text">An outgoing billing document issued to a customer, recording the amount due for delivered goods or services against a sales order.</div></div><div class="card-link-box"><div class="card-link-box-text">Details</div><div class="link-arrow-box"><div class="link-arrow-line"></div><div class="link-arrow-line2"></div></div></div></div></div></div></div><div role="navigation" aria-label="List" class="w-pagination-wrapper cms_pagination"><a href="https://www.makini.io/integrations/sap-extended-warehouse-management?a65a26ef_page=2" aria-label="Next Page" class="w-pagination-next cms_load_more"><div class="center-link-arrow"><div class="card-link-box-text">Show More</div><div class="link-arrow-box"><div class="link-arrow-line"></div><div class="link-arrow-line2"></div></div></div></a><link rel="prerender" href="https://www.makini.io/integrations/sap-extended-warehouse-management?a65a26ef_page=2"><div aria-label="Page 1 of 3" role="heading" class="w-page-count hidden">1 / 3</div></div></div></div><div data-w-tab="WMS" fs-list-instance="cms-2" class="w-tab-pane"><div class="link-collection w-dyn-list"><div fs-list-loadcount="all" fs-list-element="list" fs-list-load="more" role="list" class="s2-collection-list w-dyn-items"><div data-target-url="https://docs.makini.io/list-shipment-orders-31678363e0" role="listitem" class="collection-item dialog-btn w-dyn-item"><div data-w-id="d4250782-34f6-5851-1990-8cee6853fdb8" class="card-box"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/6606a5f4f387171a096ecdf9_7180 1.webp" alt="" class="card-icon"><div class="card-text-box"><div class="card-text-cont"><div class="card-h">Shipment Order</div><div class="card-text">A shipment record tracking the movement of goods from dispatch to confirmed receipt by the destination, spanning the in-transit phase of the fulfillment process.</div></div><div class="card-link-box"><div class="card-link-box-text">Details</div><div class="link-arrow-box"><div class="link-arrow-line"></div><div class="link-arrow-line2"></div></div></div></div></div></div><div data-target-url="https://docs.makini.io/list-purchase-orders-31674381e0" role="listitem" class="collection-item dialog-btn w-dyn-item"><div data-w-id="d4250782-34f6-5851-1990-8cee6853fdb8" class="card-box"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/6606a4e7edecfc7e7bc44681_30921 1.webp" alt="" class="card-icon"><div class="card-text-box"><div class="card-text-cont"><div class="card-h">Purchase Order</div><div class="card-text">A formal document confirming the commitment to buy or sell goods or services, issued to a vendor or received from a customer under agreed terms and quantities.</div></div><div class="card-link-box"><div class="card-link-box-text">Details</div><div class="link-arrow-box"><div class="link-arrow-line"></div><div class="link-arrow-line2"></div></div></div></div></div></div><div data-target-url="https://docs.makini.io/list-sales-orders-31674390e0" role="listitem" class="collection-item dialog-btn w-dyn-item"><div data-w-id="d4250782-34f6-5851-1990-8cee6853fdb8" class="card-box"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/6606a49dc462f0cba90be452_cart-shopping 1.webp" alt="" class="card-icon"><div class="card-text-box"><div class="card-text-cont"><div class="card-h">Sales Order</div><div class="card-text">A confirmed customer commitment to purchase goods or services, driving fulfillment, invoicing, and revenue recognition processes.</div></div><div class="card-link-box"><div class="card-link-box-text">Details</div><div class="link-arrow-box"><div class="link-arrow-line"></div><div class="link-arrow-line2"></div></div></div></div></div></div><div data-target-url="https://docs.makini.io/list-stock-items-32441573e0" role="listitem" class="collection-item dialog-btn w-dyn-item"><div data-w-id="d4250782-34f6-5851-1990-8cee6853fdb8" class="card-box"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/6606a461f1434a3b20115fde_Group (1).webp" alt="" class="card-icon"><div class="card-text-box"><div class="card-text-cont"><div class="card-h">Stock</div><div class="card-text">A record of a specific item held in stock at a particular location or bin, capturing on-hand quantity, reservation status, and lot or serial tracking details.</div></div><div class="card-link-box"><div class="card-link-box-text">Details</div><div class="link-arrow-box"><div class="link-arrow-line"></div><div class="link-arrow-line2"></div></div></div></div></div></div><div data-target-url="https://docs.makini.io/list-customers-28097134e0" role="listitem" class="collection-item dialog-btn w-dyn-item"><div data-w-id="d4250782-34f6-5851-1990-8cee6853fdb8" class="card-box"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/6a0d8bdc8a29741532dd13ed_6606aa8bd43da2d6591c9aa8_31041 1.webp" alt="" class="card-icon"><div class="card-text-box"><div class="card-text-cont"><div class="card-h">Customer</div><div class="card-text">A partner entity representing a buyer of goods or services from the organization.</div></div><div class="card-link-box"><div class="card-link-box-text">Details</div><div class="link-arrow-box"><div class="link-arrow-line"></div><div class="link-arrow-line2"></div></div></div></div></div></div><div data-target-url="https://docs.makini.io/list-vendors-28097131e0" role="listitem" class="collection-item dialog-btn w-dyn-item"><div data-w-id="d4250782-34f6-5851-1990-8cee6853fdb8" class="card-box"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/6606a37041926d38c01f7cae_31097 2.webp" alt="" class="card-icon"><div class="card-text-box"><div class="card-text-cont"><div class="card-h">Vendor</div><div class="card-text">A partner entity representing a supplier of goods or services to the organization.</div></div><div class="card-link-box"><div class="card-link-box-text">Details</div><div class="link-arrow-box"><div class="link-arrow-line"></div><div class="link-arrow-line2"></div></div></div></div></div></div></div><div role="navigation" aria-label="List" class="w-pagination-wrapper cms_pagination"><a href="https://www.makini.io/integrations/sap-extended-warehouse-management?471ab0ce_page=2" aria-label="Next Page" class="w-pagination-next cms_load_more"><div class="center-link-arrow"><div class="card-link-box-text">Show More</div><div class="link-arrow-box"><div class="link-arrow-line"></div><div class="link-arrow-line2"></div></div></div></a><link rel="prerender" href="https://www.makini.io/integrations/sap-extended-warehouse-management?471ab0ce_page=2"><div aria-label="Page 1 of 2" role="heading" class="w-page-count hidden">1 / 2</div></div></div></div><div data-w-tab="CMMS/EAM" fs-list-instance="cms-3" class="w-tab-pane"><div class="link-collection w-dyn-list"><div fs-list-stagger="60" fs-list-element="list" fs-list-load="more" fs-list-loadcount="all" role="list" class="s2-collection-list w-dyn-items"><div data-target-url="https://docs.makini.io/list-work-orders-28097171e0" role="listitem" class="collection-item dialog-btn w-dyn-item"><div data-w-id="b9e4f4a4-6f20-8b30-8679-26ca7f2d7c10" class="card-box"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/660c139d88ce60b4579a2264_Work orders 2d.webp" alt="" class="card-icon"><div class="card-text-box"><div class="card-text-cont"><div class="card-h">Work Orders</div><div class="card-text">A work order is a document for organizing the execution of work or service, describing the task, location, resources, and deadlines</div></div><div class="card-link-box"><div class="card-link-box-text">Details</div><div class="link-arrow-box"><div class="link-arrow-line"></div><div class="link-arrow-line2"></div></div></div></div></div></div><div data-target-url="https://docs.makini.io/list-assets-28097164e0" role="listitem" class="collection-item dialog-btn w-dyn-item"><div data-w-id="b9e4f4a4-6f20-8b30-8679-26ca7f2d7c10" class="card-box"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/660c122289bd2646e4b4d996_equipment.webp" alt="" class="card-icon"><div class="card-text-box"><div class="card-text-cont"><div class="card-h">Asset</div><div class="card-text">A physical or fixed asset tracked for both accounting purposes, such as depreciation and valuation, and operational purposes, such as maintenance and service history.</div></div><div class="card-link-box"><div class="card-link-box-text">Details</div><div class="link-arrow-box"><div class="link-arrow-line"></div><div class="link-arrow-line2"></div></div></div></div></div></div><div data-target-url="https://docs.makini.io/list-purchase-orders-31674381e0" role="listitem" class="collection-item dialog-btn w-dyn-item"><div data-w-id="b9e4f4a4-6f20-8b30-8679-26ca7f2d7c10" class="card-box"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/6606a4e7edecfc7e7bc44681_30921 1.webp" alt="" class="card-icon"><div class="card-text-box"><div class="card-text-cont"><div class="card-h">Purchase Order</div><div class="card-text">A formal document confirming the commitment to buy or sell goods or services, issued to a vendor or received from a customer under agreed terms and quantities.</div></div><div class="card-link-box"><div class="card-link-box-text">Details</div><div class="link-arrow-box"><div class="link-arrow-line"></div><div class="link-arrow-line2"></div></div></div></div></div></div><div data-target-url="https://docs.makini.io/list-stock-items-32441573e0" role="listitem" class="collection-item dialog-btn w-dyn-item"><div data-w-id="b9e4f4a4-6f20-8b30-8679-26ca7f2d7c10" class="card-box"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/6606ab0e6121936480eba028_30991 1.webp" alt="" class="card-icon"><div class="card-text-box"><div class="card-text-cont"><div class="card-h">Stock</div><div class="card-text">A record of a specific item held in stock at a particular location or bin, capturing on-hand quantity, reservation status, and lot or serial tracking details.</div></div><div class="card-link-box"><div class="card-link-box-text">Details</div><div class="link-arrow-box"><div class="link-arrow-line"></div><div class="link-arrow-line2"></div></div></div></div></div></div><div data-target-url="https://docs.makini.io/list-customers-28097134e0" role="listitem" class="collection-item dialog-btn w-dyn-item"><div data-w-id="b9e4f4a4-6f20-8b30-8679-26ca7f2d7c10" class="card-box"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/6606aa8bd43da2d6591c9aa8_31041 1.webp" alt="" class="card-icon"><div class="card-text-box"><div class="card-text-cont"><div class="card-h">Customer</div><div class="card-text">A partner entity representing a buyer of goods or services from the organization.</div></div><div class="card-link-box"><div class="card-link-box-text">Details</div><div class="link-arrow-box"><div class="link-arrow-line"></div><div class="link-arrow-line2"></div></div></div></div></div></div><div data-target-url="https://docs.makini.io/list-vendors-28097131e0" role="listitem" class="collection-item dialog-btn w-dyn-item"><div data-w-id="b9e4f4a4-6f20-8b30-8679-26ca7f2d7c10" class="card-box"><img loading="lazy" src="./SAP EWM API integration – connect to anything – Makini_files/6606a37041926d38c01f7cae_31097 2.webp" alt="" class="card-icon"><div class="card-text-box"><div class="card-text-cont"><div class="card-h">Vendor</div><div class="card-text">A partner entity representing a supplier of goods or services to the organization.</div></div><div class="card-link-box"><div class="card-link-box-text">Details</div><div class="link-arrow-box"><div class="link-arrow-line"></div><div class="link-arrow-line2"></div></div></div></div></div></div></div><div role="navigation" aria-label="List" class="w-pagination-wrapper cms_pagination"><a href="https://www.makini.io/integrations/sap-extended-warehouse-management?6d1a04b3_page=2" aria-label="Next Page" class="w-pagination-next cms_load_more"><div class="center-link-arrow"><div class="card-link-box-text">Show More</div><div class="link-arrow-box"><div class="link-arrow-line"></div><div class="link-arrow-line2"></div></div></div></a><link rel="prerender" href="https://www.makini.io/integrations/sap-extended-warehouse-management?6d1a04b3_page=2"><div aria-label="Page 1 of 2" role="heading" class="w-page-count hidden">1 / 2</div></div></div></div></div></div></div><img src="./SAP EWM API integration – connect to anything – Makini_files/630dce53cd62512f00d7f639_s2-bg-dec.svg" loading="lazy" alt="" class="s2-bg-dec"></section><section class="s3"><div class="m-container"><div class="s2-upheading center">the last integration you build</div><h2 class="h2">Focus on creating value, not building integrations</h2><div class="s3-subheading">Connect with Makini once and forget about integrations altogether.<br>Use freed up time on sales or something.</div></div><div class="s3-card-box"><div class="s3-card-bg"><div class="s3-card"><img src="./SAP EWM API integration – connect to anything – Makini_files/63218a75304e3a71e2ad2407_s3-icon1.webp" loading="lazy" alt="" class="s3-card-img"><div class="s3-card-h">Say yes to every deal</div><div class="s3-card-text"><div class="inline">Your prospect needs </div><div class="inline">SAP EWM</div><div class="inline">? You've got it. Plus&nbsp;2,000 other systems, ready now.</div></div></div><div class="s3-card-bg-elipce"></div></div><div class="s3-card-bg"><div class="s3-card"><img src="./SAP EWM API integration – connect to anything – Makini_files/63218a7f8fcc565c39d13cd1_career-s2-icon3.webp" loading="lazy" alt="" class="s3-card-img"><div class="s3-card-h">Ship in days, not quarters</div><div class="s3-card-text">We activate every customer ourselves. Most&nbsp;go&nbsp;live in under two weeks.</div></div><div class="s3-card-bg-elipce"></div></div><div class="s3-card-bg"><div class="s3-card"><img src="./SAP EWM API integration – connect to anything – Makini_files/63218a8af3f0f605e022b692_s3-icon3.webp" loading="lazy" alt="" class="s3-card-img"><div class="s3-card-h">We handle maintenance</div><div class="s3-card-text">Integrations break. We fix them. Your engineers stay on your product.</div></div><div class="s3-card-bg-elipce"></div></div></div></section><section data-w-id="2dc9fae0-d6f8-6fd2-ba50-f16c14e2cc7c" class="u-s4"><div class="m-container relative"><div class="u-s4-box"><div class="s4-left"><div class="s2-upheading left">SMOOTH ACCOUNT LINKING</div><h2 class="h2 white _2">Integration experience<br>that converts</h2><div class="s4-text white">Launch our authentication module from your app or anywhere else really, like an email, with a button or a link.<br><br>Your users will appreciate how intuitive linking experience is: pick the systems they use and log in with credentials they normally use to sign in.</div></div><div data-poster-url="https://cdn.prod.website-files.com/6075c27738665c833a39fd83/63566df401ad253b9d89f259_ezgifcom-gif-maker-poster-00001.jpg" data-video-urls="https://cdn.prod.website-files.com/6075c27738665c833a39fd83/63566df401ad253b9d89f259_ezgifcom-gif-maker-transcode.mp4,https://cdn.prod.website-files.com/6075c27738665c833a39fd83/63566df401ad253b9d89f259_ezgifcom-gif-maker-transcode.webm" data-autoplay="false" data-loop="false" data-wf-ignore="true" id="video-information" class="s4-img w-background-video w-background-video-atom"><video id="e802a02e-08b0-bfdd-37f0-979c4c4d2b1a-video" style="background-image:url(&quot;https://cdn.prod.website-files.com/6075c27738665c833a39fd83/63566df401ad253b9d89f259_ezgifcom-gif-maker-poster-00001.jpg&quot;)" muted="" playsinline="" data-wf-ignore="true" data-object-fit="cover"><source src="https://cdn.prod.website-files.com/6075c27738665c833a39fd83/63566df401ad253b9d89f259_ezgifcom-gif-maker-transcode.mp4" data-wf-ignore="true"><source src="https://cdn.prod.website-files.com/6075c27738665c833a39fd83/63566df401ad253b9d89f259_ezgifcom-gif-maker-transcode.webm" data-wf-ignore="true"></video></div></div></div><div class="u-s4-left"><div class="web-box"><div class="web-box-train"><div class="web-box-vagon"><img src="./SAP EWM API integration – connect to anything – Makini_files/6348ec71c6733e64ec226f8a_web.svg" loading="lazy" alt="" class="web-img"><img src="./SAP EWM API integration – connect to anything – Makini_files/6348ec71c6733e64ec226f8a_web.svg" loading="lazy" alt="" class="web-img"><img src="./SAP EWM API integration – connect to anything – Makini_files/6348ec71c6733e64ec226f8a_web.svg" loading="lazy" alt="" class="web-img"></div></div></div><img src="./SAP EWM API integration – connect to anything – Makini_files/6333e22dd61d870f4712cfca_paralax-spide2.svg" loading="lazy" alt="" class="u-s4-img"><img src="./SAP EWM API integration – connect to anything – Makini_files/6348fd6f6905cc06a55fa68d_web-blur.webp" loading="lazy" alt="" class="u-s4-img-blur-left"><img src="./SAP EWM API integration – connect to anything – Makini_files/6348e8a7820c3a21085e7b2c_train-blur.webp" loading="lazy" alt="" class="u-s4-left-grad"></div><div class="u-s4-right"><div class="web-box"><div class="web-box-train"><div class="web-box-vagon"><img src="./SAP EWM API integration – connect to anything – Makini_files/6348ec71c6733e64ec226f8a_web.svg" loading="lazy" alt="" class="web-img"><img src="./SAP EWM API integration – connect to anything – Makini_files/6348ec71c6733e64ec226f8a_web.svg" loading="lazy" alt="" class="web-img"><img src="./SAP EWM API integration – connect to anything – Makini_files/6348ec71c6733e64ec226f8a_web.svg" loading="lazy" alt="" class="web-img"></div></div></div><img src="./SAP EWM API integration – connect to anything – Makini_files/6333e22dd61d870f4712cfca_paralax-spide2.svg" loading="lazy" alt="" class="u-s4-img"><img src="./SAP EWM API integration – connect to anything – Makini_files/6348fd6f6905cc06a55fa68d_web-blur.webp" loading="lazy" alt="" class="u-s4-img-blur-left"><img src="./SAP EWM API integration – connect to anything – Makini_files/6348e8a7820c3a21085e7b2c_train-blur.webp" loading="lazy" alt="" class="u-s4-left-grad"></div><div class="u-s4-grad-up"></div><div class="u-s4-grad-down"></div><div class="hidden w-embed w-script"><script>
+document.addEventListener("DOMContentLoaded", function() {
+
+  const container = document.getElementById("video-information");
+  if (!container) return;
+
+  const video = container.querySelector("video");
+  if (!video) return;
+
+  video.pause();
+  video.loop = false;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && entry.intersectionRatio >= 0.8) {
+        video.loop = true;
+        if (video.paused) {
+          video.play();
+        }
+      } else {
+        video.pause();
+        video.loop = false;
+      }
+    });
+  }, {
+    threshold: 0.8
+  });
+
+  observer.observe(container);
+
+});
+</script></div></section><div class="padding-bottom-100"><div class="m-container"><div class="box-h2"><div class="mw-840"><h2 class="h2-36 size-mobile-24">About SAP Extended Warehouse Management</h2></div><p class="p-15">SAP Extended Warehouse Management (EWM) is a robust warehouse-logistics solution that supports complex warehouse operations, high-volume distribution, real-time tracking and multi-warehouse environments.</p></div></div></div><style>
+  .uc-sec{padding:80px 0;position:relative;z-index:2;overflow:hidden}
+  .uc-sec::before{content:"";position:absolute;z-index:-1;width:780px;height:480px;border-radius:50%;filter:blur(140px);opacity:.4;top:-160px;left:50%;transform:translateX(-50%);background:radial-gradient(circle,#9468f23d,transparent 70%);pointer-events:none}
+  .uc-head{max-width:760px;margin:0 auto 40px;text-align:center;position:relative;z-index:1}
+  .uc-tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;max-width:1040px;margin:0 auto 28px;position:relative;z-index:1}
+  .uc-tab{position:relative;overflow:hidden;display:flex;flex-direction:column;gap:3px;text-align:left;padding:14px 22px;min-width:218px;border-radius:14px;border:1px solid #ffffff14;background:#ffffff08;color:#c6c7cc;font-family:inherit;cursor:pointer;transition:.2s}
+  .uc-tab:hover{border-color:#ffffff2e;background:#ffffff0d;transform:translateY(-1px)}
+  .uc-tab.active{border-color:#71a1ff66;background:linear-gradient(135deg,#71a1ff24,#ef68f218);box-shadow:0 8px 26px #9468f22e}
+  .uc-tab-bg{position:absolute;z-index:0;pointer-events:none;right:16px;top:50%;transform:translateY(-50%);height:30px;width:auto;max-width:52%;object-fit:contain;object-position:right center;opacity:.32;-webkit-mask-image:linear-gradient(to left,#000 75%,transparent);mask-image:linear-gradient(to left,#000 75%,transparent)}
+  .uc-tab.active .uc-tab-bg{opacity:.46}
+  .uc-tab-bg.logo{height:24px;width:104px;max-width:none;object-fit:contain;object-position:right center;opacity:.22}
+  .uc-tab.active .uc-tab-bg.logo{opacity:.3}
+  .uc-tab-bg.mono{height:auto;max-width:none;right:16px;font-size:50px;font-weight:800;line-height:1;letter-spacing:-2px;color:#fff;opacity:.08}
+  .uc-tab.active .uc-tab-bg.mono{opacity:.13}
+  .uc-tab-txt{position:relative;z-index:1;display:flex;flex-direction:column;gap:3px}
+  .uc-tab-name{color:#fff;font-size:15px;font-weight:600;line-height:20px}
+  .uc-tab-cat{font-size:12px;line-height:16px;color:#959599}
+  .uc-tab.active .uc-tab-cat{color:#c6c7cc}
+  .uc-panelwrap{display:grid;align-items:start;max-width:1040px;margin:0 auto;position:relative;background-image:radial-gradient(circle at 100% 0,#212433,#1b1921);border:1px solid #ffffff14;border-radius:20px;padding:36px 40px;overflow:hidden}
+  .uc-panelwrap::after{content:"";position:absolute;z-index:0;top:-30px;right:-26px;width:200px;height:200px;border-radius:100%;filter:blur(75px);opacity:.5;background:#b355d166;pointer-events:none}
+  .uc-panel{grid-area:1/1;position:relative;z-index:1;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .25s ease}
+  .uc-panel.active{visibility:visible;opacity:1;pointer-events:auto}
+  .uc-panel-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;margin-bottom:20px;min-height:54px}
+  .uc-panel-cust{color:#fff;font-size:24px;font-weight:600;line-height:32px}
+  .uc-panel-cust span{display:block;color:#959599;font-size:13px;font-weight:400;line-height:18px;margin-top:2px}
+  .uc-cat-badge{display:inline-flex;align-items:center;padding:7px 14px;border-radius:999px;font-size:13px;color:#dfe7ff;background:linear-gradient(135deg,#71a1ff29,#ef68f21f);border:1px solid #71a1ff45;white-space:nowrap}
+  .uc-conn{display:flex;flex-wrap:wrap;align-items:center;gap:22px;padding-bottom:22px;border-bottom:1px solid #ffffff14;margin-bottom:24px}
+  .uc-conn-label{color:#959599;font-size:12px;letter-spacing:1px;text-transform:uppercase;margin-right:2px}
+  .uc-conn-item{display:inline-flex;align-items:center;gap:10px}
+  .uc-circle{width:40px;height:40px;border-radius:50%;flex:0 0 auto;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#fff}
+  .uc-circle img{width:30px;height:30px;object-fit:contain;display:block}
+  .uc-circle.mono{color:#fff;font-size:13px;font-weight:700;letter-spacing:.3px}
+  .uc-conn-name{color:#fff;font-size:14px;font-weight:500}
+  .uc-blocks{display:flex;flex-direction:column;gap:22px}
+  .uc-block{display:grid;grid-template-columns:110px 1fr;gap:20px;align-items:start}
+  .uc-bh3{min-height:80px}
+  .uc-bh2{min-height:56px}
+  .uc-block-label{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;padding-top:3px}
+  .uc-block-label .d{width:8px;height:8px;border-radius:50%;flex:0 0 auto}
+  .uc-l-problem{color:#ff8a8a}.uc-l-problem .d{background:#ff8a8a}
+  .uc-l-before{color:#959599}.uc-l-before .d{background:#959599}
+  .uc-l-after{color:#7ee7b1}.uc-l-after .d{background:#7ee7b1}
+  .uc-block p{margin:0;color:#c6c7cc;font-size:15px;line-height:25px}
+  @media (max-width:767px){.uc-sec{padding:56px 0}.uc-tab{flex:1 1 140px}.uc-panelwrap{padding:24px}.uc-block{grid-template-columns:1fr;gap:6px}}
+</style><section class="uc-sec" id="use-cases"><div class="m-container">
+  <div class="uc-head"><div class="s2-upheading center">Case study</div><h2 class="h2">One integration, every customer</h2><div class="s3-subheading">How facility, field-service and CMMS platforms use Makini to turn each new client into a connection — not an engineering project.</div></div>
+  <div class="uc-tabs" role="tablist"><button class="uc-tab active" type="button" data-uc="tfg" role="tab" aria-selected="true"><img class="uc-tab-bg logo" src="./SAP EWM API integration – connect to anything – Makini_files/logo-tfg-trim.png" loading="lazy" alt="" aria-hidden="true"><span class="uc-tab-txt"><span class="uc-tab-name">The Facilities Group</span><span class="uc-tab-cat">Integrated Facility Management</span></span></button><button class="uc-tab" type="button" data-uc="mcim" role="tab" aria-selected="false"><img class="uc-tab-bg logo" src="./SAP EWM API integration – connect to anything – Makini_files/logo-mcim-trim.png" loading="lazy" alt="" aria-hidden="true"><span class="uc-tab-txt"><span class="uc-tab-name">MCIM</span><span class="uc-tab-cat">Mission-Critical Facility Management</span></span></button><button class="uc-tab" type="button" data-uc="servicetitan" role="tab" aria-selected="false"><img class="uc-tab-bg logo" src="./SAP EWM API integration – connect to anything – Makini_files/logo-servicetitan-trim.png" loading="lazy" alt="" aria-hidden="true"><span class="uc-tab-txt"><span class="uc-tab-name">ServiceTitan</span><span class="uc-tab-cat">Field Service Management</span></span></button><button class="uc-tab" type="button" data-uc="brightly" role="tab" aria-selected="false"><img class="uc-tab-bg logo" src="./SAP EWM API integration – connect to anything – Makini_files/logo-brightly-trim.png" loading="lazy" alt="" aria-hidden="true"><span class="uc-tab-txt"><span class="uc-tab-name">Brightly Software</span><span class="uc-tab-cat">CMMS / EAM</span></span></button></div>
+  <div class="uc-panelwrap"><div class="uc-panel active" id="uc-tfg" role="tabpanel">
+  <div class="uc-panel-top"><div class="uc-panel-cust">The Facilities Group</div><span class="uc-cat-badge">Integrated Facility Management</span></div>
+  <div class="uc-blocks">
+    <div class="uc-block uc-bh3"><span class="uc-block-label uc-l-problem"><span class="d"></span>Problem</span><p>TFG runs preventive maintenance at 30,000+ buildings across North America. Every facility owner they serve runs a different FSM — Corrigo, Fexa, ServiceChannel — so every new account historically meant another integration.</p></div>
+    <div class="uc-block uc-bh2"><span class="uc-block-label uc-l-before"><span class="d"></span>Before</span><p>TFG engineers rebuilt the same work-order, status, notes and attachment sync from scratch for every new FSM. The cost of saying “yes” to a new client kept rising with every win.</p></div>
+    <div class="uc-block uc-bh3"><span class="uc-block-label uc-l-after"><span class="d"></span>After</span><p>TFG’s JAN-IT platform speaks one Makini object model. Each new client tenant is a connection, not an engineering project — eight bidirectional workflows cover PM and non-PM work orders, status, check-in/check-out, notes and attachments across every supported FSM.</p></div>
+  </div>
+</div><div class="uc-panel" id="uc-mcim" role="tabpanel">
+  <div class="uc-panel-top"><div class="uc-panel-cust">MCIM<span>by Fulcrum Collaborations</span></div><span class="uc-cat-badge">Mission-Critical Facility Management</span></div>
+  <div class="uc-blocks">
+    <div class="uc-block uc-bh3"><span class="uc-block-label uc-l-problem"><span class="d"></span>Problem</span><p>MCIM is the EAM/CMMS/APM platform for mission-critical data centers. Subscribers like NTT also run ERP, ITSM and DCIM tools where the same asset and work-order data has to live — but data was locked inside each system.</p></div>
+    <div class="uc-block uc-bh2"><span class="uc-block-label uc-l-before"><span class="d"></span>Before</span><p>Every subscriber expected MCIM to deliver integrations into their stack, but building them one-by-one meant slow onboarding and a growing backlog of one-off connectors. New subscribers waited months for basic data flow.</p></div>
+    <div class="uc-block uc-bh3"><span class="uc-block-label uc-l-after"><span class="d"></span>After</span><p>MCIM uses Makini’s Universal API to deliver hundreds of pre-built ERP, MES and WMS integrations to subscribers like NTT through one common connector layer. New subscriber onboarding is a connection, not a custom build.</p></div>
+  </div>
+</div><div class="uc-panel" id="uc-servicetitan" role="tabpanel">
+  <div class="uc-panel-top"><div class="uc-panel-cust">ServiceTitan</div><span class="uc-cat-badge">Field Service Management</span></div>
+  <div class="uc-blocks">
+    <div class="uc-block uc-bh3"><span class="uc-block-label uc-l-problem"><span class="d"></span>Problem</span><p>Commercial contractors on ServiceTitan get work assignments from the CMMS platforms their facility-owner clients run — Corrigo, Corrigo Pro, ServiceChannel, Fexa, Verisae, Maximo, FM:Systems. Each platform is a different integration with a different data shape.</p></div>
+    <div class="uc-block uc-bh2"><span class="uc-block-label uc-l-before"><span class="d"></span>Before</span><p>Contractors manually retyped work orders from each CMMS into ServiceTitan as Bookings and logged into multiple systems to push status updates — Dispatched, Arrived, Working, Completed.</p></div>
+    <div class="uc-block uc-bh3"><span class="uc-block-label uc-l-after"><span class="d"></span>After</span><p>Work orders flow from any supported CMMS into ServiceTitan as Bookings automatically. Accept/Decline responses and technician check-in/check-out events sync back to the CMMS as activity-log entries — one Makini connection per contractor’s CMMS account.</p></div>
+  </div>
+</div><div class="uc-panel" id="uc-brightly" role="tabpanel">
+  <div class="uc-panel-top"><div class="uc-panel-cust">Brightly Software<span>Asset Essentials</span></div><span class="uc-cat-badge">CMMS / EAM</span></div>
+  <div class="uc-blocks">
+    <div class="uc-block uc-bh3"><span class="uc-block-label uc-l-problem"><span class="d"></span>Problem</span><p>Brightly’s customers like Licking County Utilities were running legacy on-premises CMMSes (MP2 on Antero, Tier II) and needed to move to Asset Essentials — but migration meant pulling sites, assets, work orders and history out of an aging system before any of it could be useful in the new one.</p></div>
+    <div class="uc-block uc-bh2"><span class="uc-block-label uc-l-before"><span class="d"></span>Before</span><p>Each subscriber migration was a custom extraction project — sites, hierarchies, assets and work-order history had to be pulled, mapped and loaded by hand, slowing every onboarding.</p></div>
+    <div class="uc-block uc-bh3"><span class="uc-block-label uc-l-after"><span class="d"></span>After</span><p>Brightly uses Makini to extract data directly from the legacy CMMS and migrate it into Asset Essentials inside a 30-day project window — sites, assets and work-order history flow into AE through one repeatable connector pattern instead of a one-off ETL each time.</p></div>
+  </div>
+</div></div>
+</div></section><script>(function(){var t=document.querySelectorAll('.uc-tab'),p=document.querySelectorAll('.uc-panel');t.forEach(function(b){b.addEventListener('click',function(){t.forEach(function(x){x.classList.remove('active');x.setAttribute('aria-selected','false')});p.forEach(function(x){x.classList.remove('active')});b.classList.add('active');b.setAttribute('aria-selected','true');var el=document.getElementById('uc-'+b.getAttribute('data-uc'));if(el)el.classList.add('active')})})})();</script><section class="s5"><div class="m-container"><h2 class="h2 white">Explore more integrations</h2><div class="int-collection w-dyn-list"><div role="list" class="int-collection-list w-dyn-items"><div role="listitem" class="int-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/blue-yonder" class="int-box black w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/65b3a8373d3ea3723f5477ee_f7Vgz5UfBJ0l9dc5VDQm-BGe6Al4R1GEis4GEmOMeCM.webp" loading="lazy" alt="" class="logo-int"><div class="int-h">Blue Yonder</div></a></div><div role="listitem" class="int-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/sap-extended-warehouse-management" aria-current="page" class="int-box black w-inline-block w--current"><img src="./SAP EWM API integration – connect to anything – Makini_files/67080ac3f5d59e851d4cbb00_VuUw59TdK1FK9dvmnJ0CSZFghJO0bbRC-DkxVUWtCzo.webp" loading="lazy" alt="" class="logo-int"><div class="int-h">SAP EWM</div></a></div><div role="listitem" class="int-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/oracle-warehouse-management" class="int-box black w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/692f424df67b6477d9dae677_5_lWM6pBfynTA2cgx75IoQwg4WzCASNQB0s5vJK18YQ.png" loading="lazy" alt="" class="logo-int"><div class="int-h">Oracle Warehouse Management</div></a></div><div role="listitem" class="int-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/sap-business-one" class="int-box black w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/65b3a88ee56fbacf3e6e9e01_q-K1NCFWw5dWAj9NTGeK9EkFBK6-AFALDfOjKejW9O8.webp" loading="lazy" alt="" class="logo-int"><div class="int-h">SAP Business One</div></a></div><div role="listitem" class="int-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/oracle-fusion-cloud-warehouse-management" class="int-box black w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/65b3a9eb9fea3d2b46d28267_BBin_Xl6U-Tt-qx1EUY1HG_vccNbmfbRlsXGmXbv90I.webp" loading="lazy" alt="" class="logo-int"><div class="int-h">Oracle Fusion Cloud</div></a></div><div role="listitem" class="int-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/infor-wms" class="int-box black w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/65df222c44955d2ba1b1f3fd_h149IqVojdfYooZLjnjJZYY4nzaGwi-OWn1nP8eASNU.webp" loading="lazy" alt="" class="logo-int"><div class="int-h">INFOR WMS</div></a></div><div role="listitem" class="int-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/plex-systems" class="int-box black w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/65b3a9ee2dc41c223581f640_SklO3WmiP0EKD3Sf0CK9TgNNyC98ITky26JQSUrfV-U.webp" loading="lazy" alt="" class="logo-int"><div class="int-h">PLEX Systems</div></a></div><div role="listitem" class="int-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/sap" class="int-box black w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/692f425a4e34a646271350d4_lwYL-zYI_3O5VxF9NJDyfOUUhJ29GF4NUE76nv92kxc.png" loading="lazy" alt="" class="logo-int"><div class="int-h">SAP S/4HANA</div></a></div><div role="listitem" class="int-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/service-channel" class="int-box black w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/65b3a991c7aa90faa154eb44_mz7JYoURz2RmWb-LQNSmOzGWP8jr-6SQRCQrYstpSls.webp" loading="lazy" alt="" class="logo-int"><div class="int-h">ServiceChannel</div></a></div><div role="listitem" class="int-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/tractian" class="int-box black w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/66447113a531ec39cfec4b5d_Group 34543 (1).webp" loading="lazy" alt="" class="logo-int"><div class="int-h">Tractian</div></a></div><div role="listitem" class="int-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/ulysses" class="int-box black w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/65b3a98cf23bf6ade35f08f1_g_dvDq757tSknCXgmkPO8m4yCnzqy_N1KMJm18dDf-w.webp" loading="lazy" alt="" class="logo-int"><div class="int-h">Ulysses Systems</div></a></div><div role="listitem" class="int-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/snapfulfil" class="int-box black w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/65b3a8407eeb714964709b5e_bf5YQBmE6UavajB6x3_310RffXOQPd8-lgzZvNQJgGY.webp" loading="lazy" alt="" class="logo-int"><div class="int-h">SnapFulfil WMS</div></a></div></div></div><div class="flex_center"><a data-w-id="28c3adec-ccfe-48a2-5443-8e9fbf79d1f4" href="https://www.makini.io/integrations" class="center-link-arrow w-inline-block"><div class="card-link-box-text">See all systems</div><div class="link-arrow-box"><div class="link-arrow-line"></div><div class="link-arrow-line2"></div></div></a></div></div><img src="./SAP EWM API integration – connect to anything – Makini_files/630dd99d0824856e51903807_line-rad.svg" loading="lazy" alt="" class="s5-dec"><img src="./SAP EWM API integration – connect to anything – Makini_files/630dd99d0824856e51903807_line-rad.svg" loading="lazy" alt="" class="s5-dec blur"></section><div class="s5 faq"><div class="m-container flex-center"><h2 class="h2-36 size-mobile-28">Frequently Asked&nbsp;Questions</h2><p class="t-15">Have any questions? We’re&nbsp;here&nbsp;to&nbsp;help&nbsp;You</p></div><div class="m-container mt-60"><div class="faq_list w-dyn-list"><div role="list" class="wrapper-dropdown w-dyn-items"><div role="listitem" class="faq_item w-dyn-item"><div data-hover="false" data-delay="0" class="dropdown_faq w-dropdown"><div class="dropdown-toggle_faq w-dropdown-toggle"><div class="title-faq white">How long does it take to integrate with Makini?</div><div class="icon_arrow w-embed"><svg width="100%" style="" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M7 7L12 12L7 17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M17 7L12 12L17 17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg></div></div><nav class="dropdown-list_faq w-dropdown-list"><div class="dropdown-list-item_faq"><div class="description-faq w-richtext"><p>Integration timelines vary by complexity. For standard implementations with no customizations, connections can be live within 1-2 weeks. This includes authentication setup and basic workflow configuration. For implementations requiring custom workflows or specific business logic, timelines typically range from 2-6 weeks depending on the scope. Complex enterprise deployments with multiple systems and custom requirements may take 6-10 weeks. These timelines are significantly shorter than traditional integration projects, which often take 2-24 months.</p></div></div></nav></div></div><div role="listitem" class="faq_item w-dyn-item"><div data-hover="false" data-delay="0" class="dropdown_faq w-dropdown"><div class="dropdown-toggle_faq w-dropdown-toggle"><div class="title-faq white">What fields are supported for purchase orders?</div><div class="icon_arrow w-embed"><svg width="100%" style="" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M7 7L12 12L7 17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M17 7L12 12L17 17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg></div></div><nav class="dropdown-list_faq w-dropdown-list"><div class="dropdown-list-item_faq"><div class="description-faq w-richtext"><p>Makini's purchase order data model includes comprehensive field coverage across all major ERP systems. Standard fields include order number, line items, vendor information, quantities, unit prices, dates (order date, required date, delivery date), status, currency, ship-to and bill-to addresses, payment terms, and custom fields. Each line item includes product/material codes, descriptions, quantities, unit of measure, pricing, and delivery information. The specific fields available depend on the source system's capabilities. You can view the complete field mapping for any connected system in the Makini dashboard, and custom fields can be added as needed for your specific requirements.</p></div></div></nav></div></div><div role="listitem" class="faq_item w-dyn-item"><div data-hover="false" data-delay="0" class="dropdown_faq w-dropdown"><div class="dropdown-toggle_faq w-dropdown-toggle"><div class="title-faq white">How do I check sync status?</div><div class="icon_arrow w-embed"><svg width="100%" style="" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M7 7L12 12L7 17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M17 7L12 12L17 17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg></div></div><nav class="dropdown-list_faq w-dropdown-list"><div class="dropdown-list-item_faq"><div class="description-faq w-richtext"><p>Makini provides a <code>/sync-status</code> API endpoint that returns the current synchronization state for a connection. The response includes the last successful sync timestamp, sync status (in progress, completed, failed), any error messages, and the next scheduled sync time. You can query this endpoint to monitor sync health and detect issues. For workflow-based syncs using Makini Flows, each workflow execution is logged with detailed status information including start time, completion time, success/failure status, and any errors encountered. The Makini dashboard also provides visual sync status monitoring across all connections.</p></div></div></nav></div></div><div role="listitem" class="faq_item w-dyn-item"><div data-hover="false" data-delay="0" class="dropdown_faq w-dropdown"><div class="dropdown-toggle_faq w-dropdown-toggle"><div class="title-faq white">Does Makini support multi-region deployments?</div><div class="icon_arrow w-embed"><svg width="100%" style="" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M7 7L12 12L7 17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M17 7L12 12L17 17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg></div></div><nav class="dropdown-list_faq w-dropdown-list"><div class="dropdown-list-item_faq"><div class="description-faq w-richtext"><p>Yes, Makini supports multi-region deployments for customers requiring data residency in specific regions or needing high availability across geographies. Each region runs an independent instance of Makini with its own infrastructure, ensuring data remains within the specified region. Multi-region deployments are most common for self-hosted installations where customers want instances in multiple AWS regions or data centers. For cloud deployments, we can discuss region-specific hosting based on your requirements. Multi-region support ensures compliance with data localization regulations and provides geographic redundancy for mission-critical integrations.</p></div></div></nav></div></div></div></div></div></div><div class="getting"><div class="skew-box"><div class="m-container skew"><div class="skew-box-contant"><div class="u-s5-left"><h2 class="h2 white _2">Getting started it easy</h2><div class="u-s5-box-text">Explore Makini products, or create an account instantly and start interacting with CMMS data. You can also contact us to design a custom package for your business.</div><div class="price-s2-left-btns"><a href="https://app.makini.io/register" target="_blank" class="price-card-btn s2-btns w-inline-block"><div class="price-card-btn-text">Start free trial</div></a><a rel="nofollow" href="https://calendly.com/api-94107/makini-api-demo" target="_blank" class="price-card-btn s2-btn2 w-inline-block"><div class="price-card-btn-text">Schedule demo</div></a></div></div><img src="./SAP EWM API integration – connect to anything – Makini_files/633bf05acfeb98ebf8b54c23_image 2.webp" loading="lazy" width="421" sizes="(max-width: 479px) 95vw, 421px" alt="" srcset="https://cdn.prod.website-files.com/6075c27738665c833a39fd83/633bf05acfeb98ebf8b54c23_image%202-p-500.webp 500w, https://cdn.prod.website-files.com/6075c27738665c833a39fd83/633bf05acfeb98ebf8b54c23_image%202-p-800.webp 800w, https://cdn.prod.website-files.com/6075c27738665c833a39fd83/633bf05acfeb98ebf8b54c23_image%202-p-1080.webp 1080w, https://cdn.prod.website-files.com/6075c27738665c833a39fd83/633bf05acfeb98ebf8b54c23_image%202.webp 1624w" class="skew-box-img"></div></div><img src="./SAP EWM API integration – connect to anything – Makini_files/630df2e36671aa7e747178ca_getting-dec1.svg" loading="lazy" alt="" class="skew-box-dec1"><img src="./SAP EWM API integration – connect to anything – Makini_files/630df354bf383e28caafd39f_getting-dec2.svg" loading="lazy" alt="" class="skew-box-dec2"></div><div class="skew-bg"></div></div><footer class="footer"><div class="m-container"><div class="footer-box"><div class="footer-col1"><a href="https://www.makini.io/" class="footer-logo-link w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/608566aaabf4b474f887440f_Light.svg" loading="lazy" alt="logotype makini" class="footer-logo"></a><div class="footer-social-box"><a rel="nofollow" data-w-id="1922b780-db14-3e7b-e2e0-5b526bdd55bf" href="https://twitter.com/ThatGirlMakini" target="_blank" class="footer-social-icon w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/630daac64e0ef51b7d323012_twitter.svg" loading="lazy" alt="logotype twitter" class="footer-social-icon-img"></a><a rel="nofollow" data-w-id="62af4326-50c3-e970-76ca-3e1ff0fc0228" href="https://www.facebook.com/makini.io/" target="_blank" class="footer-social-icon w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/630dacc108248530ab8e7714_facebook.svg" loading="lazy" alt="logotype facebook" class="footer-social-icon-img"></a><a rel="nofollow" data-w-id="a066a0c3-83f2-2f13-b191-0c5b1dc1390b" href="https://www.linkedin.com/company/makini-io/mycompany/" target="_blank" class="footer-social-icon w-inline-block"><img src="./SAP EWM API integration – connect to anything – Makini_files/630dacd04e0ef5591d324dd7_linkedin.svg" loading="lazy" alt="logotype linkedin" class="footer-social-icon-img"></a></div><div class="footer-logo_soc"><img src="./SAP EWM API integration – connect to anything – Makini_files/69d7969667b065756dc9ac08_image 1843.png" loading="lazy" width="48" alt=""><div>SOC 2 Type</div></div></div><div class="footer-col2 none"><div class="footer-h">Integrations</div><div class="footer-collection-box"><div class="footer-collection w-dyn-list"><div role="list" class="footer-collection-list w-dyn-items"><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/blue-yonder" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">Blue Yonder</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/sap-extended-warehouse-management" aria-current="page" class="footer-collection-item-link w-inline-block w--current"><div class="footer-collection-item-text">SAP EWM</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/oracle-warehouse-management" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">Oracle Warehouse Management</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/sap-business-one" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">SAP Business One</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/oracle-fusion-cloud-warehouse-management" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">Oracle Fusion Cloud</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/infor-wms" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">INFOR WMS</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/plex-systems" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">PLEX Systems</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/sap" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">SAP S/4HANA</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/service-channel" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">ServiceChannel</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/tractian" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">Tractian</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/ulysses" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">Ulysses Systems</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/snapfulfil" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">SnapFulfil WMS</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/aptean-tabware" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">Aptean EAM Tabware</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/odoo" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">Odoo</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/oracle-e-business-suite" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">Oracle EBS</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/asset-essentials" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">Brightly Asset Essentials</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/ariba" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">SAP Ariba</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/infor-erp-m3" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">INFOR ERP M3</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/k-motion-enterprise-3pl" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">K.Motion Enterprise 3PL</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/fishbowl" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">Fishbowl</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/netsuite" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">Oracle NetSuite</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/sage-500" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">Sage 500</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/eclipse" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">Eclipse</div></a></div><div role="listitem" class="footer-collection-item w-dyn-item"><a href="https://www.makini.io/integrations/aptean-api-pro" class="footer-collection-item-link w-inline-block"><div class="footer-collection-item-text">Aptean</div></a></div></div></div><div class="div-block-2"><div class="div-block-3"></div><a data-w-id="8fe16e21-ae8e-4075-83ab-9a732010b1e9" href="https://www.makini.io/integrations" class="footer-products-link w-inline-block"><div class="link-box-text">See all</div><div class="link-arrow-box"><div class="link-arrow-line"></div><div class="link-arrow-line2"></div></div></a></div></div></div><div class="footer-col3"><div id="w-node-_1ac254c9-5ce5-eb6a-6153-54242b71c2ba-ae2f46c5" class="footer-h">About</div><a href="https://www.makini.io/use-cases" class="footer-link">Use cases</a><a href="https://www.makini.io/pricing" class="footer-link">Pricing</a><a href="https://www.makini.io/careers" class="footer-link">Careers</a><a id="w-node-_866a1790-6567-9689-15fb-254a19b08fa7-ae2f46c5" href="https://www.makini.io/use-cases/advanced-maintenance" class="footer-link">Advanced maintenance</a><a href="https://docs.makini.io/docs/api-docs/branches/master/df956de0eed6b-makini-api" target="_blank" class="footer-link">API reference</a><a href="https://www.makini.io/blog" class="footer-link">Blog</a><a id="w-node-_3076ab55-8267-8143-ab22-5b23f72a3b81-ae2f46c5" href="https://www.makini.io/use-cases/inventory-optimization" class="footer-link">Inventory optimization</a><a href="https://www.makini.io/educational-resources" class="footer-link">Educational resources</a><a href="https://www.makini.io/legal" class="footer-link">Legal</a><a id="w-node-_76b49c40-56c1-026d-591b-684f87d5d7cf-ae2f46c5" href="https://www.makini.io/use-cases/aftermarket" class="footer-link">Industrial aftermarket</a><a href="https://www.makini.io/sitemap" class="footer-link">Sitemap</a><a id="w-node-_78906131-b62f-eb0a-449b-aa57ca79dae7-ae2f46c5" href="https://www.makini.io/faq" class="footer-link">FAQ</a><div class="w-embed"><style>
+.footer-col3 .footer-link {
+width: auto !important;
+}
+</style></div></div></div></div></footer><div style="display:none;opacity:0" class="wrapper-popup"><div class="form-popup w-form"><div data-w-id="771ffc1f-1868-7894-064e-d0a1ed8c2545" class="box-close"><img src="./SAP EWM API integration – connect to anything – Makini_files/6343cbd4459eb42fcdff8637_close.svg" loading="lazy" alt="" class="close"></div><form id="test-connection" name="wf-form-test-connection" data-name="test connection" method="get" class="form-pp" data-wf-page-id="62e908c730bdfec9424fba91" data-wf-element-id="769749c5-2058-95cf-5515-b919a4744d13"><div class="heading-form"><div class="t-20">Test connection</div></div><div class="line"></div><div class="box-form"><div class="t-14">Submit email to proceed</div><div class="box-input"><input class="input pp w-input" maxlength="256" name="email" data-name="Email" placeholder="" type="email" id="email" required=""><input class="integration-input w-input" maxlength="256" name="Integration" data-name="Integration" placeholder="" type="text"></div><div class="box-sb"><div class="gradient-sb"></div><input type="submit" data-wait="Please wait..." id="submit" class="submit-button w-button" value="Test connection with the system"></div></div></form><div class="success w-form-done"><div class="box-success"><div class="w-embed"><a href="https://app.makini.io/register?_ga=2.217875094.1224981658.1659937789-1817805212.1654850753&amp;platform=sap-extended-warehouse-management" target="_blank" id="generateSP" class="btn-blue w-button">Test connection</a></div></div></div><div class="w-form-fail"><div>Oops! Something went wrong while submitting the form.</div></div></div></div><div class="hidden w-embed w-script"></div><div class="hidden w-embed"><style>
+.home-s2 {
+background-image: none;
+}
+</style>
+<!-- load more button -->
+<style>
+.cms_load_more .link-arrow-box {
+transform: rotate(90deg);
+}
+</style>
+<style>
+  .w-dyn-item {
+    transition: opacity 500ms ease-out, transform 500ms ease-out;
+  }
+
+  .w-dyn-item.is-list-starting {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+</style></div><dialog id="dialog" class="dialog"><div class="dialog-close"><img src="./SAP EWM API integration – connect to anything – Makini_files/6343cbd4459eb42fcdff8637_close.svg" loading="lazy" alt="" class="close"></div><div class="dialog-content"><div class="form-popup w-form"><form method="get" name="wf-form-test-connection" data-name="test connection" class="form-pp" data-wf-page-id="62e908c730bdfec9424fba91" data-wf-element-id="4716cf02-a190-343e-40e7-71ffb2c5d895"><div class="heading-form flex-horizontal"><img src="./SAP EWM API integration – connect to anything – Makini_files/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="card-icon"><div class="t-20 white system_endpoint">Title</div></div><div class="line"></div><div class="box-form-pp"><div class="icon_mail w-embed"><svg width="100%" style="" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_4038_1282)">
+<path d="M24.002 1C36.7045 1 47.002 11.2975 47.002 24C47.002 36.7026 36.7045 47 24.002 47C11.2994 47 1.00195 36.7026 1.00195 24C1.00195 11.2975 11.2994 1 24.002 1Z" stroke="currentColor" stroke-opacity="0.93" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M31 17H17C15.8954 17 15 17.8954 15 19V29C15 30.1046 15.8954 31 17 31H31C32.1046 31 33 30.1046 33 29V19C33 17.8954 32.1046 17 31 17Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M15 19L24 25L33 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+</g>
+<defs>
+<clippath id="clip0_4038_1282">
+<rect width="48" height="48" fill="currentColor"></rect>
+</clippath>
+</defs>
+</svg></div><div class="text_form_pp">Get the full API reference</div><div class="paragraph_form_pp">Data models, endpoint schemas, and code samples for every system Makini connects. Enter your email to open the docs.</div><div class="box-input"><input class="input pp w-input" maxlength="256" name="email" data-name="Email" placeholder="you@company.com" type="email" required=""></div><div class="box-sb"><div class="gradient-sb"></div><input type="submit" data-wait="Please wait..." class="submit-button w-button" value="Continue to docs"></div><div class="text_note_spam">No spam. We only email you about breaking changes and version updates.</div></div></form><div class="success w-form-done"><div class="box-success-pp"><div class="text_form_pp">Open the <span class="system_endpoint">{Endpoint name}</span> API reference</div><p class="paragraph_form_pp">The button below opens the full reference in a new tab.</p><div class="success_box_button"><button target="_blank" type="button" class="btn-blue dialog_success"><div>Open</div><div class="system_endpoint">{Endpoint name}</div><div>docs</div></button><a rel="nofollow" href="https://calendly.com/api-94107/makini-api-demo" target="_blank" class="success_secondary_button w-inline-block"><div class="price-card-btn-text">Or schedule a tech deep dive</div></a></div></div></div><div class="w-form-fail"><div>Oops! Something went wrong while submitting the form.</div></div></div></div></dialog><div class="dialog-css w-embed"><style>
+/* Блокируем скролл фона, когда открыт диалог */
+body:has(dialog[open]) {
+  overflow: hidden;
+}
+
+/* Плавности */
+dialog[open] {
+  opacity: 1;
+}
+dialog {
+/*  margin: auto auto auto auto !important; */
+  border: 0px transparent !important;
+  opacity: 1;
+  transition: all 0.5s allow-discrete;
+}
+@starting-style {
+  dialog:open {
+    opacity: 0;
+  }
+}
+
+/* Подложка */
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0);
+  transition: all 0.7s allow-discrete;
+}
+dialog[open]::backdrop {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+@starting-style {
+  dialog[open]::backdrop {
+    background-color: var(--color--transparent) !important;
+  }
+}
+.dialog .card-icon {
+margin-right: 12px;
+}
+html,
+body {
+  scrollbar-gutter: stable;
+}
+.m-body.scroll-lock {
+  overflow: hidden;
+}
+</style></div><div class="dialog-js w-embed w-script"><script>
+document.addEventListener('DOMContentLoaded', () => {
+  const dialog = document.querySelector('#dialog');
+
+  if (!dialog) return;
+
+  const dialogCloseBtn = dialog.querySelector('.dialog-close');
+  const dialogSuccessBtn = dialog.querySelector('.btn-blue.dialog_success');
+  const dialogForm = dialog.querySelector('form');
+  const dialogFormWrapper = dialogForm ? dialogForm.closest('.w-form') : null;
+
+  let targetUrl = '';
+  let resetTimer = null;
+  let lockedScrollY = 0;
+  let isScrollLocked = false;
+  let waitingForSuccessRedirect = false;
+  let redirectDone = false;
+
+  const personalEmailDomains = [
+    'gmail.com',
+    'googlemail.com',
+    'yahoo.com',
+    'yahoo.co.uk',
+    'yahoo.de',
+    'hotmail.com',
+    'hotmail.co.uk',
+    'outlook.com',
+    'live.com',
+    'msn.com',
+    'icloud.com',
+    'me.com',
+    'mac.com',
+    'aol.com',
+    'proton.me',
+    'protonmail.com',
+    'pm.me',
+    'yandex.com',
+    'yandex.ru',
+    'ya.ru',
+    'mail.ru',
+    'bk.ru',
+    'list.ru',
+    'inbox.ru',
+    'rambler.ru',
+    'gmx.com',
+    'gmx.de',
+    'web.de',
+    't-online.de',
+    'mail.com'
+  ];
+
+  const originalHtmlStyle = {
+    overflow: '',
+  };
+
+  const originalBodyStyle = {
+    position: '',
+    top: '',
+    left: '',
+    right: '',
+    width: '',
+    overflow: '',
+  };
+
+  function lockScroll() {
+    if (isScrollLocked) return;
+
+    lockedScrollY = window.scrollY || window.pageYOffset || 0;
+
+    originalHtmlStyle.overflow = document.documentElement.style.overflow;
+
+    originalBodyStyle.position = document.body.style.position;
+    originalBodyStyle.top = document.body.style.top;
+    originalBodyStyle.left = document.body.style.left;
+    originalBodyStyle.right = document.body.style.right;
+    originalBodyStyle.width = document.body.style.width;
+    originalBodyStyle.overflow = document.body.style.overflow;
+
+    document.documentElement.style.overflow = 'hidden';
+
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${lockedScrollY}px`;
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+    document.body.style.overflow = 'hidden';
+
+    document.body.classList.add('scroll-lock');
+
+    isScrollLocked = true;
+  }
+
+  function unlockScroll() {
+    if (!isScrollLocked) return;
+
+    document.documentElement.style.overflow = originalHtmlStyle.overflow;
+
+    document.body.style.position = originalBodyStyle.position;
+    document.body.style.top = originalBodyStyle.top;
+    document.body.style.left = originalBodyStyle.left;
+    document.body.style.right = originalBodyStyle.right;
+    document.body.style.width = originalBodyStyle.width;
+    document.body.style.overflow = originalBodyStyle.overflow;
+
+    document.body.classList.remove('scroll-lock');
+
+    window.scrollTo(0, lockedScrollY);
+
+    isScrollLocked = false;
+  }
+
+  function clearResetTimer() {
+    if (resetTimer) {
+      clearTimeout(resetTimer);
+      resetTimer = null;
+    }
+  }
+
+  function getImageElement(element) {
+    if (!element) return null;
+
+    if (element.tagName && element.tagName.toLowerCase() === 'img') {
+      return element;
+    }
+
+    return element.querySelector('img');
+  }
+
+  function getEmailField() {
+    if (!dialogForm) return null;
+
+    const emailByType = dialogForm.querySelector('input[type="email"]');
+
+    if (emailByType) return emailByType;
+
+    return Array.from(dialogForm.querySelectorAll('input')).find((field) => {
+      const name = (field.getAttribute('name') || '').toLowerCase();
+      const id = (field.getAttribute('id') || '').toLowerCase();
+      const placeholder = (field.getAttribute('placeholder') || '').toLowerCase();
+
+      return (
+        name.includes('email') ||
+        id.includes('email') ||
+        placeholder.includes('email') ||
+        placeholder.includes('e-mail')
+      );
+    }) || null;
+  }
+
+  function isPersonalEmailDomain(domain) {
+    return personalEmailDomains.includes(domain);
+  }
+
+  function validateCorporateEmail() {
+    const emailField = getEmailField();
+
+    if (!emailField) return true;
+
+    emailField.setCustomValidity('');
+
+    const email = emailField.value.trim().toLowerCase();
+
+    if (!email) return true;
+
+    const isEmailFormatValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+    if (!isEmailFormatValid) return true;
+
+    const domain = email.split('@').pop();
+
+    if (isPersonalEmailDomain(domain)) {
+      emailField.setCustomValidity('Please use your business email address. Personal email domains are not allowed.');
+      return false;
+    }
+
+    return true;
+  }
+
+  function resetWebflowForm() {
+    if (!dialogForm || !dialogFormWrapper) return;
+
+    const successMessage = dialogFormWrapper.querySelector('.w-form-done');
+    const failMessage = dialogFormWrapper.querySelector('.w-form-fail');
+
+    dialogForm.reset();
+    dialogForm.style.display = '';
+
+    dialogForm.querySelectorAll('input, textarea, select').forEach((field) => {
+      const tag = field.tagName.toLowerCase();
+      const type = (field.getAttribute('type') || '').toLowerCase();
+
+      field.setCustomValidity('');
+
+      if (
+        type === 'hidden' ||
+        type === 'submit' ||
+        type === 'button'
+      ) {
+        return;
+      }
+
+      if (type === 'checkbox' || type === 'radio') {
+        field.checked = false;
+        return;
+      }
+
+      if (tag === 'select') {
+        field.selectedIndex = 0;
+        return;
+      }
+
+      field.value = '';
+    });
+
+    if (successMessage) {
+      successMessage.style.display = 'none';
+    }
+
+    if (failMessage) {
+      failMessage.style.display = 'none';
+    }
+  }
+
+  function resetFormAfterDialogClose() {
+    clearResetTimer();
+
+    resetTimer = setTimeout(() => {
+      if (dialog.open) return;
+
+      resetWebflowForm();
+
+      targetUrl = '';
+      waitingForSuccessRedirect = false;
+      redirectDone = false;
+
+      if (dialogSuccessBtn) {
+        dialogSuccessBtn.removeAttribute('data-target-url');
+      }
+
+      resetTimer = null;
+    }, 1000);
+  }
+
+  function syncDialogData(card) {
+    const cardTitleEl = card.querySelector('.card-h');
+    const cardIconEl = card.querySelector('.card-icon');
+
+    const cardTitle = cardTitleEl ? cardTitleEl.textContent.trim() : '';
+    const cardImg = getImageElement(cardIconEl);
+
+    targetUrl = (card.getAttribute('data-target-url') || '').trim();
+
+    dialog.querySelectorAll('.system_endpoint').forEach((element) => {
+      element.textContent = cardTitle;
+    });
+
+    const dialogIconEl = dialog.querySelector('.card-icon');
+    const dialogImg = getImageElement(dialogIconEl);
+
+    if (dialogImg) {
+      if (cardImg) {
+        dialogImg.src = cardImg.currentSrc || cardImg.src;
+        dialogImg.alt = cardImg.alt || cardTitle;
+
+        if (cardImg.srcset) {
+          dialogImg.srcset = cardImg.srcset;
+        } else {
+          dialogImg.removeAttribute('srcset');
+        }
+
+        if (cardImg.sizes) {
+          dialogImg.sizes = cardImg.sizes;
+        } else {
+          dialogImg.removeAttribute('sizes');
+        }
+      } else {
+        dialogImg.removeAttribute('src');
+        dialogImg.removeAttribute('srcset');
+        dialogImg.removeAttribute('sizes');
+        dialogImg.alt = '';
+      }
+    }
+
+    if (dialogSuccessBtn) {
+      dialogSuccessBtn.removeAttribute('data-target-url');
+      dialogSuccessBtn.setAttribute('type', 'submit');
+    }
+  }
+
+  function isWebflowSuccessVisible() {
+    if (!dialogFormWrapper) return false;
+
+    const successMessage = dialogFormWrapper.querySelector('.w-form-done');
+
+    if (!successMessage) return false;
+
+    return window.getComputedStyle(successMessage).display !== 'none';
+  }
+
+  function redirectAfterSuccessfulSubmit() {
+    if (!waitingForSuccessRedirect) return;
+    if (redirectDone) return;
+    if (!targetUrl) return;
+    if (!isWebflowSuccessVisible()) return;
+
+    redirectDone = true;
+    waitingForSuccessRedirect = false;
+
+    window.location.href = targetUrl;
+  }
+
+  document.addEventListener('click', (event) => {
+    const card = event.target.closest('.dialog-btn[data-target-url]');
+
+    if (!card) return;
+    if (dialog.contains(card)) return;
+
+    const url = (card.getAttribute('data-target-url') || '').trim();
+
+    if (!url) return;
+
+    event.preventDefault();
+
+    clearResetTimer();
+
+    resetWebflowForm();
+    syncDialogData(card);
+
+    waitingForSuccessRedirect = false;
+    redirectDone = false;
+
+    if (!dialog.open) {
+      lockScroll();
+      dialog.showModal();
+
+      requestAnimationFrame(() => {
+        if (document.activeElement && dialog.contains(document.activeElement)) {
+          document.activeElement.blur();
+        }
+      });
+    }
+  });
+
+  if (dialogCloseBtn) {
+    dialogCloseBtn.setAttribute('type', 'button');
+
+    dialogCloseBtn.addEventListener('click', () => {
+      dialog.close();
+    });
+  }
+
+  dialog.addEventListener('click', (event) => {
+    if (event.target === dialog) {
+      dialog.close();
+    }
+  });
+
+  dialog.addEventListener('close', () => {
+    unlockScroll();
+    resetFormAfterDialogClose();
+  });
+
+  if (dialogForm) {
+    dialogForm.addEventListener('input', (event) => {
+      const emailField = getEmailField();
+
+      if (emailField && event.target === emailField) {
+        validateCorporateEmail();
+      }
+    });
+
+    dialogForm.addEventListener('submit', (event) => {
+      const emailIsValid = validateCorporateEmail();
+
+      if (!emailIsValid || !dialogForm.checkValidity()) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        dialogForm.reportValidity();
+        return;
+      }
+
+      waitingForSuccessRedirect = Boolean(targetUrl);
+      redirectDone = false;
+
+      setTimeout(redirectAfterSuccessfulSubmit, 50);
+      setTimeout(redirectAfterSuccessfulSubmit, 300);
+      setTimeout(redirectAfterSuccessfulSubmit, 1000);
+    }, true);
+  }
+
+  if (dialogFormWrapper) {
+    const observer = new MutationObserver(() => {
+      redirectAfterSuccessfulSubmit();
+    });
+
+    observer.observe(dialogFormWrapper, {
+      attributes: true,
+      childList: true,
+      subtree: true,
+      attributeFilter: ['style', 'class']
+    });
+  }
+
+  if (dialogSuccessBtn && dialogForm) {
+    dialogSuccessBtn.removeAttribute('data-target-url');
+    dialogSuccessBtn.setAttribute('type', 'submit');
+
+    if (!dialogForm.contains(dialogSuccessBtn)) {
+      dialogSuccessBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        dialogForm.requestSubmit();
+      });
+    }
+  }
+});
+</script>
+<!--script>
+document.addEventListener('DOMContentLoaded', () => {
+  const dialog = document.querySelector('#dialog');
+
+  if (!dialog) return;
+
+  const dialogCloseBtn = dialog.querySelector('.dialog-close');
+  const dialogSuccessBtn = dialog.querySelector('.btn-blue.dialog_success');
+  const dialogForm = dialog.querySelector('form');
+  const dialogFormWrapper = dialogForm ? dialogForm.closest('.w-form') : null;
+
+  let targetUrl = '';
+  let resetTimer = null;
+  let lockedScrollY = 0;
+  let isScrollLocked = false;
+
+  const originalHtmlStyle = {
+    overflow: '',
+  };
+
+  const originalBodyStyle = {
+    position: '',
+    top: '',
+    left: '',
+    right: '',
+    width: '',
+    overflow: '',
+  };
+
+  function lockScroll() {
+    if (isScrollLocked) return;
+
+    lockedScrollY = window.scrollY || window.pageYOffset || 0;
+
+    originalHtmlStyle.overflow = document.documentElement.style.overflow;
+
+    originalBodyStyle.position = document.body.style.position;
+    originalBodyStyle.top = document.body.style.top;
+    originalBodyStyle.left = document.body.style.left;
+    originalBodyStyle.right = document.body.style.right;
+    originalBodyStyle.width = document.body.style.width;
+    originalBodyStyle.overflow = document.body.style.overflow;
+
+    document.documentElement.style.overflow = 'hidden';
+
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${lockedScrollY}px`;
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+    document.body.style.overflow = 'hidden';
+
+    document.body.classList.add('scroll-lock');
+
+    isScrollLocked = true;
+  }
+
+  function unlockScroll() {
+    if (!isScrollLocked) return;
+
+    document.documentElement.style.overflow = originalHtmlStyle.overflow;
+
+    document.body.style.position = originalBodyStyle.position;
+    document.body.style.top = originalBodyStyle.top;
+    document.body.style.left = originalBodyStyle.left;
+    document.body.style.right = originalBodyStyle.right;
+    document.body.style.width = originalBodyStyle.width;
+    document.body.style.overflow = originalBodyStyle.overflow;
+
+    document.body.classList.remove('scroll-lock');
+
+    window.scrollTo(0, lockedScrollY);
+
+    isScrollLocked = false;
+  }
+
+  function clearResetTimer() {
+    if (resetTimer) {
+      clearTimeout(resetTimer);
+      resetTimer = null;
+    }
+  }
+
+  function getImageElement(element) {
+    if (!element) return null;
+
+    if (element.tagName && element.tagName.toLowerCase() === 'img') {
+      return element;
+    }
+
+    return element.querySelector('img');
+  }
+
+  function resetWebflowForm() {
+    if (!dialogForm || !dialogFormWrapper) return;
+
+    const successMessage = dialogFormWrapper.querySelector('.w-form-done');
+    const failMessage = dialogFormWrapper.querySelector('.w-form-fail');
+
+    dialogForm.reset();
+    dialogForm.style.display = '';
+
+    dialogForm.querySelectorAll('input, textarea, select').forEach((field) => {
+      const tag = field.tagName.toLowerCase();
+      const type = (field.getAttribute('type') || '').toLowerCase();
+
+      if (
+        type === 'hidden' ||
+        type === 'submit' ||
+        type === 'button'
+      ) {
+        return;
+      }
+
+      if (type === 'checkbox' || type === 'radio') {
+        field.checked = false;
+        return;
+      }
+
+      if (tag === 'select') {
+        field.selectedIndex = 0;
+        return;
+      }
+
+      field.value = '';
+    });
+
+    if (successMessage) {
+      successMessage.style.display = 'none';
+    }
+
+    if (failMessage) {
+      failMessage.style.display = 'none';
+    }
+  }
+
+  function resetFormAfterDialogClose() {
+    clearResetTimer();
+
+    resetTimer = setTimeout(() => {
+      if (dialog.open) return;
+
+      resetWebflowForm();
+
+      targetUrl = '';
+
+      if (dialogSuccessBtn) {
+        dialogSuccessBtn.removeAttribute('data-target-url');
+      }
+
+      resetTimer = null;
+    }, 1000);
+  }
+
+  function syncDialogData(card) {
+    const cardTitleEl = card.querySelector('.card-h');
+    const cardIconEl = card.querySelector('.card-icon');
+
+    const cardTitle = cardTitleEl ? cardTitleEl.textContent.trim() : '';
+    const cardImg = getImageElement(cardIconEl);
+
+    targetUrl = (card.getAttribute('data-target-url') || '').trim();
+
+    dialog.querySelectorAll('.system_endpoint').forEach((element) => {
+      element.textContent = cardTitle;
+    });
+
+    const dialogIconEl = dialog.querySelector('.card-icon');
+    const dialogImg = getImageElement(dialogIconEl);
+
+    if (dialogImg) {
+      if (cardImg) {
+        dialogImg.src = cardImg.currentSrc || cardImg.src;
+        dialogImg.alt = cardImg.alt || cardTitle;
+
+        if (cardImg.srcset) {
+          dialogImg.srcset = cardImg.srcset;
+        } else {
+          dialogImg.removeAttribute('srcset');
+        }
+
+        if (cardImg.sizes) {
+          dialogImg.sizes = cardImg.sizes;
+        } else {
+          dialogImg.removeAttribute('sizes');
+        }
+      } else {
+        dialogImg.removeAttribute('src');
+        dialogImg.removeAttribute('srcset');
+        dialogImg.removeAttribute('sizes');
+        dialogImg.alt = '';
+      }
+    }
+
+    if (dialogSuccessBtn) {
+      dialogSuccessBtn.setAttribute('type', 'button');
+      dialogSuccessBtn.setAttribute('data-target-url', targetUrl);
+    }
+  }
+
+  document.addEventListener('click', (event) => {
+    const card = event.target.closest('.dialog-btn[data-target-url]');
+
+    if (!card) return;
+    if (dialog.contains(card)) return;
+
+    const url = (card.getAttribute('data-target-url') || '').trim();
+
+    if (!url) return;
+
+    event.preventDefault();
+
+    clearResetTimer();
+
+    resetWebflowForm();
+    syncDialogData(card);
+
+    if (!dialog.open) {
+      lockScroll();
+      dialog.showModal();
+
+      requestAnimationFrame(() => {
+        if (document.activeElement && dialog.contains(document.activeElement)) {
+          document.activeElement.blur();
+        }
+      });
+    }
+  });
+
+  if (dialogCloseBtn) {
+    dialogCloseBtn.setAttribute('type', 'button');
+
+    dialogCloseBtn.addEventListener('click', () => {
+      dialog.close();
+    });
+  }
+
+  dialog.addEventListener('click', (event) => {
+    if (event.target === dialog) {
+      dialog.close();
+    }
+  });
+
+  dialog.addEventListener('close', () => {
+    unlockScroll();
+    resetFormAfterDialogClose();
+  });
+
+  if (dialogSuccessBtn) {
+    dialogSuccessBtn.setAttribute('type', 'button');
+
+    dialogSuccessBtn.addEventListener('click', (event) => {
+      event.preventDefault();
+
+      const url = (
+        dialogSuccessBtn.getAttribute('data-target-url') ||
+        targetUrl ||
+        ''
+      ).trim();
+
+      if (!url) return;
+
+      window.open(url, '_blank', 'noopener,noreferrer');
+    });
+  }
+});
+</script--></div><script src="./SAP EWM API integration – connect to anything – Makini_files/jquery-3.5.1.min.dc5e7f18c8.js" type="text/javascript"></script><script src="./SAP EWM API integration – connect to anything – Makini_files/webflow.schunk.1a807f015b216e46.js" type="text/javascript"></script><script src="./SAP EWM API integration – connect to anything – Makini_files/webflow.schunk.9b5bd8e84658d2a4.js" type="text/javascript"></script><script src="./SAP EWM API integration – connect to anything – Makini_files/webflow.847938a1.8836ea3eb6313895.js" type="text/javascript"></script><iframe id="_hjSafeContext_16506394" title="_hjSafeContext" tabindex="-1" aria-hidden="true" src="./SAP EWM API integration – connect to anything – Makini_files/saved_resource.html" style="display: none !important; width: 1px !important; height: 1px !important; opacity: 0 !important; pointer-events: none !important;"></iframe></body></html>

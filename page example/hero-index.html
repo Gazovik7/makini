@@ -1,0 +1,1808 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Makini Hero Connector Variants</title>
+<meta name="description" content="Five polished interaction prototypes for replacing the One network hero moment on the Makini index page.">
+<style>
+  :root {
+    --bg-deep: #0f1016;
+    --bg-a: #16161d;
+    --bg-b: #1d1d28;
+    --card: #1b1922;
+    --card-hot: #212433;
+    --line: rgba(255,255,255,.13);
+    --line-strong: rgba(255,255,255,.24);
+    --text: #fff;
+    --muted: #c6c7cc;
+    --soft: #8d8f99;
+    --blue: #71a1ff;
+    --violet: #9468f2;
+    --pink: #ef68f2;
+    --green: #7ee7b1;
+    --shadow: rgba(0,0,0,.44);
+    --container: 1180px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--text);
+    background:
+      radial-gradient(840px 580px at 10% 0%, rgba(113,161,255,.12), transparent 70%),
+      radial-gradient(780px 520px at 88% 4%, rgba(239,104,242,.11), transparent 72%),
+      linear-gradient(180deg, #191922 0%, #111217 38%, #0e0f15 100%);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: .18;
+    background-image:
+      linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: linear-gradient(180deg, #000 0%, transparent 78%);
+  }
+
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; }
+  img { max-width: 100%; display: block; }
+
+  .skip {
+    position: absolute;
+    left: 16px;
+    top: -80px;
+    z-index: 20;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: #fff;
+    color: #111217;
+  }
+  .skip:focus { top: 16px; }
+
+  .page {
+    width: min(var(--container), calc(100% - 48px));
+    margin: 0 auto;
+    padding: 48px 0 96px;
+  }
+
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 54px;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 650;
+    letter-spacing: .02em;
+  }
+
+  .brand-mark,
+  .hub-mark {
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255,255,255,.18);
+    background: radial-gradient(circle at 30% 20%, #3a2f5e, #1f1c2b 68%);
+    box-shadow: 0 0 34px rgba(148,104,242,.28), inset 0 0 18px rgba(255,255,255,.07);
+  }
+
+  .brand-mark {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+  }
+
+  .brand-mark img { width: 20px; height: 20px; object-fit: contain; }
+
+  .top-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .nav-pill {
+    display: inline-flex;
+    align-items: center;
+    min-height: 34px;
+    padding: 0 12px;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 999px;
+    background: rgba(255,255,255,.04);
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 600;
+    transition: border-color .22s ease, color .22s ease, background .22s ease, transform .22s ease;
+  }
+
+  .nav-pill:hover,
+  .nav-pill:focus-visible {
+    border-color: rgba(113,161,255,.48);
+    background: rgba(113,161,255,.09);
+    color: #fff;
+    transform: translateY(-1px);
+    outline: none;
+  }
+
+  .intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(300px, .62fr);
+    gap: 44px;
+    align-items: end;
+    margin-bottom: 34px;
+  }
+
+  .eyebrow {
+    margin: 0 0 14px;
+    color: var(--soft);
+    font-size: 11px;
+    line-height: 1;
+    font-weight: 750;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    max-width: 820px;
+    margin: 0;
+    font-size: clamp(46px, 7.2vw, 84px);
+    line-height: .96;
+    letter-spacing: -.052em;
+    font-weight: 680;
+    text-wrap: balance;
+  }
+
+  .intro-copy {
+    margin: 22px 0 0;
+    max-width: 720px;
+    color: var(--muted);
+    font-size: 17px;
+    line-height: 1.72;
+  }
+
+  .intro-panel {
+    position: relative;
+    overflow: hidden;
+    min-height: 210px;
+    padding: 22px;
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,.12);
+    background:
+      radial-gradient(circle at 100% 0%, rgba(113,161,255,.18), transparent 42%),
+      radial-gradient(circle at 14% 100%, rgba(239,104,242,.14), transparent 46%),
+      linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.035));
+    box-shadow: 0 24px 70px rgba(0,0,0,.34);
+  }
+
+  .intro-panel::after {
+    content: "";
+    position: absolute;
+    inset: auto 22px 20px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.28), transparent);
+  }
+
+  .metric-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 24px;
+  }
+
+  .metric {
+    min-height: 76px;
+    padding: 14px;
+    border-radius: 14px;
+    background: rgba(10,11,16,.52);
+    border: 1px solid rgba(255,255,255,.1);
+  }
+
+  .metric b {
+    display: block;
+    font-variant-numeric: tabular-nums;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: -.03em;
+  }
+
+  .metric span {
+    display: block;
+    margin-top: 9px;
+    color: var(--soft);
+    font-size: 11px;
+    line-height: 1.3;
+  }
+
+  .prototype-note {
+    margin: 18px 0 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .variant {
+    position: relative;
+    margin-top: 30px;
+    padding: 26px;
+    border-top: 1px solid rgba(255,255,255,.07);
+    border-radius: 24px;
+    background:
+      radial-gradient(720px 300px at 76% 0%, rgba(148,104,242,.11), transparent 68%),
+      linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.018));
+  }
+
+  .variant::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(84,133,229,.34), rgba(251,99,255,.23), rgba(255,255,255,.06));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .variant-head {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 18px;
+    align-items: start;
+    margin-bottom: 22px;
+  }
+
+  .variant-number {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 13px;
+    background: linear-gradient(135deg, rgba(113,161,255,.22), rgba(239,104,242,.16));
+    border: 1px solid rgba(255,255,255,.16);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 750;
+    font-variant-numeric: tabular-nums;
+    box-shadow: 0 0 30px rgba(113,161,255,.18);
+  }
+
+  .variant h2 {
+    margin: 0;
+    font-size: clamp(25px, 3vw, 36px);
+    line-height: 1.1;
+    letter-spacing: -.035em;
+    font-weight: 650;
+    text-wrap: balance;
+  }
+
+  .variant-desc {
+    max-width: 720px;
+    margin: 9px 0 0;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  .variant-tag {
+    justify-self: end;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 34px;
+    padding: 0 12px;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 999px;
+    background: rgba(255,255,255,.045);
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 650;
+    white-space: nowrap;
+  }
+
+  .tag-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: var(--green);
+    box-shadow: 0 0 14px rgba(126,231,177,.75);
+  }
+
+  .hero-frame {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(190px, 226px) minmax(0, 1fr) minmax(190px, 226px);
+    gap: 16px;
+    align-items: stretch;
+    min-height: 430px;
+  }
+
+  .side-card,
+  .stage {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 18px;
+    background-image: radial-gradient(circle at 100% 0%, #212433, #1b1921);
+    box-shadow: 0 22px 58px rgba(0,0,0,.34);
+  }
+
+  .side-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    padding: 20px;
+    transition: transform .24s ease, border-color .24s ease, box-shadow .24s ease;
+  }
+
+  .side-card::after {
+    content: "";
+    position: absolute;
+    top: -34px;
+    right: -38px;
+    width: 150px;
+    height: 150px;
+    border-radius: 999px;
+    background: rgba(113,161,255,.34);
+    filter: blur(70px);
+    pointer-events: none;
+  }
+
+  .mcp-side::after { background: rgba(239,104,242,.32); }
+
+  .side-card:hover,
+  .side-card:focus-within,
+  .variant[data-mode="api"] .api-side,
+  .variant[data-mode="mcp"] .mcp-side,
+  .variant[data-flow="api"] .api-side,
+  .variant[data-flow="mcp"] .mcp-side {
+    transform: translateY(-3px);
+    border-color: rgba(113,161,255,.48);
+    box-shadow: 0 24px 64px rgba(0,0,0,.4), 0 0 34px rgba(113,161,255,.15);
+  }
+
+  .variant[data-mode="mcp"] .mcp-side,
+  .variant[data-flow="mcp"] .mcp-side {
+    border-color: rgba(239,104,242,.46);
+    box-shadow: 0 24px 64px rgba(0,0,0,.4), 0 0 34px rgba(239,104,242,.13);
+  }
+
+  .side-kicker {
+    position: relative;
+    z-index: 1;
+    margin: 0 0 12px;
+    color: var(--soft);
+    font-size: 11px;
+    font-weight: 750;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+  }
+
+  .side-card h3 {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    color: #fff;
+    font-size: 21px;
+    line-height: 1.2;
+    letter-spacing: -.02em;
+    font-weight: 650;
+  }
+
+  .side-card p {
+    position: relative;
+    z-index: 1;
+    margin: 11px 0 20px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .mini-terminal {
+    position: relative;
+    z-index: 1;
+    margin-top: auto;
+    display: grid;
+    gap: 9px;
+    padding: 14px;
+    border-radius: 14px;
+    background: rgba(8,9,14,.62);
+    border: 1px solid rgba(255,255,255,.1);
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 12px;
+    color: #dfe7ff;
+  }
+
+  .mini-terminal span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .mini-terminal span::before {
+    content: "";
+    flex: 0 0 auto;
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: var(--green);
+    box-shadow: 0 0 10px rgba(126,231,177,.75);
+  }
+
+  .agent-strip {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 10px;
+    margin-top: auto;
+  }
+
+  .agent-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 46px;
+    padding: 8px 10px;
+    border-radius: 13px;
+    background: rgba(255,255,255,.065);
+    border: 1px solid rgba(255,255,255,.11);
+    color: #e8e9f0;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .agent-row img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+  }
+
+  .stage {
+    min-height: 430px;
+    padding: 24px;
+    background:
+      radial-gradient(420px 260px at 50% 28%, rgba(113,161,255,.13), transparent 70%),
+      radial-gradient(520px 300px at 78% 72%, rgba(239,104,242,.11), transparent 74%),
+      linear-gradient(180deg, #191923, #14151c);
+  }
+
+  .stage::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.5px;
+    background: linear-gradient(130deg, rgba(84,133,229,.72), rgba(251,99,255,.48), rgba(148,104,242,.42));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: .72;
+  }
+
+  .stage::after {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    border-radius: 17px;
+    background-image:
+      linear-gradient(rgba(255,255,255,.034) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.032) 1px, transparent 1px);
+    background-size: 38px 38px;
+    mask-image: radial-gradient(circle at 50% 46%, #000 0%, transparent 76%);
+    pointer-events: none;
+    opacity: .44;
+  }
+
+  .stage-inner {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    min-height: 382px;
+  }
+
+  .stage-caption {
+    position: absolute;
+    left: 18px;
+    bottom: 16px;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--soft);
+    font-size: 12px;
+    font-weight: 650;
+    letter-spacing: .02em;
+  }
+
+  .stage-caption::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--green);
+    box-shadow: 0 0 14px rgba(126,231,177,.7);
+  }
+
+  .hub-mark {
+    width: 86px;
+    height: 86px;
+    border-radius: 22px;
+  }
+
+  .hub-mark::before {
+    content: "";
+    position: absolute;
+    inset: -16px;
+    border-radius: inherit;
+    background: radial-gradient(circle, rgba(113,161,255,.24), transparent 64%);
+    z-index: -1;
+    animation: hubPulse 3s ease-in-out infinite;
+  }
+
+  .hub-mark img {
+    width: 46px;
+    height: 46px;
+    object-fit: contain;
+  }
+
+  .flow-line {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.22), transparent);
+    overflow: hidden;
+  }
+
+  .flow-line::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -10px;
+    width: 9px;
+    height: 9px;
+    border-radius: 999px;
+    transform: translateY(-50%);
+    background: #fff;
+    box-shadow: 0 0 12px rgba(255,255,255,.88), 0 0 26px rgba(113,161,255,.7);
+    animation: packetMove 1.75s linear infinite;
+  }
+
+  .flow-line.reverse::after { animation-direction: reverse; }
+
+  .soft-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 30px;
+    padding: 0 11px;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 999px;
+    background: rgba(15,16,22,.68);
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 650;
+    box-shadow: 0 12px 32px rgba(0,0,0,.25);
+  }
+
+  .logo-tile,
+  .mini-logo {
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255,255,255,.12);
+    background: rgba(255,255,255,.075);
+    box-shadow: 0 12px 28px rgba(0,0,0,.24);
+  }
+
+  .logo-tile img,
+  .mini-logo img {
+    max-width: 78%;
+    max-height: 70%;
+    object-fit: contain;
+  }
+
+  /* Variant 1: literal plug */
+  .plug-layout {
+    position: relative;
+    height: 100%;
+    display: grid;
+    place-items: center;
+  }
+
+  .plug-rail {
+    position: absolute;
+    left: 7%;
+    right: 7%;
+    top: 47%;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(113,161,255,.05), rgba(255,255,255,.24), rgba(239,104,242,.05));
+  }
+
+  .plug-rail::before,
+  .plug-rail::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 9px;
+    height: 9px;
+    border-radius: 999px;
+    transform: translateY(-50%);
+    background: #fff;
+    box-shadow: 0 0 14px rgba(255,255,255,.82), 0 0 30px rgba(113,161,255,.72);
+    opacity: 0;
+  }
+
+  .plug-rail::before { animation: railPulseLeft 3.6s ease-in-out infinite; }
+  .plug-rail::after { animation: railPulseRight 3.6s ease-in-out infinite; }
+
+  .port-module {
+    position: relative;
+    width: min(100%, 360px);
+    height: 236px;
+    display: grid;
+    place-items: center;
+  }
+
+  .port {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 138px;
+    height: 88px;
+    transform: translate(-50%, -50%);
+    border-radius: 24px;
+    background:
+      radial-gradient(circle at 50% 50%, rgba(126,231,177,.24), transparent 46%),
+      linear-gradient(180deg, #25293a, #171821);
+    border: 1px solid rgba(255,255,255,.18);
+    box-shadow: inset 0 0 24px rgba(0,0,0,.34), 0 0 44px rgba(113,161,255,.18);
+    animation: portGlow 3.6s ease-in-out infinite;
+  }
+
+  .port::before {
+    content: "";
+    position: absolute;
+    left: 23px;
+    right: 23px;
+    top: 21px;
+    bottom: 21px;
+    border-radius: 14px;
+    background: #0f1016;
+    border: 1px solid rgba(255,255,255,.2);
+    box-shadow: inset 0 0 22px rgba(0,0,0,.55);
+  }
+
+  .port::after {
+    content: "";
+    position: absolute;
+    inset: 26px 36px;
+    border-radius: 9px;
+    border: 1px solid rgba(126,231,177,.52);
+    box-shadow: 0 0 18px rgba(126,231,177,.35);
+  }
+
+  .plug {
+    position: absolute;
+    top: calc(50% - 23px);
+    left: calc(50% - 230px);
+    display: flex;
+    align-items: center;
+    transform: translateX(0);
+    animation: plugDock 3.6s cubic-bezier(.6, 0, .16, 1) infinite;
+  }
+
+  .plug-cable {
+    width: 124px;
+    height: 12px;
+    border-radius: 999px 0 0 999px;
+    background: linear-gradient(90deg, rgba(113,161,255,.12), rgba(113,161,255,.54));
+    border: 1px solid rgba(113,161,255,.22);
+  }
+
+  .plug-body {
+    position: relative;
+    width: 84px;
+    height: 46px;
+    border-radius: 14px 20px 20px 14px;
+    background: linear-gradient(180deg, #eff4ff, #aebde6);
+    box-shadow: 0 14px 34px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.8);
+  }
+
+  .plug-body::before,
+  .plug-body::after {
+    content: "";
+    position: absolute;
+    right: -23px;
+    width: 24px;
+    height: 6px;
+    border-radius: 999px;
+    background: #dfe7ff;
+    box-shadow: 0 0 10px rgba(255,255,255,.45);
+  }
+
+  .plug-body::before { top: 13px; }
+  .plug-body::after { bottom: 13px; }
+
+  .fan {
+    position: absolute;
+    left: 50%;
+    top: calc(50% + 82px);
+    width: 320px;
+    height: 130px;
+    transform: translateX(-50%);
+  }
+
+  .fan .mini-logo {
+    position: absolute;
+    width: 56px;
+    height: 42px;
+    border-radius: 13px;
+    opacity: 0;
+    transform: translate(-50%, 18px) scale(.82);
+    animation: fanReveal 3.6s ease-in-out infinite;
+    animation-delay: var(--delay);
+  }
+
+  .fan .mini-logo:nth-child(1) { left: 8%; top: 58%; }
+  .fan .mini-logo:nth-child(2) { left: 22%; top: 24%; }
+  .fan .mini-logo:nth-child(3) { left: 41%; top: 10%; }
+  .fan .mini-logo:nth-child(4) { left: 59%; top: 10%; }
+  .fan .mini-logo:nth-child(5) { left: 78%; top: 24%; }
+  .fan .mini-logo:nth-child(6) { left: 92%; top: 58%; }
+
+  .plug-label {
+    position: absolute;
+    left: 50%;
+    top: calc(50% - 92px);
+    transform: translateX(-50%);
+  }
+
+  /* Variant 2: central hub */
+  .hub-map {
+    position: relative;
+    height: 100%;
+    min-height: 382px;
+  }
+
+  .map-hub {
+    position: absolute;
+    left: 50%;
+    top: 47%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+  }
+
+  .orbit-node {
+    position: absolute;
+    z-index: 4;
+    width: 88px;
+    min-height: 72px;
+    transform: translate(-50%, -50%);
+    display: grid;
+    place-items: center;
+    gap: 6px;
+    padding: 8px;
+    border-radius: 16px;
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.13);
+    box-shadow: 0 16px 36px rgba(0,0,0,.28);
+  }
+
+  .orbit-node img {
+    max-width: 54px;
+    max-height: 30px;
+    object-fit: contain;
+  }
+
+  .orbit-node span {
+    color: var(--soft);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .orbit-node.n1 { left: 13%; top: 20%; }
+  .orbit-node.n2 { left: 27%; top: 76%; }
+  .orbit-node.n3 { left: 50%; top: 13%; }
+  .orbit-node.n4 { left: 73%; top: 76%; }
+  .orbit-node.n5 { left: 87%; top: 20%; }
+  .orbit-node.n6 { left: 88%; top: 52%; }
+  .orbit-node.n7 { left: 12%; top: 52%; }
+
+  .spoke {
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    top: 47%;
+    width: var(--w);
+    height: 2px;
+    transform-origin: left center;
+    transform: rotate(var(--r));
+    background: linear-gradient(90deg, rgba(255,255,255,.22), rgba(255,255,255,.04));
+    opacity: .86;
+  }
+
+  .spoke::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    transform: translateY(-50%);
+    background: #fff;
+    box-shadow: 0 0 14px rgba(255,255,255,.78), 0 0 24px rgba(113,161,255,.55);
+    animation: spokeParticle 2.2s linear infinite;
+    animation-delay: var(--delay);
+  }
+
+  .variant-hub[data-flow="api"] .spoke.mcp-path,
+  .variant-hub[data-flow="mcp"] .spoke.api-path {
+    opacity: .22;
+  }
+
+  .variant-hub[data-flow="api"] .spoke.api-path::after,
+  .variant-hub[data-flow="mcp"] .spoke.mcp-path::after {
+    background: var(--green);
+    box-shadow: 0 0 14px rgba(126,231,177,.82), 0 0 30px rgba(126,231,177,.5);
+  }
+
+  .map-label-left,
+  .map-label-right {
+    position: absolute;
+    z-index: 5;
+    top: calc(47% + 74px);
+  }
+
+  .map-label-left { left: 10%; }
+  .map-label-right { right: 10%; }
+
+  /* Variant 3: toggle */
+  .toggle-scene {
+    position: relative;
+    height: 100%;
+    min-height: 382px;
+    display: grid;
+    place-items: center;
+  }
+
+  .toggle-path {
+    position: absolute;
+    top: 50%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.22), transparent);
+    transition: opacity .28s ease, filter .28s ease;
+  }
+
+  .toggle-path.left { left: 8%; right: 50%; }
+  .toggle-path.right { left: 50%; right: 8%; }
+
+  .toggle-path::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 9px;
+    height: 9px;
+    border-radius: 999px;
+    transform: translateY(-50%);
+    background: #fff;
+    box-shadow: 0 0 12px rgba(255,255,255,.78), 0 0 24px rgba(113,161,255,.55);
+  }
+
+  .toggle-path.left::after {
+    left: 0;
+    animation: leftPathDot 1.7s linear infinite;
+  }
+
+  .toggle-path.right::after {
+    left: 0;
+    animation: rightPathDot 1.7s linear infinite;
+  }
+
+  .variant-toggle[data-mode="api"] .toggle-path.right,
+  .variant-toggle[data-mode="mcp"] .toggle-path.left {
+    opacity: .22;
+    filter: grayscale(1);
+  }
+
+  .switch-module {
+    position: relative;
+    z-index: 4;
+    display: grid;
+    justify-items: center;
+    gap: 16px;
+  }
+
+  .switch-button {
+    position: relative;
+    width: 246px;
+    height: 118px;
+    padding: 0;
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 26px;
+    cursor: pointer;
+    background:
+      radial-gradient(circle at 28% 30%, rgba(113,161,255,.25), transparent 42%),
+      radial-gradient(circle at 75% 70%, rgba(239,104,242,.2), transparent 44%),
+      linear-gradient(180deg, #272b3b, #14151c);
+    box-shadow: 0 26px 72px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.14);
+    transition: transform .18s ease, border-color .22s ease;
+  }
+
+  .switch-button:hover,
+  .switch-button:focus-visible {
+    transform: translateY(-2px);
+    border-color: rgba(113,161,255,.45);
+    outline: none;
+  }
+
+  .switch-button:active { transform: translateY(0) scale(.99); }
+
+  .switch-track {
+    position: absolute;
+    left: 24px;
+    right: 24px;
+    top: 50%;
+    height: 22px;
+    transform: translateY(-50%);
+    border-radius: 999px;
+    background: rgba(10,11,16,.8);
+    border: 1px solid rgba(255,255,255,.12);
+    box-shadow: inset 0 0 18px rgba(0,0,0,.52);
+  }
+
+  .switch-lever {
+    position: absolute;
+    top: 23px;
+    left: 32px;
+    width: 76px;
+    height: 72px;
+    border-radius: 22px;
+    display: grid;
+    place-items: center;
+    background: radial-gradient(circle at 32% 22%, #fff, #b8c7f2 58%, #7f8fbd);
+    box-shadow: 0 20px 40px rgba(0,0,0,.38), 0 0 28px rgba(113,161,255,.22);
+    transition: transform .34s cubic-bezier(.22, .92, .24, 1), box-shadow .28s ease;
+  }
+
+  .switch-lever img {
+    width: 34px;
+    height: 34px;
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,.22));
+  }
+
+  .variant-toggle[data-mode="mcp"] .switch-lever {
+    transform: translateX(106px);
+    box-shadow: 0 20px 40px rgba(0,0,0,.38), 0 0 30px rgba(239,104,242,.24);
+  }
+
+  .switch-labels {
+    display: flex;
+    justify-content: space-between;
+    gap: 88px;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 750;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+  }
+
+  .switch-state {
+    min-width: 242px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .mode-api-text,
+  .mode-mcp-text { display: none; }
+  .variant-toggle[data-mode="api"] .mode-api-text { display: inline; }
+  .variant-toggle[data-mode="mcp"] .mode-mcp-text { display: inline; }
+
+  .endpoint-pill {
+    position: absolute;
+    z-index: 4;
+    top: calc(50% - 16px);
+  }
+
+  .endpoint-pill.api-end { left: 8%; }
+  .endpoint-pill.mcp-end { right: 8%; }
+
+  /* Variant 4: untangle */
+  .untangle-scene {
+    position: relative;
+    height: 100%;
+    min-height: 382px;
+    display: grid;
+    place-items: center;
+  }
+
+  .wire-svg {
+    position: absolute;
+    inset: 20px 10px 36px;
+    width: calc(100% - 20px);
+    height: calc(100% - 56px);
+    overflow: visible;
+  }
+
+  .wire-svg path {
+    fill: none;
+    stroke-linecap: round;
+    stroke-width: 2;
+    transition: opacity .32s ease, stroke-dashoffset .75s cubic-bezier(.22,.92,.24,1);
+  }
+
+  .messy-wire {
+    opacity: .82;
+    stroke-dasharray: 9 9;
+    animation: wireDash 1.5s linear infinite;
+  }
+
+  .clean-wire {
+    opacity: 0;
+    stroke-dasharray: 620;
+    stroke-dashoffset: 620;
+  }
+
+  .variant-untangle.is-clean .messy-wire { opacity: .13; }
+  .variant-untangle.is-clean .clean-wire {
+    opacity: .9;
+    stroke-dashoffset: 0;
+  }
+
+  .untangle-core {
+    position: relative;
+    z-index: 4;
+    display: grid;
+    justify-items: center;
+    gap: 12px;
+  }
+
+  .untangle-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 40px;
+    padding: 0 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.16);
+    background: rgba(10,11,16,.72);
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 16px 42px rgba(0,0,0,.32);
+    transition: transform .2s ease, border-color .2s ease, background .2s ease;
+  }
+
+  .untangle-button:hover,
+  .untangle-button:focus-visible {
+    transform: translateY(-2px);
+    border-color: rgba(126,231,177,.44);
+    background: rgba(126,231,177,.09);
+    outline: none;
+  }
+
+  .untangle-button span {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--green);
+    box-shadow: 0 0 14px rgba(126,231,177,.75);
+  }
+
+  .wire-node {
+    position: absolute;
+    z-index: 4;
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 44px;
+    border-radius: 13px;
+    background: rgba(255,255,255,.075);
+    border: 1px solid rgba(255,255,255,.12);
+    box-shadow: 0 12px 28px rgba(0,0,0,.24);
+  }
+
+  .wire-node img {
+    max-width: 42px;
+    max-height: 27px;
+    object-fit: contain;
+  }
+
+  .wire-node.w1 { left: 8%; top: 17%; }
+  .wire-node.w2 { left: 9%; top: 63%; }
+  .wire-node.w3 { left: 25%; top: 78%; }
+  .wire-node.w4 { right: 8%; top: 17%; }
+  .wire-node.w5 { right: 9%; top: 63%; }
+  .wire-node.w6 { right: 25%; top: 78%; }
+
+  /* Variant 5: connection grid */
+  .grid-scene {
+    position: relative;
+    height: 100%;
+    min-height: 382px;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 18px;
+  }
+
+  .grid-topline {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .counter {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 10px 13px;
+    border-radius: 14px;
+    background: rgba(10,11,16,.66);
+    border: 1px solid rgba(255,255,255,.11);
+    box-shadow: 0 12px 32px rgba(0,0,0,.28);
+  }
+
+  .counter b {
+    color: #fff;
+    font-size: 26px;
+    line-height: 1;
+    letter-spacing: -.04em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .counter span {
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 650;
+  }
+
+  .grid-plug {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .grid-plug::before {
+    content: "";
+    width: 34px;
+    height: 18px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, rgba(113,161,255,.2), rgba(126,231,177,.72));
+    border: 1px solid rgba(255,255,255,.2);
+    box-shadow: 0 0 24px rgba(126,231,177,.22);
+    animation: plugBlink 2s ease-in-out infinite;
+  }
+
+  .connection-grid {
+    position: relative;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    align-content: center;
+  }
+
+  .system-card {
+    position: relative;
+    min-height: 92px;
+    display: grid;
+    align-content: space-between;
+    gap: 12px;
+    padding: 14px;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,.11);
+    background: rgba(255,255,255,.06);
+    box-shadow: 0 14px 34px rgba(0,0,0,.22);
+    overflow: hidden;
+    animation: cardConnect 7s ease-in-out infinite;
+    animation-delay: var(--delay);
+  }
+
+  .system-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    background: radial-gradient(circle at 100% 0%, rgba(126,231,177,.18), transparent 58%);
+    animation: cardGlow 7s ease-in-out infinite;
+    animation-delay: var(--delay);
+  }
+
+  .system-card::after {
+    content: "";
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    width: 17px;
+    height: 17px;
+    border-radius: 999px;
+    background:
+      linear-gradient(135deg, transparent 44%, #0f1016 44% 56%, transparent 56%),
+      var(--green);
+    transform: scale(.68);
+    opacity: 0;
+    box-shadow: 0 0 14px rgba(126,231,177,.62);
+    animation: checkPop 7s ease-in-out infinite;
+    animation-delay: var(--delay);
+  }
+
+  .system-card img {
+    position: relative;
+    z-index: 1;
+    max-width: 82px;
+    max-height: 32px;
+    object-fit: contain;
+  }
+
+  .system-card span {
+    position: relative;
+    z-index: 1;
+    color: var(--soft);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .grid-wave {
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    top: 56%;
+    width: 80px;
+    height: 80px;
+    border: 1px solid rgba(126,231,177,.34);
+    border-radius: 999px;
+    transform: translate(-50%, -50%) scale(.2);
+    opacity: 0;
+    animation: gridWave 7s ease-in-out infinite;
+  }
+
+  .grid-wave.w2 { animation-delay: .32s; }
+  .grid-wave.w3 { animation-delay: .64s; }
+
+  @keyframes hubPulse {
+    0%, 100% { opacity: .48; transform: scale(.94); }
+    50% { opacity: .9; transform: scale(1.08); }
+  }
+
+  @keyframes packetMove {
+    0% { left: -10px; opacity: 0; }
+    12% { opacity: 1; }
+    86% { opacity: 1; }
+    100% { left: calc(100% + 10px); opacity: 0; }
+  }
+
+  @keyframes plugDock {
+    0%, 18% { transform: translateX(0); }
+    42%, 72% { transform: translateX(128px); }
+    100% { transform: translateX(0); }
+  }
+
+  @keyframes portGlow {
+    0%, 34%, 100% { box-shadow: inset 0 0 24px rgba(0,0,0,.34), 0 0 44px rgba(113,161,255,.18); }
+    46%, 72% { box-shadow: inset 0 0 24px rgba(0,0,0,.34), 0 0 64px rgba(126,231,177,.38), 0 0 34px rgba(113,161,255,.24); }
+  }
+
+  @keyframes railPulseLeft {
+    0%, 41% { left: 50%; opacity: 0; }
+    50% { opacity: 1; }
+    74% { left: 4%; opacity: 0; }
+    100% { left: 50%; opacity: 0; }
+  }
+
+  @keyframes railPulseRight {
+    0%, 41% { left: 50%; opacity: 0; }
+    50% { opacity: 1; }
+    74% { left: 96%; opacity: 0; }
+    100% { left: 50%; opacity: 0; }
+  }
+
+  @keyframes fanReveal {
+    0%, 38%, 100% { opacity: 0; transform: translate(-50%, 18px) scale(.82); }
+    51%, 76% { opacity: 1; transform: translate(-50%, 0) scale(1); }
+  }
+
+  @keyframes spokeParticle {
+    0% { left: 0; opacity: 0; }
+    15% { opacity: 1; }
+    84% { opacity: 1; }
+    100% { left: 100%; opacity: 0; }
+  }
+
+  @keyframes leftPathDot {
+    0% { left: 100%; opacity: 0; }
+    15% { opacity: 1; }
+    100% { left: 0; opacity: 0; }
+  }
+
+  @keyframes rightPathDot {
+    0% { left: 0; opacity: 0; }
+    15% { opacity: 1; }
+    100% { left: 100%; opacity: 0; }
+  }
+
+  @keyframes wireDash {
+    to { stroke-dashoffset: -36; }
+  }
+
+  @keyframes plugBlink {
+    0%, 100% { box-shadow: 0 0 20px rgba(126,231,177,.18); }
+    50% { box-shadow: 0 0 34px rgba(126,231,177,.46); }
+  }
+
+  @keyframes cardConnect {
+    0%, 8% { border-color: rgba(255,255,255,.11); background: rgba(255,255,255,.06); transform: translateY(0); }
+    15%, 78% { border-color: rgba(126,231,177,.46); background: rgba(126,231,177,.075); transform: translateY(-2px); }
+    88%, 100% { border-color: rgba(255,255,255,.11); background: rgba(255,255,255,.06); transform: translateY(0); }
+  }
+
+  @keyframes cardGlow {
+    0%, 8%, 88%, 100% { opacity: 0; }
+    15%, 78% { opacity: 1; }
+  }
+
+  @keyframes checkPop {
+    0%, 10%, 88%, 100% { opacity: 0; transform: scale(.68); }
+    16%, 78% { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes gridWave {
+    0%, 12% { opacity: 0; transform: translate(-50%, -50%) scale(.2); }
+    20% { opacity: .65; }
+    58% { opacity: 0; transform: translate(-50%, -50%) scale(5.8); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(5.8); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: .001ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+      transition-duration: .001ms !important;
+    }
+  }
+
+  @media (max-width: 1040px) {
+    .intro { grid-template-columns: 1fr; }
+    .intro-panel { max-width: 560px; }
+    .hero-frame {
+      grid-template-columns: 1fr;
+      min-height: 0;
+    }
+    .side-card { min-height: 230px; }
+    .stage { min-height: 430px; }
+  }
+
+  @media (max-width: 720px) {
+    .page {
+      width: min(100% - 28px, var(--container));
+      padding-top: 28px;
+    }
+    .topbar { align-items: flex-start; flex-direction: column; margin-bottom: 38px; }
+    .top-actions { justify-content: flex-start; }
+    h1 { font-size: clamp(40px, 13vw, 58px); }
+    .variant { padding: 18px; border-radius: 20px; }
+    .variant-head { grid-template-columns: auto 1fr; }
+    .variant-tag { grid-column: 1 / -1; justify-self: start; }
+    .stage { padding: 16px; }
+    .connection-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .metric-row { grid-template-columns: 1fr; }
+    .orbit-node { width: 72px; }
+    .switch-button { width: 220px; }
+    .switch-lever { width: 68px; }
+    .variant-toggle[data-mode="mcp"] .switch-lever { transform: translateX(94px); }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#plug">Skip to variants</a>
+<main class="page">
+  <header class="topbar" aria-label="Prototype navigation">
+    <a class="brand" href="./index.html" aria-label="Back to index page">
+      <span class="brand-mark"><img src="./SAP%20EWM%20API%20integration%20%E2%80%93%20connect%20to%20anything%20%E2%80%93%20Makini_files/makini-white-sign.png" alt=""></span>
+      <span>Makini hero lab</span>
+    </a>
+    <nav class="top-actions" aria-label="Variants">
+      <a class="nav-pill" href="#plug">Plug</a>
+      <a class="nav-pill" href="#hub">Hub</a>
+      <a class="nav-pill" href="#toggle">Toggle</a>
+      <a class="nav-pill" href="#untangle">Untangle</a>
+      <a class="nav-pill" href="#grid">Grid</a>
+    </nav>
+  </header>
+
+  <section class="intro" aria-labelledby="page-title">
+    <div>
+      <p class="eyebrow">Replace "One network"</p>
+      <h1 id="page-title">Five connector moments for the index hero.</h1>
+      <p class="intro-copy">Each option keeps the same API and MCP cards and changes only the center interaction. The visual system follows the MCP page: dark product surfaces, thin flow lines, Makini as the core, local system logos, and restrained motion.</p>
+    </div>
+    <aside class="intro-panel" aria-label="Prototype scope">
+      <p class="eyebrow">Test frame</p>
+      <p class="prototype-note">Use this file as a comparison board before moving one candidate into the main index.html hero.</p>
+      <div class="metric-row">
+        <div class="metric"><b>5</b><span>hero variants</span></div>
+        <div class="metric"><b>2</b><span>stable use cases</span></div>
+        <div class="metric"><b>0</b><span>external libs</span></div>
+      </div>
+    </aside>
+  </section>
+
+  <article class="variant variant-plug" id="plug">
+    <header class="variant-head">
+      <span class="variant-number">01</span>
+      <div>
+        <h2>The literal plug.</h2>
+        <p class="variant-desc">A connector docks into the Makini port, then pulses move out to both products and agents. The logo fan appears only after the connection locks.</p>
+      </div>
+      <span class="variant-tag"><span class="tag-dot"></span>Automatic loop</span>
+    </header>
+
+    <div class="hero-frame">
+      <aside class="side-card api-side">
+        <p class="side-kicker">As an API</p>
+        <h3>Embed the network</h3>
+        <p>One universal integration layer inside your product.</p>
+        <div class="mini-terminal" aria-label="API calls">
+          <span>POST /work_orders</span>
+          <span>GET /inventory</span>
+          <span>SYNC /assets</span>
+        </div>
+      </aside>
+
+      <section class="stage" aria-label="Plug animation">
+        <div class="stage-inner plug-layout">
+          <span class="soft-label plug-label">connect once</span>
+          <div class="plug-rail" aria-hidden="true"></div>
+          <div class="port-module">
+            <div class="port" aria-hidden="true"></div>
+            <div class="plug" aria-hidden="true">
+              <div class="plug-cable"></div>
+              <div class="plug-body"></div>
+            </div>
+            <div class="fan" aria-hidden="true">
+              <span class="mini-logo" style="--delay:.05s"><img src="./index-from-website_files/67080ac3f5d59e851d4cbb00_VuUw59TdK1FK9dvmnJ0CSZFghJO0bbRC-DkxVUWtCzo.webp" alt=""></span>
+              <span class="mini-logo" style="--delay:.12s"><img src="./index-from-website_files/692f424df67b6477d9dae677_5_lWM6pBfynTA2cgx75IoQwg4WzCASNQB0s5vJK18YQ.png" alt=""></span>
+              <span class="mini-logo" style="--delay:.19s"><img src="./index-from-website_files/69d66faa16d28a4799806c2c_logo-maintainx.webp" alt=""></span>
+              <span class="mini-logo" style="--delay:.26s"><img src="./index-from-website_files/69d66fabcf108617104252cb_logo-siemens.webp" alt=""></span>
+              <span class="mini-logo" style="--delay:.33s"><img src="./index-from-website_files/69d66faab133d35bd4cd65ee_logo-servicetitan.webp" alt=""></span>
+              <span class="mini-logo" style="--delay:.40s"><img src="./index-from-website_files/69d66faa77e0f98b22f937a8_logo-caterpillar.webp" alt=""></span>
+            </div>
+          </div>
+          <span class="stage-caption">Port lights up after docking</span>
+        </div>
+      </section>
+
+      <aside class="side-card mcp-side">
+        <p class="side-kicker">As MCP</p>
+        <h3>Point agents at tools</h3>
+        <p>Every client reaches the same connected industrial systems.</p>
+        <div class="agent-strip" aria-label="MCP clients">
+          <div class="agent-row"><img src="./SAP%20EWM%20API%20integration%20%E2%80%93%20connect%20to%20anything%20%E2%80%93%20Makini_files/logo-chatgpt.svg" alt="">ChatGPT</div>
+          <div class="agent-row"><img src="./SAP%20EWM%20API%20integration%20%E2%80%93%20connect%20to%20anything%20%E2%80%93%20Makini_files/logo-claude.svg" alt="">Claude</div>
+          <div class="agent-row"><img src="./SAP%20EWM%20API%20integration%20%E2%80%93%20connect%20to%20anything%20%E2%80%93%20Makini_files/logo-cursor.svg" alt="">Cursor</div>
+        </div>
+      </aside>
+    </div>
+  </article>
+
+  <article class="variant variant-hub" id="hub" data-flow="all">
+    <header class="variant-head">
+      <span class="variant-number">02</span>
+      <div>
+        <h2>Central hub with live particles.</h2>
+        <p class="variant-desc">Makini becomes the active distribution core. Hover the left or right card to bias the particle flow toward product API or MCP agents.</p>
+      </div>
+      <span class="variant-tag"><span class="tag-dot"></span>Hover responsive</span>
+    </header>
+
+    <div class="hero-frame">
+      <aside class="side-card api-side" data-flow-target="api" tabindex="0">
+        <p class="side-kicker">As an API</p>
+        <h3>Build on one endpoint</h3>
+        <p>Product calls resolve through the same connected catalog.</p>
+        <div class="mini-terminal">
+          <span>GET /systems</span>
+          <span>PATCH /meters</span>
+          <span>POST /purchase_orders</span>
+        </div>
+      </aside>
+
+      <section class="stage" aria-label="Hub animation">
+        <div class="stage-inner hub-map">
+          <span class="spoke api-path" style="--w:42%;--r:198deg;--delay:.0s"></span>
+          <span class="spoke api-path" style="--w:34%;--r:138deg;--delay:.2s"></span>
+          <span class="spoke api-path" style="--w:38%;--r:269deg;--delay:.45s"></span>
+          <span class="spoke mcp-path" style="--w:42%;--r:-18deg;--delay:.1s"></span>
+          <span class="spoke mcp-path" style="--w:34%;--r:42deg;--delay:.32s"></span>
+          <span class="spoke mcp-path" style="--w:38%;--r:91deg;--delay:.55s"></span>
+          <span class="spoke mcp-path" style="--w:35%;--r:8deg;--delay:.74s"></span>
+
+          <div class="orbit-node n1"><img src="./index-from-website_files/67080ac3f5d59e851d4cbb00_VuUw59TdK1FK9dvmnJ0CSZFghJO0bbRC-DkxVUWtCzo.webp" alt=""><span>WMS</span></div>
+          <div class="orbit-node n2"><img src="./index-from-website_files/69d66faa16d28a4799806c2c_logo-maintainx.webp" alt=""><span>CMMS</span></div>
+          <div class="orbit-node n3"><img src="./logos/infor-white.png" alt=""><span>ERP</span></div>
+          <div class="orbit-node n4"><img src="./index-from-website_files/69d66fabcf108617104252cb_logo-siemens.webp" alt=""><span>IoT</span></div>
+          <div class="orbit-node n5"><img src="./index-from-website_files/692f424df67b6477d9dae677_5_lWM6pBfynTA2cgx75IoQwg4WzCASNQB0s5vJK18YQ.png" alt=""><span>EAM</span></div>
+          <div class="orbit-node n6"><img src="./index-from-website_files/69d66faab133d35bd4cd65ee_logo-servicetitan.webp" alt=""><span>FSM</span></div>
+          <div class="orbit-node n7"><img src="./logos/corrigo-white.png" alt=""><span>FM</span></div>
+
+          <div class="hub-mark map-hub"><img src="./SAP%20EWM%20API%20integration%20%E2%80%93%20connect%20to%20anything%20%E2%80%93%20Makini_files/makini-white-sign.png" alt="Makini"></div>
+          <span class="soft-label map-label-left">product traffic</span>
+          <span class="soft-label map-label-right">agent traffic</span>
+          <span class="stage-caption">Particles run through one Makini core</span>
+        </div>
+      </section>
+
+      <aside class="side-card mcp-side" data-flow-target="mcp" tabindex="0">
+        <p class="side-kicker">As MCP</p>
+        <h3>Give agents real reach</h3>
+        <p>Tools are available through one MCP connector.</p>
+        <div class="agent-strip">
+          <div class="agent-row"><img src="./SAP%20EWM%20API%20integration%20%E2%80%93%20connect%20to%20anything%20%E2%80%93%20Makini_files/logo-claude.svg" alt="">Claude</div>
+          <div class="agent-row"><img src="./SAP%20EWM%20API%20integration%20%E2%80%93%20connect%20to%20anything%20%E2%80%93%20Makini_files/logo-chatgpt.svg" alt="">ChatGPT</div>
+          <div class="agent-row"><img src="./SAP%20EWM%20API%20integration%20%E2%80%93%20connect%20to%20anything%20%E2%80%93%20Makini_files/logo-mcp.svg" alt="">MCP client</div>
+        </div>
+      </aside>
+    </div>
+  </article>
+
+  <article class="variant variant-toggle" id="toggle" data-mode="api">
+    <header class="variant-head">
+      <span class="variant-number">03</span>
+      <div>
+        <h2>API / MCP physical switch.</h2>
+        <p class="variant-desc">A tactile center switch makes the two use cases explicit. Click it to flip the highlighted path between embedding Makini and directing agents.</p>
+      </div>
+      <span class="variant-tag"><span class="tag-dot"></span>Click to switch</span>
+    </header>
+
+    <div class="hero-frame">
+      <aside class="side-card api-side">
+        <p class="side-kicker">As an API</p>
+        <h3>Embed in product</h3>
+        <p>Use Makini as the connection layer for customer-facing workflows.</p>
+        <div class="mini-terminal">
+          <span>API token scoped</span>
+          <span>Events logged</span>
+          <span>Data normalized</span>
+        </div>
+      </aside>
+
+      <section class="stage" aria-label="API MCP toggle">
+        <div class="stage-inner toggle-scene">
+          <span class="toggle-path left"></span>
+          <span class="toggle-path right"></span>
+          <span class="soft-label endpoint-pill api-end">product</span>
+          <span class="soft-label endpoint-pill mcp-end">agent</span>
+          <div class="switch-module">
+            <button class="switch-button" type="button" data-toggle-switch aria-label="Switch between API and MCP mode">
+              <span class="switch-track"></span>
+              <span class="switch-lever"><img src="./SAP%20EWM%20API%20integration%20%E2%80%93%20connect%20to%20anything%20%E2%80%93%20Makini_files/makini-white-sign.png" alt=""></span>
+            </button>
+            <div class="switch-labels" aria-hidden="true"><span>API</span><span>MCP</span></div>
+            <p class="switch-state">
+              <span class="mode-api-text">API path active: embed Makini inside the product.</span>
+              <span class="mode-mcp-text">MCP path active: point agents at Makini tools.</span>
+            </p>
+          </div>
+          <span class="stage-caption">Click flips the whole hero state</span>
+        </div>
+      </section>
+
+      <aside class="side-card mcp-side">
+        <p class="side-kicker">As MCP</p>
+        <h3>Direct agents</h3>
+        <p>Expose connected systems to ChatGPT, Claude, Cursor, and other clients.</p>
+        <div class="agent-strip">
+          <div class="agent-row"><img src="./SAP%20EWM%20API%20integration%20%E2%80%93%20connect%20to%20anything%20%E2%80%93%20Makini_files/logo-chatgpt.svg" alt="">ChatGPT</div>
+          <div class="agent-row"><img src="./SAP%20EWM%20API%20integration%20%E2%80%93%20connect%20to%20anything%20%E2%80%93%20Makini_files/logo-cursor.svg" alt="">Cursor</div>
+          <div class="agent-row"><img src="./SAP%20EWM%20API%20integration%20%E2%80%93%20connect%20to%20anything%20%E2%80%93%20Makini_files/logo-claude.svg" alt="">Claude</div>
+        </div>
+      </aside>
+    </div>
+  </article>
+
+  <article class="variant variant-untangle" id="untangle">
+    <header class="variant-head">
+      <span class="variant-number">04</span>
+      <div>
+        <h2>Before and after: untangling wires.</h2>
+        <p class="variant-desc">The messy integration picture collapses into one clean cable through Makini, then fans out in an orderly way. This is the clearest pain-to-solution metaphor.</p>
+      </div>
+      <span class="variant-tag"><span class="tag-dot"></span>Click to clean</span>
+    </header>
+
+    <div class="hero-frame">
+      <aside class="side-card api-side">
+        <p class="side-kicker">As an API</p>
+        <h3>Before: custom adapters</h3>
+        <p>Each system usually requires another integration path.</p>
+        <div class="mini-terminal">
+          <span>SAP adapter</span>
+          <span>Oracle adapter</span>
+          <span>CMMS adapter</span>
+        </div>
+      </aside>
+
+      <section class="stage" aria-label="Untangling integration wires">
+        <div class="stage-inner untangle-scene">
+          <svg class="wire-svg" viewBox="0 0 620 320" aria-hidden="true">
+            <path class="messy-wire" d="M52 52 C170 18 160 194 302 120 C432 54 438 246 566 58" stroke="#71a1ff"/>
+            <path class="messy-wire" d="M52 236 C152 112 282 280 330 132 C372 8 482 184 566 236" stroke="#ef68f2"/>
+            <path class="messy-wire" d="M78 86 C198 284 270 22 348 172 C416 302 468 72 542 90" stroke="#9468f2"/>
+            <path class="messy-wire" d="M82 250 C190 234 170 56 302 168 C408 258 438 94 540 256" stroke="#7ee7b1"/>
+            <path class="messy-wire" d="M154 270 C186 84 280 102 318 160 C372 244 464 180 482 270" stroke="#ffffff" opacity=".42"/>
+            <path class="clean-wire" d="M58 70 H250 C282 70 282 160 310 160 C338 160 338 70 370 70 H562" stroke="#71a1ff"/>
+            <path class="clean-wire" d="M58 238 H250 C282 238 282 160 310 160 C338 160 338 238 370 238 H562" stroke="#ef68f2"/>
+            <path class="clean-wire" d="M156 272 H250 C282 272 282 160 310 160 C338 160 338 272 370 272 H464" stroke="#7ee7b1"/>
+          </svg>
+          <span class="wire-node w1"><img src="./index-from-website_files/67080ac3f5d59e851d4cbb00_VuUw59TdK1FK9dvmnJ0CSZFghJO0bbRC-DkxVUWtCzo.webp" alt=""></span>
+          <span class="wire-node w2"><img src="./index-from-website_files/69d66faa16d28a4799806c2c_logo-maintainx.webp" alt=""></span>
+          <span class="wire-node w3"><img src="./logos/corrigo-white.png" alt=""></span>
+          <span class="wire-node w4"><img src="./index-from-website_files/692f424df67b6477d9dae677_5_lWM6pBfynTA2cgx75IoQwg4WzCASNQB0s5vJK18YQ.png" alt=""></span>
+          <span class="wire-node w5"><img src="./index-from-website_files/69d66fabcf108617104252cb_logo-siemens.webp" alt=""></span>
+          <span class="wire-node w6"><img src="./index-from-website_files/69d66faab133d35bd4cd65ee_logo-servicetitan.webp" alt=""></span>
+          <div class="untangle-core">
+            <div class="hub-mark"><img src="./SAP%20EWM%20API%20integration%20%E2%80%93%20connect%20to%20anything%20%E2%80%93%20Makini_files/makini-white-sign.png" alt="Makini"></div>
+            <button class="untangle-button" type="button" data-untangle><span></span>Clean through Makini</button>
+          </div>
+          <span class="stage-caption">N integrations collapse into one connection</span>
+        </div>
+      </section>
+
+      <aside class="side-card mcp-side">
+        <p class="side-kicker">As MCP</p>
+        <h3>After: one tool surface</h3>
+        <p>Agents use the same clean access pattern across every system.</p>
+        <div class="agent-strip">
+          <div class="agent-row"><img src="./SAP%20EWM%20API%20integration%20%E2%80%93%20connect%20to%20anything%20%E2%80%93%20Makini_files/logo-mcp.svg" alt="">MCP tools</div>
+          <div class="agent-row"><img src="./SAP%20EWM%20API%20integration%20%E2%80%93%20connect%20to%20anything%20%E2%80%93%20Makini_files/logo-claude.svg" alt="">Agent reads</div>
+          <div class="agent-row"><img src="./SAP%20EWM%20API%20integration%20%E2%80%93%20connect%20to%20anything%20%E2%80%93%20Makini_files/logo-chatgpt.svg" alt="">Agent acts</div>
+        </div>
+      </aside>
+    </div>
+  </article>
+
+  <article class="variant variant-grid" id="grid">
+    <header class="variant-head">
+      <span class="variant-number">05</span>
+      <div>
+        <h2>Animated connection grid.</h2>
+        <p class="variant-desc">Systems light up one after another with connected checks and a running counter. This is the strongest option when the hero needs to communicate catalog scale.</p>
+      </div>
+      <span class="variant-tag"><span class="tag-dot"></span>Scale signal</span>
+    </header>
+
+    <div class="hero-frame">
+      <aside class="side-card api-side">
+        <p class="side-kicker">As an API</p>
+        <h3>Ship many integrations</h3>
+        <p>One integration strategy can cover the long tail of industrial tools.</p>
+        <div class="mini-terminal">
+          <span>500+ systems</span>
+          <span>One auth layer</span>
+          <span>Shared logs</span>
+        </div>
+      </aside>
+
+      <section class="stage" aria-label="Connection grid animation">
+        <div class="stage-inner grid-scene">
+          <div class="grid-wave"></div>
+          <div class="grid-wave w2"></div>
+          <div class="grid-wave w3"></div>
+          <div class="grid-topline">
+            <div class="counter"><b data-counter>0</b><span>integrations connected</span></div>
+            <div class="grid-plug">plug triggers wave</div>
+          </div>
+          <div class="connection-grid">
+            <div class="system-card" style="--delay:.0s"><img src="./index-from-website_files/67080ac3f5d59e851d4cbb00_VuUw59TdK1FK9dvmnJ0CSZFghJO0bbRC-DkxVUWtCzo.webp" alt=""><span>SAP EWM</span></div>
+            <div class="system-card" style="--delay:.38s"><img src="./index-from-website_files/692f424df67b6477d9dae677_5_lWM6pBfynTA2cgx75IoQwg4WzCASNQB0s5vJK18YQ.png" alt=""><span>Oracle</span></div>
+            <div class="system-card" style="--delay:.76s"><img src="./logos/infor-white.png" alt=""><span>Infor</span></div>
+            <div class="system-card" style="--delay:1.14s"><img src="./index-from-website_files/69d66faa16d28a4799806c2c_logo-maintainx.webp" alt=""><span>MaintainX</span></div>
+            <div class="system-card" style="--delay:1.52s"><img src="./index-from-website_files/69d66fabcf108617104252cb_logo-siemens.webp" alt=""><span>Siemens</span></div>
+            <div class="system-card" style="--delay:1.90s"><img src="./index-from-website_files/69d66faab133d35bd4cd65ee_logo-servicetitan.webp" alt=""><span>ServiceTitan</span></div>
+            <div class="system-card" style="--delay:2.28s"><img src="./index-from-website_files/69d66faa77e0f98b22f937a8_logo-caterpillar.webp" alt=""><span>Caterpillar</span></div>
+            <div class="system-card" style="--delay:2.66s"><img src="./index-from-website_files/69d66faab3c4d8b053d323fb_logo-nucor.webp" alt=""><span>Nucor</span></div>
+          </div>
+          <span class="stage-caption">Connection status rolls across the catalog</span>
+        </div>
+      </section>
+
+      <aside class="side-card mcp-side">
+        <p class="side-kicker">As MCP</p>
+        <h3>Use every system as tools</h3>
+        <p>Agents get a growing set of connected tool calls without per-system glue.</p>
+        <div class="agent-strip">
+          <div class="agent-row"><img src="./SAP%20EWM%20API%20integration%20%E2%80%93%20connect%20to%20anything%20%E2%80%93%20Makini_files/logo-mcp.svg" alt="">list_tools</div>
+          <div class="agent-row"><img src="./SAP%20EWM%20API%20integration%20%E2%80%93%20connect%20to%20anything%20%E2%80%93%20Makini_files/logo-cursor.svg" alt="">search_assets</div>
+          <div class="agent-row"><img src="./SAP%20EWM%20API%20integration%20%E2%80%93%20connect%20to%20anything%20%E2%80%93%20Makini_files/logo-chatgpt.svg" alt="">create_order</div>
+        </div>
+      </aside>
+    </div>
+  </article>
+</main>
+
+<script>
+  const hubVariant = document.querySelector('.variant-hub');
+  if (hubVariant) {
+    hubVariant.querySelectorAll('[data-flow-target]').forEach((card) => {
+      const flow = card.getAttribute('data-flow-target');
+      const setFlow = () => hubVariant.dataset.flow = flow;
+      const resetFlow = () => hubVariant.dataset.flow = 'all';
+      card.addEventListener('pointerenter', setFlow);
+      card.addEventListener('focus', setFlow);
+      card.addEventListener('pointerleave', resetFlow);
+      card.addEventListener('blur', resetFlow);
+    });
+  }
+
+  document.querySelectorAll('[data-toggle-switch]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const variant = button.closest('.variant-toggle');
+      if (!variant) return;
+      variant.dataset.mode = variant.dataset.mode === 'api' ? 'mcp' : 'api';
+    });
+  });
+
+  document.querySelectorAll('[data-untangle]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const variant = button.closest('.variant-untangle');
+      if (!variant) return;
+      variant.classList.toggle('is-clean');
+      button.lastChild.textContent = variant.classList.contains('is-clean') ? 'Show the tangle' : 'Clean through Makini';
+    });
+  });
+
+  const counter = document.querySelector('[data-counter]');
+  if (counter) {
+    const runCounter = () => {
+      const duration = 4200;
+      const start = performance.now();
+      const tick = (now) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        counter.textContent = `${Math.round(500 * eased)}+`;
+        if (progress < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
+    runCounter();
+    window.setInterval(runCounter, 7000);
+  }
+</script>
+</body>
+</html>
