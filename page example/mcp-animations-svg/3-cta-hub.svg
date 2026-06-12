@@ -34,16 +34,16 @@
       <animate attributeName="opacity" values="0.22;0.38;0.22" dur="3s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
       <animate attributeName="r"       values="53;65;53"         dur="3s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
     </circle>
-    <circle cx="230" cy="200" r="40" fill="#71a1ff" opacity="0.12" filter="url(#glow-blur)">
+    <circle cx="230" cy="200" r="40" fill="#fb63ff" opacity="0.12" filter="url(#glow-blur)">
       <animate attributeName="opacity" values="0.10;0.20;0.10" dur="3s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
     </circle>
 
     <!-- lines top: solid blue, orthogonal elbows -->
-    <path fill="none" stroke="#71a1ff" stroke-opacity="0.5" stroke-width="1.6" stroke-linecap="round"
+    <path fill="none" stroke="#fb63ff" stroke-opacity="0.5" stroke-width="1.6" stroke-linecap="round"
           d="M100 87 L100 109 Q100 121 112 121 L218 121 Q230 121 230 133 L230 147"/>
-    <path fill="none" stroke="#71a1ff" stroke-opacity="0.5" stroke-width="1.6" stroke-linecap="round"
+    <path fill="none" stroke="#fb63ff" stroke-opacity="0.5" stroke-width="1.6" stroke-linecap="round"
           d="M230 87 L230 147"/>
-    <path fill="none" stroke="#71a1ff" stroke-opacity="0.5" stroke-width="1.6" stroke-linecap="round"
+    <path fill="none" stroke="#fb63ff" stroke-opacity="0.5" stroke-width="1.6" stroke-linecap="round"
           d="M360 87 L360 109 Q360 121 348 121 L242 121 Q230 121 230 133 L230 147"/>
 
     <!-- lines bottom: dashed animated, start below "Makini MCP" label -->
@@ -65,15 +65,15 @@
     </path>
 
     <!-- animated dots: agents → hub -->
-    <circle r="3" fill="#71a1ff">
+    <circle r="3" fill="#fb63ff">
       <animateMotion dur="1.5s" repeatCount="indefinite" path="M100 87 L100 109 Q100 121 112 121 L218 121 Q230 121 230 133 L230 147"/>
       <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="1.5s" repeatCount="indefinite"/>
     </circle>
-    <circle r="3" fill="#71a1ff">
+    <circle r="3" fill="#fb63ff">
       <animateMotion dur="1.5s" begin="-0.5s" repeatCount="indefinite" path="M230 87 L230 147"/>
       <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="1.5s" begin="-0.5s" repeatCount="indefinite"/>
     </circle>
-    <circle r="3" fill="#71a1ff">
+    <circle r="3" fill="#fb63ff">
       <animateMotion dur="1.5s" begin="-1s" repeatCount="indefinite" path="M360 87 L360 109 Q360 121 348 121 L242 121 Q230 121 230 133 L230 147"/>
       <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="1.5s" begin="-1s" repeatCount="indefinite"/>
     </circle>
