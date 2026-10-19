@@ -1,0 +1,36 @@
+{
+  "decodedAssets": 30,
+  "scenarios": 6,
+  "caseImages": 6,
+  "dots": 6,
+  "libraryImages": 30,
+  "removedControls": 0,
+  "onlySpectrum": true,
+  "separateSections": true,
+  "loopBackward": "06 / 06",
+  "loopForward": "01 / 06",
+  "libraryIndependent": true,
+  "filterAll": 30,
+  "filterWarehouse": 9,
+  "filterLogistics": 9,
+  "filterManufacturing": 4,
+  "filterMaintenance": 4,
+  "filterInfrastructure": 4,
+  "keyboardTab": "Warehouse",
+  "keyboardEnd": "Infrastructure",
+  "mobile": {
+    "viewport": 390,
+    "section": 390,
+    "document": 390,
+    "activeWidth": 278,
+    "captionHeight": 362,
+    "panelHeight": 422
+  },
+  "narrowMobile": {
+    "viewport": 320,
+    "document": 320,
+    "captionHeight": 472,
+    "panelHeight": 532
+  },
+  "errors": []
+}

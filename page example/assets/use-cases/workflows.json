@@ -1,0 +1,50 @@
+[
+  {
+    "title": "Rank cycle count variances by bin and item",
+    "text": "The agent reads cycle counts and the inventory adjustments posted from RF-SMART scans and ranks the largest variances by bin, item and counter. Inventory control leads decide which bins to recount and where receiving or picking habits need correcting.",
+    "id": "01-inventory-robot",
+    "category": "Warehouse",
+    "image": "processed/spectrum/01-inventory-robot.webp",
+    "original": "originals/01-inventory-robot.jpg"
+  },
+  {
+    "title": "List orders that will miss today's carrier cutoff",
+    "text": "Open sales orders are compared with item fulfillments and their carrier and ship status, and orders not yet picked or packed near the cutoff are listed by ship method. Shipping supervisors move pickers or warn customer service while there is still time.",
+    "id": "02-outbound-truck",
+    "category": "Logistics",
+    "image": "processed/spectrum/02-outbound-truck.webp",
+    "original": "originals/02-outbound-truck.jpg"
+  },
+  {
+    "title": "Set preferred bins for newly received items",
+    "text": "Where the connection exposes bin settings, the agent lists recently received items with no preferred bin at their location, along with the bins where their stock now sits. Warehouse leads assign preferred bins so RF-SMART putaway and picking stop depending on who remembers where things go.",
+    "id": "03-forklift-racking",
+    "category": "Warehouse",
+    "image": "processed/spectrum/03-forklift-racking.webp",
+    "original": "originals/03-forklift-racking.jpg"
+  },
+  {
+    "title": "Chase partly received purchase orders",
+    "text": "Purchase order lines are compared with the item receipts scanned at the dock, and lines still short or overdue are listed by vendor with the quantities outstanding. Buyers follow up with the vendor before the missing stock delays customer orders.",
+    "id": "04-receiving-dock",
+    "category": "Logistics",
+    "image": "processed/spectrum/04-receiving-dock.webp",
+    "original": "originals/04-receiving-dock.jpg"
+  },
+  {
+    "title": "Find transfer orders stuck in transit",
+    "text": "The agent compares transfer orders fulfilled at the shipping location with item receipts scanned at the destination and lists lines still pending receipt, with quantities and ship dates. Warehouse managers at both sites trace the missing stock before it shows up as a false shortage.",
+    "id": "05-highway-freight",
+    "category": "Logistics",
+    "image": "processed/spectrum/05-highway-freight.webp",
+    "original": "originals/05-highway-freight.jpg"
+  },
+  {
+    "title": "Stage components for tomorrow's production runs",
+    "text": "The agent reads tomorrow's production schedule from your MES through the same Makini endpoint and checks component availability by bin in the ERP behind RF-SMART. Material handlers get a shortage list and draft transfers to line-side staging bins to review.",
+    "id": "06-assembly-robots",
+    "category": "Manufacturing",
+    "image": "processed/spectrum/06-assembly-robots.webp",
+    "original": "originals/06-assembly-robots.jpg"
+  }
+]

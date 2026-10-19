@@ -1,0 +1,242 @@
+[
+  {
+    "id": "01-inventory-robot",
+    "title": "Autonomous inventory scanning",
+    "category": "Warehouse",
+    "case": 0,
+    "scene": "a high-bay warehouse aisle with a single autonomous inventory scanning robot, metal shelving filled with neatly stacked cartons, precise symmetrical perspective",
+    "focus": "68% 50%"
+  },
+  {
+    "id": "02-outbound-truck",
+    "title": "Outbound loading dock",
+    "category": "Logistics",
+    "case": 1,
+    "scene": "a modern silver semi truck backed into a distribution center loading dock, three-quarter view from the loading yard, a second trailer in the background, loading bay geometry",
+    "focus": "50% 50%"
+  },
+  {
+    "id": "03-forklift-racking",
+    "title": "Forklift and pallet racking",
+    "category": "Warehouse",
+    "case": 2,
+    "scene": "an electric reach forklift lifting one pallet to a high storage rack in a spacious distribution warehouse, carefully stacked cartons, strong industrial perspective",
+    "focus": "50% 50%"
+  },
+  {
+    "id": "04-receiving-dock",
+    "title": "Goods receiving",
+    "category": "Logistics",
+    "case": 3,
+    "scene": "inside a warehouse receiving dock looking toward an open truck trailer, wrapped freight pallets on a low pallet jack in the foreground, daylight entering from the loading bay",
+    "focus": "50% 50%"
+  },
+  {
+    "id": "05-highway-freight",
+    "title": "Long-haul freight",
+    "category": "Logistics",
+    "case": 4,
+    "scene": "a silver European semi truck with a long unbranded trailer rounding a broad highway curve, elevated three-quarter front view, modern logistics hub far in the distance",
+    "focus": "50% 50%"
+  },
+  {
+    "id": "06-assembly-robots",
+    "title": "Robotic component staging",
+    "category": "Manufacturing",
+    "case": 5,
+    "scene": "industrial robotic arms on a precision assembly line, trays of machined metal components neatly arranged on a conveyor, spacious modern factory hall",
+    "focus": "50% 50%"
+  },
+  {
+    "id": "07-pallet-stock",
+    "title": "Pallet inventory",
+    "category": "Warehouse",
+    "case": 6,
+    "scene": "a warehouse cross aisle with rows of shrink-wrapped palletized cartons and a compact electric pallet truck, wide architectural perspective, detailed steel shelving",
+    "focus": "50% 50%"
+  },
+  {
+    "id": "08-dispatch-yard",
+    "title": "Distribution center dispatch",
+    "category": "Logistics",
+    "case": 7,
+    "scene": "an elevated oblique view of six silver semi trailers lined up at a modern distribution center, one tractor leaving its bay, clean loading yard and repeating architecture",
+    "focus": "50% 50%"
+  },
+  {
+    "id": "09-autonomous-pallet",
+    "title": "Autonomous pallet transport",
+    "category": "Warehouse",
+    "case": 8,
+    "scene": "a low autonomous mobile robot carrying a single wrapped pallet through organized warehouse racks, floor-level three-quarter photograph, realistic equipment and clear aisle",
+    "focus": "50% 50%"
+  },
+  {
+    "id": "10-port-receiving",
+    "title": "Container port receiving",
+    "category": "Infrastructure",
+    "case": 9,
+    "scene": "a massive quayside gantry crane lifting one shipping container from a cargo ship at a working container terminal, container stacks, realistic distant scale",
+    "focus": "50% 50%"
+  },
+  {
+    "id": "11-freight-rail",
+    "title": "Intermodal rail freight",
+    "category": "Logistics",
+    "case": 10,
+    "scene": "a modern freight locomotive pulling container wagons through an intermodal terminal, low three-quarter perspective, parallel tracks and container gantry in the distance",
+    "focus": "50% 50%"
+  },
+  {
+    "id": "12-cnc-machining",
+    "title": "Precision manufacturing",
+    "category": "Manufacturing",
+    "case": 11,
+    "scene": "a large CNC milling machine shaping a precision metal component, close perspective inside a clean machining cell, metallic shavings and tool spindle clearly visible",
+    "focus": "50% 50%"
+  },
+  {
+    "id": "13-rf-scanning",
+    "title": "RF inventory scanning",
+    "category": "Warehouse",
+    "case": 12,
+    "scene": "a warehouse worker's gloved hand holding an industrial barcode scanner toward neatly shelved boxes, shelf detail in foreground and warehouse depth behind, scanner screen turned away",
+    "focus": "50% 50%"
+  },
+  {
+    "id": "14-parcel-sortation",
+    "title": "Parcel sortation",
+    "category": "Logistics",
+    "case": 13,
+    "scene": "a broad automated parcel sorting conveyor curving through a distribution hall, a few plain cardboard packages on black conveyor belts, overhead steel trusses",
+    "focus": "50% 50%"
+  },
+  {
+    "id": "15-automated-storage",
+    "title": "Automated high-bay storage",
+    "category": "Warehouse",
+    "case": 14,
+    "scene": "an automated storage and retrieval crane between tall symmetrical steel pallet racks, a single pallet on the crane platform, imposing real industrial scale",
+    "focus": "50% 50%"
+  },
+  {
+    "id": "16-air-cargo",
+    "title": "Air cargo receiving",
+    "category": "Logistics",
+    "case": 15,
+    "scene": "an unbranded wide-body cargo aircraft on an airport apron with its side cargo door open, a raised freight loader carrying palletized goods, three-quarter side view",
+    "focus": "50% 50%"
+  },
+  {
+    "id": "17-container-vessel",
+    "title": "Ocean freight in transit",
+    "category": "Infrastructure",
+    "case": 16,
+    "scene": "a large container ship carrying neatly arranged shipping containers approaching a commercial harbor, elevated three-quarter bow perspective, calm water and port cranes in the distance",
+    "focus": "50% 50%"
+  },
+  {
+    "id": "18-automotive-line",
+    "title": "Automotive assembly",
+    "category": "Manufacturing",
+    "case": 17,
+    "scene": "a modern automotive body assembly cell with silver unfinished car body shells and large industrial robot arms, precise factory symmetry, no sparks obscuring equipment",
+    "focus": "50% 50%"
+  },
+  {
+    "id": "19-turbine-inspection",
+    "title": "Turbine inspection",
+    "category": "Maintenance",
+    "case": 18,
+    "scene": "a maintenance technician in protective workwear inspecting a huge exposed industrial gas turbine rotor in a clean service workshop, person small beside machinery, three-quarter perspective",
+    "focus": "50% 50%"
+  },
+  {
+    "id": "20-mining-haul-truck",
+    "title": "Heavy haul operations",
+    "category": "Logistics",
+    "case": 19,
+    "scene": "a colossal mining haul truck on a quarry haul road, strong three-quarter front view with enormous realistically proportioned tires, terraced open pit in the background",
+    "focus": "50% 50%"
+  },
+  {
+    "id": "21-parts-warehouse",
+    "title": "Spare parts storage",
+    "category": "Maintenance",
+    "case": 20,
+    "scene": "organized industrial spare-parts storage with metal gears, bearings and pump housings in blue-gray shelf bins, deep warehouse aisle, precise real metal detail",
+    "focus": "50% 50%"
+  },
+  {
+    "id": "22-pump-service",
+    "title": "Pump and valve maintenance",
+    "category": "Maintenance",
+    "case": 21,
+    "scene": "an industrial pump service workshop with a large disassembled centrifugal pump and valve assemblies on a workbench, mechanic in protective workwear in the background",
+    "focus": "50% 50%"
+  },
+  {
+    "id": "23-terminal-agv",
+    "title": "Automated container transport",
+    "category": "Infrastructure",
+    "case": 22,
+    "scene": "a container terminal autonomous guided vehicle carrying one shipping container between massive gantry cranes, low wide perspective, repeating containers and clean concrete lanes",
+    "focus": "50% 50%"
+  },
+  {
+    "id": "24-bottling-line",
+    "title": "Process manufacturing",
+    "category": "Manufacturing",
+    "case": 23,
+    "scene": "a stainless steel industrial bottling and packaging line inside a pristine manufacturing plant, rows of plain unlabeled bottles on a curved conveyor, realistic machine detail",
+    "focus": "50% 50%"
+  },
+  {
+    "id": "25-inventory-drone",
+    "title": "Warehouse inventory drone",
+    "category": "Warehouse",
+    "case": 24,
+    "scene": "a small industrial quadcopter inventory drone scanning upper pallet racks in a vast warehouse, drone in upper right and geometrical shelf perspective, grounded real technology",
+    "focus": "50% 50%"
+  },
+  {
+    "id": "26-electric-fleet",
+    "title": "Electric freight fleet",
+    "category": "Logistics",
+    "case": 25,
+    "scene": "two modern unbranded electric semi trucks parked at charging stations beside a logistics center, three-quarter front view, realistic clean truck design and visible charging cables",
+    "focus": "50% 50%"
+  },
+  {
+    "id": "27-cold-storage",
+    "title": "Cold chain storage",
+    "category": "Warehouse",
+    "case": 26,
+    "scene": "a cold storage distribution warehouse with clean metal racks and wrapped food freight pallets, an electric forklift in the distance, subtle condensation and frosted surfaces",
+    "focus": "50% 50%"
+  },
+  {
+    "id": "28-rail-transloading",
+    "title": "Rail cargo transloading",
+    "category": "Infrastructure",
+    "case": 27,
+    "scene": "an intermodal rail gantry crane transferring one shipping container from a freight wagon toward a waiting semi trailer, elevated three-quarter view, realistic rail terminal scale",
+    "focus": "50% 50%"
+  },
+  {
+    "id": "29-forklift-transfer",
+    "title": "Warehouse stock transfers",
+    "category": "Warehouse",
+    "case": 28,
+    "scene": "an electric counterbalance forklift carrying a single neatly wrapped freight pallet across a broad warehouse cross aisle toward loading doors, strong side three-quarter view",
+    "focus": "50% 50%"
+  },
+  {
+    "id": "30-gearbox-service",
+    "title": "Industrial gearbox service",
+    "category": "Maintenance",
+    "case": 29,
+    "scene": "a massive wind turbine gearbox opened for maintenance on a clean factory service floor, intricate steel gears and shafts, a technician wearing protective workwear provides scale",
+    "focus": "50% 50%"
+  }
+]
