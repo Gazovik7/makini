@@ -40,6 +40,12 @@
      lays out at the open panel's width (--cg-act-w), so titles sit on one line across slides,
      the text follows right under the title, and shorter cases simply leave room at the bottom. */
   .cg-over{position:absolute;left:0;bottom:0;z-index:2;box-sizing:border-box;display:flex;flex-direction:column;justify-content:flex-start;min-width:var(--cg-act-w,640px);width:100%;height:var(--cg-over-h,auto);padding:110px 34px 30px;background:linear-gradient(180deg,transparent,#0b0b12d9 62%);opacity:0;transform:translateY(10px);transition:opacity .35s ease,transform .35s ease;pointer-events:none}
+  /* Only the open panel's caption gets its own layer. A caption that has just faded in (on a
+     copy) and one switched on instantly (on the real panel, when the loop returns) would
+     otherwise get their text antialiased differently, and the letters would shimmer once.
+     Not on every caption: a layer inside a panel only a few pixels wide, sliding in at the
+     right edge, rendered as a thin white line during the move. */
+  .cg-item.is-active .cg-over{will-change:transform,opacity}
   .cg-item.is-active .cg-over{opacity:1;transform:none;transition-delay:.4s}
   .cg-over h3{margin:0 0 8px;max-width:620px;color:#fff;font-size:24px;line-height:32px;font-weight:600;text-wrap:balance}
   .cg-over p{margin:0;max-width:620px;color:#c6c7cc;font-size:15px;line-height:24px}

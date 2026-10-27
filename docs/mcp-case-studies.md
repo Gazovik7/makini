@@ -40,7 +40,19 @@ A gallery after Stripe's "What's happening" section, in the Makini palette.
 - **The track loops.** After the last case the first ones are already waiting on the right and
   the arrows never disable. The script clones the panels in the browser; the page source still
   carries each case once, and the clones stay out of the accessibility tree and the tab order.
-  Moving between copies shows identical pixels and runs with animation off, so it cannot be seen.
+  There are at least 8 copied panels before the real ones and 16 after, enough for the biggest
+  single move (a click on the farthest visible panel jumps five cases and still needs five
+  panels after it) plus a burst of quick clicks. The return from a copy to the real panels
+  waits 1.3s after the last move, longer than the slowest transition (the 1.2s image zoom),
+  so it never cuts into a running animation; it is pixel-identical and runs with animation
+  off. The open panel's caption carries `will-change: transform, opacity` so its text is
+  antialiased the same way on a copy and on the real panel. Only the open one: on every caption
+  it drew a thin white line at the right edge while narrow panels slid in (fixed 2026-10-27). All images switch to eager loading once the gallery is
+  800px from the screen, so a copy never slides in blank.
+
+  Fixed 2026-10-27 after the developer's review: clicking the farthest panel used to leave only
+  two panels visible (the track ran out of copies), and quick clicks made the track jump (the
+  return ran at the start of each move, in the middle of the previous animation).
 
 - **Swipe.** On touch screens a mostly horizontal drag of 40px or more moves one case. Vertical
   drags still scroll the page (`touch-action: pan-y`), and the tap a swipe can leave behind is

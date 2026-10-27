@@ -692,6 +692,12 @@
      lays out at the open panel's width (--cg-act-w), so titles sit on one line across slides,
      the text follows right under the title, and shorter cases simply leave room at the bottom. */
   .cg-over{position:absolute;left:0;bottom:0;z-index:2;box-sizing:border-box;display:flex;flex-direction:column;justify-content:flex-start;min-width:var(--cg-act-w,640px);width:100%;height:var(--cg-over-h,auto);padding:110px 34px 30px;background:linear-gradient(180deg,transparent,#0b0b12d9 62%);opacity:0;transform:translateY(10px);transition:opacity .35s ease,transform .35s ease;pointer-events:none}
+  /* Only the open panel's caption gets its own layer. A caption that has just faded in (on a
+     copy) and one switched on instantly (on the real panel, when the loop returns) would
+     otherwise get their text antialiased differently, and the letters would shimmer once.
+     Not on every caption: a layer inside a panel only a few pixels wide, sliding in at the
+     right edge, rendered as a thin white line during the move. */
+  .cg-item.is-active .cg-over{will-change:transform,opacity}
   .cg-item.is-active .cg-over{opacity:1;transform:none;transition-delay:.4s}
   .cg-over h3{margin:0 0 8px;max-width:620px;color:#fff;font-size:24px;line-height:32px;font-weight:600;text-wrap:balance}
   .cg-over p{margin:0;max-width:620px;color:#c6c7cc;font-size:15px;line-height:24px}
@@ -1335,17 +1341,29 @@ var S=document.currentScript.closest('section');
   var prev=g.querySelector('.cg-prev'),next=g.querySelector('.cg-next');
   var dots=[].slice.call(g.querySelectorAll('.cg-dot')),count=g.querySelector('.cg-count');
   // The track loops: after the last case the first one is already waiting on the right, and
-  // the arrows never dead-end. Copies of the panels make that possible: one copy before the
-  // real ones and enough after them that five followers always exist. They are built here
+  // the arrows never dead-end. Copies of the panels make that possible. They are built here
   // rather than in the HTML, so the page source carries each case once, and they stay out of
-  // the accessibility tree and the tab order.
-  var copies=Math.max(3,Math.ceil((2*n+6)/n));
+  // the accessibility tree and the tab order. There must be enough of them on both sides for
+  // the biggest single move (a click on the farthest visible panel jumps FOLLOW cases, and the
+  // panel it lands on still needs FOLLOW panels after it) plus a burst of quick clicks before
+  // the track gets a chance to settle: at least 8 panels before the real ones, 16 after.
+  var FOLLOW=5;
+  var before=Math.max(1,Math.ceil(8/n)),after=Math.max(1,Math.ceil(16/n));
   var mk=function(el){var c=el.cloneNode(true);c.classList.add('cg-clone');c.setAttribute('aria-hidden','true');
     c.removeAttribute('role');c.removeAttribute('aria-label');c.tabIndex=-1;return c;};
-  var lead=document.createDocumentFragment();items.forEach(function(el){lead.appendChild(mk(el));});
+  var lead=document.createDocumentFragment();
+  for(var c=0;c<before;c++)items.forEach(function(el){lead.appendChild(mk(el));});
   track.insertBefore(lead,track.firstChild);
-  for(var c=0;c<copies-2;c++)items.forEach(function(el){track.appendChild(mk(el));});
-  items=[].slice.call(track.children);i=n;
+  for(c=0;c<after;c++)items.forEach(function(el){track.appendChild(mk(el));});
+  var base=before*n;
+  items=[].slice.call(track.children);i=base;
+  // A lazy image loads only once it is on screen, so a copy sliding in could show up blank for
+  // a frame. Once the gallery is near the screen, load them all; the copies reuse the same
+  // files, so this adds no requests.
+  var imgs=[].slice.call(g.querySelectorAll('img'));
+  var eager=function(){imgs.forEach(function(im){im.loading='eager';});};
+  if('IntersectionObserver' in window){var po=new IntersectionObserver(function(en){
+    if(en[0].isIntersecting){eager();po.disconnect();}},{rootMargin:'800px 0px'});po.observe(g);}else eager();
   var clone=function(el){return el.classList.contains('cg-clone');};
   // Every caption gets the height of the longest one, so titles sit on one line across slides
   var overs=[].slice.call(g.querySelectorAll('.cg-item:not(.cg-clone) .cg-over'));
@@ -1377,11 +1395,20 @@ var S=document.currentScript.closest('section');
     count.textContent=('0'+(c+1)).slice(-2)+' / '+('0'+n).slice(-2);
     sizes();
   }
-  // Moving between copies shows exactly the same pictures in the same places, so it happens
-  // with no animation, just before the next move starts.
-  function norm(){var m=n+((i%n)+n)%n;if(m===i)return;i=m;instant(function(){mark();sizes();});}
-  function step(d){norm();i+=d;render();}
-  function toCase(j){norm();i=n+j;render();}
+  // Going back from a copy to the real panels shows exactly the same pictures in the same
+  // places, so it is done without animation. It waits until the gallery has settled after the
+  // last move (1.3s, longer than the slowest transition, the 1.2s image zoom), so it never cuts
+  // into a running animation. Only a burst long enough to run out of copies forces it early.
+  var settle=null;
+  function home(){return base+((i%n)+n)%n;}
+  function norm(){var m=home();if(m===i)return;i=m;instant(function(){mark();sizes();});}
+  function go(d){
+    if(i+d<1||i+d+FOLLOW>items.length-1)norm();
+    i+=d;render();
+    clearTimeout(settle);settle=setTimeout(norm,1300);
+  }
+  function step(d){go(d);}
+  function toCase(j){go(j-((i%n)+n)%n);}
   items.forEach(function(el,k){
     el.addEventListener('click',function(){step(k-i);});
     el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();step(k-i);}});
