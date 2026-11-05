@@ -15,6 +15,11 @@
     people=L.people;
   }
   posts.sort(function(a,b){return a.date<b.date?1:-1;});
+  /* TEST section: the article with every element of a post. It shows only in the TEST tab, never in All, the slider or the counts of the other tabs. */
+  var testP=[{slug:'all-article-elements',title:'All article elements',type:'test',test:true,platforms:[],agents:[],author:'George Surovtsev',date:'2026-11-03',read:3,
+    cover:'./assets/use-cases/processed/spectrum/21-parts-warehouse.webp',href:'blog-article-elements.html',
+    summary:'Headings, text, lists, quotes, callouts, code, tables, images, video and more, one after another.'}];
+  var everything=posts.concat(testP);
   /* Sections of the blog. A is the current set (by post type). B and C are proposals, sorted by what the reader needs:
      a post belongs to one section, new posts of the same kind go to the same place. */
   var SLUGS={
@@ -45,11 +50,13 @@
   };
   var ALIAS={releases:'product'};  /* old ?type= links from article pages */
   function inTab(p,t){
+    if(p.test)return !!t.test;
+    if(t.test)return false;
     if(t.id==='all')return true;
     return !!((t.types&&t.types.indexOf(p.type)>=0)||(t.slugs&&t.slugs.indexOf(p.slug)>=0));
   }
-  var TABS=SETS[RV.tabs||'a'].filter(function(t){return posts.some(function(p){return inTab(p,t);});});
-  var TYPE_LABEL={};D.types.forEach(function(t){TYPE_LABEL[t.id]=t.label;});
+  var TABS=SETS[RV.tabs||'a'].filter(function(t){return posts.some(function(p){return inTab(p,t);});}).concat([{id:'test',label:'TEST',test:true}]);
+  var TYPE_LABEL={test:'Test'};D.types.forEach(function(t){TYPE_LABEL[t.id]=t.label;});
   var $=function(s,r){return (r||document).querySelector(s);};
   var grid=$('#bv-grid'),tabsEl=$('#bv-tabs'),slider=$('#bv-feature'),qEl=$('#bv-q'),suggEl=$('#bv-sugg'),clrEl=$('#bv-qclear'),moreEl=$('#bv-more'),cntEl=$('#bv-count'),emptyEl=$('#bv-empty');
   var STEP=9,shown=STEP,st={tab:'all',q:'',platform:''};
@@ -104,7 +111,7 @@
   window.__btAmb=slides[0].cover;
   play();
   /* ---------- tabs, cards ---------- */
-  function counts(){return TABS.map(function(t){return posts.filter(function(p){return inTab(p,t);}).length;});}
+  function counts(){return TABS.map(function(t){return everything.filter(function(p){return inTab(p,t);}).length;});}
   function drawTabs(){var c=counts();
     tabsEl.innerHTML=TABS.map(function(t,i){return '<button type="button" class="bv-tab'+(t.id===st.tab?' is-on':'')+'" data-tab="'+t.id+'">'+esc(t.label)+'<b>'+c[i]+'</b></button>';}).join('');}
   function sync(){var u=new URLSearchParams();if(FULL)u.set('v','full');if(st.tab!=='all')u.set('type',st.tab);if(st.q)u.set('q',st.q);if(st.platform)u.set('platform',st.platform);
@@ -114,7 +121,7 @@
       +'<div class="bv-cbody"><div class="bv-top"><span class="bv-type">'+typeLine(p)+'</span><time datetime="'+p.date+'">'+fmt(p.date)+'</time></div><h3>'+esc(p.title)+'</h3><p>'+esc(p.summary)+'</p>'
       +'<div class="bv-foot">'+who(p,true)+'<span class="bv-read">'+(p.video?'Video, '+p.video:p.read+' min read')+'</span></div></div></a>';
   }
-  var cards=posts.map(function(p){
+  var cards=everything.map(function(p){
     var t=document.createElement('div');t.innerHTML=card(p);var el=t.firstChild;el._p=p;el.setAttribute('data-type',p.type);grid.appendChild(el);return el;});
   /* the block that sits in the grid after the first row: a demo / trial block (variants A to D, see blog-review.js) */
   var promo=document.createElement('div');promo.className='bv-card bv-dm dm dm-card';promo.setAttribute('data-demo','card');RV.fill(promo);
