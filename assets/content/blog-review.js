@@ -8,11 +8,14 @@
   var SYSTEMS=['ServiceTitan','Fishbowl Advanced','NetSuite','Odoo','SAP S/4HANA','SAP EWM','Microsoft Dynamics 365','MaintainX','Fiix','UpKeep','IBM Maximo','CorrigoPro'];
   var VERS=[['cur','Current'],['full','Full content']];
   var TABSETS=[['a','Current'],['b','4 sections'],['c','5 sections']];
+  var MENUS=[['a','List'],['b','Rail']];
   var DEMOS=[['a','Demo'],['b','Your system'],['c','Free trial'],['d','Two paths']];
   var qs=new URLSearchParams(location.search);
   var listing=!!document.getElementById('bv-grid');
   var ver=qs.get('v')==='full'?'full':'cur';
-  var dv='a',tabs='a';
+  var dv='a',tabs='a',menu='a';
+  try{var ms=qs.get('menu')||localStorage.getItem('bk-menu');if(ms&&MENUS.some(function(d){return d[0]===ms;}))menu=ms;}catch(e){}
+  document.documentElement.setAttribute('data-menu',menu==='b'?'rail':'list');
   try{var ts=qs.get('tabs')||localStorage.getItem('bk-tabs');if(ts&&TABSETS.some(function(d){return d[0]===ts;}))tabs=ts;}catch(e){}
   try{var s=qs.get('demo')||localStorage.getItem('bk-demo');if(s&&DEMOS.some(function(d){return d[0]===s;}))dv=s;}catch(e){}
 
@@ -61,10 +64,12 @@
   }
   function panel(){
     var d=document.createElement('div');d.className='rv';d.setAttribute('role','group');d.setAttribute('aria-label','Review options');
-    d.innerHTML=(listing?row('Blog',VERS,ver,'ver')+row('Tabs',TABSETS,tabs,'tabs'):'')+row('Block',DEMOS,dv,'demo');
+    d.innerHTML=(listing?row('Blog',VERS,ver,'ver')+row('Tabs',TABSETS,tabs,'tabs'):row('Menu',MENUS,menu,'menu'))+row('Block',DEMOS,dv,'demo');
     d.addEventListener('click',function(e){var b=e.target.closest('.rv-b');if(!b)return;var k=b.getAttribute('data-key'),v=b.getAttribute('data-v');
       if(k==='ver'){var u=new URLSearchParams(location.search);if(v==='full')u.set('v','full');else u.delete('v');u.delete('type');u.delete('q');u.delete('platform');
         location.href=location.pathname+(u.toString()?'?'+u.toString():'');return;}
+      if(k==='menu'){menu=v;try{localStorage.setItem('bk-menu',v);}catch(x){}document.documentElement.setAttribute('data-menu',v==='b'?'rail':'list');
+        [].forEach.call(d.querySelectorAll('[data-key="menu"]'),function(x){var on=x.getAttribute('data-v')===v;x.classList.toggle('is-on',on);x.setAttribute('aria-pressed',on);});return;}
       if(k==='tabs'){try{localStorage.setItem('bk-tabs',v);}catch(x){}var w=new URLSearchParams(location.search);w.delete('tabs');w.delete('type');location.href=location.pathname+(w.toString()?'?'+w.toString():'');return;}
       dv=v;try{localStorage.setItem('bk-demo',v);}catch(x){}
       [].forEach.call(d.querySelectorAll('[data-key="demo"]'),function(x){var on=x.getAttribute('data-v')===v;x.classList.toggle('is-on',on);x.setAttribute('aria-pressed',on);});
