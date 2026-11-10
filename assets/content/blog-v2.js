@@ -97,19 +97,34 @@
   var si=0,timer=null,reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
   function go(k){si=(k+slides.length)%slides.length;
     [].forEach.call(slider.querySelectorAll('.bv-slide'),function(s,j){s.classList.toggle('is-on',j===si);});
-    [].forEach.call(slider.querySelectorAll('.bv-sbar'),function(s,j){s.classList.toggle('is-on',j===si);});
+    var bars=slider.querySelectorAll('.bv-sbar');[].forEach.call(bars,function(s){s.classList.remove('is-on');});void slider.offsetWidth;bars[si].classList.add('is-on');
     slider.querySelector('.bv-scount').textContent='0'+(si+1)+' / 0'+slides.length;
     window.__btAmb=slides[si].cover;if(window.btAmbient)window.btAmbient(slides[si].cover);}
-  function play(){stop();if(reduce)return;timer=setInterval(function(){go(si+1);},7000);}
-  function stop(){if(timer)clearInterval(timer);timer=null;}
   slider.addEventListener('click',function(e){var a=e.target.closest('.bv-sa'),b=e.target.closest('.bv-sbar');
-    if(a){e.preventDefault();go(si+parseInt(a.getAttribute('data-d'),10));play();}
-    if(b){e.preventDefault();go(parseInt(b.getAttribute('data-i'),10));play();}});
-  slider.addEventListener('mouseenter',stop);slider.addEventListener('mouseleave',play);slider.addEventListener('focusin',stop);slider.addEventListener('focusout',play);
+    if(a){e.preventDefault();go(si+parseInt(a.getAttribute('data-d'),10));}
+    if(b){e.preventDefault();go(parseInt(b.getAttribute('data-i'),10));}});
   var x0=null;slider.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;},{passive:true});
-  slider.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40){go(si+(dx<0?1:-1));play();}x0=null;});
+  slider.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40){go(si+(dx<0?1:-1));}x0=null;});
   window.__btAmb=slides[0].cover;
-  play();
+  /* Autoplay like the use cases gallery on the MCP pages: the active bar fills over one step (--bv-dur, 6s) and its animationend moves
+     the slider on, so pausing the fill pauses the slider and any move restarts the count. Paused while the mouse is over it, while keyboard
+     focus is inside, while it is mostly off screen and while the tab is hidden. Touch does not stop it. Reduced motion turns it off. */
+  (function(){
+    var bars=[].slice.call(slider.querySelectorAll('.bv-sbar'));
+    if(reduce){slider.classList.add('bv-static');return;}
+    var hold={hover:false,focus:false,off:true,hidden:document.hidden};
+    function apply(){slider.classList.toggle('bv-paused',hold.hover||hold.focus||hold.off||hold.hidden);}
+    var fine=window.matchMedia('(hover:hover) and (pointer:fine)');
+    slider.addEventListener('mouseenter',function(){if(fine.matches){hold.hover=true;apply();}});
+    slider.addEventListener('mouseleave',function(){hold.hover=false;apply();});
+    slider.addEventListener('focusin',function(e){if(e.target.matches(':focus-visible')){hold.focus=true;apply();}});
+    slider.addEventListener('focusout',function(e){if(!slider.contains(e.relatedTarget)){hold.focus=false;apply();}});
+    document.addEventListener('visibilitychange',function(){hold.hidden=document.hidden;apply();});
+    if('IntersectionObserver' in window)new IntersectionObserver(function(en){hold.off=!en[0].isIntersecting;apply();},{threshold:.35}).observe(slider);
+    else hold.off=false;
+    bars.forEach(function(b){b.addEventListener('animationend',function(e){if(e.animationName==='bv-fill'&&b.classList.contains('is-on'))go(si+1);});});
+    apply();
+  })();
   /* ---------- tabs, cards ---------- */
   function counts(){return TABS.map(function(t){return everything.filter(function(p){return inTab(p,t);}).length;});}
   function drawTabs(){var c=counts();
