@@ -16,6 +16,7 @@ MAIN = """
 <section class="bv-wrap" data-bt data-pal="b" data-pat="amb">
   <div class="m-container">
     <div class="bv-hero">
+      <nav class="bv-crumbs" aria-label="Breadcrumb"><a href="https://www.makini.io/">Home</a><span>/</span><a href="blog-v2.html" aria-current="page">Blog</a></nav>
       <span class="bv-eyebrow">Blog</span>
       <h1 class="bv-h1">Guides, releases and news from Makini</h1>
       <p class="bv-lead">Everything about connecting industrial systems: setup guides, product announcements and company news.</p>
@@ -23,6 +24,7 @@ MAIN = """
     <div class="bv-feature" id="bv-feature" aria-roledescription="carousel" aria-label="Featured posts"></div>
     <div class="bv-lower">
     <div class="bv-bar">
+      <div class="bv-total" id="bv-total"></div>
       <div class="bv-tabs" id="bv-tabs" role="tablist"></div>
       <div class="bv-tools">
         <div class="bv-find">
@@ -40,8 +42,8 @@ MAIN = """
 </section>
 """ % SEARCH
 
-HEAD = '<link href="./assets/content/ct-blocks.css" rel="stylesheet" type="text/css"><link href="./assets/content/blog-v2.css?v=9" rel="stylesheet" type="text/css"><link href="./assets/content/blog-theme.css?v=9" rel="stylesheet" type="text/css"><link href="./assets/content/blog-brand.css?v=11" rel="stylesheet" type="text/css"><link href="./assets/content/blog-add.css?v=9" rel="stylesheet" type="text/css">'
-TAIL = '<script src="./assets/content/blog-data.js?v=9"></script><script src="./assets/content/blog-live.js?v=9"></script><script src="./assets/content/blog-full-data.js?v=2"></script><script src="./assets/content/blog-review.js?v=5"></script><script src="./assets/content/blog-v2.js?v=12"></script><script src="./assets/content/blog-theme.js?v=9"></script>'
+HEAD = '<link href="./assets/content/ct-blocks.css" rel="stylesheet" type="text/css"><link href="./assets/content/blog-v2.css?v=9" rel="stylesheet" type="text/css"><link href="./assets/content/blog-theme.css?v=9" rel="stylesheet" type="text/css"><link href="./assets/content/blog-brand.css?v=11" rel="stylesheet" type="text/css"><link href="./assets/content/blog-site.css?v=2" rel="stylesheet" type="text/css"><script src="./assets/content/blog-style.js?v=1"></script><link href="./assets/content/blog-add.css?v=9" rel="stylesheet" type="text/css">'
+TAIL = '<script src="./assets/content/blog-data.js?v=9"></script><script src="./assets/content/blog-live.js?v=9"></script><script src="./assets/content/blog-full-data.js?v=2"></script><script src="./assets/content/blog-review.js?v=6"></script><script src="./assets/content/blog-v2.js?v=14"></script><script src="./assets/content/blog-theme.js?v=9"></script>'
 
 if __name__ == "__main__":
     out = page("Blog | Makini review", MAIN, head_extra=HEAD, tail_extra=TAIL)

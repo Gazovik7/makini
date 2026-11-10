@@ -58,7 +58,7 @@
   var TABS=SETS[RV.tabs||'a'].filter(function(t){return posts.some(function(p){return inTab(p,t);});}).concat([{id:'test',label:'TEST',test:true}]);
   var TYPE_LABEL={test:'Test'};D.types.forEach(function(t){TYPE_LABEL[t.id]=t.label;});
   var $=function(s,r){return (r||document).querySelector(s);};
-  var grid=$('#bv-grid'),tabsEl=$('#bv-tabs'),slider=$('#bv-feature'),qEl=$('#bv-q'),suggEl=$('#bv-sugg'),clrEl=$('#bv-qclear'),moreEl=$('#bv-more'),cntEl=$('#bv-count'),emptyEl=$('#bv-empty');
+  var grid=$('#bv-grid'),tabsEl=$('#bv-tabs'),slider=$('#bv-feature'),qEl=$('#bv-q'),suggEl=$('#bv-sugg'),clrEl=$('#bv-qclear'),moreEl=$('#bv-more'),cntEl=$('#bv-count'),emptyEl=$('#bv-empty'),totEl=$('#bv-total');
   var STEP=9,shown=STEP,st={tab:'all',q:'',platform:''};
   var REAL={'servicetitan-connection-guide':'blog-article-servicetitan.html','direct-vs-third-party-mcp-servers-the-industrial-edition':'blog-article-direct-vs-third-party.html','fishbowl-advanced-connection-guide':'blog-article-fishbowl.html'};
   function href(p){return p.href||REAL[p.slug]||'blog-article.html';}
@@ -157,7 +157,7 @@
     });
     emptyEl.hidden=list.length>0;
     moreEl.hidden=k>=rows.length;
-    cntEl.textContent=list.length?('Showing '+posts+' of '+list.length+' posts'):'';
+    cntEl.textContent=list.length?('Showing '+posts+' of '+list.length+' posts'):'';if(totEl){var tn=cards.filter(function(el){return match(el._p);}).length;totEl.textContent=tn+(tn===1?' post':' posts');}
     drawTabs();sync();
   }
   /* ---------- search with platform suggestions (replaces the "All platforms" select) ---------- */

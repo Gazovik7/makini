@@ -1,0 +1,73 @@
+/* Blog, style B "Site style": the same blog, with every element taken from the rest of makini.io
+   (the /integrations listing for the head, search and filters; the MCP page for cards and type sizes).
+   Everything is scoped to html[data-sm="site"], style A is untouched. Real values of the site:
+   H1 .s1-h1 40/56/600 centred, sub 15/24 #c6c7cc, search .search-input.integration (icon left, underline 48px),
+   filters = pills radius 50 padding 8x24 #ffffff1a with a white 1.5px ring when on, secondary button #ffffff1f 52px radius 8,
+   eyebrow 13px/3px uppercase #c6c7cc, card h3 20/28, h2 30/40/400, no negative letter-spacing anywhere. */
+.bv-crumbs,.bv-total{display:none}
+html[data-sm="site"] .ct-panel{display:none}
+html[data-sm="site"] .bv-wrap :is(h1,h2,h3,p),html[data-sm="site"] .ba-wrap :is(h1,h2,h3,h4,p,blockquote){letter-spacing:normal}
+
+/* ---------- listing: head ---------- */
+html[data-sm="site"] .bv-eyebrow{display:none}
+html[data-sm="site"] .bv-crumbs{display:flex;flex-wrap:wrap;align-items:center;margin:0 0 24px;font-size:14px;line-height:24px;color:#fff}
+html[data-sm="site"] .bv-crumbs a{color:#fff;text-decoration:none;font-size:12px;white-space:nowrap}
+html[data-sm="site"] .bv-crumbs a:hover{text-decoration:underline}
+html[data-sm="site"] .bv-crumbs span{margin:0 12px;color:#4a4b4d}
+html[data-sm="site"] .bv-wrap .bv-hero{display:block;text-align:center;margin:0 0 56px}
+html[data-sm="site"] .bv-wrap .bv-crumbs{text-align:left}
+html[data-sm="site"] .bv-wrap .bv-h1{font-size:40px;line-height:56px;font-weight:600;max-width:none;margin:0 auto;flex:none;text-wrap:balance}
+html[data-sm="site"] .bv-wrap .bv-lead{margin:24px auto 0;max-width:624px;font-size:15px;line-height:24px;padding:0;color:#c6c7cc}
+
+/* ---------- listing: slider and cards ---------- */
+html[data-sm="site"] .bv-wrap[data-pal] .bv-feature{border-radius:16px;box-shadow:none}
+html[data-sm="site"] .bv-wrap[data-pal] .bv-card h3{font-size:20px;line-height:28px}
+html[data-sm="site"] .bv-wrap .bv-type,html[data-sm="site"] .bv-wrap .dm-k{font-family:Inter,Arial,sans-serif;font-size:12px;line-height:16px;font-weight:500;letter-spacing:2px;text-transform:uppercase}
+
+/* ---------- listing: filter bar = count, search, pills (as on /integrations) ---------- */
+html[data-sm="site"] .bv-wrap[data-pal] .bv-bar{display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px 40px;border-bottom:0;margin-bottom:40px}
+html[data-sm="site"] .bv-total{display:block;order:0;color:#fff;font-size:20px;line-height:32px;font-weight:500;white-space:nowrap}
+html[data-sm="site"] .bv-wrap .bv-tools{order:1;flex:1 1 300px;max-width:382px}
+html[data-sm="site"] .bv-wrap .bv-tabs{order:2;display:flex;flex-wrap:wrap;gap:8px;border-bottom:0;overflow:visible;white-space:normal;justify-content:flex-end}
+html[data-sm="site"] .bv-wrap[data-pal] .bv-tab{position:relative;margin:0;padding:8px 24px;border:1.5px solid transparent;border-radius:50px;background:#ffffff1a;color:#fff;font:400 15px/24px Inter,Arial,sans-serif;transition:background-color .2s,border-color .2s}
+html[data-sm="site"] .bv-wrap[data-pal] .bv-tab:hover{background:#ffffff26;color:#fff}
+html[data-sm="site"] .bv-wrap[data-pal] .bv-tab.is-on{color:#fff;border:1.5px solid #fff;background:#ffffff1a}
+html[data-sm="site"] .bv-wrap .bv-tab b,html[data-sm="site"] .bv-wrap .bv-tab[data-tab="test"]{display:none}
+html[data-sm="site"] .bv-wrap[data-pal] .bv-search{width:100%}
+html[data-sm="site"] .bv-wrap[data-pal] .bv-search input{height:48px;padding:0 36px 0 35px;border:0;border-bottom:1px solid #fff3;border-radius:0;background:transparent;color:#fff;font:300 14px/20px Inter,Arial,sans-serif}
+html[data-sm="site"] .bv-wrap[data-pal] .bv-search input:focus{border-bottom-color:#ffffff99;background:transparent}
+html[data-sm="site"] .bv-wrap[data-pal] .bv-search input::placeholder{color:#6d6f76}
+html[data-sm="site"] .bv-wrap[data-pal] .bv-search svg{left:0;right:auto;width:22px;height:22px;stroke:#c6c7cc;stroke-width:1.5}
+html[data-sm="site"] .bv-wrap .bv-qclear{right:2px}
+
+/* ---------- buttons: secondary = .price-card-btn, primary = .btn-blue ---------- */
+html[data-sm="site"] .bv-wrap[data-pal] .bv-more .ct-btn,html[data-sm="site"] .bv-wrap[data-pal] .bv-empty .ct-btn{height:52px;min-width:186px;padding:0 28px;border:0;border-radius:8px;background:#ffffff1f;color:#c6c7cc;font:400 14px/24px Inter,Arial,sans-serif;box-shadow:none}
+html[data-sm="site"] .bv-wrap[data-pal] .bv-more .ct-btn:hover,html[data-sm="site"] .bv-wrap[data-pal] .bv-empty .ct-btn:hover{background:#ffffff2e;color:#fff;border:0}
+html[data-sm="site"] .dm-btn{height:52px;padding:0 28px;border-radius:8px;font:400 14px/1 Inter,Arial,sans-serif;box-shadow:5px 0 15px #ef68f266,-5px 0 15px #71a1ff80,inset 0 0 16px #3d44e199}
+html[data-sm="site"] .dm-alt{height:52px;padding:0 28px;border-radius:8px;background:#ffffff1f;color:#c6c7cc;font:400 14px/1 Inter,Arial,sans-serif}
+
+/* ---------- article ---------- */
+html[data-sm="site"] .ba-crumbs{font-size:14px;gap:12px;color:#fff}
+html[data-sm="site"] .ba-crumbs a{color:#fff}
+html[data-sm="site"] .ba-crumbs span{color:#4a4b4d;opacity:1}
+html[data-sm="site"] .ba-type{font:300 13px/24px Inter,Arial,sans-serif;letter-spacing:3px;text-transform:uppercase;color:#c6c7cc;margin-bottom:12px}
+html[data-sm="site"] .ba-wrap .ba-h1{font-size:40px;line-height:56px;font-weight:600}
+html[data-sm="site"] .ba-wrap .ba-deck{font-size:16px;line-height:28px;color:#c6c7cc}
+html[data-sm="site"] .ba-meta-i i{font-family:Inter,Arial,sans-serif;font-size:12px;letter-spacing:2px;color:#959599}
+html[data-sm="site"] .ba-wrap .ba-cover{border-radius:16px;box-shadow:none}
+html[data-sm="site"] .ba-wrap[data-pal] .ba-sheet{background:none;border:0;border-radius:0;padding:0;box-shadow:none;overflow:visible}
+html[data-sm="site"] .ba-sheet::before,html[data-sm="site"] .ba-sheet::after{display:none}
+html[data-sm="site"] .ba-prose p,html[data-sm="site"] .ba-prose ul li,html[data-sm="site"] .ba-steps>li,html[data-sm="site"] .ba-prose .ba-ticks li{font-size:16px;line-height:28px;color:#c6c7cc}
+html[data-sm="site"] .ba-prose .ba-lead{font-size:20px;line-height:32px;color:#fff}
+html[data-sm="site"] .ba-prose h2{font-size:30px;line-height:40px;font-weight:400;margin:56px 0 16px}
+html[data-sm="site"] .ba-prose h3{font-size:20px;line-height:28px;font-weight:600}
+html[data-sm="site"] .ba-prose .ba-quote p{font-size:24px;line-height:36px}
+/* small caps labels: Inter instead of mono (code stays mono) */
+html[data-sm="site"] :is(.ba-toc-t,.ba-box-t,.ba-toc-in summary,.ba-note-t,.ba-table th,.ba-tags span,.ba-pn span,.ba-rc-t span,.bv-sugg-t){font-family:Inter,Arial,sans-serif;letter-spacing:2px}
+@media (max-width:767px){
+  html[data-sm="site"] .bv-wrap .bv-h1,html[data-sm="site"] .ba-wrap .ba-h1{font-size:32px;line-height:40px}
+  html[data-sm="site"] .bv-wrap .bv-hero{margin-bottom:36px}
+  html[data-sm="site"] .bv-wrap .bv-tools{max-width:none}
+  html[data-sm="site"] .bv-wrap .bv-tabs{justify-content:flex-start}
+  html[data-sm="site"] .ba-prose h2{font-size:26px;line-height:34px}
+}
