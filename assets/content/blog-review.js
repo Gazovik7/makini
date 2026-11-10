@@ -9,11 +9,13 @@
   var VERS=[['cur','Current'],['full','Full content']];
   var TABSETS=[['a','Current'],['b','4 sections'],['c','5 sections']];
   var MENUS=[['a','List'],['b','Rail']];
+  var STYLES=[['a','Current'],['b','Site style']];
   var DEMOS=[['a','Demo'],['b','Your system'],['c','Free trial'],['d','Two paths']];
   var qs=new URLSearchParams(location.search);
   var listing=!!document.getElementById('bv-grid');
   var ver=qs.get('v')==='full'?'full':'cur';
-  var dv='a',tabs='a',menu='a';
+  var dv='a',tabs='a',menu='a',sty=document.documentElement.getAttribute('data-sm')==='site'?'b':'a';
+  function applyStyle(){if(sty==='b')document.documentElement.setAttribute('data-sm','site');else document.documentElement.removeAttribute('data-sm');}
   try{var ms=qs.get('menu')||localStorage.getItem('bk-menu');if(ms&&MENUS.some(function(d){return d[0]===ms;}))menu=ms;}catch(e){}
   document.documentElement.setAttribute('data-menu',menu==='b'?'rail':'list');
   try{var ts=qs.get('tabs')||localStorage.getItem('bk-tabs');if(ts&&TABSETS.some(function(d){return d[0]===ts;}))tabs=ts;}catch(e){}
@@ -64,8 +66,11 @@
   }
   function panel(){
     var d=document.createElement('div');d.className='rv';d.setAttribute('role','group');d.setAttribute('aria-label','Review options');
-    d.innerHTML=(listing?row('Blog',VERS,ver,'ver')+row('Tabs',TABSETS,tabs,'tabs'):row('Menu',MENUS,menu,'menu'))+row('Block',DEMOS,dv,'demo');
+    d.innerHTML=row('Style',STYLES,sty,'style')+(listing?row('Blog',VERS,ver,'ver')+row('Tabs',TABSETS,tabs,'tabs'):row('Menu',MENUS,menu,'menu'))+row('Block',DEMOS,dv,'demo');
     d.addEventListener('click',function(e){var b=e.target.closest('.rv-b');if(!b)return;var k=b.getAttribute('data-key'),v=b.getAttribute('data-v');
+      if(k==='style'){sty=v;try{localStorage.setItem('bk-style',v==='b'?'site':'a');}catch(x){}applyStyle();
+        try{var su=new URLSearchParams(location.search);if(su.has('style')){su.set('style',v==='b'?'site':'a');history.replaceState(null,'',location.pathname+'?'+su.toString());}}catch(x){}
+        [].forEach.call(d.querySelectorAll('[data-key="style"]'),function(x){var on=x.getAttribute('data-v')===v;x.classList.toggle('is-on',on);x.setAttribute('aria-pressed',on);});return;}
       if(k==='ver'){var u=new URLSearchParams(location.search);if(v==='full')u.set('v','full');else u.delete('v');u.delete('type');u.delete('q');u.delete('platform');
         location.href=location.pathname+(u.toString()?'?'+u.toString():'');return;}
       if(k==='menu'){menu=v;try{localStorage.setItem('bk-menu',v);}catch(x){}document.documentElement.setAttribute('data-menu',v==='b'?'rail':'list');
