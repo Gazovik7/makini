@@ -62,6 +62,26 @@ html[data-sm="site"] .ba-prose .ba-lead{font-size:20px;line-height:32px;color:#f
 html[data-sm="site"] .ba-prose h2{font-size:30px;line-height:40px;font-weight:400;margin:56px 0 16px}
 html[data-sm="site"] .ba-prose h3{font-size:20px;line-height:28px;font-weight:600}
 html[data-sm="site"] .ba-prose .ba-quote p{font-size:24px;line-height:36px}
+/* ---------- article blocks in the shape of the site's own components ---------- */
+/* FAQ = .faq_item of the site: boxed row, radius 14, #ffffff05 on a #ffffff14 border, 18/22 toggle, 17/24/600 question, thin plus that turns 45deg */
+html[data-sm="site"] .ba-faq{border-top:0;margin:0 0 8px}
+html[data-sm="site"] .ba-faq details{border:1px solid #ffffff14;border-radius:14px;background:#ffffff05;margin:0 0 12px;overflow:hidden;transition:border-color .2s}
+html[data-sm="site"] .ba-faq details:hover{border-color:#ffffff2a}
+html[data-sm="site"] .ba-faq summary{align-items:center;gap:20px;padding:18px 22px;font-size:17px;line-height:24px;font-weight:600;color:#fff}
+html[data-sm="site"] .ba-faq summary:hover{color:#fff}
+html[data-sm="site"] .ba-faq summary::after{content:"";width:26px;height:26px;font:inherit;color:#fff;background:linear-gradient(currentColor,currentColor) center/12px 1.5px no-repeat,linear-gradient(currentColor,currentColor) center/1.5px 12px no-repeat;transition:transform .25s}
+html[data-sm="site"] .ba-faq details[open] summary::after{transform:rotate(45deg)}
+html[data-sm="site"] .ba-prose .ba-faq p{margin:0;padding:0 22px 20px;max-width:none;font-size:15px;line-height:24px;color:#c6c7cc}
+/* table, quote, notes: the card of the site (radius 16, #ffffff14 border, #ffffff05 fill) */
+html[data-sm="site"] .ba-table{border:1px solid #ffffff14;border-radius:16px;background:#ffffff05;overflow-x:auto}
+html[data-sm="site"] .ba-table th{padding:14px 18px;background:#ffffff08}
+html[data-sm="site"] .ba-table td{padding:14px 18px}
+html[data-sm="site"] .ba-table tbody tr:last-child td{border-bottom:0}
+html[data-sm="site"] .ba-prose .ba-quote{position:relative;overflow:hidden;margin:40px 0;padding:28px 32px 28px 36px;border:1px solid #ffffff14;border-radius:16px;background:#ffffff05}
+html[data-sm="site"] .ba-prose .ba-quote::after{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,#71a1ff,#ef68f2)}
+html[data-sm="site"] .ba-prose .ba-note{border-radius:16px}
+html[data-sm="site"] .ba-btn,html[data-sm="site"] .ba-btn.is-solid{height:52px;padding:0 28px;border-radius:8px;font:400 14px/1 Inter,Arial,sans-serif}
+html[data-sm="site"] .ba-btn.is-solid{box-shadow:5px 0 15px #ef68f266,-5px 0 15px #71a1ff80,inset 0 0 16px #3d44e199}
 /* small caps labels: Inter instead of mono (code stays mono) */
 html[data-sm="site"] :is(.ba-toc-t,.ba-box-t,.ba-toc-in summary,.ba-note-t,.ba-table th,.ba-tags span,.ba-pn span,.ba-rc-t span,.bv-sugg-t){font-family:Inter,Arial,sans-serif;letter-spacing:2px}
 @media (max-width:767px){

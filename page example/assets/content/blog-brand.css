@@ -168,3 +168,16 @@
 .bv-wrap[data-pal] .bv-slide::before{background:
   linear-gradient(90deg,#0b0b12e0 0%,#0b0b12c4 14%,#0b0b129c 28%,#0b0b1272 42%,#0b0b1248 56%,#0b0b1226 70%,#0b0b1210 84%,#0b0b1200 100%),
   linear-gradient(180deg,#0b0b1200 28%,#0b0b1206 38%,#0b0b1212 48%,#0b0b1222 58%,#0b0b1236 68%,#0b0b124a 78%,#0b0b125c 88%,#0b0b1268 100%)}
+/* slider timer = the use cases gallery of the MCP pages (.cg-*): equal flat bars, the active one fills over one step and that fill moves the slider */
+.bv-feature{--bv-dur:6s}
+.bv-scount{font:400 13px/1 Inter,Arial,sans-serif;letter-spacing:.12em;font-variant-numeric:tabular-nums;color:#c6c7cc;min-width:0;flex:0 0 auto}
+.bv-sbars{flex:1 1 auto;max-width:420px;gap:6px}
+.bv-sarrows{margin-left:auto}
+.bv-wrap .bv-sbar,.bv-wrap .bv-sbar.is-on{position:relative;overflow:hidden;flex:1;width:auto;height:3px;border-radius:3px;background:#ffffff2e;transition:background-color .3s}
+.bv-wrap .bv-sbar:hover{background:#ffffff4d}
+.bv-wrap[data-pal] .bv-sbar.is-on{background:#ffffff40}
+.bv-sbar::after{content:"";position:absolute;left:0;top:0;bottom:0;width:0;border-radius:inherit;background:linear-gradient(90deg,#71a1ff,#ef68f2)}
+.bv-sbar.is-on::after{animation:bv-fill var(--bv-dur) linear forwards}
+.bv-paused .bv-sbar.is-on::after{animation-play-state:paused}
+.bv-static .bv-sbar.is-on::after{animation:none;width:100%}
+@keyframes bv-fill{from{width:0}to{width:100%}}
