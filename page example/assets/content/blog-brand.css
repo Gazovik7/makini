@@ -163,3 +163,8 @@
 .ba-wrap .ba-cover img,.ba-wrap .ba-rc-i img{filter:saturate(.42) contrast(.9) brightness(.94)}
 /* author rows share one baseline: wide cards had 32px below the footer, regular cards 22px */
 .bv-wrap .bv-card.is-w .bv-cbody{padding-bottom:22px}
+/* featured banner: one soft scrim instead of a hard band. The bottom fade starts high (30%) and eases in over many stops,
+   and tops out lower, so there is no visible line on bright covers. The left fade is eased the same way. */
+.bv-wrap[data-pal] .bv-slide::before{background:
+  linear-gradient(90deg,#0b0b12e0 0%,#0b0b12c4 14%,#0b0b129c 28%,#0b0b1272 42%,#0b0b1248 56%,#0b0b1226 70%,#0b0b1210 84%,#0b0b1200 100%),
+  linear-gradient(180deg,#0b0b1200 28%,#0b0b1206 38%,#0b0b1212 48%,#0b0b1222 58%,#0b0b1236 68%,#0b0b124a 78%,#0b0b125c 88%,#0b0b1268 100%)}

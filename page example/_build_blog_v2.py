@@ -42,7 +42,7 @@ MAIN = """
 </section>
 """ % SEARCH
 
-HEAD = '<link href="./assets/content/ct-blocks.css" rel="stylesheet" type="text/css"><link href="./assets/content/blog-v2.css?v=9" rel="stylesheet" type="text/css"><link href="./assets/content/blog-theme.css?v=9" rel="stylesheet" type="text/css"><link href="./assets/content/blog-brand.css?v=11" rel="stylesheet" type="text/css"><link href="./assets/content/blog-site.css?v=2" rel="stylesheet" type="text/css"><script src="./assets/content/blog-style.js?v=1"></script><link href="./assets/content/blog-add.css?v=9" rel="stylesheet" type="text/css">'
+HEAD = '<link href="./assets/content/ct-blocks.css" rel="stylesheet" type="text/css"><link href="./assets/content/blog-v2.css?v=9" rel="stylesheet" type="text/css"><link href="./assets/content/blog-theme.css?v=9" rel="stylesheet" type="text/css"><link href="./assets/content/blog-brand.css?v=12" rel="stylesheet" type="text/css"><link href="./assets/content/blog-site.css?v=2" rel="stylesheet" type="text/css"><script src="./assets/content/blog-style.js?v=1"></script><link href="./assets/content/blog-add.css?v=9" rel="stylesheet" type="text/css">'
 TAIL = '<script src="./assets/content/blog-data.js?v=9"></script><script src="./assets/content/blog-live.js?v=9"></script><script src="./assets/content/blog-full-data.js?v=2"></script><script src="./assets/content/blog-review.js?v=6"></script><script src="./assets/content/blog-v2.js?v=15"></script><script src="./assets/content/blog-theme.js?v=9"></script>'
 
 if __name__ == "__main__":
