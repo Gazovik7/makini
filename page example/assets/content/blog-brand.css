@@ -157,4 +157,7 @@
 .ba-wrap :is(a,button,summary):focus-visible,.bv-wrap :is(a,button,input,select):focus-visible{outline:2px solid var(--t1,var(--bt1,#71a1ff));outline-offset:3px;border-radius:4px}
 .bv-wrap ::selection,.ba-wrap ::selection{background:#71a1ff55;color:inherit}
 .ba-prose h2,.ba-prose h3,.ba-prose h4,.ba-h1,.bv-card h3,.bv-h1{text-wrap:balance}
-.ba-prose p,.ba-prose li,.ba-deck{text-wrap:pretty}
+.ba-prose p,.ba-prose li,.ba-deck{text-wrap:pretty}/* calmer covers: pull the Spectrum purple/pink back toward the neutral slate of the page (v2.10) */
+.bv-wrap[data-pal] .bv-card .bv-img img{filter:saturate(.42) contrast(.9) brightness(.94)}
+.bv-wrap[data-pal] .bv-feature .bv-slide::after{display:block;content:"";position:absolute;inset:0;pointer-events:none;background:#808080;mix-blend-mode:saturation;opacity:.58}
+.ba-wrap .ba-cover img,.ba-wrap .ba-rc-i img{filter:saturate(.42) contrast(.9) brightness(.94)}

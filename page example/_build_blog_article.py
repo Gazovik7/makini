@@ -299,7 +299,7 @@ MAIN = make_main()
 HEAD = ('<link href="./assets/content/ct-blocks.css" rel="stylesheet" type="text/css">'
         '<link href="./assets/content/blog-article.css?v=9" rel="stylesheet" type="text/css">'
         '<link href="./assets/content/blog-theme.css?v=9" rel="stylesheet" type="text/css">'
-        '<link href="./assets/content/blog-brand.css?v=9" rel="stylesheet" type="text/css">'
+        '<link href="./assets/content/blog-brand.css?v=10" rel="stylesheet" type="text/css">'
         '<link href="./assets/content/blog-add.css?v=9" rel="stylesheet" type="text/css">')
 TAIL = '<script src="./assets/content/blog-article.js?v=9"></script><script src="./assets/content/blog-review.js?v=5"></script><script src="./assets/content/blog-theme.js?v=9"></script>'
 
