@@ -88,7 +88,7 @@
   order.forEach(function(p){if(slides.length<4&&slides.indexOf(p)<0&&!p.video)slides.push(p);});
   var AR='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>';
   slider.innerHTML='<div class="bv-slides">'+slides.map(function(p,i){
-    return '<a class="bv-slide'+(i?'':' is-on')+'" href="'+href(p)+'" style="background-image:url('+p.cover+')"><span class="bv-arrow">'+AR+'</span>'
+    return '<a class="bv-slide'+(i?'':' is-on')+'" href="'+href(p)+'" style="background-image:url('+p.cover+')">'
       +'<div class="bv-fbody"><span class="bv-type">'+typeLine(p)+'</span><h2>'+esc(p.title)+'</h2><p>'+esc(p.summary)+'</p>'
       +'<div class="bv-meta">'+(p.video?'<span class="bv-vplay">'+PLAY+'</span>':'')+who(p,true)+'<span>'+fmt(p.date)+'</span><span>'+(p.video?'Video, '+p.video:p.read+' min read')+'</span></div></div></a>';
   }).join('')+'</div>'
