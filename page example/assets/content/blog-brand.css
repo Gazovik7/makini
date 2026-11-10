@@ -161,3 +161,5 @@
 .bv-wrap[data-pal] .bv-card .bv-img img{filter:saturate(.42) contrast(.9) brightness(.94)}
 .bv-wrap[data-pal] .bv-feature .bv-slide::after{display:block;content:"";position:absolute;inset:0;pointer-events:none;background:#808080;mix-blend-mode:saturation;opacity:.58}
 .ba-wrap .ba-cover img,.ba-wrap .ba-rc-i img{filter:saturate(.42) contrast(.9) brightness(.94)}
+/* author rows share one baseline: wide cards had 32px below the footer, regular cards 22px */
+.bv-wrap .bv-card.is-w .bv-cbody{padding-bottom:22px}
